@@ -27,9 +27,17 @@ const config = {
       black: '#001114',
       white: '#FFFFFF',
       light: '#FBFBFB',
-      primary: '#0C99A2',
-      'primary-dark': '#056B79',
-      secondary: '#00F0FF'
+      primary: {
+        light: '#0C99A2',
+        DEFAULT: '#047585',
+        dark: '#035C68'
+      },
+      secondary: {
+        DEFAULT: '#D3EDEE'
+      },
+      accent: {
+        DEFAULT: '#0AF0FF'
+      }
     },
     extend: {
       keyframes: {
