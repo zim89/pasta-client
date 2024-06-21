@@ -15,6 +15,7 @@
   .section {
   }
 
-  .btn {
+  .textLink-light {
+    @apply hover:text-accent text-[13px]/[16.9px] text-white transition-colors duration-300 xl:text-sm/[18.2px];
   }
 }
