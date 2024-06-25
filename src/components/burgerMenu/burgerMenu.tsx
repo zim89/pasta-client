@@ -69,6 +69,9 @@ export const BurgerMenu = () => {
 
         <Image
           className='ml-auto mt-40'
+          style={{
+            transform: 'rotateY(180deg) rotateZ(50deg) '
+          }}
           src={parsley.src}
           width={60}
           height={68}
