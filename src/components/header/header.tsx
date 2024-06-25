@@ -1,17 +1,14 @@
 import { Instagram, Search, Smartphone } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import logoLight from '@/assets/icons/logo/logo-light.svg'
-import logoPrimary from '@/assets/icons/logo/logo-primary.svg'
 import { BurgerMenu } from '../burgerMenu'
 import { PinIcon } from '../icons-pack'
 import { Button } from '../ui/button'
 import { CartButton } from './ui/CartButton'
 import { Links } from './ui/Links'
+import { Logo } from './ui/Logo'
 
 export const Header = () => {
   return (
-    <header className='md:bg-transparent mt-7 md:mt-0'>
+    <header className='md:bg-transparent md:mt-0'>
       <div className='bg-primary'>
         <div className='container py-2'>
           <div className='flex items-center justify-center md:justify-between pt-1 pb-3 text-white text-sm'>
@@ -43,33 +40,13 @@ export const Header = () => {
           </div>
         </div>
       </div>
-      <div className='bg-primary md:bg-[transparent] backdrop-blur-sm'>
+      <div className='bg-primary md:bg-[transparent] backdrop-blur-sm relative z-50'>
         <div className='flex justify-between items-center container'>
-          <div className='xl:hidden'>
+          <div className='xl:hidden md:mr-28'>
             <BurgerMenu />
           </div>
 
-          <Link
-            href='/'
-            className='relative w-14 h-14 md:w-20'
-          >
-            <Image
-              src={logoLight.src}
-              className='md:hidden'
-              color='black'
-              fill
-              sizes='100%'
-              alt='Logo di Pasta La Pepito'
-            />
-            <Image
-              src={logoPrimary.src}
-              className='hidden md:block'
-              color='black'
-              fill
-              sizes='100%'
-              alt='Logo di Pasta La Pepito'
-            />
-          </Link>
+          <Logo />
           <Links />
           <CartButton />
         </div>

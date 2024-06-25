@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { cn } from '@/lib/utils'
 import { SITE_NAME } from '@/constants/seo.const'
-import { inter } from './fonts'
+import { alegreya, inter } from './fonts'
 import './globals.css'
 import { Providers } from './providers'
 
@@ -20,7 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={cn('min-h-screen antialiased', inter.className)}>
+      <body
+        className={cn(
+          'min-h-screen antialiased',
+          alegreya.variable,
+          inter.className
+        )}
+      >
         <Providers>{children}</Providers>
       </body>
     </html>

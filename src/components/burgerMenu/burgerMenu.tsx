@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { AlignLeft, X } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { useActive } from '@/hooks/useActive'
@@ -15,13 +16,19 @@ export const BurgerMenu = () => {
   const { active, change } = useActive()
   const location = usePathname()
 
+  // Highlight active link and close the menu
   useEffect(() => {
     change(location)
+    setOpened(false)
   }, [location])
 
   return (
     <>
-      <Button onClick={() => setOpened(!opened)}>
+      {/* Trigger button */}
+      <Button
+        onClick={() => setOpened(!opened)}
+        className='px-0'
+      >
         <AlignLeft
           className='text-white md:text-black'
           strokeWidth={1}
@@ -31,32 +38,35 @@ export const BurgerMenu = () => {
 
       <div
         className={cn(
-          'absolute p-8 z-10 left-0 top-0 w-full font-medium bg-light transition-transform duration-500',
+          'absolute p-8 left-0 top-0 w-full font-medium bg-light transition-all duration-500',
           opened
-            ? 'translate-y-[-56px] opacity-100 '
-            : 'translate-y-[-1000px] opacity-0 transition-transform duration-500'
+            ? 'translate-y-[-56px] opacity-100'
+            : 'translate-y-[-1000px] transition-transform duration-500 opacity-80'
         )}
       >
+        {/* Close button */}
         <X
           size={32}
-          className='text-grey ml-auto'
+          className='text-grey ml-auto cursor-pointer'
           onClick={setOpened.bind(null, false)}
         />
+        {/* Links */}
         <ul className='flex flex-col items-center gap-10'>
           {links.map(link => {
             return (
               <li
                 key={link.label}
                 className={cn(
-                  'text-black',
-                  active === link.href && 'border-b border-b-primary-dark'
+                  'text-black transition-all duration-300 border-b-0 border-b-primary-dark',
+                  active === link.href && 'border-b'
                 )}
               >
-                <a href={link.href}>{link.label}</a>
+                <Link href={link.href}>{link.label}</Link>
               </li>
             )
           })}
         </ul>
+
         <Image
           className='ml-auto mt-40'
           src={parsley.src}
