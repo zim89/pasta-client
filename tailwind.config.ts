@@ -27,6 +27,7 @@ const config = {
       black: '#001114',
       white: '#FFFFFF',
       light: '#FBFBFB',
+      grey: '#6F7273',
       primary: {
         light: '#0C99A2',
         DEFAULT: '#047585',
@@ -49,6 +50,10 @@ const config = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' }
         }
+      },
+      fontFamily: {
+        alegreya: ['var(--font-alegreya)', 'sans-serif'],
+        inter: ['var(--font-inter)', 'sans-serif']
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',

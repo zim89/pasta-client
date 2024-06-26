@@ -1,4 +1,4 @@
-import { Alegreya, Inter } from 'next/font/google'
+import { Alegreya_SC, Inter } from 'next/font/google'
 
 export const inter = Inter({
   weight: ['400', '500', '600'],
@@ -6,8 +6,8 @@ export const inter = Inter({
   variable: '--font-inter'
 })
 
-export const alegreya = Alegreya({
-  weight: ['700'],
+export const alegreya = Alegreya_SC({
+  weight: ['500', '700'],
   subsets: ['latin'],
   variable: '--font-alegreya'
 })
