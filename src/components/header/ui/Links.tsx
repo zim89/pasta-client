@@ -20,7 +20,10 @@ export const Links = () => {
       {links.map((item, index) => (
         <li key={index}>
           <Link
-            className={cn(active === item.href && 'border-b border-b-black')}
+            className={cn(
+              'relative after:absolute after:-bottom-[0.5px] after:left-0 after:h-[0.5px] after:w-0 after:bg-primary-light after:transition-all after:duration-300 hover:after:w-full group-hover:after:w-full',
+              active === item.href && 'border-b border-b-black'
+            )}
             href={item.href}
           >
             {item.label}

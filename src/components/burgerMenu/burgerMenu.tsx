@@ -38,7 +38,7 @@ export const BurgerMenu = () => {
 
       <div
         className={cn(
-          'absolute p-8 left-0 top-0 w-full font-medium bg-light transition-all duration-500',
+          'absolute p-8 left-0 top-0 ml-5 mt-5 rounded-[20px] w-[calc(100%-40px)] font-medium bg-light transition-all duration-500',
           opened
             ? 'translate-y-[-56px] opacity-100'
             : 'translate-y-[-1000px] transition-transform duration-500 opacity-80'
@@ -57,8 +57,8 @@ export const BurgerMenu = () => {
               <li
                 key={link.label}
                 className={cn(
-                  'text-black transition-all duration-300 border-b-0 border-b-primary-dark',
-                  active === link.href && 'border-b'
+                  'text-black transition-all duration-300 border-b-0 border-b-primary-light',
+                  active === link.href && 'border-b-2'
                 )}
               >
                 <Link href={link.href}>{link.label}</Link>
