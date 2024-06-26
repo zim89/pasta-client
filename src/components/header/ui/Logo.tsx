@@ -1,24 +1,30 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import logoLight from '@/assets/icons/logo/logo-light.svg'
 import logoPrimary from '@/assets/icons/logo/logo-primary.svg'
 
 export const Logo = () => {
   return (
-    <div className='relative w-14 h-14 md:w-20'>
+    <Link
+      href='/'
+      className='py-2 md:py-0'
+    >
+      {/* Mobile logo */}
       <Image
         src={logoLight.src}
-        className='md:hidden -z-10'
-        fill
-        sizes='100%'
+        className='md:hidden'
+        width={54.94}
+        height={58.04}
         alt='Logo di Pasta La Pepito'
       />
+      {/* Tablet/Laptop logo */}
       <Image
         src={logoPrimary.src}
-        className='hidden md:block -z-10'
-        fill
-        sizes='100%'
+        className='hidden md:block'
+        width={74}
+        height={82}
         alt='Logo di Pasta La Pepito'
       />
-    </div>
+    </Link>
   )
 }

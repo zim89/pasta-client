@@ -7,7 +7,7 @@ export const Hero = () => {
   return (
     <div
       // Adjusted container width since 500px screens on tablets to ensure the hero looks pretty.
-      className='md:static h-[274px] min-[500px]:h-[480px] xl:h-[824px] overflow-clip md:-mt-[56px]'
+      className='md:static h-[274px] min-[500px]:h-[480px] xl:h-[824px] overflow-clip md:-mt-[82px]'
       style={{
         filter: 'saturate(1.7)'
       }}
@@ -16,11 +16,11 @@ export const Hero = () => {
         src={hero.src}
         fill
         style={{ top: '-15px' }}
-        className='object-cover -z-10 object-center md:scale-[1.75] md:object-[11em_6em] xl:scale-[1.6] xl:object-[13.5em_6em]'
+        className='object-cover -z-10 object-center md:scale-[1.75] md:object-[11em_7em] xl:scale-[1.6] xl:object-[13em_7em]'
         alt=''
       />
 
-      <div className='hidden md:block container translate-y-[60px] xl:translate-y-[69px]'>
+      <div className='hidden md:block container translate-y-20 xl:translate-y-24'>
         <h1 className='font-alegreya text-[4.375rem]/[4.375rem] xl:text-[8.125rem]/[8.938rem] text-primary-dark font-medium xl:font-bold'>
           Pasta <br className='hidden xl:block' /> La{' '}
           <br className='xl:hidden' />
