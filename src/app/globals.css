@@ -13,9 +13,14 @@
 
 @layer components {
   .section {
+    @apply py-10 md:py-9 xl:py-14;
+  }
+
+  .section .heading {
+    @apply mb-5 text-center text-[28px]/[36.4px] font-medium md:mb-8 md:text-start md:text-[32px]/[41.6px] xl:mb-16 xl:text-center;
   }
 
   .textLink-light {
-    @apply hover:text-accent text-[13px]/[16.9px] text-white transition-colors duration-300 xl:text-sm/[18.2px];
+    @apply text-[13px]/[16.9px] text-white transition-colors duration-300 hover:text-accent xl:text-sm/[18.2px];
   }
 }
