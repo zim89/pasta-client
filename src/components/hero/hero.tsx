@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import hero from '@/assets/images/hero.jpg'
 import parsley from '@/assets/images/parsley.png'
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
 
 export const Hero = () => {
   return (
