@@ -7,14 +7,14 @@ export const Logo = () => {
     <div className='relative w-14 h-14 md:w-20'>
       <Image
         src={logoLight.src}
-        className='md:hidden'
+        className='md:hidden -z-10'
         fill
         sizes='100%'
         alt='Logo di Pasta La Pepito'
       />
       <Image
         src={logoPrimary.src}
-        className='hidden md:block'
+        className='hidden md:block -z-10'
         fill
         sizes='100%'
         alt='Logo di Pasta La Pepito'

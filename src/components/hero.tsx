@@ -1,13 +1,13 @@
 import Image from 'next/image'
 import hero from '@/assets/images/hero.jpg'
 import parsley from '@/assets/images/parsley.png'
-import classes from './header/classes.module.css'
 import { Button } from './ui/button'
 
 export const Hero = () => {
   return (
     <div
-      className='relative md:static flex flex-col justify-end h-[400px] md:h-[480px] xl:h-[824px] overflow-clip md:-mt-[56px]'
+      // Adjusted container width since 500px screens on tablets to ensure the hero looks pretty.
+      className='md:static h-[274px] min-[500px]:h-[480px] xl:h-[824px] overflow-clip md:-mt-[56px]'
       style={{
         filter: 'saturate(1.7)'
       }}
@@ -15,11 +15,12 @@ export const Hero = () => {
       <Image
         src={hero.src}
         fill
+        style={{ top: '-15px' }}
         className='object-cover -z-10 object-center md:scale-[1.75] md:object-[11em_6em] xl:scale-[1.6] xl:object-[13.5em_6em]'
         alt=''
       />
 
-      <div className='hidden md:block container absolute z-20 top-28 left-0'>
+      <div className='hidden md:block container translate-y-[60px] xl:translate-y-[69px]'>
         <h1 className='font-alegreya text-[4.375rem]/[4.375rem] xl:text-[8.125rem]/[8.938rem] text-primary-dark font-medium xl:font-bold'>
           Pasta <br className='hidden xl:block' /> La{' '}
           <br className='xl:hidden' />
@@ -32,7 +33,7 @@ export const Hero = () => {
         <div className='relative flex items-center max-h-24 max-w-32 mt-20'>
           <Image
             src={parsley}
-            className='-z-20 absolute'
+            className='absolute'
             style={{
               transform:
                 'scale(0.7) translate(-2em, -1em) rotateY(180deg) rotateZ(50deg) '
@@ -44,8 +45,9 @@ export const Hero = () => {
           </Button>
         </div>
       </div>
-      <div className='md:hidden'>
+      <div className='flex items-end h-full md:hidden scale-x-[1.4]'>
         <svg
+          className='w-full'
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 1440 320'
         >
@@ -55,13 +57,13 @@ export const Hero = () => {
             d='M0,96L120,133.3C240,171,480,245,720,240C960,235,1200,149,1320,106.7L1440,64L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z'
           ></path>
           <path
-            style={{ transform: 'scaleY(0.5) translateY(115%)' }}
+            style={{ transform: 'scaleY(0.5) translateY(113%)' }}
             fill='#d0e9eb'
             fill-opacity='1'
             d='M0,32L60,37.3C120,43,240,53,360,85.3C480,117,600,171,720,170.7C840,171,960,117,1080,96C1200,75,1320,85,1380,90.7L1440,96L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'
           ></path>
           <path
-            style={{ transform: 'scaleY(0.5) translateY(101%)' }}
+            style={{ transform: 'scaleY(0.6) translateY(70%)' }}
             fill='#fbfbfb'
             fill-opacity='1'
             d='M0,192L120,208C240,224,480,256,720,256C960,256,1200,224,1320,208L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z'
