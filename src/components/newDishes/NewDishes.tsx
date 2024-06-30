@@ -17,6 +17,7 @@ export const NewDishes = () => {
           ))}
         </div>
 
+        {/* Only tablet screens */}
         <BrandCarousel>
           {CarouselItem => (
             <>
