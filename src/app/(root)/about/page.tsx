@@ -37,7 +37,7 @@ export default function page() {
         >
           <ChevronLeft size={24} />
         </Link>
-        <h1 className='font-alegreya text-center text-[28px]  md:text-4xl xl:text-[50px]'>
+        <h1 className='font-alegreya text-center text-[28px] md:text-4xl xl:text-[3.125rem]'>
           Про нас
         </h1>
       </div>
@@ -50,7 +50,7 @@ export default function page() {
             alt=''
           />
         </div>
-        <p className='text-justify text-sm/[18.2px] xl:text-base/[20.8px]'>
+        <p className='text-justify text-sm/[1.138rem] xl:text-base/[1.3rem]'>
           <span className='text-primary-light font-semibold'>
             Pasta Le Pepito
           </span>{' '}

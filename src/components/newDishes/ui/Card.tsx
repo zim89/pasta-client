@@ -24,7 +24,7 @@ export const Card = ({ dish }: Props) => {
           Вага: {formatMass(dish.mass)}
         </span>
         <div className='flex items-center justify-between'>
-          <span className='font-semibold text-[22px]'>{dish.price}₴</span>
+          <span className='font-semibold text-[1.375rem]'>{dish.price}₴</span>
           <Button className='bg-primary-light rounded-full p-2 text-white'>
             <ShoppingCart size={24} />
           </Button>
