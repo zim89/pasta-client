@@ -40,7 +40,7 @@ export const BurgerMenu = () => {
         className={cn(
           'absolute p-8 left-0 top-0 ml-5 mt-5 rounded-[20px] w-[calc(100%-40px)] font-medium bg-light transition-all duration-500',
           opened
-            ? 'translate-y-[-56px] opacity-100'
+            ? '-translate-y-14 opacity-100'
             : 'translate-y-[-1000px] transition-transform duration-500 opacity-80'
         )}
       >

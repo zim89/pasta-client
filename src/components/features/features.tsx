@@ -1,11 +1,5 @@
 import Image from 'next/image'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
-} from '@/components/ui/carousel'
+import { BrandCarousel } from '@/components/brandCarousel'
 import { featureList } from '@/data/features.data'
 
 export const Features = () => {
@@ -55,42 +49,36 @@ export const Features = () => {
           ))}
         </ul>
 
-        <Carousel
-          className='hidden md:block xl:hidden'
-          opts={{
-            align: 'start',
-            slidesToScroll: 1
+        <BrandCarousel>
+          {CarouselItem => {
+            return (
+              <>
+                {featureList.map(item => (
+                  <CarouselItem
+                    key={item.title}
+                    className='basis-1/3 pl-10'
+                  >
+                    <div className='border border-primary-light/50 rounded-[30px] flex flex-col items-center justify-center py-[20.5px] px-2'>
+                      <Image
+                        src={item.icon}
+                        alt={item.title}
+                        height={72}
+                        width={80}
+                        className='mb-6'
+                      />
+                      <h3 className='text-base/[19.2px] font-medium mb-2'>
+                        {item.title}
+                      </h3>
+                      <p className='text-sm/[18.2px] text-center px-4'>
+                        {item.desc}
+                      </p>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </>
+            )
           }}
-        >
-          <CarouselContent className='-ml-10'>
-            {featureList.map(item => (
-              <CarouselItem
-                key={item.title}
-                className='basis-1/3 pl-10'
-              >
-                <div className='border border-primary-light/50 rounded-[30px] flex flex-col items-center justify-center py-[20.5px] px-2'>
-                  <Image
-                    src={item.icon}
-                    alt={item.title}
-                    height={72}
-                    width={80}
-                    className='mb-6'
-                  />
-                  <h3 className='text-base/[19.2px] font-medium mb-2'>
-                    {item.title}
-                  </h3>
-                  <p className='text-sm/[18.2px] text-center px-4'>
-                    {item.desc}
-                  </p>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <div className='flex gap-10 items-center absolute h-10 w-[120px] -top-[72.8px] right-0'>
-            <CarouselPrevious className='top-0 left-0 translate-x-0 translate-y-0' />
-            <CarouselNext className='top-0 right-0 translate-x-0 translate-y-0' />
-          </div>
-        </Carousel>
+        </BrandCarousel>
       </div>
     </section>
   )
