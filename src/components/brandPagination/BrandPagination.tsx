@@ -17,9 +17,9 @@ type Props = {
   className?: string
 }
 export const BrandPagination = ({ pages, className }: Props) => {
-  if (!pages) return null
-
   const params = useSearchParams()
+
+  if (!pages) return null
   const currentPage = parseInt(params.get('page') || '1')
 
   // Generating pagination links

@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { cn } from '@/lib/utils'
 import { SITE_NAME } from '@/constants/seo.const'
@@ -27,7 +28,9 @@ export default function RootLayout({
           inter.className
         )}
       >
-        <Providers>{children}</Providers>
+        <Suspense>
+          <Providers>{children}</Providers>
+        </Suspense>
       </body>
     </html>
   )
