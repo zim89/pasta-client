@@ -1,46 +1,14 @@
-import { ChevronLeft } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator
-} from '@/components/ui/breadcrumb'
+import { PageHeader } from '@/components/pageHeader'
 import poster from '@/assets/images/about-us-poster.jpg'
 
 export default function page() {
   return (
     <div className='container mb-[72px] mt-5 xl:mb-[120px]'>
-      <Breadcrumb className='hidden md:block'>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink
-              className='opacity-50'
-              href='/'
-            >
-              Головна
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Про нас</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <div className='my-8 md:mt-5 xl:mb-[60px] flex md:block justify-center items-center'>
-        <Link
-          href='/'
-          className='mr-3 md:hidden'
-        >
-          <ChevronLeft size={24} />
-        </Link>
-        <h1 className='font-alegreya text-center text-[28px] md:text-4xl xl:text-[3.125rem]'>
-          Про нас
-        </h1>
-      </div>
+      <PageHeader
+        breadcrumbs={[{ label: 'Головна', href: '/' }, { label: 'Про нас' }]}
+        title='Про нас'
+      />
       <div className='xl:flex items-center gap-[100px]'>
         <div className='relative min-h-[251px] min-w-[343px] md:min-h-[264px] md:min-w-[340px] xl:min-w-[620px] xl:min-h-[450px] md:float-left rounded-2xl md:rounded-[30px] overflow-clip md:mr-8 mb-5 md:mb-0 xl:mr-0'>
           <Image
