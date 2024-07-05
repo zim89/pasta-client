@@ -1,15 +1,14 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { AlignLeft, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import img from '@/assets/icons/features/feat3_sm.svg'
 import { formatMass } from '@/helpers/newDishes.helpers'
 import { initIngredients } from '@/helpers/productCard.helpers'
 import { BrandButton } from '../brandButton'
-import { Button } from '../ui/button'
 import { Card, CardContent, CardHeader } from '../ui/card'
+import { Ingredients } from './ui/Ingredients'
 import { Dish } from '@/data/menu.data'
 
 type Props = { dish: Dish; className?: string }
@@ -42,6 +41,19 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
     setIngredients(initIngredients(dish.ingredients))
   }
 
+  const handleChangeQuantity = (
+    action: 'DECREASE' | 'INCREASE',
+    ingredient: string
+  ) => {
+    setIngredients(prev => ({
+      ...prev,
+      [ingredient]:
+        action === 'DECREASE'
+          ? Math.max(prev[ingredient] - 1, 0)
+          : prev[ingredient] + 1
+    }))
+  }
+
   return (
     <Card
       className={cn(
@@ -65,10 +77,12 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
             <span className='text-sm opacity-70'>
               Вага: {formatMass(dish.mass)}
             </span>
-            <span className='text-[26px]/[31.47px] text-black font-medium'>
+            <span className='text-[1.625rem]/[1.967rem] text-black font-medium'>
               {dish.price.toFixed(0)}₴
             </span>
           </div>
+
+          {/* Modal Menu */}
           <div className='flex flex-col gap-4 xl:gap-5'>
             <BrandButton
               kind='outlined'
@@ -79,9 +93,9 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
 
             <div
               className={cn(
-                'fixed p-8 left-0 top-14 rounded-[20px] w-full h-full z-50 font-medium bg-light transition-all duration-500 overflow-y-auto',
+                'fixed p-8 left-0 xl:left-2/4 xl:-translate-x-2/4 top-14  max-w-[1088px] max-h-[591px] rounded-[20px] w-full h-full z-50 font-medium bg-light transition-all duration-500 overflow-y-auto',
                 opened
-                  ? '-translate-y-14 opacity-100'
+                  ? '-translate-y-14 opacity-100 xl:-translate-y-0'
                   : 'translate-y-[-1000px] transition-transform duration-500 opacity-80'
               )}
             >
@@ -91,95 +105,72 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
                 className='text-grey ml-auto cursor-pointer mb-3'
                 onClick={setOpened.bind(null, false)}
               />
-              {/* Ingredients */}
-              <div className='md:flex md:flex-row-reverse md:gap-6'>
-                <div className='grid grid-cols-2 md:grid-cols-3 items-center md:items-start gap-x-9 gap-y-4'>
-                  {dish.ingredients.map((ingr, index) => {
-                    return (
-                      <div
-                        key={index}
-                        className='bg-white p-1 rounded-lg'
-                      >
-                        <h3 className='font-semibold capitalize mb-2'>
-                          {ingr}
-                        </h3>
-                        <div className='flex justify-center gap-1 items-center'>
-                          <Image
-                            src={img.src}
-                            width={64}
-                            height={64}
-                            alt={ingr}
-                            className='rounded-lg'
-                          />
-                          <div className='text-xs'>
-                            <span className='block whitespace-nowrap'>
-                              {formatMass(799)}
-                            </span>
-                            <span>{ingredients[ingr]} х 50₴</span>
-                          </div>
-                        </div>
-                        <div className='flex gap-2 items-center justify-center mt-3'>
-                          <Button
-                            className='border border-black border-opacity-5 p-0 w-8 h-8 rounded-lg'
-                            onClick={() =>
-                              setIngredients(prev => ({
-                                ...prev,
-                                [ingr]: Math.max(prev[ingr] - 1, 0)
-                              }))
-                            }
-                          >
-                            -
-                          </Button>
-                          <span className='flex items-center justify-center border border-black border-opacity-10 p-0 w-8 h-8 rounded-lg'>
-                            {ingredients[ingr]}
-                          </span>
-                          <Button
-                            className='border border-black border-opacity-5 p-0 w-8 h-8 rounded-lg'
-                            onClick={() =>
-                              setIngredients(prev => ({
-                                ...prev,
-                                [ingr]: prev[ingr] + 1
-                              }))
-                            }
-                          >
-                            +
-                          </Button>
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-                <div className='flex flex-col flex-1 py-4 gap-5 mt-7 md:m-0 md:p-0 border-t border-t-primary-light md:border-0'>
-                  <div className='flex gap-4 items-center justify-between md:flex-col-reverse'>
-                    <div className='md:text-center my-6'>
-                      <p className='text-[18px]/[23.4px] mb-5 font-semibold'>
+
+              <div className='md:flex md:flex-row-reverse md:gap-6 max-w-max mx-auto'>
+                {/* Ingredients Grid */}
+                <Ingredients
+                  ingredients={dish.ingredients}
+                  ingredientsQuantity={ingredients}
+                  handleChangeQuantity={handleChangeQuantity}
+                />
+                {/* End Ingredients Grid */}
+
+                {/* Product Preview and Controllers */}
+                <div className='flex flex-col flex-1 py-4 gap-5 mt-5 md:m-0 md:p-0 border-t border-t-primary-light md:border-0'>
+                  <div className='flex gap-6 items-center justify-between md:flex-col-reverse'>
+                    <div className='md:text-center'>
+                      <p className='text-[1.125rem]/[1.463rem] font-semibold'>
                         {dish.name}
                       </p>
-                      <p className='text-[26px] font-semibold'>
-                        {dish.price + extraCost}₴
+                      <p className='text-[1.625rem] font-semibold mt-5 mb-3'>
+                        {(dish.price + extraCost).toFixed(1)}₴
                       </p>
                     </div>
-                    <div className='w-full'>
-                      <div className='relative w-full h-full min-w-[100px] min-h-[100px] md:min-w-[200px] md:min-h-[200px]'>
-                        <Image
-                          className='rounded-lg'
-                          src={dish.imageSrc}
-                          fill
-                          alt={dish.name}
-                        />
-                      </div>
+
+                    <div className='ml-auto relative min-w-[100px] min-h-[100px] md:min-w-[200px] md:min-h-[200px] xl:min-h-[240px] xl:min-w-[240px]'>
+                      <Image
+                        className='rounded-lg object-cover h-full w-full'
+                        src={dish.imageSrc}
+                        fill
+                        alt={dish.name}
+                      />
                     </div>
                   </div>
                   <BrandButton
+                    className='xl:hidden'
                     kind='outlined'
                     onClick={() => handleClear()}
                   >
                     Очистити
                   </BrandButton>
-                  <BrandButton kind='filled'>Додати</BrandButton>
+                  <BrandButton
+                    className='xl:hidden'
+                    kind='filled'
+                  >
+                    Додати
+                  </BrandButton>
                 </div>
               </div>
+              <div className='hidden xl:flex justify-end container px-64 gap-10'>
+                <BrandButton
+                  className='w-56'
+                  kind='outlined'
+                  onClick={() => handleClear()}
+                >
+                  Очистити
+                </BrandButton>
+                <BrandButton
+                  className='w-56'
+                  kind='filled'
+                >
+                  Додати
+                </BrandButton>
+              </div>
+
+              {/* End Product Preview and Controllers */}
             </div>
+            {/* End Modal Menu */}
+
             <BrandButton kind='filled'>До кошика</BrandButton>
           </div>
         </div>

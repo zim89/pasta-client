@@ -1,22 +1,25 @@
 import { CSSProperties } from 'react'
+import { cn } from '@/lib/utils'
 import { Button, ButtonProps } from '../ui/button'
 
 type Props = Omit<ButtonProps, 'className' | 'kind'> & {
   kind: 'outlined' | 'filled'
   primaryColor?: CSSProperties['color']
   secondaryColor?: CSSProperties['color']
+  className?: string
 }
 
 export const BrandButton = ({
   kind,
   primaryColor = '#0C99A2',
   secondaryColor = '#FFFFFF',
+  className,
   ...props
 }: Props) => {
   return (
     <Button
       {...props}
-      className='py-3 px-6 rounded-[30px]'
+      className={cn('py-3 px-6 rounded-[30px]', className)}
       style={{
         backgroundColor: kind === 'filled' ? primaryColor : secondaryColor,
         color: kind === 'filled' ? secondaryColor : primaryColor,

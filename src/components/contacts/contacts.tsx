@@ -45,7 +45,7 @@ export const Contacts = () => {
               width='891'
               height='493'
               allowFullScreen={false}
-              className='hidden md:block border max-w-[530px] max-h-[460px] xl:max-h-[493px] xl:max-w-[893px] border-primary-light/50 rounded-xl'
+              className='hidden outline-none md:block border max-w-[530px] max-h-[460px] xl:max-h-[493px] xl:max-w-[893px] border-primary-light/50 rounded-xl'
               loading='lazy'
               referrerPolicy='no-referrer-when-downgrade'
             ></iframe>
