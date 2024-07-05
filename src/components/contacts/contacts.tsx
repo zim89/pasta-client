@@ -1,6 +1,3 @@
-import Image from 'next/image'
-import mapImgTablet from '@/assets/images/map-md.png'
-import mapImgDesktop from '@/assets/images/map-xl.png'
 import { LinkIcon } from '../icons-pack'
 import { contactList } from '@/data/contacts.data'
 
@@ -11,7 +8,7 @@ export const Contacts = () => {
         <h2 className='heading'>Контакти</h2>
 
         <div className='xl:border xl:border-primary-light xl:rounded-[30px] xl:p-16'>
-          <div className='flex gap-7 md:mb-8 xl:gap-[83px] xl:justify-between'>
+          <div className='flex gap-7 xl:mb-8 xl:gap-[83px] xl:justify-between'>
             <ul className='grid grid-cols-2 gap-y-8 gap-x-[43.5px] md:w-[156px] md:grid-cols-1 md:gap-14 xl:w-[178px] xl:gap-[46px]'>
               {contactList.map(item => (
                 <li
@@ -43,20 +40,15 @@ export const Contacts = () => {
                 </li>
               ))}
             </ul>
-            <Image
-              src={mapImgTablet}
-              alt='Google map'
-              height={460}
-              width={530}
-              className='hidden border border-primary-light/50 rounded-xl md:block xl:hidden'
-            />
-            <Image
-              src={mapImgDesktop}
-              alt='Google map'
-              height={493}
-              width={891}
-              className='hidden border border-primary-light/50 rounded-xl xl:block'
-            />
+            <iframe
+              src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2541.2550409362175!2d30.517785076305785!3d50.436349971589486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cf696c1d8391%3A0xc1feb24c84046fe9!2spasta%20la%20pepito!5e0!3m2!1suk!2sua!4v1720196368041!5m2!1suk!2sua'
+              width='891'
+              height='493'
+              allowFullScreen={false}
+              className='hidden md:block border max-w-[530px] max-h-[460px] xl:max-h-[493px] xl:max-w-[893px] border-primary-light/50 rounded-xl'
+              loading='lazy'
+              referrerPolicy='no-referrer-when-downgrade'
+            ></iframe>
           </div>
           <a
             href='https://www.google.com/maps/dir//pasta+la+pepito,+Esplanadna+St,+34%2F2,+Kyiv,+02000/@50.4339733,30.5202255,15.15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x40d4cf696c1d8391:0xc1feb24c84046fe9!2m2!1d30.52036!2d50.43635?entry=ttu'
