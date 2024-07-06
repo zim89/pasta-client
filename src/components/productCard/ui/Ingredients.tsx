@@ -19,6 +19,8 @@ export const Ingredients = ({
   ingredientsQuantity,
   handleChangeQuantity
 }: Props) => {
+  console.log(ingredients, ingredientsQuantity)
+
   return (
     <div className={classes.ingredients}>
       {ingredients.map((ingr, index) => {

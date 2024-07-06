@@ -28,10 +28,14 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
     }
   }, [opened])
 
+  useEffect(() => {
+    setIngredients(initIngredients(dish.ingredients))
+  }, [dish.name, dish.ingredients.length])
+
   const extraCost = useMemo(() => {
     let cost = 0
     for (const name in ingredients) {
-      cost += ingredients[name] * 50
+      cost += ingredients[name] || 0 * 50
     }
 
     return cost
