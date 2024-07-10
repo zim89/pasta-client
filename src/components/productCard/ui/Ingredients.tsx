@@ -7,7 +7,7 @@ import { Dish } from '@/data/menu.data'
 
 type Props = {
   ingredients: Dish['ingredients']
-  ingredientsQuantity: { [P in string]: number }
+  ingredientsQuantity: { [P in string]: { count: number; price: number } }
   handleChangeQuantity: (
     action: 'DECREASE' | 'INCREASE',
     ingredient: string
@@ -19,7 +19,7 @@ export const Ingredients = ({
   ingredientsQuantity,
   handleChangeQuantity
 }: Props) => {
-  console.log(ingredients, ingredientsQuantity)
+  console.log(ingredientsQuantity)
 
   return (
     <div className={classes.ingredients}>
@@ -40,9 +40,11 @@ export const Ingredients = ({
                   alt={ingr.name}
                   className='rounded-lg -mt-3'
                 />
-                <span className='hidden xl:block text-xs mt-[100%]'>
-                  {ingredientsQuantity[ingr.name]} х {ingr.price}₴
-                </span>
+                {!!ingredientsQuantity[ingr.name]?.count && (
+                  <span className='hidden xl:block text-xs mt-[100%]'>
+                    {ingredientsQuantity[ingr.name].count} х {ingr.price}₴
+                  </span>
+                )}
               </div>
               <div className='text-xs'>
                 <h3 className='font-semibold capitalize mb-2 hidden xl:block'>
@@ -51,9 +53,14 @@ export const Ingredients = ({
                 <span className='block whitespace-nowrap'>
                   {formatMass(ingr.mass)}
                 </span>
-                <span className='xl:hidden text-xs'>
-                  {ingredientsQuantity[ingr.name]} х {ingr.price}₴
-                </span>
+                {!!ingredientsQuantity[ingr.name]?.count ? (
+                  <span className='xl:hidden text-xs'>
+                    {ingredientsQuantity[ingr.name].count} х {ingr.price}₴
+                  </span>
+                ) : (
+                  <span className='xl:hidden text-xs'>0 х {ingr.price}₴</span>
+                )}
+
                 <div className='gap-2 items-center justify-center mt-3 hidden xl:flex xl:mt-7'>
                   <Button
                     className='border border-black border-opacity-5 p-0 w-8 h-8 rounded-lg'
@@ -61,9 +68,12 @@ export const Ingredients = ({
                   >
                     -
                   </Button>
-                  <span className='flex items-center justify-center border border-black border-opacity-10 p-0 w-8 h-8 rounded-lg'>
-                    {ingredientsQuantity[ingr.name]}
-                  </span>
+                  {!!ingredientsQuantity[ingr.name]?.count && (
+                    <span className='flex items-center justify-center border border-black border-opacity-10 p-0 w-8 h-8 rounded-lg'>
+                      {ingredientsQuantity[ingr.name].count}
+                    </span>
+                  )}
+
                   <Button
                     className='border border-black border-opacity-5 p-0 w-8 h-8 rounded-lg'
                     onClick={() => handleChangeQuantity('INCREASE', ingr.name)}
@@ -80,9 +90,11 @@ export const Ingredients = ({
               >
                 -
               </Button>
-              <span className='flex items-center justify-center border border-black border-opacity-10 p-0 w-8 h-8 rounded-lg'>
-                {ingredientsQuantity[ingr.name]}
-              </span>
+              {ingredientsQuantity[ingr.name]?.count && (
+                <span className='flex items-center justify-center border border-black border-opacity-10 p-0 w-8 h-8 rounded-lg'>
+                  {ingredientsQuantity[ingr.name].count}
+                </span>
+              )}
               <Button
                 className='border border-black border-opacity-5 p-0 w-8 h-8 rounded-lg'
                 onClick={() => handleChangeQuantity('INCREASE', ingr.name)}

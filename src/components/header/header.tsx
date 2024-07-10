@@ -1,8 +1,8 @@
-import { Instagram, Search, Smartphone } from 'lucide-react'
+import { Instagram, Search, ShoppingCart, Smartphone } from 'lucide-react'
 import { BurgerMenu } from '../burgerMenu'
+import CartButton from '../cartButton/CartButton'
 import { PinIcon } from '../icons-pack'
 import { Button } from '../ui/button'
-import { CartButton } from './ui/CartButton'
 import { Links } from './ui/Links'
 import { Logo } from './ui/Logo'
 
@@ -48,7 +48,23 @@ export const Header = () => {
 
           <Logo />
           <Links />
-          <CartButton />
+          {/* <CartButton /> */}
+          <CartButton>
+            {Trigger => (
+              <>
+                <Trigger className='flex flex-col md:flex-row md:gap-5 md:px-8 md:py-[6px] text-[0.625rem] rounded-[30px] text-white md:text-black md:bg-white md:border md:border-primary md:hover:opacity-90 items-center'>
+                  <div>
+                    <span>0</span>
+
+                    <div className='-mt-[5px]'>
+                      <ShoppingCart size={24} />
+                    </div>
+                  </div>
+                  <span className='hidden md:inline text-sm'>00,00 грн</span>
+                </Trigger>
+              </>
+            )}
+          </CartButton>
         </div>
       </div>
     </header>
