@@ -64,6 +64,8 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
     }))
   }
 
+  console.log(ingredients[0])
+
   return (
     <Card
       className={cn(
@@ -103,7 +105,7 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
 
             <div
               className={cn(
-                'fixed p-8 left-0 xl:left-2/4 xl:-translate-x-2/4 top-14  max-w-[1088px] max-h-[591px] rounded-[20px] w-full h-full z-50 font-medium bg-light transition-all duration-500 overflow-y-auto',
+                'fixed p-8 left-0 xl:left-2/4 xl:-translate-x-2/4 md:translate-x-12 top-14 xl:max-w-[1088px] xl:max-h-[591px] md:max-w-[700px] rounded-[20px] w-full h-full z-50 font-medium bg-white transition-all duration-500 overflow-y-auto',
                 opened
                   ? '-translate-y-14 opacity-100 xl:-translate-y-0'
                   : 'translate-y-[-1000px] transition-transform duration-500 opacity-80'

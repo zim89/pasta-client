@@ -8,7 +8,7 @@ export const Contacts = () => {
         <h2 className='heading'>Контакти</h2>
 
         <div className='xl:border xl:border-primary-light xl:rounded-[30px] xl:p-16'>
-          <div className='flex gap-7 xl:mb-8 xl:gap-[83px] xl:justify-between'>
+          <div className='flex flex-col md:flex-row gap-7 xl:mb-8 xl:gap-[83px] xl:justify-between'>
             <ul className='grid grid-cols-2 gap-y-8 gap-x-[43.5px] md:w-[156px] md:grid-cols-1 md:gap-14 xl:w-[178px] xl:gap-[46px]'>
               {contactList.map(item => (
                 <li
@@ -45,7 +45,7 @@ export const Contacts = () => {
               width='891'
               height='493'
               allowFullScreen={false}
-              className='hidden outline-none md:block border max-w-[530px] max-h-[460px] xl:max-h-[493px] xl:max-w-[893px] border-primary-light/50 rounded-xl'
+              className=' outline-none border max-w-full md:max-w-[530px] md:max-h-[460px] xl:max-h-[493px] xl:max-w-[893px] border-primary-light/50 rounded-xl'
               loading='lazy'
               referrerPolicy='no-referrer-when-downgrade'
             ></iframe>
