@@ -15,9 +15,12 @@ type Props = { dish: Dish; className?: string }
 export const ProductCard = ({ dish, className = '' }: Props) => {
   const [opened, setOpened] = useState(false)
 
-  const [ingredients, setIngredients] = useState<{ [P in string]: number }>(
-    initIngredients(dish.ingredients)
-  )
+  const [ingredients, setIngredients] = useState<{
+    [P in string]: {
+      count: number
+      price: number
+    }
+  }>(initIngredients(dish.ingredients))
 
   // Remove the side scrollbar
   useEffect(() => {
@@ -35,7 +38,7 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
   const extraCost = useMemo(() => {
     let cost = 0
     for (const name in ingredients) {
-      cost += ingredients[name] || 0 * 50
+      cost += (ingredients[name].count || 0) * (ingredients[name].price || 0)
     }
 
     return cost
@@ -51,10 +54,13 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
   ) => {
     setIngredients(prev => ({
       ...prev,
-      [ingredient]:
-        action === 'DECREASE'
-          ? Math.max(prev[ingredient] - 1, 0)
-          : prev[ingredient] + 1
+      [ingredient]: {
+        count:
+          action === 'DECREASE'
+            ? Math.max(prev[ingredient].count - 1, 0)
+            : prev[ingredient].count + 1,
+        price: prev[ingredient].price
+      }
     }))
   }
 
