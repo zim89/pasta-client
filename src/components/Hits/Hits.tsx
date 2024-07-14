@@ -40,7 +40,7 @@ export default function Hits() {
           )}
         </BrandCarousel>
 
-        <div className='text-center mt-6 md:mt-8 md:text-right'>
+        <div className='text-center mt-6 md:mt-8 xl:mt-10 md:text-right'>
           <Link
             className='border-b border-b-primary-light'
             href='/menu'

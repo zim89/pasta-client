@@ -64,8 +64,6 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
     }))
   }
 
-  console.log(ingredients[0])
-
   return (
     <Card
       className={cn(

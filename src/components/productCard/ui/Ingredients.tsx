@@ -19,8 +19,6 @@ export const Ingredients = ({
   ingredientsQuantity,
   handleChangeQuantity
 }: Props) => {
-  console.log(ingredientsQuantity)
-
   return (
     <div className={classes.ingredients}>
       {ingredients.map((ingr, index) => {
@@ -68,7 +66,7 @@ export const Ingredients = ({
                   >
                     -
                   </Button>
-                  {!!ingredientsQuantity[ingr.name]?.count && (
+                  {ingredientsQuantity[ingr.name] != null && (
                     <span className='flex items-center justify-center border border-black border-opacity-10 p-0 w-8 h-8 rounded-lg'>
                       {ingredientsQuantity[ingr.name].count}
                     </span>

@@ -4,7 +4,8 @@ import { featureList } from '@/data/features.data'
 
 export const Features = () => {
   return (
-    <section className='section'>
+    // On mobiles it's above Hits section, on larger screens it's below
+    <section className='section order-[-1] md:order-1 '>
       <div className='container'>
         <h2 className='heading'>Наші переваги</h2>
 
