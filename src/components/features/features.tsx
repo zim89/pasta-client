@@ -5,19 +5,25 @@ import { featureList } from '@/data/features.data'
 export const Features = () => {
   return (
     // On mobiles it's above Hits section, on larger screens it's below
-    <section className='section order-[-1] md:order-1 '>
+    <section
+      className='section order-[-1] md:order-1'
+      data-testid='feature-section'
+    >
       <div className='container'>
         <h2 className='heading'>Наші переваги</h2>
 
+        {/* Mobile layout */}
         <ul className='grid grid-cols-2 gap-[14px] md:hidden'>
           {featureList.map(item => (
             <li
+              data-testid='feature-item-mobile'
               key={item.title}
               className='p-2 border-[0.86px] border-primary-light/70 rounded-[25.91px] size-[164px]'
             >
               <Image
                 src={item.icon_sm}
                 alt={item.title}
+                width={62}
                 height={62}
                 className='mb-3 w-auto mx-auto'
               />
@@ -29,9 +35,11 @@ export const Features = () => {
           ))}
         </ul>
 
+        {/* Laptop layout */}
         <ul className='hidden xl:grid xl:grid-cols-4 xl:gap-[106.67px]'>
           {featureList.map(item => (
             <li
+              data-testid='feature-item-laptop'
               key={item.title}
               className='py-[30px] px-[17px] border border-primary-light/50 rounded-[30px] size-[240px]'
             >
@@ -50,6 +58,7 @@ export const Features = () => {
           ))}
         </ul>
 
+        {/* Tablet layout */}
         <BrandCarousel>
           {CarouselItem => {
             return (
@@ -59,7 +68,10 @@ export const Features = () => {
                     key={item.title}
                     className='basis-1/3 pl-10'
                   >
-                    <div className='border border-primary-light/50 rounded-[30px] flex flex-col items-center justify-center py-[20.5px] px-2'>
+                    <div
+                      data-testid='feature-item-tablet'
+                      className='border border-primary-light/50 rounded-[30px] flex flex-col items-center justify-center py-[20.5px] px-2'
+                    >
                       <Image
                         src={item.icon}
                         alt={item.title}

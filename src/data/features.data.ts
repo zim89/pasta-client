@@ -38,4 +38,4 @@ export const featureList = [
     icon_sm: feat4_sm,
     icon: feat4
   }
-] as const
+]
