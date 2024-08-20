@@ -5,9 +5,9 @@ import monoPay_img from '@/assets/icons/pay/mono-pay.svg'
 import visa_img from '@/assets/icons/pay/visa.svg'
 
 export const payList = [
-  { label: 'visa', src: visa_img },
-  { label: 'mastercard', src: mastercard_img },
-  { label: 'googlePay', src: googlePay_img },
-  { label: 'applePay', src: applePay_img },
-  { label: 'monoPay', src: monoPay_img }
-] as const
+  { label: 'visa', src: visa_img, width: 40.96 },
+  { label: 'mastercard', src: mastercard_img, width: 24.75 },
+  { label: 'googlePay', src: googlePay_img, width: 44.95 },
+  { label: 'applePay', src: applePay_img, width: 39.66 },
+  { label: 'monoPay', src: monoPay_img, width: 65.72 }
+]

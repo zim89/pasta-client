@@ -13,7 +13,7 @@ export const navLinks = [
     label: 'Доставка і оплата',
     href: `${APP_PAGES.DELIVERY}`
   }
-] as const
+]
 
 // FIXME: Add valid links
 export const additionalLinks = [
@@ -29,4 +29,4 @@ export const additionalLinks = [
     label: 'Політика конфіденційності',
     href: `${APP_PAGES.HOME}`
   }
-] as const
+]
