@@ -44,17 +44,27 @@ export const PageHeader = ({ breadcrumbs, title }: Props) => {
           })}
         </BreadcrumbList>
       </Breadcrumb>
-      <div className='my-8 md:mt-5 xl:mb-[60px] flex md:block justify-center items-center'>
+
+      {/* Mobile breadcrumb */}
+      <div
+        className='my-8 md:mt-5 xl:mb-[60px] flex md:block justify-center items-center'
+        data-testid='breadcrumb-mobile'
+      >
         <Link
           href='/'
           className='mr-3 md:hidden'
+          data-testid='breadcrumb-link-mobile'
         >
           <ChevronLeft size={24} />
         </Link>
-        <h1 className='font-alegreya text-center text-[28px] md:text-4xl xl:text-[3.125rem]'>
+        <h1
+          className='font-alegreya text-center text-[28px] md:text-4xl xl:text-[3.125rem]'
+          data-testid='breadcrumb-title-mobile'
+        >
           {title}
         </h1>
       </div>
+      {/* End Mobile breadcrumb */}
     </>
   )
 }
