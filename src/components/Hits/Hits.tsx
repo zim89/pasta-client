@@ -5,7 +5,10 @@ import { menu } from '@/data/menu.data'
 
 export default function Hits() {
   return (
-    <section className='section'>
+    <section
+      className='section'
+      data-testid='hits-wrapper'
+    >
       <div className='container'>
         <h2 className='heading'>Хіти</h2>
 
@@ -29,6 +32,7 @@ export default function Hits() {
                   // Width substracted to a half of left margin (first slide's margin and the rest)
                   className='basis-[calc(50%-23px)] first:ml-6 ml-[22px]'
                   key={index}
+                  data-testid='carousel-item'
                 >
                   <ProductCard
                     dish={dish}

@@ -35,8 +35,8 @@ export const MenuList = () => {
 
   return (
     <>
-      <Categories />
-      <div className='hidden md:block'>
+      {/* <Categories /> */}
+      {/* <div className='hidden md:block'>
         <Select
           defaultValue={'За популярністю'}
           onValueChange={val => setFilter(val)}
@@ -55,7 +55,8 @@ export const MenuList = () => {
             <SelectItem value='За спаданням ціни'>За спаданням ціни</SelectItem>
           </SelectContent>
         </Select>
-      </div>
+      </div> */}
+
       <div className='flex flex-wrap flex-col md:flex-row gap-6 md:gap-9'>
         {paginated.map((item, index) => (
           <ProductCard

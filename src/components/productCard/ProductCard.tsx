@@ -70,6 +70,7 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
         'border-primary-light rounded-[30px] overflow-clip',
         className
       )}
+      data-testid='product-card'
     >
       <CardHeader className='relative aspect-[5/3.8417] '>
         <Image
@@ -77,17 +78,34 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
           fill
           sizes='100%'
           alt={dish.name}
+          data-testid='product-card-surface-image'
         />
       </CardHeader>
       <CardContent className='p-4'>
-        <h4 className='text-xl font-medium'>{dish.name}</h4>
-        <p className='text-sm text-justify my-6'>{dish.description}</p>
+        <h4
+          className='text-xl font-medium'
+          data-testid='product-card-name'
+        >
+          {dish.name}
+        </h4>
+        <p
+          className='text-sm text-justify my-6'
+          data-testid='product-card-desc'
+        >
+          {dish.description}
+        </p>
         <div className='flex justify-between items-center'>
           <div className='flex flex-col gap-8'>
-            <span className='text-sm opacity-70'>
+            <span
+              className='text-sm opacity-70'
+              data-testid='product-card-mass'
+            >
               Вага: {formatMass(dish.mass)}
             </span>
-            <span className='text-[1.625rem]/[1.967rem] text-black font-medium'>
+            <span
+              className='text-[1.625rem]/[1.967rem] text-black font-medium'
+              data-testid='product-card-price'
+            >
               {dish.price.toFixed(0)}₴
             </span>
           </div>
@@ -97,6 +115,7 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
             <BrandButton
               kind='outlined'
               onClick={() => setOpened(!opened)}
+              role='modal-button'
             >
               Додати інгредієнт
             </BrandButton>
@@ -108,12 +127,14 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
                   ? '-translate-y-14 opacity-100 xl:-translate-y-0'
                   : 'translate-y-[-1000px] transition-transform duration-500 opacity-80'
               )}
+              data-testid='modal-content'
             >
               {/* Close button */}
               <X
                 size={32}
                 className='text-grey ml-auto cursor-pointer mb-3'
                 onClick={setOpened.bind(null, false)}
+                data-testid='modal-close-button'
               />
 
               <div className='md:flex md:flex-row-reverse md:gap-6 max-w-max mx-auto'>
@@ -129,10 +150,16 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
                 <div className='flex flex-col flex-1 py-4 gap-5 mt-5 md:m-0 md:p-0 border-t border-t-primary-light md:border-0'>
                   <div className='flex gap-6 items-center justify-between md:flex-col-reverse'>
                     <div className='md:text-center'>
-                      <p className='text-[1.125rem]/[1.463rem] font-semibold'>
+                      <p
+                        className='text-[1.125rem]/[1.463rem] font-semibold'
+                        data-testid='modal-preview-name'
+                      >
                         {dish.name}
                       </p>
-                      <p className='text-[1.625rem] font-semibold mt-5 mb-3'>
+                      <p
+                        className='text-[1.625rem] font-semibold mt-5 mb-3'
+                        data-testid='modal-preview-total'
+                      >
                         {(dish.price + extraCost).toFixed(1)}₴
                       </p>
                     </div>
@@ -143,45 +170,60 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
                         src={dish.imageSrc}
                         fill
                         alt={dish.name}
+                        data-testid='modal-preview-image'
                       />
                     </div>
                   </div>
+
+                  {/* Mobile controllers */}
                   <BrandButton
                     className='xl:hidden'
                     kind='outlined'
                     onClick={() => handleClear()}
+                    role='modal-clear-mobile'
                   >
                     Очистити
                   </BrandButton>
                   <BrandButton
                     className='xl:hidden'
                     kind='filled'
+                    role='modal-add-mobile'
                   >
                     Додати
                   </BrandButton>
+                  {/* End Mobile controllers */}
                 </div>
               </div>
+              {/* Laptop controllers*/}
               <div className='hidden xl:flex justify-end container px-64 gap-10'>
                 <BrandButton
                   className='w-56'
                   kind='outlined'
                   onClick={() => handleClear()}
+                  role='modal-clear-laptop'
                 >
                   Очистити
                 </BrandButton>
                 <BrandButton
                   className='w-56'
                   kind='filled'
+                  role='modal-add-laptop'
                 >
                   Додати
                 </BrandButton>
               </div>
+              {/* End Laptop controllers*/}
 
               {/* End Product Preview and Controllers */}
             </div>
             {/* End Modal Menu */}
 
-            <BrandButton kind='filled'>До кошика</BrandButton>
+            <BrandButton
+              kind='filled'
+              role='cart-button'
+            >
+              До кошика
+            </BrandButton>
           </div>
         </div>
       </CardContent>

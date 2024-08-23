@@ -28,6 +28,7 @@ export const BurgerMenu = () => {
       <Button
         onClick={() => setOpened(!opened)}
         className='px-0'
+        data-testid='trigger-btn'
       >
         <AlignLeft
           className='text-white md:text-black'
@@ -37,6 +38,7 @@ export const BurgerMenu = () => {
       </Button>
 
       <div
+        data-testid='burger-menu'
         className={cn(
           'absolute p-8 left-0 top-0 ml-5 mt-5 rounded-[20px] w-[calc(100%-40px)] font-medium bg-light transition-all duration-500',
           opened
@@ -46,6 +48,7 @@ export const BurgerMenu = () => {
       >
         {/* Close button */}
         <X
+          data-testid='close-btn'
           size={32}
           className='text-grey ml-auto cursor-pointer'
           onClick={setOpened.bind(null, false)}
@@ -61,7 +64,14 @@ export const BurgerMenu = () => {
                   active === link.href && 'border-b-2'
                 )}
               >
-                <Link href={link.href}>{link.label}</Link>
+                <Link
+                  data-testid={
+                    active === link.href ? 'active-link' : 'menu-link'
+                  }
+                  href={link.href}
+                >
+                  {link.label}
+                </Link>
               </li>
             )
           })}

@@ -6,8 +6,13 @@ import { payList } from '@/data/footer.data'
 import { additionalLinks, navLinks } from '@/data/links.data'
 
 export const Footer = () => {
+  const currentYear = new Date().getFullYear()
+
   return (
-    <footer className='py-[26px] bg-primary-dark md:py-8 xl:pb-10'>
+    <footer
+      className='py-[26px] bg-primary-dark md:py-8 xl:pb-10'
+      data-testid='footer'
+    >
       <div className='container'>
         <div className='mb-8 space-y-2 text-white text-sm/[18.2px] md:hidden'>
           <p className='flex items-center'>
@@ -24,7 +29,10 @@ export const Footer = () => {
           </Link>
           <ul className='space-y-2'>
             {navLinks.map(item => (
-              <li key={item.label}>
+              <li
+                key={item.label}
+                data-testid='nav-link'
+              >
                 <Link
                   href={item.href}
                   className='textLink-light'
@@ -36,7 +44,10 @@ export const Footer = () => {
           </ul>
           <ul className='space-y-2'>
             {additionalLinks.map(item => (
-              <li key={item.label}>
+              <li
+                key={item.label}
+                data-testid='additional-link'
+              >
                 <Link
                   href={item.href}
                   className='textLink-light'
@@ -79,17 +90,19 @@ export const Footer = () => {
             {payList.map(item => (
               <li key={item.label}>
                 <Image
+                  data-testid='payment-item'
                   src={item.src}
                   alt={item.label}
+                  width={item.width}
                   height={17.64}
-                  className='w-auto'
                 />
               </li>
             ))}
           </ul>
 
           <p className='text-white text-sm/[18.2px] md:text-[13px]/[16.9px] xl:text-sm'>
-            © Ресторан «Pasta la Pepito», 2024
+            © Ресторан «Pasta la Pepito»,{' '}
+            <span data-testid='current-year'>{currentYear}</span>
           </p>
         </div>
       </div>
