@@ -24,8 +24,9 @@ export const Ingredients = ({
       className={classes.ingredients}
       data-testid='ingredients-container'
     >
-      {ingredients.map(ingr => (
+      {ingredients.map((ingr, index) => (
         <Ingredient
+          key={index}
           handleChangeQuantity={handleChangeQuantity}
           ingredient={ingr}
           ingredientsQuantity={ingredientsQuantity}
