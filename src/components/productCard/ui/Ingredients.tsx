@@ -81,7 +81,7 @@ export const Ingredient = ({
           {/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */}
 
           {/* Ingredient's price for big screens */}
-          {!!ingredientsQuantity[ingr.name]?.count != null && (
+          {!!ingredientsQuantity[ingr.name]?.count && (
             <span
               className='hidden xl:block text-xs mt-[100%]'
               data-testid='ingredient-price-laptop'
@@ -109,7 +109,7 @@ export const Ingredient = ({
           </span>
 
           {/* Ingredient's price for mobile screens */}
-          {!!ingredientsQuantity[ingr.name]?.count != null ? (
+          {!!ingredientsQuantity[ingr.name]?.count ? (
             <span
               className='xl:hidden text-xs'
               data-testid='ingredient-price-mobile'

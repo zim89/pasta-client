@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { BrandPagination } from '@/components/brandPagination'
 import { ProductCard } from '@/components/productCard'
+import { ProductGrid } from '@/components/productGrid'
 import { Button } from '@/components/ui/button'
 import {
   Select,
@@ -12,31 +13,20 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
+import { paginationItemsLimit } from '@/config/appConfig'
+import { usePaginate } from '@/hooks/usePaginate'
 import { Categories } from './Categories'
-import { Dish, menu } from '@/data/menu.data'
-
-const itemsLimit = 9
+import { menu } from '@/data/menu.data'
 
 export const MenuList = () => {
-  const [paginated, setPaginated] = useState<Dish[]>([])
-  const params = useSearchParams()
-  const page = parseInt(params.get('page') || '1')
+  const [_, { paginated, setPaginated }] = usePaginate(menu)
 
   const [filter, setFilter] = useState('За популярністю')
 
-  useEffect(() => {
-    if (page === 1) {
-      setPaginated(menu.slice(0, itemsLimit))
-    } else {
-      const startingIndex = itemsLimit * page - 1
-      setPaginated(menu.slice(startingIndex, startingIndex + itemsLimit))
-    }
-  }, [menu, page])
-
   return (
     <>
-      {/* <Categories /> */}
-      {/* <div className='hidden md:block'>
+      <Categories />
+      <div className='hidden md:block'>
         <Select
           defaultValue={'За популярністю'}
           onValueChange={val => setFilter(val)}
@@ -55,19 +45,12 @@ export const MenuList = () => {
             <SelectItem value='За спаданням ціни'>За спаданням ціни</SelectItem>
           </SelectContent>
         </Select>
-      </div> */}
-
-      <div className='flex flex-wrap flex-col md:flex-row gap-6 md:gap-9'>
-        {paginated.map((item, index) => (
-          <ProductCard
-            key={index}
-            className='md:basis-1/2 xl:basis-[31.5%] w-full max-w-[338px] xl:max-w-full'
-            dish={item}
-          />
-        ))}
       </div>
+
+      <ProductGrid products={paginated} />
+
       <BrandPagination
-        pages={Math.floor(menu.length / itemsLimit)}
+        pages={Math.floor(menu.length / paginationItemsLimit)}
         className='hidden md:flex md:mt-8 md:mb-[72px] xl:mt-16 xl:mb-[120px]'
       />
       <Button className='md:hidden p-0 font-normal w-full mt-6 mb-[60px]'>
