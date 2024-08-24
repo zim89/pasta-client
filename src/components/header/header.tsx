@@ -1,10 +1,11 @@
-import { Instagram, Search, ShoppingCart, Smartphone } from 'lucide-react'
+import { Instagram, ShoppingCart, Smartphone } from 'lucide-react'
 import { BurgerMenu } from '../burgerMenu'
 import CartButton from '../cartButton/CartButton'
 import { PinIcon } from '../icons-pack'
 import { Button } from '../ui/button'
 import { Links } from './ui/Links'
 import { Logo } from './ui/Logo'
+import { Search } from './ui/Search'
 
 export const Header = () => {
   return (
@@ -19,9 +20,7 @@ export const Header = () => {
             <p className='text-center xl:mx-[44px]'>
               Доставка щоденно з 12.00 до 20.00
             </p>
-            <Button className='hidden xl:block ml-auto mr-[44px]'>
-              <Search size={20} />
-            </Button>
+            <Search />
             <p className='hidden md:flex md:items-center md:gap-1'>
               <Smartphone size={20} />
               <span>+380 (96) 612 27 20</span>
