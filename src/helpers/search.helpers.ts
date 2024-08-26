@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
 
-export const close = (dispatch: Dispatch<SetStateAction<string>>) => {
+export const clear = (dispatch: (param: string) => void) => {
   dispatch('')
 }

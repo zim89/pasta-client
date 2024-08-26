@@ -7,12 +7,12 @@ import { usePathname } from 'next/navigation'
 export const Search = () => {
   const path = usePathname()
 
-  if (path === '/search') return <span className='block ml-auto mr-[44px]' />
+  if (path === '/search') return <span className='block ml-auto mr-[2.75rem]' />
 
   return (
     <Link
       href='/search'
-      className='hidden xl:block ml-auto mr-[44px]'
+      className='xl:ml-auto xl:mr-[2.75rem]'
     >
       <SearchIcon size={20} />
     </Link>
