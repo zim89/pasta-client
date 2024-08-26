@@ -49,7 +49,10 @@ export const BrandPagination = ({ pages, className }: Props) => {
   return (
     <>
       <Pagination className={cn('justify-end xl:justify-center', className)}>
-        <PaginationContent className='gap-10'>
+        <PaginationContent
+          className='gap-10'
+          data-testid='pagination'
+        >
           <PaginationItem>
             <PaginationPrevious
               href={
