@@ -1,11 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useState } from 'react'
 import { BrandPagination } from '@/components/brandPagination'
-import { ProductCard } from '@/components/productCard'
+import { LoadMoreButton } from '@/components/loadMoreButton/LoadMoreButton'
 import { ProductGrid } from '@/components/productGrid'
-import { Button } from '@/components/ui/button'
 import {
   Select,
   SelectContent,
@@ -13,14 +11,17 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { paginationItemsLimit } from '@/config/appConfig'
+import { itemsPerScreen, paginationItemsLimit } from '@/config/appConfig'
+import { useLoadMore } from '@/hooks/useLoadMore'
+import { useMedia } from '@/hooks/useMedia'
 import { usePaginate } from '@/hooks/usePaginate'
 import { Categories } from './Categories'
 import { menu } from '@/data/menu.data'
 
 export const MenuList = () => {
-  const [_, { paginated, setPaginated }] = usePaginate(menu)
-
+  const { isMobileScreen } = useMedia()
+  const { expandedItems, expansionCount, setExpansionCount } = useLoadMore(menu)
+  const [_, { paginated }] = usePaginate(menu)
   const [filter, setFilter] = useState('За популярністю')
 
   return (
@@ -37,7 +38,7 @@ export const MenuList = () => {
           >
             <SelectValue placeholder={filter} />
           </SelectTrigger>
-          <SelectContent className='text-[15px] border-0 rounded-sm translate-x-0'>
+          <SelectContent className='text-[0.938rem] border-0 rounded-sm translate-x-0'>
             <SelectItem value='За популярністю'>За популярністю</SelectItem>
             <SelectItem value='За зростанням ціни'>
               За зростанням ціни
@@ -47,17 +48,22 @@ export const MenuList = () => {
         </Select>
       </div>
 
-      <ProductGrid products={paginated} />
+      <ProductGrid products={isMobileScreen ? expandedItems : paginated} />
 
       <BrandPagination
         pages={Math.floor(menu.length / paginationItemsLimit)}
-        className='hidden md:flex md:mt-8 md:mb-[72px] xl:mt-16 xl:mb-[120px]'
+        className='hidden md:flex md:mt-8 md:mb-[4.5em] xl:mt-16 xl:mb-[7.5rem]'
       />
-      <Button className='md:hidden p-0 font-normal w-full mt-6 mb-[60px]'>
-        <span className='inline-block border-b border-b-primary-light'>
-          Подивитися все меню
-        </span>
-      </Button>
+
+      {menu.length >= itemsPerScreen * expansionCount ? (
+        <LoadMoreButton
+          onClick={() => {
+            setExpansionCount(prev => prev + 1)
+          }}
+        />
+      ) : (
+        <div className='md:hidden mt-[5.25rem]' />
+      )}
     </>
   )
 }
