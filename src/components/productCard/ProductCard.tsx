@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { X } from 'lucide-react'
 import Image from 'next/image'
-import { useSearchParams } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { formatMass } from '@/helpers/newDishes.helpers'
 import { initIngredients } from '@/helpers/productCard.helpers'

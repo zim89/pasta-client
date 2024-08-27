@@ -12,7 +12,7 @@ export const Logo = () => {
       {/* Mobile logo */}
       <Image
         src={logoLight.src}
-        className='md:hidden'
+        className='md:hidden ml-4'
         width={54.94}
         height={58.04}
         alt='Logo di Pasta La Pepito'

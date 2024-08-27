@@ -12,16 +12,17 @@ export const Header = () => {
     <header className='md:bg-transparent md:mt-0'>
       <div className='bg-primary'>
         <div className='container py-2'>
-          <div className='flex items-center justify-center md:justify-between pt-1 pb-3 text-white text-sm'>
+          <div className='flex items-center justify-center md:justify-between xl:justify-normal pt-1 pb-3 text-white text-sm'>
             <p className='hidden md:flex md:items-center'>
               <PinIcon />
               <span>Kиїв, Еспланадна, 34/2</span>
             </p>
-            <p className='text-center xl:mx-[44px]'>
+            <p className='text-center xl:mx-[44px] xl:mr-auto'>
               Доставка щоденно з 12.00 до 20.00
             </p>
 
             <p className='hidden md:flex md:items-center md:gap-1'>
+              <Search />
               <Smartphone size={20} />
               <span>+380 (96) 612 27 20</span>
             </p>
@@ -49,7 +50,9 @@ export const Header = () => {
           <Logo />
           <Links />
           <div className='flex items-center'>
-            <Search />
+            <div className='md:hidden text-white mr-4 -mb-[6px]'>
+              <Search />
+            </div>
             <CartButton>
               {Trigger => (
                 <>

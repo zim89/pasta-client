@@ -12,9 +12,9 @@ export const Search = () => {
   return (
     <Link
       href='/search'
-      className='xl:ml-auto xl:mr-[2.75rem]'
+      className='md:mr-3 xl:mr-[2.75rem]'
     >
-      <SearchIcon size={20} />
+      <SearchIcon className='size-6 md:size-5' />
     </Link>
   )
 }

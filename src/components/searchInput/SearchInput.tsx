@@ -12,6 +12,7 @@ export const SearchInput = ({ onSearch, value }: Props) => {
     <div className='flex items-center bg-white border border-opacity-50 border-primary-light px-5 rounded-2.5xl py-[0.125rem] my-8 w-full md:max-w-[20em] xl:max-w-[39.125em]'>
       <Search size={24} />
       <Input
+        data-testid='search-input'
         value={value}
         onChange={e => onSearch(e.target.value)}
         type='text'
@@ -23,6 +24,7 @@ export const SearchInput = ({ onSearch, value }: Props) => {
       />
       {value && (
         <X
+          data-testid='clear-search'
           size={24}
           className='text-grey'
           onClick={clear.bind(null, onSearch)}
