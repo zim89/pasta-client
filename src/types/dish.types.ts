@@ -1,18 +1,18 @@
-export interface HitDishes {
+export interface Dish {
   id: number
+  slug: string
   title: string
   weight: number
+  volume: number | null
+  composition: string
   price: number
   image: string
+  type: string
   isHit: boolean
   isNew: boolean
 }
 
-export interface NewDishes extends HitDishes {
-  composition: string
-}
-
 export interface HitsAndNewsResponse {
-  hits: HitDishes[]
-  news: NewDishes[]
+  hits: Dish[]
+  news: Dish[]
 }

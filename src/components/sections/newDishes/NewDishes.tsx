@@ -1,8 +1,8 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
+import { BrandCarousel } from '@/components/brandCarousel'
 import { QUERY_KEYS } from '@/constants/query.const'
-import { BrandCarousel } from '../brandCarousel'
 import { Card } from './ui/Card'
 import { CardSkeleton } from './ui/CardSkeleton'
 import { dishService } from '@/services/dishes.service'
@@ -51,9 +51,9 @@ export const NewDishes = () => {
               <CardSkeleton key={index} />
             ))}
 
-            <div className='flex gap-10 items-center absolute h-10 w-[120px] -top-[72.8px] right-0'>
-              <div className='size-10 rounded-full border border-grey/10 bg-grey/30 animate-pulse' />
-              <div className='size-10 rounded-full border border-grey/10 bg-grey/30 animate-pulse' />
+            <div className='absolute -top-[72.8px] right-0 flex h-10 w-[120px] items-center gap-10'>
+              <div className='size-10 animate-pulse rounded-full border border-grey/10 bg-grey/30' />
+              <div className='size-10 animate-pulse rounded-full border border-grey/10 bg-grey/30' />
             </div>
           </div>
         )}
@@ -66,7 +66,7 @@ export const NewDishes = () => {
                   <CarouselItem
                     // Width substracted to a half of left margin
                     data-testid='carousel-item'
-                    className='basis-[calc(50%-7px)] first:pl-10 ml-[14px] first:ml-0'
+                    className='ml-[14px] basis-[calc(50%-7px)] first:ml-0 first:pl-10'
                     key={dish.id}
                   >
                     <Card dish={dish} />

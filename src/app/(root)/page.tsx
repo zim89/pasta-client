@@ -1,9 +1,9 @@
-import Hits from '@/components/Hits'
 import { Contacts } from '@/components/contacts'
-import { Features } from '@/components/features'
 import { Hero } from '@/components/hero'
 import InstagramSection from '@/components/instagramSection/InstagramSection'
-import { NewDishes } from '@/components/newDishes'
+import { Hits } from '@/components/sections/Hits'
+import { Features } from '@/components/sections/features'
+import { NewDishes } from '@/components/sections/newDishes'
 
 export default function Home() {
   return (
