@@ -1,1 +1,0 @@
-export { Hits } from './Hits'

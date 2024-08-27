@@ -1,6 +1,7 @@
 'use client'
 
 import type { Dish } from '@/types/dish.types'
+import { Card } from '@/components/sections/new-dishes/ui/Card'
 import {
   Carousel,
   CarouselContent,
@@ -29,7 +30,10 @@ export const SectionSlider = ({
       }}
     >
       <CarouselContent
-        className={cn('pt-[72px]', isLaptopScreen ? '-ml-16' : '-ml-[38px]')}
+        className={cn(
+          type === 'hits' ? 'pt-[72px]' : 'pt-0',
+          isLaptopScreen ? '-ml-16' : '-ml-[38px]'
+        )}
       >
         {data.map(dish => (
           <CarouselItem
@@ -38,11 +42,17 @@ export const SectionSlider = ({
               isLaptopScreen ? 'basis-1/3 pl-16' : 'basis-1/2 pl-[38px]'
             )}
           >
-            <ProductCard dish={dish} />
+            {type === 'hits' && <ProductCard dish={dish} />}
+            {type === 'news' && <Card dish={dish} />}
           </CarouselItem>
         ))}
       </CarouselContent>
-      <div className='absolute right-0 top-0 flex h-10 items-center gap-10'>
+      <div
+        className={cn(
+          'absolute right-0 flex h-10 items-center gap-10',
+          type === 'hits' ? 'top-0' : '-top-[72px]'
+        )}
+      >
         <CarouselPrevious className='static translate-x-0 translate-y-0' />
         <CarouselNext className='static translate-x-0 translate-y-0' />
       </div>

@@ -3,15 +3,15 @@
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import { ProductCard, ProductCardSkeleton } from '@/components/productCard'
-import { SectionTitle } from '@/components/shared/SectionTitle'
+import { SectionTitle } from '@/components/shared/section-title'
 import pepper_img from '@/assets/images/hits/pepper.png'
 import { QUERY_KEYS } from '@/constants/query.const'
-import { SectionSlider } from '../../shared/SectionSlider'
-import { MenuLink } from './ui/MenuLink'
-import { SkeletonList } from './ui/SkeletonList'
+import { SectionSlider } from '../../shared/section-slider'
+import { MenuLink } from './ui/menu-link'
+import { SkeletonList } from './ui/skeleton-list'
 import { dishService } from '@/services/dishes.service'
 
-export const Hits = () => {
+export const HitDishes = () => {
   const { isLoading, isError, data, error } = useQuery({
     queryKey: [QUERY_KEYS.HITS_NEWS],
     queryFn: () => dishService.getHitsAndNews()
