@@ -1,10 +1,14 @@
+import type { HitsAndNewsResponse } from '@/types/dish.types'
 import { axiosBase, axiosWithAuth } from '@/api/interceptors'
 
 class DishService {
-  private BASE_URL = '/dishes'
+  private BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL! + '/dish'
 
-  async getDishes() {
-    return await axiosBase.get(this.BASE_URL)
+  async getHitsAndNews() {
+    const response = await axiosBase.get<HitsAndNewsResponse>(
+      this.BASE_URL + '/hits-and-news'
+    )
+    return response.data
   }
 
   async getDishById(id: string) {}

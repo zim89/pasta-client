@@ -1,5 +1,4 @@
 export const QUERY_KEYS = {
+  HITS_NEWS: 'hits-and-news'
   // PRODUCTS: 'products',
-  // TOP: 'products-top',
-  // SALE: 'products-on-sale'
 }
