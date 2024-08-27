@@ -1,9 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import { Dish } from '@/types/dish.types'
+import { useQuery } from '@tanstack/react-query'
+import axios from 'axios'
 import { BrandPagination } from '@/components/brandPagination'
 import { LoadMoreButton } from '@/components/loadMoreButton/LoadMoreButton'
 import { ProductGrid } from '@/components/productGrid'
+import { ProductGrid2 } from '@/components/productGrid/productGrid2'
 import {
   Select,
   SelectContent,
@@ -20,8 +24,23 @@ import { menu } from '@/data/menu.data'
 
 export const MenuList = () => {
   const { isMobileScreen } = useMedia()
-  const { expandedItems, expansionCount, setExpansionCount } = useLoadMore(menu)
-  const [_, { paginated }] = usePaginate(menu)
+
+  const { data: dishes } = useQuery({
+    queryKey: ['Dishes'],
+
+    queryFn: async () => {
+      const dishes = await axios.get<Dish[]>(
+        process.env.NEXT_PUBLIC_SERVER_URL + '/dish'
+      )
+
+      return dishes.data
+    }
+  })
+
+  const { expandedItems, expansionCount, setExpansionCount } = useLoadMore(
+    dishes || []
+  )
+  const [_, { paginated }] = usePaginate(dishes || [])
   const [filter, setFilter] = useState('За популярністю')
 
   return (
@@ -48,7 +67,7 @@ export const MenuList = () => {
         </Select>
       </div>
 
-      <ProductGrid products={isMobileScreen ? expandedItems : paginated} />
+      <ProductGrid2 products={isMobileScreen ? expandedItems : paginated} />
 
       <BrandPagination
         pages={Math.floor(menu.length / paginationItemsLimit)}
