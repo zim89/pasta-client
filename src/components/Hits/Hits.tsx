@@ -1,20 +1,35 @@
+import { Dish } from '@/types/dish.types'
+import Image from 'next/image'
 import Link from 'next/link'
+import hot_chilly from '@/assets/images/hits-pepper.png'
 import { BrandCarousel } from '../brandCarousel'
 import { ProductCard } from '../productCard'
-import { menu } from '@/data/menu.data'
 
-export default function Hits() {
+type Props = {
+  dishes: Dish[]
+}
+
+export default function Hits({ dishes }: Props) {
   return (
     <section
       className='section'
       data-testid='hits-wrapper'
     >
       <div className='container'>
-        <h2 className='heading'>Хіти</h2>
+        <div className='flex items-center justify-normal xl:justify-center'>
+          <h2 className='heading xl:ml-28'>Хіти</h2>
+          <Image
+            src={hot_chilly}
+            alt='Chilly'
+            width={146.34}
+            height={59.95}
+            className='object-contain hidden xl:block -rotate-6 mb-12 -ml-4'
+          />
+        </div>
 
         {/* Mobile and laptop layout */}
         <div className='flex flex-col gap-6 md:hidden xl:flex xl:gap-16 xl:justify-between xl:flex-row'>
-          {menu.slice(0, 3).map((dish, index) => (
+          {dishes.slice(0, 3).map((dish, index) => (
             <ProductCard
               className='w-full'
               key={index}
@@ -27,7 +42,7 @@ export default function Hits() {
         <BrandCarousel>
           {CarouselItem => (
             <>
-              {menu.slice(3, 6).map((dish, index) => (
+              {dishes.map((dish, index) => (
                 <CarouselItem
                   // Width substracted to a half of left margin (first slide's margin and the rest)
                   className='basis-[calc(50%-23px)] first:ml-6 ml-[22px]'

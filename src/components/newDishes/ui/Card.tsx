@@ -1,40 +1,41 @@
+import { Dish } from '@/types/dish.types'
 import { ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { formatMass } from '@/helpers/newDishes.helpers'
-import { NewDish } from '@/data/newDishes.data'
 
-export type Props = { dish: NewDish }
+export type Props = { dish: Dish }
 
 export const Card = ({ dish }: Props) => {
   return (
     <div
-      className='flex rounded-xl border border-primary-light overflow-clip w-full'
+      className='flex rounded-4xl border border-primary-light overflow-clip w-full'
       data-testid='card'
     >
       <div className='relative w-full max-w-[135px] xl:max-w-[160px] min-h-[159px]'>
         <Image
           data-testid='card-poster'
-          src={dish.poster}
+          src={dish.image}
           fill
-          style={dish.additionalStyles}
           className='object-cover'
-          alt={dish.name}
+          alt={dish.title}
         />
       </div>
-      <div className='m-4'>
+      <div className='m-4 flex-1 flex flex-col justify-around'>
         <h3
           className='text-sm font-semibold'
           data-testid='card-name'
         >
-          {dish.name}
+          {dish.title}
         </h3>
-        <span
-          className='inline-block text-sm my-3 opacity-70'
-          data-testid='card-attr-mass'
-        >
-          Вага: {formatMass(dish.mass)}
-        </span>
+        {dish.weight && (
+          <span
+            className='inline-block text-sm my-3 opacity-70'
+            data-testid='card-attr-mass'
+          >
+            Вага: {formatMass(dish.weight)}
+          </span>
+        )}
         <div className='flex items-center justify-between'>
           <span
             className='font-semibold text-[1.375rem]'

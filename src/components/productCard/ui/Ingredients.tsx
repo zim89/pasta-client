@@ -1,12 +1,12 @@
+import { Ingredient } from '@/types/dish.types'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import img from '@/assets/icons/features/feat3_sm.svg'
 import { formatMass } from '@/helpers/newDishes.helpers'
 import classes from '../classes.module.css'
-import { Dish } from '@/data/menu.data'
 
 export type Props = {
-  ingredients: Dish['ingredients']
+  ingredients: Ingredient[]
   ingredientsQuantity: { [P in string]: { count: number; price: number } }
   handleChangeQuantity: (
     action: 'DECREASE' | 'INCREASE',
@@ -25,7 +25,7 @@ export const Ingredients = ({
       data-testid='ingredients-container'
     >
       {ingredients.map((ingr, index) => (
-        <Ingredient
+        <Ingredient2
           key={index}
           handleChangeQuantity={handleChangeQuantity}
           ingredient={ingr}
@@ -53,7 +53,7 @@ export type ItemProps = {
 // For increase quantity button: increase-btn-laptop, increase-btn-mobile
 // For decrease quantity button: decrease-btn-laptop, decrease-btn-mobile
 
-export const Ingredient = ({
+export const Ingredient2 = ({
   handleChangeQuantity,
   ingredient: ingr,
   ingredientsQuantity
@@ -91,7 +91,7 @@ export const Ingredient = ({
           )}
           {/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */}
         </div>
-        <div className='text-xs'>
+        <div className='text-xs mt-6'>
           {/* Ingredient's name for big screens */}
           <h3
             className='font-semibold capitalize mb-2 hidden xl:block'
@@ -101,12 +101,12 @@ export const Ingredient = ({
           </h3>
           {/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */}
 
-          <span
+          {/* <span
             className='block whitespace-nowrap'
             data-testid='ingredient-mass'
           >
             {formatMass(ingr.mass)}
-          </span>
+          </span> */}
 
           {/* Ingredient's price for mobile screens */}
           {!!ingredientsQuantity[ingr.name]?.count ? (

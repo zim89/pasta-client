@@ -1,8 +1,12 @@
+import { Dish } from '@/types/dish.types'
 import { BrandCarousel } from '../brandCarousel'
 import { Card } from './ui/Card'
-import { newDishes } from '@/data/newDishes.data'
 
-export const NewDishes = () => {
+type Props = {
+  newDishes: Dish[]
+}
+
+export const NewDishes = ({ newDishes }: Props) => {
   return (
     <section
       className='section'
@@ -14,7 +18,7 @@ export const NewDishes = () => {
         <div className='flex flex-col gap-6 md:hidden xl:flex xl:gap-24 xl:justify-between xl:flex-row'>
           {newDishes.map(dish => (
             <Card
-              key={dish.productId}
+              key={dish.id}
               dish={dish}
             />
           ))}
@@ -29,7 +33,7 @@ export const NewDishes = () => {
                   // Width substracted to a half of left margin
                   data-testid='carousel-item'
                   className='basis-[calc(50%-7px)] first:pl-10 ml-[14px] first:ml-0'
-                  key={dish.productId}
+                  key={dish.id}
                 >
                   <Card dish={dish} />
                 </CarouselItem>

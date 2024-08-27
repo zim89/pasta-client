@@ -1,27 +1,42 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import { Dish, Ingredient } from '@/types/dish.types'
+import { useQuery } from '@tanstack/react-query'
+import axios from 'axios'
 import { X } from 'lucide-react'
 import Image from 'next/image'
-import { useSearchParams } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { formatMass } from '@/helpers/newDishes.helpers'
-import { initIngredients } from '@/helpers/productCard.helpers'
+import {
+  initIngredients,
+  initIngredients2
+} from '@/helpers/productCard.helpers'
 import { BrandButton } from '../brandButton'
 import { Card, CardContent, CardHeader } from '../ui/card'
 import { Ingredients } from './ui/Ingredients'
-import { Dish } from '@/data/menu.data'
 
 type Props = { dish: Dish; className?: string }
 export const ProductCard = ({ dish, className = '' }: Props) => {
   const [opened, setOpened] = useState(false)
+
+  const { data: ingred } = useQuery({
+    queryKey: ['Ingredients'],
+    queryFn: async () => {
+      const ingredients = await axios.get<Ingredient[]>(
+        process.env.NEXT_PUBLIC_SERVER_URL + '/ingredient'
+      )
+
+      return ingredients.data
+    }
+  })
 
   const [ingredients, setIngredients] = useState<{
     [P in string]: {
       count: number
       price: number
     }
-  }>(initIngredients(dish.ingredients))
+  }>(initIngredients2(ingred || []))
 
   // Remove the side scrollbar
   useEffect(() => {
@@ -33,8 +48,10 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
   }, [opened])
 
   useEffect(() => {
-    setIngredients(initIngredients(dish.ingredients))
-  }, [dish.name, dish.ingredients.length])
+    if (!ingred) return
+
+    setIngredients(initIngredients2(ingred))
+  }, [dish.title, ingred])
 
   const extraCost = useMemo(() => {
     let cost = 0
@@ -46,7 +63,7 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
   }, [ingredients])
 
   const handleClear = () => {
-    setIngredients(initIngredients(dish.ingredients))
+    setIngredients(initIngredients([]))
   }
 
   const handleChangeQuantity = (
@@ -68,41 +85,49 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
   return (
     <Card
       className={cn(
-        'border-primary-light rounded-[30px] overflow-clip',
+        'border-primary-light rounded-[30px] overflow-clip flex flex-col',
         className
       )}
       data-testid='product-card'
     >
       <CardHeader className='relative aspect-[5/3.8417] '>
         <Image
-          src={dish.imageSrc}
+          src={dish.image || 'https://placehold.co/600x400.png'}
           fill
-          sizes='100%'
-          alt={dish.name}
+          className='object-cover'
+          sizes='(max-width: 390px) 100vw, (max-width: 834px) 50vw, 33vw'
+          alt={dish.title}
           data-testid='product-card-surface-image'
         />
       </CardHeader>
-      <CardContent className='p-4'>
-        <h4
-          className='text-xl font-medium'
-          data-testid='product-card-name'
-        >
-          {dish.name}
-        </h4>
-        <p
-          className='text-sm text-justify my-6'
-          data-testid='product-card-desc'
-        >
-          {dish.description}
-        </p>
+
+      <CardContent className='p-4 flex-1 flex flex-col justify-between'>
+        <div>
+          <h4
+            className='text-xl font-medium'
+            data-testid='product-card-name'
+          >
+            {dish.title}
+          </h4>
+          <p
+            className='text-sm my-6 max-w-max'
+            data-testid='product-card-desc'
+          >
+            {dish.composition || 'Опису немає'}
+          </p>
+        </div>
         <div className='flex justify-between items-center'>
-          <div className='flex flex-col gap-8'>
-            <span
-              className='text-sm opacity-70'
-              data-testid='product-card-mass'
-            >
-              Вага: {formatMass(dish.mass)}
-            </span>
+          <div className={cn('flex flex-col', dish.weight && 'gap-8')}>
+            {dish.weight ? (
+              <span
+                className='text-sm opacity-70'
+                data-testid='product-card-mass'
+              >
+                Вага: {formatMass(dish.weight)}
+              </span>
+            ) : (
+              <span />
+            )}
             <span
               className='text-[1.625rem]/[1.967rem] text-black font-medium'
               data-testid='product-card-price'
@@ -113,13 +138,15 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
 
           {/* Modal Menu */}
           <div className='flex flex-col gap-4 xl:gap-5'>
-            <BrandButton
-              kind='outlined'
-              onClick={() => setOpened(!opened)}
-              role='modal-button'
-            >
-              Додати інгредієнт
-            </BrandButton>
+            {dish.composition && (
+              <BrandButton
+                kind='outlined'
+                onClick={() => setOpened(!opened)}
+                role='modal-button'
+              >
+                Додати інгредієнт
+              </BrandButton>
+            )}
 
             <div
               className={cn(
@@ -141,7 +168,7 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
               <div className='md:flex md:flex-row-reverse md:gap-6 max-w-max mx-auto'>
                 {/* Ingredients Grid */}
                 <Ingredients
-                  ingredients={dish.ingredients}
+                  ingredients={ingred || []}
                   ingredientsQuantity={ingredients}
                   handleChangeQuantity={handleChangeQuantity}
                 />
@@ -155,7 +182,7 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
                         className='text-[1.125rem]/[1.463rem] font-semibold'
                         data-testid='modal-preview-name'
                       >
-                        {dish.name}
+                        {dish.title}
                       </p>
                       <p
                         className='text-[1.625rem] font-semibold mt-5 mb-3'
@@ -165,15 +192,17 @@ export const ProductCard = ({ dish, className = '' }: Props) => {
                       </p>
                     </div>
 
-                    <div className='ml-auto relative min-w-[100px] min-h-[100px] md:min-w-[200px] md:min-h-[200px] xl:min-h-[240px] xl:min-w-[240px]'>
-                      <Image
-                        className='rounded-lg object-cover h-full w-full'
-                        src={dish.imageSrc}
-                        fill
-                        alt={dish.name}
-                        data-testid='modal-preview-image'
-                      />
-                    </div>
+                    {dish.image && (
+                      <div className='ml-auto relative min-w-[100px] min-h-[100px] md:min-w-[200px] md:min-h-[200px] xl:min-h-[240px] xl:min-w-[240px]'>
+                        <Image
+                          className='rounded-lg object-cover h-full w-full'
+                          src={dish.image}
+                          fill
+                          alt={dish.title}
+                          data-testid='modal-preview-image'
+                        />
+                      </div>
+                    )}
                   </div>
 
                   {/* Mobile controllers */}

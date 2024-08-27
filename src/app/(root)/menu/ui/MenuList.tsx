@@ -7,7 +7,7 @@ import axios from 'axios'
 import { BrandPagination } from '@/components/brandPagination'
 import { LoadMoreButton } from '@/components/loadMoreButton/LoadMoreButton'
 import { ProductGrid } from '@/components/productGrid'
-import { ProductGrid2 } from '@/components/productGrid/productGrid2'
+import { ProductGrid2 } from '@/components/productGrid/productGrid'
 import {
   Select,
   SelectContent,

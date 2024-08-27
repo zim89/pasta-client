@@ -42,7 +42,8 @@ const config = {
     },
     extend: {
       borderRadius: {
-        '2.5xl': '1.25rem'
+        '2.5xl': '1.25rem',
+        '4xl': '1.875rem'
       },
       keyframes: {
         'accordion-down': {
