@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { LogoLightIcon, PinIcon } from '@/components/icons-pack'
+import veggies from '@/assets/images/footer-veggies.png'
 import { InstagramButton } from './ui/instagram-button'
 import { payList } from '@/data/footer.data'
 import { additionalLinks, navLinks } from '@/data/links.data'
@@ -85,7 +86,7 @@ export const Footer = () => {
           </Link>
         </ul>
 
-        <div className='flex flex-col gap-8 md:flex-row-reverse md:justify-between'>
+        <div className='flex flex-col gap-8 md:flex-row-reverse md:justify-between items-end'>
           <ul className='flex justify-between items-center md:justify-start md:gap-[33.68px]'>
             {payList.map(item => (
               <li key={item.label}>
@@ -99,6 +100,14 @@ export const Footer = () => {
               </li>
             ))}
           </ul>
+
+          <Image
+            src={veggies}
+            width={259}
+            height={120}
+            className='hidden xl:block -mb-4'
+            alt=''
+          />
 
           <p className='text-white text-sm/[18.2px] md:text-[13px]/[16.9px] xl:text-sm'>
             © Ресторан «Pasta la Pepito»,{' '}

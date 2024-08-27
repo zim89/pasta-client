@@ -16,9 +16,10 @@ type Props = {
     label: string
     href?: string
   }[]
+  rightSection?: React.ReactNode
 }
 
-export const PageHeader = ({ breadcrumbs, title }: Props) => {
+export const PageHeader = ({ breadcrumbs, title, rightSection }: Props) => {
   return (
     <>
       <Breadcrumb className='hidden md:block'>
@@ -57,12 +58,15 @@ export const PageHeader = ({ breadcrumbs, title }: Props) => {
         >
           <ChevronLeft size={24} />
         </Link>
-        <h1
-          className='font-alegreya text-center text-[28px] md:text-4xl xl:text-[3.125rem]'
-          data-testid='breadcrumb-title-mobile'
-        >
-          {title}
-        </h1>
+        <div className='flex items-center justify-center'>
+          <h1
+            className='font-alegreya text-center text-[28px] md:text-4xl xl:text-[3.125rem]'
+            data-testid='breadcrumb-title'
+          >
+            {title}
+          </h1>
+          {rightSection}
+        </div>
       </div>
       {/* End Mobile breadcrumb */}
     </>

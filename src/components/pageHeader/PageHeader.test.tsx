@@ -15,6 +15,6 @@ describe('PageHeader', () => {
 
     expect(getByTestId('breadcrumb-link-mobile')).toHaveAttribute('href', '/')
 
-    expect(getByTestId('breadcrumb-title-mobile')).toHaveTextContent('About Us')
+    expect(getByTestId('breadcrumb-title')).toHaveTextContent('About Us')
   })
 })
