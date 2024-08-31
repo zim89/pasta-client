@@ -7,7 +7,8 @@ export const dataProvider: DataProvider = {
     )
 
     return {
-      data: response.json
+      data: response.json,
+      total: response.json.length
     }
   },
   getOne: async (resource, params) => {
@@ -69,6 +70,8 @@ export const dataProvider: DataProvider = {
     }
   },
   deleteMany: async (resource, params) => {
+    console.log('Deletion ')
+
     return {
       data: []
     }

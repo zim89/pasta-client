@@ -5,15 +5,17 @@ import {
   CarouselPrevious,
   Carousel as ShadCNCarousel
 } from '@/components/ui/carousel'
+import { cn } from '@/lib/utils'
 
 type Props = {
   children(item: typeof CarouselItem): React.ReactNode
+  className?: string
 }
 
-export const BrandCarousel = ({ children }: Props) => {
+export const BrandCarousel = ({ children, className }: Props) => {
   return (
     <ShadCNCarousel
-      className='hidden md:block xl:hidden'
+      className={cn('hidden md:block xl:hidden', className)}
       opts={{
         align: 'start',
         slidesToScroll: 1
