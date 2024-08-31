@@ -13,7 +13,7 @@ import {
 import { cn } from '@/lib/utils'
 import { PAGINATION_LIMIT } from '@/constants/app.const'
 
-export const Paginate = ({ total }: { total: number }) => {
+export const PagePagination = ({ total }: { total: number }) => {
   const path = usePathname()
   const searchParams = useSearchParams()
 
