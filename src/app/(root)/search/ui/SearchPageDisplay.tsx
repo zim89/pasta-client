@@ -6,7 +6,6 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { BrandPagination } from '@/components/brandPagination'
 import { ProductGrid } from '@/components/productGrid'
-import { ProductGrid2 } from '@/components/productGrid/productGrid'
 import { paginationItemsLimit } from '@/config/appConfig'
 import { useMedia } from '@/hooks/useMedia'
 import { usePaginate } from '@/hooks/usePaginate'
@@ -54,7 +53,7 @@ export const SearchPageDisplay = ({ debouncedSearch }: Props) => {
 
   return (
     <>
-      <ProductGrid2 products={isMobileScreen ? matched : paginated} />
+      <ProductGrid products={isMobileScreen ? matched : paginated} />
       <BrandPagination
         pages={Math.floor(matched.length / paginationItemsLimit)}
         className='hidden md:flex md:mt-8 md:mb-[4.5rem] xl:mt-16 xl:mb-[7.5rem]'

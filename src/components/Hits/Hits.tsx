@@ -23,7 +23,7 @@ export default function Hits({ dishes }: Props) {
             alt='Chilly'
             width={146.34}
             height={59.95}
-            className='object-contain hidden xl:block -rotate-6 mb-12 -ml-4'
+            className='object-contain hidden xl:block -rotate-6 -mt-20 -ml-4'
           />
         </div>
 

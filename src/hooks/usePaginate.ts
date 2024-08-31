@@ -9,7 +9,7 @@ export const usePaginate = <T = any>(allItems: T[]) => {
   const page = parseInt(params.get('page') || '1')
   const { isMobileScreen } = useMedia()
 
-  const items = useMemo(() => allItems, [allItems.length])
+  const items = useMemo(() => allItems, [allItems])
 
   useEffect(() => {
     if (isMobileScreen) return

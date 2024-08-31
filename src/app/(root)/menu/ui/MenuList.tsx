@@ -1,13 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Dish } from '@/types/dish.types'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import { BrandPagination } from '@/components/brandPagination'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { BrandPaginationBar2 } from '@/components/brandPagination/BrandPagination2'
 import { LoadMoreButton } from '@/components/loadMoreButton/LoadMoreButton'
-import { ProductGrid } from '@/components/productGrid'
-import { ProductGrid2 } from '@/components/productGrid/productGrid'
+import { ProductGrid } from '@/components/productGrid/productGrid'
 import {
   Select,
   SelectContent,
@@ -19,11 +19,17 @@ import { itemsPerScreen, paginationItemsLimit } from '@/config/appConfig'
 import { useLoadMore } from '@/hooks/useLoadMore'
 import { useMedia } from '@/hooks/useMedia'
 import { usePaginate } from '@/hooks/usePaginate'
+import { calculateParams } from '@/helpers/brandPagination.helpers'
+import { sortDishes } from '@/helpers/menuList.helpers'
 import { Categories } from './Categories'
-import { menu } from '@/data/menu.data'
 
 export const MenuList = () => {
   const { isMobileScreen } = useMedia()
+  const router = useRouter()
+  const params = useSearchParams()
+
+  const filterParam = params.get('filter')
+  const sortParam = params.get('sort')
 
   const { data: dishes } = useQuery({
     queryKey: ['Dishes'],
@@ -37,25 +43,52 @@ export const MenuList = () => {
     }
   })
 
-  const { expandedItems, expansionCount, setExpansionCount } = useLoadMore(
-    dishes || []
-  )
-  const [_, { paginated }] = usePaginate(dishes || [])
-  const [filter, setFilter] = useState('За популярністю')
+  const [displayDishes, setDisplayDishes] = useState(dishes || [])
+
+  const { expandedItems, expansionCount, setExpansionCount } =
+    useLoadMore(displayDishes)
+  const [_, { paginated }] = usePaginate(displayDishes)
+
+  useEffect(() => {
+    if (filterParam && dishes) {
+      const filtered = dishes.filter(dish => dish.type === filterParam)
+
+      setDisplayDishes(() => filtered)
+    } else if (!filterParam && dishes) {
+      setDisplayDishes(() => dishes)
+    }
+  }, [filterParam, dishes])
+
+  useEffect(() => {
+    if (sortParam && filterParam) {
+      let result = sortDishes(paginated, sortParam)
+
+      setDisplayDishes(result)
+    } else if (sortParam && !filterParam && dishes) {
+      let result = sortDishes(dishes, sortParam)
+
+      // It's iterated to cause a rerender, as the array's size stays the same; so I forced to update the reference
+      setDisplayDishes(() => [...result])
+    }
+  }, [sortParam, filterParam])
+
+  if (!dishes) return
 
   return (
     <>
-      <Categories />
+      <Categories dishes={dishes} />
       <div className='hidden md:block'>
         <Select
-          defaultValue={'За популярністю'}
-          onValueChange={val => setFilter(val)}
+          value={sortParam || ''}
+          onValueChange={val => {
+            router.replace(calculateParams(params, 'sort', val))
+          }}
         >
           <SelectTrigger
             iconClassName='opacity-100 text-black mt-1'
             className='ml-auto max-w-fit mb-6 bg-transparent border-0 p-0 text-lg justify-end gap-3'
           >
-            <SelectValue placeholder={filter} />
+            <SelectValue placeholder={sortParam || 'Сортування'} />
           </SelectTrigger>
           <SelectContent className='text-[0.938rem] border-0 rounded-sm translate-x-0'>
             <SelectItem value='За популярністю'>За популярністю</SelectItem>
@@ -67,14 +100,14 @@ export const MenuList = () => {
         </Select>
       </div>
 
-      <ProductGrid2 products={isMobileScreen ? expandedItems : paginated} />
+      <ProductGrid products={isMobileScreen ? expandedItems : paginated} />
 
-      <BrandPagination
-        pages={Math.floor(menu.length / paginationItemsLimit)}
+      <BrandPaginationBar2
+        pages={Math.floor(displayDishes.length / paginationItemsLimit)}
         className='hidden md:flex md:mt-8 md:mb-[4.5em] xl:mt-16 xl:mb-[7.5rem]'
       />
 
-      {menu.length >= itemsPerScreen * expansionCount ? (
+      {displayDishes.length >= itemsPerScreen * expansionCount ? (
         <LoadMoreButton
           onClick={() => {
             setExpansionCount(prev => prev + 1)

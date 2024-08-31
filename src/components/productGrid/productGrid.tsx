@@ -5,7 +5,7 @@ type Props = {
   products: Dish[]
 }
 
-export const ProductGrid2 = ({ products }: Props) => {
+export const ProductGrid = ({ products }: Props) => {
   return (
     <div className='flex flex-wrap flex-col md:flex-row gap-6 md:gap-9'>
       {products.map((item, index) => (
