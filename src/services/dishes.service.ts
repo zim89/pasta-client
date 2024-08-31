@@ -1,4 +1,4 @@
-import type { HitsAndNewsResponse } from '@/types/dish.types'
+import type { Dish, HitsAndNewsResponse } from '@/types/dish.types'
 import { axiosBase, axiosWithAuth } from '@/api/interceptors'
 
 class DishService {
@@ -11,19 +11,23 @@ class DishService {
     return response.data
   }
 
-  async getDishById(id: string) {}
-
-  async createDish(data: any) {
-    return await axiosWithAuth.post(this.BASE_URL, data)
+  async getDishes() {
+    const response = await axiosBase.get<Dish[]>(this.BASE_URL)
+    return response.data
   }
+  // async getDishById(id: string) {}
 
-  async updateDish(id: string, data: any) {
-    return await axiosWithAuth.put(`${this.BASE_URL}/${id}`, data)
-  }
+  // async createDish(data: any) {
+  //   return await axiosWithAuth.post(this.BASE_URL, data)
+  // }
 
-  async removeDish(id: string) {
-    return await axiosWithAuth.delete(`${this.BASE_URL}/${id}`)
-  }
+  // async updateDish(id: string, data: any) {
+  //   return await axiosWithAuth.put(`${this.BASE_URL}/${id}`, data)
+  // }
+
+  // async removeDish(id: string) {
+  //   return await axiosWithAuth.delete(`${this.BASE_URL}/${id}`)
+  // }
 }
 
 export const dishService = new DishService()

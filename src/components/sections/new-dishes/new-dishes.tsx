@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query'
 import { SectionSlider } from '@/components/shared/section-slider'
 import { SectionTitle } from '@/components/shared/section-title'
 import { QUERY_KEYS } from '@/constants/query.const'
-import { Card } from './ui/Card'
-import { CardSkeleton } from './ui/CardSkeleton'
+import { Card } from './ui/card'
+import { CardSkeleton } from './ui/card-skeleton'
 import { dishService } from '@/services/dishes.service'
 
 export const NewDishes = () => {

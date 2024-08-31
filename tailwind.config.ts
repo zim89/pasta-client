@@ -20,11 +20,11 @@ const config = {
       padding: {
         DEFAULT: '24px',
         md: '60px',
-        lg: '80px'
+        xl: '80px'
       }
     },
     colors: {
-      black: '#001114',
+      black: 'rgb(0, 17, 20)',
       white: '#FFFFFF',
       light: '#FBFBFB',
       grey: '#6F7273',

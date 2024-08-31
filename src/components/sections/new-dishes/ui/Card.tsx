@@ -3,7 +3,7 @@ import { ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { formatMass } from '@/helpers/newDishes.helpers'
-import { NewsCardTitle } from './NewsTitle'
+import { CardTitle } from './card-title'
 
 export const Card = ({ dish }: { dish: Dish }) => {
   return (
@@ -22,7 +22,7 @@ export const Card = ({ dish }: { dish: Dish }) => {
         />
       </div>
       <div className='flex-1 space-y-4 pb-[25px] pr-[18px] pt-[21px] xl:space-y-[22px] xl:pb-[14px] xl:pr-[18px] xl:pt-[18px]'>
-        <NewsCardTitle title={dish.title} />
+        <CardTitle title={dish.title} />
 
         <p
           className='pb-2 text-sm/[16.94px] opacity-70 xl:pb-0 xl:text-[13px]/[16.9px] xl:opacity-80'

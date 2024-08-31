@@ -1,19 +1,19 @@
-
 import type { Dish } from '@/types/dish.types'
 import Image from 'next/image'
 import { formatMass } from '@/helpers/newDishes.helpers'
 import { BrandButton } from '../brandButton'
 import { Card, CardContent, CardHeader } from '../ui/card'
+import { HitLabel } from './ui/hit-label'
 
 export const ProductCard = ({ dish }: { dish: Dish }) => {
   return (
     <Card
-      className='w-full overflow-clip rounded-[30px] border-primary-light/50'
+      className='relative w-full overflow-clip rounded-[30px] border-primary-light/50'
       data-testid='product-card'
     >
       <CardHeader className='relative aspect-[5/3.8417]'>
         <Image
-          src={dish.image}
+          src={dish.image ? dish.image : 'https://placehold.co/600x400.png'}
           fill
           sizes='100%'
           alt={dish.title}
@@ -67,6 +67,8 @@ export const ProductCard = ({ dish }: { dish: Dish }) => {
           </div>
         </div>
       </CardContent>
+
+      {dish.isHit && <HitLabel />}
     </Card>
   )
 }

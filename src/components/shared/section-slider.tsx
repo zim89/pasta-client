@@ -1,7 +1,7 @@
 'use client'
 
 import type { Dish } from '@/types/dish.types'
-import { Card } from '@/components/sections/new-dishes/ui/Card'
+import { Card } from '@/components/sections/new-dishes/ui/card'
 import {
   Carousel,
   CarouselContent,
