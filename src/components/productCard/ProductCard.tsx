@@ -1,14 +1,24 @@
 import type { Dish } from '@/types/dish.types'
 import Image from 'next/image'
+import { cn } from '@/lib/utils'
 import { formatMass } from '@/helpers/newDishes.helpers'
 import { BrandButton } from '../brandButton'
 import { Card, CardContent, CardHeader } from '../ui/card'
 import { HitLabel } from './ui/hit-label'
 
-export const ProductCard = ({ dish }: { dish: Dish }) => {
+export const ProductCard = ({
+  dish,
+  className = ''
+}: {
+  dish: Dish
+  className?: string
+}) => {
   return (
     <Card
-      className='relative w-full overflow-clip rounded-[30px] border-primary-light/50'
+      className={cn(
+        'relative w-full overflow-clip rounded-[30px] border-primary-light/50',
+        className
+      )}
       data-testid='product-card'
     >
       <CardHeader className='relative aspect-[5/3.8417]'>
