@@ -86,7 +86,7 @@ export const ProductCard = ({
   return (
     <Card
       className={cn(
-        'flex min-h-full flex-col overflow-clip rounded-[30px] border-primary-light',
+        'relative flex min-h-full flex-col overflow-clip rounded-[30px] border-primary-light',
         className
       )}
       data-testid='product-card'
