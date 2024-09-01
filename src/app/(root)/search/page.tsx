@@ -1,9 +1,5 @@
-// import { SearchPageWrapper } from './ui/SearchPageWrapper'
-
-// export default function Page() {
-//   return <SearchPageWrapper />
-// }
+import { SearchPageWrapper } from './ui/SearchPageWrapper'
 
 export default function Page() {
-  return <div>Search page</div>
+  return <SearchPageWrapper />
 }

@@ -2,15 +2,10 @@
 
 import { Feature } from '@/types/feature.types'
 import { useQuery } from '@tanstack/react-query'
-import Image from 'next/image'
-import { BrandCarousel } from '@/components/brandCarousel'
-import { LaptopFeatures } from '@/components/features/ui/LaptopFeatures'
-import { MobileFeatures } from '@/components/features/ui/MobileFeatures'
-import { TabletFeatures } from '@/components/features/ui/TabletFeatures'
-import features_veggies2 from '@/assets/images/features-veggies-2.png'
-import features_veggies1 from '@/assets/images/features-veggies.png'
+import { LaptopFeatures } from '@/components/sections/features/ui/LaptopFeatures'
+import { MobileFeatures } from '@/components/sections/features/ui/MobileFeatures'
+import { TabletFeatures } from '@/components/sections/features/ui/TabletFeatures'
 import { axiosBase } from '@/api/interceptors'
-import { featureList } from '@/data/features.data'
 
 export const Features = () => {
   const { data } = useQuery({

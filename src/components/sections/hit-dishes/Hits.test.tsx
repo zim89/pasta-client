@@ -1,12 +1,12 @@
 import { render } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 import '@/lib/mockIntersectionObserver'
-import Hits from './hit-dishes'
+import { HitDishes } from './hit-dishes'
 import * as exports from '@/data/menu.data'
 
 describe('Hits', () => {
   test('should render', () => {
-    const { getByTestId } = render(<Hits />)
+    const { getByTestId } = render(<HitDishes />)
 
     expect(getByTestId('hits-wrapper')).toBeInTheDocument()
   })
@@ -62,7 +62,7 @@ describe('Hits', () => {
 
     vi.spyOn(exports, 'menu', 'get').mockReturnValue(testMenu)
 
-    const { getAllByTestId } = render(<Hits />)
+    const { getAllByTestId } = render(<HitDishes />)
 
     // TODO: ~~~~~~~~~~~~~~~~~~~~~~~~
 

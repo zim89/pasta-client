@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import * as nextMod from 'next/navigation'
 import { describe, expect, test, vi } from 'vitest'
 import { BurgerMenu } from './'

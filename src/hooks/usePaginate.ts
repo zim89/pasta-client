@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { paginationItemsLimit } from '@/config/appConfig'
+import { PAGINATION_LIMIT } from '@/constants/app.const'
 import { useMedia } from './useMedia'
 
 export const usePaginate = <T = any>(allItems: T[]) => {
@@ -15,12 +15,10 @@ export const usePaginate = <T = any>(allItems: T[]) => {
     if (isMobileScreen) return
 
     if (page === 1) {
-      setPaginated(items.slice(0, paginationItemsLimit))
+      setPaginated(items.slice(0, PAGINATION_LIMIT))
     } else {
-      const startingIndex = paginationItemsLimit * page - 1
-      setPaginated(
-        items.slice(startingIndex, startingIndex + paginationItemsLimit)
-      )
+      const startingIndex = PAGINATION_LIMIT * page - 1
+      setPaginated(items.slice(startingIndex, startingIndex + PAGINATION_LIMIT))
     }
   }, [items, page, isMobileScreen])
 

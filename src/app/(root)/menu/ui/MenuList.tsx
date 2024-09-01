@@ -5,7 +5,7 @@ import { Dish } from '@/types/dish.types'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { BrandPaginationBar2 } from '@/components/brandPagination/BrandPagination2'
+import { BrandPagination } from '@/components/brandPagination'
 import { LoadMoreButton } from '@/components/loadMoreButton/LoadMoreButton'
 import { ProductGrid } from '@/components/productGrid/productGrid'
 import {
@@ -15,10 +15,13 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { itemsPerScreen, paginationItemsLimit } from '@/config/appConfig'
 import { useLoadMore } from '@/hooks/useLoadMore'
 import { useMedia } from '@/hooks/useMedia'
 import { usePaginate } from '@/hooks/usePaginate'
+import {
+  PAGINATION_LIMIT,
+  PAGINATION_LIMIT_MOBILE
+} from '@/constants/app.const'
 import { calculateParams } from '@/helpers/brandPagination.helpers'
 import { sortDishes } from '@/helpers/menuList.helpers'
 import { Categories } from './Categories'
@@ -86,11 +89,11 @@ export const MenuList = () => {
         >
           <SelectTrigger
             iconClassName='opacity-100 text-black mt-1'
-            className='ml-auto max-w-fit mb-6 bg-transparent border-0 p-0 text-lg justify-end gap-3'
+            className='bg-transparent mb-6 ml-auto max-w-fit justify-end gap-3 border-0 p-0 text-lg'
           >
             <SelectValue placeholder={sortParam || 'Сортування'} />
           </SelectTrigger>
-          <SelectContent className='text-[0.938rem] border-0 rounded-sm translate-x-0'>
+          <SelectContent className='translate-x-0 rounded-sm border-0 text-[0.938rem]'>
             <SelectItem value='За популярністю'>За популярністю</SelectItem>
             <SelectItem value='За зростанням ціни'>
               За зростанням ціни
@@ -102,19 +105,19 @@ export const MenuList = () => {
 
       <ProductGrid products={isMobileScreen ? expandedItems : paginated} />
 
-      <BrandPaginationBar2
-        pages={Math.floor(displayDishes.length / paginationItemsLimit)}
-        className='hidden md:flex md:mt-8 md:mb-[4.5em] xl:mt-16 xl:mb-[7.5rem]'
+      <BrandPagination
+        pages={Math.floor(displayDishes.length / PAGINATION_LIMIT)}
+        className='hidden md:mb-[4.5em] md:mt-8 md:flex xl:mb-[7.5rem] xl:mt-16'
       />
 
-      {displayDishes.length >= itemsPerScreen * expansionCount ? (
+      {displayDishes.length >= PAGINATION_LIMIT_MOBILE * expansionCount ? (
         <LoadMoreButton
           onClick={() => {
             setExpansionCount(prev => prev + 1)
           }}
         />
       ) : (
-        <div className='md:hidden mt-[5.25rem]' />
+        <div className='mt-[5.25rem] md:hidden' />
       )}
     </>
   )

@@ -1,0 +1,16 @@
+.ingredients {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  grid-auto-rows: min-content;
+  justify-content: center;
+  row-gap: 1em;
+  column-gap: 2em;
+}
+
+@media screen and (min-width: 834px) {
+  .ingredients {
+    grid-template-columns: repeat(3, max-content);
+    align-items: flex-start;
+    gap: 1.5em;
+  }
+}
