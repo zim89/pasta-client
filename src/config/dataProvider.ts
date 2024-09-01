@@ -1,4 +1,5 @@
 import { DataProvider, fetchUtils } from 'react-admin'
+import { retrieveToken } from '@/helpers/dataProvider.helpers'
 
 export const dataProvider: DataProvider = {
   getList: async (resource, params) => {
@@ -28,11 +29,17 @@ export const dataProvider: DataProvider = {
   create: async (resource, params) => {
     const { data } = params
 
+    const { token } = retrieveToken()
+
     const response = await fetchUtils.fetchJson(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/${resource}`,
       {
         method: 'POST',
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        user: {
+          token: `Bearer ${token}`,
+          authenticated: !!token
+        }
       }
     )
 
