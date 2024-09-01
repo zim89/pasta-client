@@ -1,16 +1,16 @@
-'use client'
+// 'use client'
 
-import { SearchPageDisplay } from './SearchPageDisplay'
-import { SearchPageHeader } from './SearchPageHeader'
+// import { SearchPageDisplay } from './SearchPageDisplay'
+// import { SearchPageHeader } from './SearchPageHeader'
 
-export const SearchPageWrapper = () => {
-  return (
-    <div className='container'>
-      <SearchPageHeader>
-        {({ debouncedSearch }) => (
-          <SearchPageDisplay debouncedSearch={debouncedSearch} />
-        )}
-      </SearchPageHeader>
-    </div>
-  )
-}
+// export const SearchPageWrapper = () => {
+//   return (
+//     <div className='container'>
+//       <SearchPageHeader>
+//         {({ debouncedSearch }) => (
+//           <SearchPageDisplay debouncedSearch={debouncedSearch} />
+//         )}
+//       </SearchPageHeader>
+//     </div>
+//   )
+// }

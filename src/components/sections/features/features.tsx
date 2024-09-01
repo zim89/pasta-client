@@ -1,13 +1,15 @@
+'use client'
+
 import { Feature } from '@/types/feature.types'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import { BrandCarousel } from '@/components/brandCarousel'
+import { LaptopFeatures } from '@/components/features/ui/LaptopFeatures'
+import { MobileFeatures } from '@/components/features/ui/MobileFeatures'
+import { TabletFeatures } from '@/components/features/ui/TabletFeatures'
 import features_veggies2 from '@/assets/images/features-veggies-2.png'
 import features_veggies1 from '@/assets/images/features-veggies.png'
 import { axiosBase } from '@/api/interceptors'
-import { LaptopFeatures } from './ui/LaptopFeatures'
-import { MobileFeatures } from './ui/MobileFeatures'
-import { TabletFeatures } from './ui/TabletFeatures'
 import { featureList } from '@/data/features.data'
 
 export const Features = () => {

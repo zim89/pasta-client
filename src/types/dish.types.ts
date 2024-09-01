@@ -17,3 +17,8 @@ export type Ingredient = {
   price: number
   image: string | null
 }
+
+export interface HitsAndNewsResponse {
+  hits: Dish[]
+  news: Dish[]
+}

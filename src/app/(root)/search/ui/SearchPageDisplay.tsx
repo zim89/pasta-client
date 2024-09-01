@@ -1,5 +1,4 @@
-'use client'
-
+// 'use client'
 import { useEffect, useState } from 'react'
 import { Dish } from '@/types/dish.types'
 import { useQuery } from '@tanstack/react-query'
@@ -46,7 +45,7 @@ export const SearchPageDisplay = ({ debouncedSearch }: Props) => {
     }
   }, [debouncedSearch, dishes])
 
-  // When menu is filtered, then it matches pagination results
+  //   // When menu is filtered, then it matches pagination results
   useEffect(() => {
     setPaginated(matched.slice(0, paginationItemsLimit))
   }, [matched])
@@ -56,9 +55,9 @@ export const SearchPageDisplay = ({ debouncedSearch }: Props) => {
       <ProductGrid products={isMobileScreen ? matched : paginated} />
       <BrandPagination
         pages={Math.floor(matched.length / paginationItemsLimit)}
-        className='hidden md:flex md:mt-8 md:mb-[4.5rem] xl:mt-16 xl:mb-[7.5rem]'
+        className='hidden md:mb-[4.5rem] md:mt-8 md:flex xl:mb-[7.5rem] xl:mt-16'
       />
-      <div className='md:hidden mt-[5.25rem]' />
+      <div className='mt-[5.25rem] md:hidden' />
     </>
   )
 }

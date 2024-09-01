@@ -1,11 +1,11 @@
 'use client'
 
-import Hits from '../Hits'
+import { NewDishes } from '@/components/newDishes/NewDishes'
+import { Features } from '@/components/sections/features'
+import Hits from '../Hits/Hits'
 import { Contacts } from '../contacts'
-import { Features } from '../features'
 import { Hero } from '../hero'
 import InstagramSection from '../instagramSection/InstagramSection'
-import { NewDishes } from '../newDishes'
 import { DishFetcher } from './ui/DishFetcher'
 
 export const HomeDisplay = () => {

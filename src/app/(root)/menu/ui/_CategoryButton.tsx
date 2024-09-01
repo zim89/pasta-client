@@ -11,7 +11,7 @@ export const CategoryButton = ({ label, onClick, className = '' }: Props) => {
   return (
     <Button
       className={cn(
-        'whitespace-nowrap select-none py-3 px-5 xl:px-10 font-normal text-black border border-black border-opacity-20 rounded-[30px]',
+        'select-none whitespace-nowrap rounded-[30px] border border-black border-opacity-20 px-5 py-3 font-normal text-black xl:px-10',
         className
       )}
       type='button'

@@ -7,7 +7,7 @@ import {
   CarouselContent,
   CarouselItem
 } from '@/components/ui/carousel'
-import { CategoryButton } from './CategoryButton'
+import { CategoryButton } from './_CategoryButton'
 
 type Props = {
   dishes: Dish[]
@@ -22,7 +22,7 @@ export const Categories = ({ dishes }: Props) => {
 
   return (
     <Carousel
-      className='max-w-[calc(100vw-44px)] mb-8'
+      className='mb-8 max-w-[calc(100vw-44px)]'
       opts={{
         align: 'start',
         slidesToScroll: 3

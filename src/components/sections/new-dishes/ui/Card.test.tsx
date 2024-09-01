@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import { describe, expect, test } from 'vitest'
-import { Card, Props } from './Card'
+import { Card, Props } from './news-card'
 
 let testDish: Props['dish'] = {
   name: 'Test Pasta',
