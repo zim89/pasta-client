@@ -1,6 +1,7 @@
 'use client'
 
 import type { Dish } from '@/types/dish.types'
+import { NewsCard } from '@/components/sections/new-dishes/ui/news-card'
 import {
   Carousel,
   CarouselContent,
@@ -11,7 +12,6 @@ import {
 import { cn } from '@/lib/utils'
 import { useMedia } from '@/hooks/useMedia'
 import { ProductCard } from '../productCard'
-import { Card } from '../sections/new-dishes/ui/card'
 
 export const SectionSlider = ({
   data,
@@ -43,7 +43,7 @@ export const SectionSlider = ({
             )}
           >
             {type === 'hits' && <ProductCard dish={dish} />}
-            {type === 'news' && <Card dish={dish} />}
+            {type === 'news' && <NewsCard dish={dish} />}
           </CarouselItem>
         ))}
       </CarouselContent>

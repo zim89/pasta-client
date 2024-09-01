@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { formatMass } from '@/helpers/newDishes.helpers'
 import { CardTitle } from './card-title'
 
-export const Card = ({ dish }: { dish: Dish }) => {
+export const NewsCard = ({ dish }: { dish: Dish }) => {
   return (
     <div
       className='flex gap-[22px] overflow-clip rounded-xl border border-primary-light/50 xl:gap-[18px] xl:rounded-[30px]'
