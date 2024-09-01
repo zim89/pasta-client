@@ -1,9 +1,7 @@
-import Hits from '@/components/Hits'
 import { Contacts } from '@/components/contacts'
-import { Features } from '@/components/features'
 import { Hero } from '@/components/hero'
 import InstagramSection from '@/components/instagramSection/InstagramSection'
-import { NewDishes } from '@/components/newDishes'
+import { Features, HitDishes, NewDishes } from '@/components/sections'
 
 export default function Home() {
   return (
@@ -12,7 +10,7 @@ export default function Home() {
       <NewDishes />
       {/* Wrapped in containers for ordering sections */}
       <div className='flex flex-col'>
-        <Hits />
+        <HitDishes />
         <Features />
       </div>
       {/* Wrapped in containers for ordering sections */}

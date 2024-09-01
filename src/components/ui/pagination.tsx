@@ -52,7 +52,7 @@ const PaginationLink = ({
   <Link
     aria-current={isActive ? 'page' : undefined}
     className={cn(
-      'p-0 w-10 h-10 border border-primary-light rounded-full',
+      'h-10 w-10 rounded-full border border-primary-light/50 p-0',
       buttonVariants({
         variant: isActive ? 'activeLink' : 'link',
         size
@@ -72,12 +72,12 @@ const PaginationPrevious = ({
     aria-label='Go to previous page'
     size='default'
     className={cn(
-      'p-0 w-10 h-10 gap-1 border border-primary-light rounded-full',
+      'h-10 w-10 gap-1 rounded-full border border-primary-light/50 p-0 text-primary-light',
       className
     )}
     {...props}
   >
-    <ChevronLeft className='h-4 w-4 text-primary-light' />
+    <ChevronLeft className='h-6 w-6' />
   </PaginationLink>
 )
 PaginationPrevious.displayName = 'PaginationPrevious'
@@ -90,12 +90,12 @@ const PaginationNext = ({
     aria-label='Go to next page'
     size='default'
     className={cn(
-      'p-0 w-10 h-10 gap-1 border border-primary-light rounded-full',
+      'h-10 w-10 gap-1 rounded-full border border-primary-light/50 p-0 text-primary-light',
       className
     )}
     {...props}
   >
-    <ChevronRight className='h-4 w-4 text-primary-light' />
+    <ChevronRight className='h-6 w-6' />
   </PaginationLink>
 )
 PaginationNext.displayName = 'PaginationNext'
@@ -107,13 +107,13 @@ const PaginationEllipsis = ({
   <span
     aria-hidden
     className={cn(
-      'flex items-center justify-center p-0 w-10 h-10 gap-1 border border-primary-light rounded-full',
+      'flex h-10 w-10 items-center justify-center gap-1 rounded-full border border-primary-light/50 p-0',
       className
     )}
     {...props}
   >
     <MoreHorizontal
-      className='h-4 w-4 -mb-3'
+      className='-mb-3 h-4 w-4'
       color='#00111480'
     />
     <span className='sr-only'>More pages</span>

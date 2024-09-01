@@ -16,8 +16,9 @@
     @apply pb-0 pt-10 md:py-9 xl:py-[55px];
   }
 
+  /* FIXME: delete after refactor */
   .section .heading {
-    @apply mb-5 text-[1.75rem]/[2.275rem] font-medium md:mb-8 md:text-start md:text-[2rem]/[2.6rem] xl:mb-16 xl:text-center;
+    @apply mb-5 text-center text-[1.75rem]/[2.275rem] font-medium md:mb-8 md:text-start md:text-[2rem]/[2.6rem] xl:mb-16 xl:text-center;
   }
 
   .textLink-light {

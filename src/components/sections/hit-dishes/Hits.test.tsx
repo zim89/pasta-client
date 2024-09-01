@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 import '@/lib/mockIntersectionObserver'
-import Hits from './Hits'
+import Hits from './hit-dishes'
 import * as exports from '@/data/menu.data'
 
 describe('Hits', () => {
