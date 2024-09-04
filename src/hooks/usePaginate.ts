@@ -3,10 +3,17 @@ import { useSearchParams } from 'next/navigation'
 import { PAGINATION_LIMIT } from '@/constants/app.const'
 import { useMedia } from './useMedia'
 
-export const usePaginate = <T = any>(allItems: T[]) => {
+export const usePaginate = <T = any>(
+  allItems: T[],
+  page?: number,
+  perPage = PAGINATION_LIMIT
+) => {
+  const [limit, setLimit] = useState(perPage)
   const [paginated, setPaginated] = useState<T[]>([])
   const params = useSearchParams()
-  const page = parseInt(params.get('page') || '1')
+  const [currentPage, setCurrentPage] = useState(
+    page || parseInt(params.get('page') || '1')
+  )
   const { isMobileScreen } = useMedia()
 
   const items = useMemo(() => allItems, [allItems])
@@ -14,13 +21,21 @@ export const usePaginate = <T = any>(allItems: T[]) => {
   useEffect(() => {
     if (isMobileScreen) return
 
-    if (page === 1) {
-      setPaginated(items.slice(0, PAGINATION_LIMIT))
+    if (currentPage === 1) {
+      setPaginated(items.slice(0, perPage))
     } else {
-      const startingIndex = PAGINATION_LIMIT * page - 1
-      setPaginated(items.slice(startingIndex, startingIndex + PAGINATION_LIMIT))
+      const startingIndex = perPage * (currentPage - 1)
+      setPaginated(items.slice(startingIndex, startingIndex + perPage))
     }
-  }, [items, page, isMobileScreen])
+  }, [items, currentPage, isMobileScreen, limit])
 
-  return [page, { paginated, setPaginated, params }] as const
+  useEffect(() => {
+    setPaginated(items.slice(0, limit))
+    setCurrentPage(1)
+  }, [limit])
+
+  return [
+    currentPage,
+    { paginated, setPaginated, params, setLimit, setCurrentPage }
+  ] as const
 }

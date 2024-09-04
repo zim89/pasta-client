@@ -1,12 +1,14 @@
 'use client'
 
+import { QueryClient } from '@tanstack/react-query'
 import {
   Admin,
   Edit,
   EditGuesser,
   Layout,
   ListGuesser,
-  Resource
+  Resource,
+  Show
 } from 'react-admin'
 import { theme } from '@/config/adminTheme'
 import { authProvider } from '@/config/authProvider'
@@ -18,6 +20,9 @@ import {
   PastaIcon,
   PepperIcon
 } from '../icons-pack'
+import { DishDetails } from '../pages/dish-details'
+import { IngredientList } from '../pages/ingredients-list'
+import { EditIngredient } from '../pages/ingredients-list/EditIngredient'
 import { EditProduct } from './ui/EditProduct'
 import { MainPage } from './ui/MainPage'
 import { ProductList } from './ui/ProductList'
@@ -33,6 +38,15 @@ export default function AdminPage() {
       authProvider={authProvider}
       theme={theme}
       layout={CustomLayout}
+      queryClient={
+        new QueryClient({
+          defaultOptions: {
+            queries: {
+              refetchOnWindowFocus: false
+            }
+          }
+        })
+      }
     >
       <Resource
         name='/main-page'
@@ -42,6 +56,11 @@ export default function AdminPage() {
           label: 'Головна сторінка'
         }}
         list={MainPage}
+        edit={
+          <Edit resource='/main-page'>
+            <p>Hello</p>
+          </Edit>
+        }
       />
       <Resource
         name='dish'
@@ -55,6 +74,11 @@ export default function AdminPage() {
             <EditProduct />
           </Edit>
         }
+        show={
+          <Show>
+            <DishDetails />
+          </Show>
+        }
       />
       <Resource
         name='ingredient'
@@ -62,8 +86,8 @@ export default function AdminPage() {
         options={{
           label: 'Інгредієнти'
         }}
-        list={ListGuesser}
-        edit={EditGuesser}
+        list={<IngredientList />}
+        edit={<EditIngredient />}
       />
       <Resource
         name='post'

@@ -9,7 +9,7 @@ export const theme = deepmerge(defaultTheme, {
     RaAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: '#0C99A2'
+          backgroundColor: '#047585'
         }
       }
     },
@@ -17,7 +17,8 @@ export const theme = deepmerge(defaultTheme, {
       styleOverrides: {
         root: {
           borderRight: '1px solid #D3EDEE',
-          backgroundColor: '#F2F6F6'
+          backgroundColor: '#F2F6F6',
+          height: '100vh'
         }
       }
     }

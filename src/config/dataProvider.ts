@@ -13,8 +13,16 @@ export const dataProvider: DataProvider = {
     }
   },
   getOne: async (resource, params) => {
+    const { token } = retrieveToken()
+
     const response = await fetchUtils.fetchJson(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/${resource}/${params.id}`
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/${resource}/${params.id}`,
+      {
+        user: {
+          token: `Bearer ${token}`,
+          authenticated: !!token
+        }
+      }
     )
 
     return {
@@ -31,11 +39,24 @@ export const dataProvider: DataProvider = {
 
     const { token } = retrieveToken()
 
+    let requestBody: FormData | string
+
+    if (resource === 'our-advantages') {
+      const form = new FormData()
+      form.append('image', data.image.rawFile)
+      form.append('title', data.title)
+      form.append('description', data.description)
+
+      requestBody = form
+    } else {
+      requestBody = JSON.stringify(data)
+    }
+
     const response = await fetchUtils.fetchJson(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/${resource}`,
       {
         method: 'POST',
-        body: JSON.stringify(data),
+        body: requestBody,
         user: {
           token: `Bearer ${token}`,
           authenticated: !!token
@@ -50,10 +71,16 @@ export const dataProvider: DataProvider = {
   delete: async (resource, params) => {
     const { id } = params
 
+    const { token } = retrieveToken()
+
     const response = await fetchUtils.fetchJson(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/${resource}/${id}`,
       {
-        method: 'DELETE'
+        method: 'DELETE',
+        user: {
+          token: `Bearer ${token}`,
+          authenticated: !!token
+        }
       }
     )
 
@@ -64,11 +91,17 @@ export const dataProvider: DataProvider = {
   update: async (resource, params) => {
     const { id, data } = params
 
+    const { token } = retrieveToken()
+
     const response = await fetchUtils.fetchJson(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/${resource}/${id}`,
       {
-        method: 'PUT',
-        body: JSON.stringify(data)
+        method: 'PATCH',
+        body: JSON.stringify(data),
+        user: {
+          token: `Bearer ${token}`,
+          authenticated: !!token
+        }
       }
     )
 

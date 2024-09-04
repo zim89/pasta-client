@@ -1,4 +1,10 @@
-import { Datagrid, ImageField, List, TextField } from 'react-admin'
+import {
+  Datagrid,
+  ImageField,
+  List,
+  ReferenceField,
+  TextField
+} from 'react-admin'
 
 export const ProductList = () => {
   return (

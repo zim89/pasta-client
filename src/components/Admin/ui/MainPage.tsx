@@ -1,18 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import { Feature } from '@/types/feature.types'
-import { DialogClose, DialogContent, DialogTitle } from '@radix-ui/react-dialog'
 import { useQuery } from '@tanstack/react-query'
-import {
-  Edit,
-  MonitorSmartphone,
-  PlusCircle,
-  Smartphone,
-  Tablet,
-  X
-} from 'lucide-react'
-import Link from 'next/link'
+import { Edit, PlusCircle } from 'lucide-react'
 import {
   Datagrid,
   ImageField,
@@ -20,15 +10,11 @@ import {
   TextField,
   useAuthenticated
 } from 'react-admin'
-import { Button } from '@/components/ui/button'
-import { Dialog } from '@/components/ui/dialog'
-import { cn } from '@/lib/utils'
+import { AdminDialog } from '@/components/adminDialog'
 import { axiosBase } from '@/api/interceptors'
 import { AddForm } from './AddForm'
 
 export const MainPage = () => {
-  const [opened, setOpened] = useState(false)
-
   // Redirect to login page when unauthorized
   useAuthenticated()
 
@@ -46,51 +32,50 @@ export const MainPage = () => {
   if (!data) return null
 
   return (
-    <div className='p-4'>
-      <List
-        resource='our-advantages'
-        actions={
-          <div className='flex w-full items-center py-1'>
-            <h2 className='text-4xl font-alegreya mr-auto'>Наші переваги</h2>
-            <Button className='flex items-center gap-2'>
-              <Edit size={24} />
-              Оновити
-            </Button>
-            <Button
-              className='flex items-center gap-2'
-              onClick={() => setOpened(true)}
-            >
-              <PlusCircle size={24} />
-              Додати
-            </Button>
-          </div>
-        }
-      >
-        <Datagrid>
-          <TextField
-            source='id'
-            cellClassName='size-1'
-          />
-          <ImageField
-            source='image'
-            cellClassName='size-8 object-contain'
-          />
-          <TextField source='title' />
-          <TextField source='description' />
-        </Datagrid>
-      </List>
+    <List
+      resource='our-advantages'
+      className='p-4'
+      actions={
+        <div className='flex w-full items-center py-4'>
+          <h2 className='mr-auto font-alegreya text-4xl'>Наші переваги</h2>
 
-      <Dialog
-        open={opened}
-        onOpenChange={setOpened}
-      >
-        <DialogContent className='absolute bg-black bg-opacity-30 z-10 top-0 bottom-0 left-0 right-0 flex justify-center flex-col items-center'>
-          <div className='flex items-center'>
-            <DialogTitle hidden>Додати секцію</DialogTitle>
-          </div>
-          <AddForm />
-        </DialogContent>
-      </Dialog>
-    </div>
+          <AdminDialog
+            title='Оновити секцію'
+            buttonProps={{
+              text: 'Оновити',
+              leftSection: <Edit size={24} />
+            }}
+          >
+            {() => <p>Update</p>}
+          </AdminDialog>
+
+          <AdminDialog
+            title='Додати секцію'
+            buttonProps={{
+              text: 'Додати',
+              leftSection: <PlusCircle size={24} />
+            }}
+          >
+            {() => <AddForm />}
+          </AdminDialog>
+        </div>
+      }
+    >
+      <Datagrid>
+        <ImageField
+          source='image'
+          cellClassName='size-8 object-contain'
+          label='Постер'
+        />
+        <TextField
+          source='title'
+          label='Найменування'
+        />
+        <TextField
+          source='description'
+          label='Опис'
+        />
+      </Datagrid>
+    </List>
   )
 }

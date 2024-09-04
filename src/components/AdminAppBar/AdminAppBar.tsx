@@ -3,7 +3,7 @@ import { OptionsIcon } from '../icons-pack'
 import { Button } from '../ui/button'
 
 export const AdminAppBar = () => (
-  <AppBar color='primary'>
+  <AppBar>
     <p className='mr-auto'>Pasta La Pepito Admin</p>
     <Button>
       <OptionsIcon />
