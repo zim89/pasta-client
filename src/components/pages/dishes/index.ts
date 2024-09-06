@@ -1,1 +1,0 @@
-export { DishDetails } from './DishDetails'
