@@ -7,6 +7,9 @@ import { ProductGrid } from '@/components/productGrid'
 import { useMedia } from '@/hooks/useMedia'
 import { usePaginate } from '@/hooks/usePaginate'
 import { PAGINATION_LIMIT } from '@/constants/app.const'
+import { QUERY_KEYS } from '@/constants/query.const'
+import { SERVER_URL } from '@/constants'
+import { dishService } from '@/services/dishes.service'
 
 export type Props = {
   debouncedSearch: string
@@ -16,14 +19,10 @@ export const SearchPageDisplay = ({ debouncedSearch }: Props) => {
   const { isMobileScreen } = useMedia()
 
   const { data: dishes } = useQuery({
-    queryKey: ['Dishes'],
+    queryKey: [QUERY_KEYS.DISHES],
     queryFn: async () => {
       try {
-        const dishes = await axios.get<Dish[]>(
-          process.env.NEXT_PUBLIC_SERVER_URL + '/dish'
-        )
-
-        return dishes.data
+        return dishService.getDishes()
       } catch (err) {
         console.error('Error fetching dishes:', err)
       }
@@ -37,14 +36,18 @@ export const SearchPageDisplay = ({ debouncedSearch }: Props) => {
   useEffect(() => {
     if (dishes) {
       setMatched(
-        dishes.filter(item =>
-          item.title.toLowerCase().includes(debouncedSearch.toLowerCase())
+        dishes.filter(
+          item =>
+            item.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+            item.type.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+            (item.composition &&
+              item.composition.includes(debouncedSearch.toLowerCase()))
         )
       )
     }
   }, [debouncedSearch, dishes])
 
-  //   // When menu is filtered, then it matches pagination results
+  // When menu is filtered, then it aligns pagination results
   useEffect(() => {
     setPaginated(matched.slice(0, PAGINATION_LIMIT))
   }, [matched])

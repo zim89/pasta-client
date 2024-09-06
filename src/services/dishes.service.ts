@@ -1,8 +1,9 @@
 import type { Dish, HitsAndNewsResponse } from '@/types/dish.types'
 import { axiosBase, axiosWithAuth } from '@/api/interceptors'
+import { SERVER_URL } from '@/constants'
 
 class DishService {
-  private BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL! + '/dish'
+  private BASE_URL = SERVER_URL + '/dish'
 
   async getHitsAndNews() {
     const response = await axiosBase.get<HitsAndNewsResponse>(
