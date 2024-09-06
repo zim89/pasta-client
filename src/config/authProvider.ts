@@ -1,10 +1,11 @@
 import { AuthProvider, fetchUtils } from 'react-admin'
 import { KEYS } from '@/constants/localStorage.const'
+import { SERVER_URL } from '@/constants'
 
 export const authProvider: AuthProvider = {
   login: async ({ username, password }) => {
     const response = await fetchUtils.fetchJson(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/admin/login`,
+      `${SERVER_URL}/auth/admin/login`,
       {
         method: 'POST',
         body: JSON.stringify({ email: username, password })

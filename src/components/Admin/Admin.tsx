@@ -15,17 +15,16 @@ import { authProvider } from '@/config/authProvider'
 import { dataProvider } from '@/config/dataProvider'
 import { AdminAppBar } from '../AdminAppBar'
 import {
-  HomeIcon,
+  AdvantageIcon,
   MenuInstagramIcon,
   PastaIcon,
   PepperIcon
 } from '../icons-pack'
-import { DishDetails } from '../pages/dish-details'
-import { IngredientList } from '../pages/ingredients-list'
-import { EditIngredient } from '../pages/ingredients-list/EditIngredient'
-import { EditProduct } from './ui/EditProduct'
-import { MainPage } from './ui/MainPage'
-import { ProductList } from './ui/ProductList'
+import { ProductList } from '../pages/dishes/DishesList'
+import { EditProduct } from '../pages/dishes/EditDish'
+import { IngredientList } from '../pages/ingredients'
+import { EditIngredient } from '../pages/ingredients/EditIngredient'
+import { AdvantagesList } from './ui/AdvantagesList'
 
 const CustomLayout = ({ children }: { children: React.ReactNode }) => {
   return <Layout appBar={AdminAppBar}>{children}</Layout>
@@ -49,16 +48,15 @@ export default function AdminPage() {
       }
     >
       <Resource
-        name='/main-page'
-        icon={HomeIcon}
-        intent='route'
+        name='our-advantages'
+        icon={AdvantageIcon}
         options={{
-          label: 'Головна сторінка'
+          label: 'Переваги'
         }}
-        list={MainPage}
+        list={AdvantagesList}
         edit={
-          <Edit resource='/main-page'>
-            <p>Hello</p>
+          <Edit>
+            <p>Edit</p>
           </Edit>
         }
       />
@@ -73,11 +71,6 @@ export default function AdminPage() {
           <Edit>
             <EditProduct />
           </Edit>
-        }
-        show={
-          <Show>
-            <DishDetails />
-          </Show>
         }
       />
       <Resource

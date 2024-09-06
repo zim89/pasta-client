@@ -1,11 +1,12 @@
 import { DataProvider, fetchUtils } from 'react-admin'
 import { retrieveToken } from '@/helpers/dataProvider.helpers'
+import { SERVER_URL } from '@/constants'
+
+const resourcesWithImages = ['dish', 'our-advantages', 'ingredient']
 
 export const dataProvider: DataProvider = {
   getList: async (resource, params) => {
-    const response = await fetchUtils.fetchJson(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/${resource}`
-    )
+    const response = await fetchUtils.fetchJson(`${SERVER_URL}/${resource}`)
 
     return {
       data: response.json,
@@ -16,7 +17,7 @@ export const dataProvider: DataProvider = {
     const { token } = retrieveToken()
 
     const response = await fetchUtils.fetchJson(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/${resource}/${params.id}`,
+      `${SERVER_URL}/${resource}/${params.id}`,
       {
         user: {
           token: `Bearer ${token}`,
@@ -41,28 +42,28 @@ export const dataProvider: DataProvider = {
 
     let requestBody: FormData | string
 
-    if (resource === 'our-advantages') {
+    if (resourcesWithImages.includes(resource)) {
       const form = new FormData()
+      for (let prop in data) {
+        form.append(prop, data[prop])
+      }
+      form.delete('image')
       form.append('image', data.image.rawFile)
-      form.append('title', data.title)
-      form.append('description', data.description)
+      resource === 'dish' && form.append('isNew', 'true')
 
       requestBody = form
     } else {
       requestBody = JSON.stringify(data)
     }
 
-    const response = await fetchUtils.fetchJson(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/${resource}`,
-      {
-        method: 'POST',
-        body: requestBody,
-        user: {
-          token: `Bearer ${token}`,
-          authenticated: !!token
-        }
+    const response = await fetchUtils.fetchJson(`${SERVER_URL}/${resource}`, {
+      method: 'POST',
+      body: requestBody,
+      user: {
+        token: `Bearer ${token}`,
+        authenticated: !!token
       }
-    )
+    })
 
     return {
       data: response.json
@@ -74,7 +75,7 @@ export const dataProvider: DataProvider = {
     const { token } = retrieveToken()
 
     const response = await fetchUtils.fetchJson(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/${resource}/${id}`,
+      `${SERVER_URL}/${resource}/${id}`,
       {
         method: 'DELETE',
         user: {
@@ -94,7 +95,7 @@ export const dataProvider: DataProvider = {
     const { token } = retrieveToken()
 
     const response = await fetchUtils.fetchJson(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/${resource}/${id}`,
+      `${SERVER_URL}/${resource}/${id}`,
       {
         method: 'PATCH',
         body: JSON.stringify(data),
@@ -111,9 +112,23 @@ export const dataProvider: DataProvider = {
   },
   deleteMany: async (resource, params) => {
     console.log('Deletion ')
+    const { ids } = params
+
+    const { token } = retrieveToken()
+
+    const response = await fetchUtils.fetchJson(`${SERVER_URL}/${resource}`, {
+      method: 'DELETE',
+      body: JSON.stringify({
+        ids
+      }),
+      user: {
+        token: `Bearer ${token}`,
+        authenticated: !!token
+      }
+    })
 
     return {
-      data: []
+      data: ids
     }
   },
   updateMany: async (resource, params) => {

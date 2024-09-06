@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Ingredient } from '@/types/dish.types'
-import { useSearchParams } from 'next/navigation'
 import {
   Datagrid,
   ImageField,
@@ -44,7 +43,10 @@ export const IngredientList = () => {
   }, [sort, order])
 
   useEffect(() => {
-    if (data) setDisplayedRows(data)
+    if (data) {
+      setDisplayedRows(data)
+      setLimit(5)
+    }
   }, [data])
 
   useEffect(() => {
@@ -93,7 +95,7 @@ export const IngredientList = () => {
           <Grid />
         </InfiniteList>
       ) : (
-        <List perPage={10}>
+        <List>
           <Grid />
         </List>
       )}
