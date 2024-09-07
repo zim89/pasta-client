@@ -1,39 +1,43 @@
 import { useEffect, useState } from 'react'
 import { Dish } from '@/types/dish.types'
 import { PlusCircle } from 'lucide-react'
-import { Datagrid, ImageField, List, TextField, useGetList } from 'react-admin'
-import { AdminDialog } from '@/components/adminDialog'
+import { ImageField, List, TextField, useGetList } from 'react-admin'
+import { EntityGrid } from '@/components/entityGrid'
+import { HeaderActions } from '@/components/headerActions'
+import { MobileGrid } from '@/components/mobileGrid'
 import { useHashParamValue } from '@/hooks/useHashValues'
+import { useMedia } from '@/hooks/useMedia'
 import { usePaginate } from '@/hooks/usePaginate'
 import { AddDishForm } from './AddDishForm'
 
 export const ProductList = () => {
+  const { isMobileScreen } = useMedia()
   const { data } = useGetList('dish')
   const [displayedRows, setDisplayedRows] = useState<Dish[]>(data || [])
 
-  const limit = useHashParamValue('perPage')
-  const page = useHashParamValue('page')
-  const sort = useHashParamValue('sort')
-  const order = useHashParamValue('order')
+  const limitParam = useHashParamValue('perPage')
+  const pageParam = useHashParamValue('page')
+  const sortParam = useHashParamValue('sort')
+  const orderParam = useHashParamValue('order')
 
-  const [_, { paginated, setLimit, setCurrentPage }] = usePaginate(
+  const [currentPage, { paginated, setLimit, setCurrentPage }] = usePaginate(
     displayedRows,
-    Number(page),
-    Number(limit)
+    Number(pageParam),
+    Number(limitParam)
   )
 
   useEffect(() => {
-    if (!sort || !order) return
+    if (!sortParam || !orderParam) return
 
-    const sortParam = sort as keyof Dish
+    const sort = sortParam as keyof Dish
 
     setDisplayedRows([
       ...displayedRows.sort((a, b) => {
-        if (order === 'DESC') return b[sortParam]! < a[sortParam]! ? -1 : 1
-        return a[sortParam]! < b[sortParam]! ? -1 : 1
+        if (orderParam === 'DESC') return b[sort]! < a[sort]! ? -1 : 1
+        return a[sort]! < b[sort]! ? -1 : 1
       })
     ])
-  }, [sort, order])
+  }, [sortParam, orderParam])
 
   useEffect(() => {
     if (data) {
@@ -43,70 +47,127 @@ export const ProductList = () => {
   }, [data])
 
   useEffect(() => {
-    if (limit) {
-      setLimit(Number(limit))
+    if (limitParam) {
+      setLimit(Number(limitParam))
     }
-  }, [limit])
+  }, [limitParam])
 
   useEffect(() => {
-    if (page) {
-      setCurrentPage(Number(page))
+    if (pageParam) {
+      setCurrentPage(Number(pageParam))
     }
-  }, [page])
+  }, [pageParam])
 
   return (
-    <List
-      actions={
-        <div className='flex w-full items-center py-4'>
-          <h2 className='mr-auto font-alegreya text-4xl'>Каталог страв</h2>
-          <AdminDialog
-            title='Додати страву'
-            buttonProps={{
-              text: 'Додати',
-              leftSection: <PlusCircle size={24} />
-            }}
-          >
-            {() => <AddDishForm />}
-          </AdminDialog>
-        </div>
-      }
-    >
-      <Datagrid data={paginated}>
-        <ImageField
-          source='image'
-          cellClassName='size-8 object-contain'
-          sortable={false}
-          label='Фото'
+    <>
+      {isMobileScreen ? (
+        <MobileGrid
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          actions={
+            <HeaderActions
+              title='Каталог страв'
+              buttonProps={{
+                text: 'Додати страву',
+                leftSection: <PlusCircle size={24} />
+              }}
+            >
+              {() => <AddDishForm />}
+            </HeaderActions>
+          }
+          displayedRows={displayedRows}
+          renderGrid={rows => (
+            <EntityGrid displayedRows={rows}>
+              <ImageField
+                source='image'
+                cellClassName='size-8 object-contain'
+                sortable={false}
+                label='Фото'
+              />
+              <TextField
+                source='title'
+                label='Назва'
+              />
+              <TextField
+                source='type'
+                sortable={false}
+                label='Тип'
+              />
+              <TextField
+                source='composition'
+                sortable={false}
+                label='Композиція'
+              />
+              <TextField
+                source='price'
+                label='Ціна'
+              />
+              <TextField
+                source='weight'
+                sortable={false}
+                label='Вага'
+              />
+              <TextField
+                source='volume'
+                sortable={false}
+                label='Обсяг'
+              />
+            </EntityGrid>
+          )}
         />
-        <TextField
-          source='title'
-          label='Назва'
-        />
-        <TextField
-          source='type'
-          sortable={false}
-          label='Тип'
-        />
-        <TextField
-          source='composition'
-          sortable={false}
-          label='Композиція'
-        />
-        <TextField
-          source='price'
-          label='Ціна'
-        />
-        <TextField
-          source='weight'
-          sortable={false}
-          label='Вага'
-        />
-        <TextField
-          source='volume'
-          sortable={false}
-          label='Обсяг'
-        />
-      </Datagrid>
-    </List>
+      ) : (
+        <List
+          className='p-4'
+          actions={
+            <HeaderActions
+              title='Каталог страв'
+              buttonProps={{
+                text: 'Додати страву',
+                leftSection: <PlusCircle size={24} />
+              }}
+            >
+              {() => <AddDishForm />}
+            </HeaderActions>
+          }
+        >
+          <EntityGrid displayedRows={paginated}>
+            <ImageField
+              source='image'
+              cellClassName='size-8 object-contain'
+              sortable={false}
+              label='Фото'
+            />
+            <TextField
+              source='title'
+              label='Назва'
+            />
+            <TextField
+              source='type'
+              sortable={false}
+              label='Тип'
+            />
+            <TextField
+              source='composition'
+              sortable={false}
+              label='Композиція'
+            />
+            <TextField
+              source='price'
+              label='Ціна'
+            />
+            <TextField
+              source='weight'
+              sortable={false}
+              label='Вага'
+            />
+            <TextField
+              source='volume'
+              sortable={false}
+              label='Обсяг'
+            />
+          </EntityGrid>
+        </List>
+      )}
+    </>
   )
 }

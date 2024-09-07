@@ -1,7 +1,7 @@
-import { Create, ImageInput, SimpleForm, TextInput } from 'react-admin'
+import { Edit, ImageInput, SimpleForm, TextInput } from 'react-admin'
 
-export const AddForm = () => (
-  <Create
+export const EditAdvantageForm = () => (
+  <Edit
     resource='our-advantages'
     className='w-full'
   >
@@ -10,14 +10,16 @@ export const AddForm = () => (
         source='title'
         label='Найменування'
       />
+
       <TextInput
         source='description'
         label='Опис'
       />
+
       <ImageInput
         source='image'
         label='Постер'
       />
     </SimpleForm>
-  </Create>
+  </Edit>
 )

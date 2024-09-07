@@ -20,11 +20,12 @@ import {
   PastaIcon,
   PepperIcon
 } from '../icons-pack'
+import { AdvantagesList } from '../pages/advantages/AdvantagesList'
+import { EditAdvantageForm } from '../pages/advantages/EditAdvantageForm'
 import { ProductList } from '../pages/dishes/DishesList'
 import { EditProduct } from '../pages/dishes/EditDish'
 import { IngredientList } from '../pages/ingredients'
 import { EditIngredient } from '../pages/ingredients/EditIngredient'
-import { AdvantagesList } from './ui/AdvantagesList'
 
 const CustomLayout = ({ children }: { children: React.ReactNode }) => {
   return <Layout appBar={AdminAppBar}>{children}</Layout>
@@ -54,11 +55,7 @@ export default function AdminPage() {
           label: 'Переваги'
         }}
         list={AdvantagesList}
-        edit={
-          <Edit>
-            <p>Edit</p>
-          </Edit>
-        }
+        edit={EditAdvantageForm}
       />
       <Resource
         name='dish'

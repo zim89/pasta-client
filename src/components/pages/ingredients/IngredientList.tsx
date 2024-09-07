@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Ingredient } from '@/types/dish.types'
+import { PlusCircle } from 'lucide-react'
 import {
-  Datagrid,
   ImageField,
   InfiniteList,
   List,
@@ -9,38 +9,43 @@ import {
   TextField,
   useGetList
 } from 'react-admin'
+import { EntityGrid } from '@/components/entityGrid'
+import { HeaderActions } from '@/components/headerActions'
+import { MobileGrid } from '@/components/mobileGrid'
+import { Button } from '@/components/ui/button'
 import { useHashParamValue } from '@/hooks/useHashValues'
 import { useMedia } from '@/hooks/useMedia'
 import { usePaginate } from '@/hooks/usePaginate'
+import { AddIngredient } from './AddIngredient'
 
 export const IngredientList = () => {
   const { isMobileScreen } = useMedia()
   const { data } = useGetList('ingredient')
   const [displayedRows, setDisplayedRows] = useState<Ingredient[]>(data || [])
 
-  const limit = useHashParamValue('perPage')
-  const page = useHashParamValue('page')
-  const sort = useHashParamValue('sort')
-  const order = useHashParamValue('order')
+  const limitParam = useHashParamValue('perPage')
+  const pageParam = useHashParamValue('page')
+  const sortParam = useHashParamValue('sort')
+  const orderParam = useHashParamValue('order')
 
-  const [_, { paginated, setLimit, setCurrentPage }] = usePaginate(
+  const [currentPage, { paginated, setLimit, setCurrentPage }] = usePaginate(
     displayedRows,
-    Number(page),
-    Number(limit)
+    Number(pageParam),
+    Number(limitParam)
   )
 
   useEffect(() => {
-    if (!sort || !order) return
+    if (!sortParam || !orderParam) return
 
-    const sortParam = sort as keyof Ingredient
+    const sort = sortParam as keyof Ingredient
 
     setDisplayedRows([
       ...displayedRows.sort((a, b) => {
-        if (order === 'DESC') return b[sortParam]! < a[sortParam]! ? -1 : 1
-        return a[sortParam]! < b[sortParam]! ? -1 : 1
+        if (orderParam === 'DESC') return b[sort]! < a[sort]! ? -1 : 1
+        return a[sort]! < b[sort]! ? -1 : 1
       })
     ])
-  }, [sort, order])
+  }, [sortParam, orderParam])
 
   useEffect(() => {
     if (data) {
@@ -50,53 +55,99 @@ export const IngredientList = () => {
   }, [data])
 
   useEffect(() => {
-    if (limit) {
-      setLimit(Number(limit))
+    if (limitParam) {
+      setLimit(Number(limitParam))
     }
-  }, [limit])
+  }, [limitParam])
 
   useEffect(() => {
-    if (page) {
-      setCurrentPage(Number(page))
+    if (pageParam) {
+      setCurrentPage(Number(pageParam))
     }
-  }, [page])
-
-  const Grid = () => {
-    return (
-      <Datagrid data={paginated}>
-        <ImageField
-          source='image'
-          label='Постер'
-          cellClassName='size-12 object-contain'
-          sortable={false}
-        />
-        <TextField
-          source='name'
-          label='Найменування'
-        />
-        <NumberField
-          source='price'
-          label='Ціна'
-          cellClassName='size-2'
-        />
-        <NumberField
-          source='weight'
-          label='Вага'
-          cellClassName='size-2'
-        />
-      </Datagrid>
-    )
-  }
+  }, [pageParam])
 
   return (
     <>
       {isMobileScreen ? (
-        <InfiniteList>
-          <Grid />
-        </InfiniteList>
+        <MobileGrid
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          displayedRows={displayedRows}
+          actions={
+            <HeaderActions
+              title='Каталог інгредієнтів'
+              secondaryTitle='Додати інгредієнт'
+              buttonProps={{
+                text: 'Додати інгредієнт',
+                leftSection: <PlusCircle size={24} />
+              }}
+            >
+              {() => <AddIngredient />}
+            </HeaderActions>
+          }
+          renderGrid={rows => (
+            <EntityGrid displayedRows={rows}>
+              <ImageField
+                source='image'
+                label='Постер'
+                cellClassName='size-12 object-contain'
+                sortable={false}
+              />
+              <TextField
+                source='name'
+                label='Найменування'
+              />
+              <NumberField
+                source='price'
+                label='Ціна'
+                cellClassName='size-2'
+              />
+              <NumberField
+                source='weight'
+                label='Вага'
+                cellClassName='size-2'
+              />
+            </EntityGrid>
+          )}
+        />
       ) : (
-        <List>
-          <Grid />
+        <List
+          className='hidden p-4 md:block'
+          actions={
+            <HeaderActions
+              title='Каталог інгредієнтів'
+              secondaryTitle='Додати інгредієнт'
+              buttonProps={{
+                text: 'Додати інгредієнт',
+                leftSection: <PlusCircle size={24} />
+              }}
+            >
+              {() => <AddIngredient />}
+            </HeaderActions>
+          }
+        >
+          <EntityGrid displayedRows={paginated}>
+            <ImageField
+              source='image'
+              label='Постер'
+              cellClassName='size-12 object-contain'
+              sortable={false}
+            />
+            <TextField
+              source='name'
+              label='Найменування'
+            />
+            <NumberField
+              source='price'
+              label='Ціна'
+              cellClassName='size-2'
+            />
+            <NumberField
+              source='weight'
+              label='Вага'
+              cellClassName='size-2'
+            />
+          </EntityGrid>
         </List>
       )}
     </>
