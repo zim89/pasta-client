@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { Feature } from '@/types/feature.types'
 import { PlusCircle } from 'lucide-react'
 import { Datagrid, ImageField, List, TextField, useGetList } from 'react-admin'
 import { EntityGrid } from '@/components/entityGrid'
@@ -14,7 +15,7 @@ import { usePaginate } from '@/hooks/usePaginate'
 export const AdvantagesList = () => {
   const { isMobileScreen } = useMedia()
   const { data } = useGetList('our-advantages')
-  const [displayedRows, setDisplayedRows] = useState<any[]>(data || [])
+  const [displayedRows, setDisplayedRows] = useState<Feature[]>(data || [])
 
   const limitParam = useHashParamValue('perPage')
   const pageParam = useHashParamValue('page')
@@ -28,11 +29,36 @@ export const AdvantagesList = () => {
   )
 
   useEffect(() => {
+    if (!sortParam || !orderParam) return
+
+    const sort = sortParam as keyof Feature
+
+    setDisplayedRows([
+      ...displayedRows.sort((a, b) => {
+        if (orderParam === 'DESC') return b[sort]! < a[sort]! ? -1 : 1
+        return a[sort]! < b[sort]! ? -1 : 1
+      })
+    ])
+  }, [sortParam, orderParam])
+
+  useEffect(() => {
     if (data) {
       setDisplayedRows(data)
       setLimit(5)
     }
   }, [data])
+
+  useEffect(() => {
+    if (limitParam) {
+      setLimit(Number(limitParam))
+    }
+  }, [limitParam])
+
+  useEffect(() => {
+    if (pageParam) {
+      setCurrentPage(Number(pageParam))
+    }
+  }, [pageParam])
 
   return (
     <>
