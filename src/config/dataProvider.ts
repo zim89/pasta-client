@@ -6,7 +6,13 @@ const resourcesWithImages = ['dish', 'our-advantages', 'ingredient']
 
 export const dataProvider: DataProvider = {
   getList: async (resource, params) => {
-    const response = await fetchUtils.fetchJson(`${SERVER_URL}/${resource}`)
+    const { token } = retrieveToken()
+    const response = await fetchUtils.fetchJson(`${SERVER_URL}/${resource}`, {
+      user: {
+        token: `Bearer ${token}`,
+        authenticated: !!token
+      }
+    })
 
     return {
       data: response.json,
@@ -16,15 +22,17 @@ export const dataProvider: DataProvider = {
   getOne: async (resource, params) => {
     const { token } = retrieveToken()
 
-    const response = await fetchUtils.fetchJson(
-      `${SERVER_URL}/${resource}/${params.id}`,
-      {
-        user: {
-          token: `Bearer ${token}`,
-          authenticated: !!token
-        }
+    const url =
+      resource === 'dish'
+        ? `${SERVER_URL}/${resource}/by-id/${params.id}`
+        : `${SERVER_URL}/${resource}/${params.id}`
+
+    const response = await fetchUtils.fetchJson(url, {
+      user: {
+        token: `Bearer ${token}`,
+        authenticated: !!token
       }
-    )
+    })
 
     return {
       data: response.json

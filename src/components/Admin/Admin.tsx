@@ -17,6 +17,7 @@ import { AdminAppBar } from '../AdminAppBar'
 import {
   AdvantageIcon,
   MenuInstagramIcon,
+  OrderIcon,
   PastaIcon,
   PepperIcon
 } from '../icons-pack'
@@ -26,6 +27,8 @@ import { ProductList } from '../pages/dishes/DishesList'
 import { EditProduct } from '../pages/dishes/EditDish'
 import { IngredientList } from '../pages/ingredients'
 import { EditIngredient } from '../pages/ingredients/EditIngredient'
+import { OrdersList } from '../pages/orders/OrdersList'
+import { ShowOrder } from '../pages/orders/ShowOrder'
 
 const CustomLayout = ({ children }: { children: React.ReactNode }) => {
   return <Layout appBar={AdminAppBar}>{children}</Layout>
@@ -78,6 +81,20 @@ export default function AdminPage() {
         }}
         list={<IngredientList />}
         edit={<EditIngredient />}
+      />
+      <Resource
+        name='order'
+        icon={OrderIcon}
+        hasEdit={false}
+        options={{
+          label: 'Замовлення'
+        }}
+        list={OrdersList}
+        show={
+          <Show>
+            <ShowOrder />
+          </Show>
+        }
       />
       <Resource
         name='post'
