@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { APP_PAGES } from '@/shared/config/pages-url.config'
+import { APP_PAGES } from '@/shared/constants' 
 
 export const MenuLink = () => {
   return (
