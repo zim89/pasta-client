@@ -1,14 +1,13 @@
-import axios, { type CreateAxiosDefaults } from 'axios'
+import axios, { CreateAxiosDefaults } from 'axios'
+import { getContentType } from './api.helpers'
 
-const options: CreateAxiosDefaults = {
+const axiosOptions: CreateAxiosDefaults = {
   baseURL: process.env.BASE_URL,
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  withCredentials: true
+  headers: getContentType(),
+  withCredentials: true,
 }
 
-const axiosBase = axios.create(options)
-const axiosWithAuth = axios.create(options)
+const axiosBase = axios.create(axiosOptions)
+const axiosWithAuth = axios.create(axiosOptions)
 
 export { axiosBase, axiosWithAuth }
