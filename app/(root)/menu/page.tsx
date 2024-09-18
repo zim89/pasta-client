@@ -11,7 +11,7 @@ import { PageTitle } from '@/components/shared/page-title'
 import { SortBar } from '@/components/shared/sort-bar'
 import { dishService } from '@/entities/dish/api/dishes.service'
 import { APP_PAGES } from '@/shared/config/pages-url.config'
-import { QUERY_KEYS } from '@/shared/constants/query.const'
+import { QUERY_KEYS } from '@/shared/constants'
 
 const crumbs = [{ href: APP_PAGES.MENU, label: 'Меню' }]
 

@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '../../shared/ui/common/button'
 import parsley from '@/shared/assets/images/parsley.png'
-import { menuLinks } from '@/shared/data/links.data'
+import { LINKS_DATA } from '@/shared/data/links.data'
 import { useActive } from '@/shared/lib/hooks/useActive'
 import { cn } from '@/shared/lib/utils/cn-merge'
 
@@ -55,7 +55,7 @@ export const BurgerMenu = () => {
         />
         {/* Links */}
         <ul className='flex flex-col items-center gap-10'>
-          {menuLinks.map(link => {
+          {LINKS_DATA.map(link => {
             return (
               <li
                 key={link.label}

@@ -1,18 +1,17 @@
 import type { ReactNode } from 'react'
 import Image from 'next/image'
-
 import { formatMass } from '../lib'
 import type { Dish } from '../model'
 
 export const NewsCard = ({
   dish,
-  addToCartSlot,
+  addToCartSlot
 }: {
   dish: Dish
   addToCartSlot?: ReactNode
 }) => {
   return (
-    <div className='border-primary-light/50 flex gap-[22px] overflow-clip rounded-xl border xl:gap-[18px] xl:rounded-[30px]'>
+    <div className='flex gap-[22px] overflow-clip rounded-xl border border-primary-light/50 xl:gap-[18px] xl:rounded-[30px]'>
       <div className='relative h-[159px] w-[135px] xl:h-[196px] xl:w-[196px]'>
         <Image
           src={dish.image}
@@ -27,9 +26,11 @@ export const NewsCard = ({
           {dish.title}
         </h3>
 
-        <p className='pb-2 text-sm/[16.94px] opacity-70 xl:pb-0 xl:text-[13px]/[16.9px] xl:opacity-80'>
-          Вага: {formatMass(dish.weight)}
-        </p>
+        {dish.weight && (
+          <p className='pb-2 text-sm/[16.94px] opacity-70 xl:pb-0 xl:text-[13px]/[16.9px] xl:opacity-80'>
+            Вага: {formatMass(dish.weight)}
+          </p>
+        )}
 
         <div className='relative'>
           <p className='px-[5.5px] text-base/[19.36px] font-semibold xl:text-[22px]/[28.6px] xl:font-medium'>

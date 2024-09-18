@@ -1,6 +1,6 @@
 import { PlusCircle } from 'lucide-react'
 import { HeaderActions } from '@/components/headerActions'
-import { CreateProduct } from '@/features/create-dish'
+import { CreateProduct } from '@/features/admin/create-dish'
 import { AdminDialog } from '@/shared/ui/admin/admin-dialog'
 
 export const DishHeaderActions = () => {

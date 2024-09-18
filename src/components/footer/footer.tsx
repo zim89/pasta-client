@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { InstagramButton } from './ui/instagram-button'
 import veggies from '@/shared/assets/images/footer-veggies.png'
 import { payList } from '@/shared/data/footer.data'
-import { additionalLinks, navLinks } from '@/shared/data/links.data'
+import { ADDITIONAL_LINKS, FOOTER_LINKS } from '@/shared/data/links.data'
 import { LogoLightIcon, PinIcon } from '@/shared/ui/icons-pack'
 
 export const Footer = () => {
@@ -29,7 +29,7 @@ export const Footer = () => {
             <LogoLightIcon />
           </Link>
           <ul className='space-y-2'>
-            {navLinks.map(item => (
+            {FOOTER_LINKS.map(item => (
               <li
                 key={item.label}
                 data-testid='nav-link'
@@ -44,7 +44,7 @@ export const Footer = () => {
             ))}
           </ul>
           <ul className='space-y-2'>
-            {additionalLinks.map(item => (
+            {ADDITIONAL_LINKS.map(item => (
               <li
                 key={item.label}
                 data-testid='additional-link'

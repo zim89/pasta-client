@@ -6,7 +6,7 @@ import { SectionTitle } from '@/components/shared/section-title'
 import { CardSkeleton } from './ui/card-skeleton'
 import { NewsCard } from './ui/news-card'
 import { dishService } from '@/entities/dish/api/dishes.service'
-import { QUERY_KEYS } from '@/shared/constants/query.const'
+import { QUERY_KEYS } from '@/shared/constants'
 
 export const NewDishes = () => {
   const { isLoading, isError, data, error } = useQuery({

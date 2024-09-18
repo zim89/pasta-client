@@ -9,7 +9,7 @@ import { MenuLink } from './ui/menu-link'
 import { SkeletonList } from './ui/skeleton-list'
 import { dishService } from '@/entities/dish/api/dishes.service'
 import pepper_img from '@/shared/assets/images/hits/pepper.png'
-import { QUERY_KEYS } from '@/shared/constants/query.const'
+import { QUERY_KEYS } from '@/shared/constants'
 
 export const HitDishes = () => {
   const { isLoading, data } = useQuery({

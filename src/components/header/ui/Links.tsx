@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { menuLinks } from '@/shared/data/links.data'
+import { LINKS_DATA } from '@/shared/data/links.data'
 import { useActive } from '@/shared/lib/hooks/useActive'
 import { cn } from '@/shared/lib/utils/cn-merge'
 
@@ -20,7 +20,7 @@ export const Links = () => {
       className='hidden xl:flex xl:gap-[60px]'
       data-testid='links'
     >
-      {menuLinks.map((item, index) => (
+      {LINKS_DATA.map((item, index) => (
         <li key={index}>
           <Link
             data-testid={active === item.href ? 'active-link' : 'link'}
