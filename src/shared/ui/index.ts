@@ -1,2 +1,4 @@
 export * from './icons-pack'
-export { Logo } from './logo'
+export * from './logo'
+export * from './admin'
+export * from './common'

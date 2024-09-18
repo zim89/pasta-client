@@ -1,0 +1,266 @@
+import { useEffect, useMemo, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { X } from 'lucide-react'
+import Image from 'next/image'
+import { Card, CardContent, CardHeader } from '../../shared/ui/common/card'
+import { BrandButton } from '../brandButton'
+import { Ingredients } from './ui/Ingredients'
+import { HitLabel } from './ui/hit-label'
+import type { Dish } from '@/entities/dish/model/types'
+import { Ingredient } from '@/entities/ingredient/model/types'
+import { axiosBase } from '@/shared/api/axios'
+import { cn } from '@/shared/lib/utils/cn-merge'
+import { formatMass } from '@/shared/lib/utils/menu-funcs'
+import { initIngredients } from '@/shared/lib/utils/product-card-funcs'
+
+export const ProductCard = ({
+  dish,
+  className = ''
+}: {
+  dish: Dish
+  className?: string
+}) => {
+  const [opened, setOpened] = useState(false)
+
+  const { data: ingred } = useQuery({
+    queryKey: ['Ingredients'],
+    queryFn: async () => {
+      const ingredients = await axiosBase.get<Ingredient[]>(
+        process.env.NEXT_PUBLIC_SERVER_URL + '/ingredient'
+      )
+
+      return ingredients.data
+    }
+  })
+
+  const [ingredients, setIngredients] = useState<{
+    [P in string]: {
+      count: number
+      price: number
+    }
+  }>(initIngredients(ingred || []))
+
+  // Remove the side scrollbar
+  useEffect(() => {
+    if (opened) {
+      document.body.classList.add('overflow-hidden')
+    } else {
+      document.body.classList.remove('overflow-hidden')
+    }
+  }, [opened])
+
+  useEffect(() => {
+    if (!ingred) return
+
+    setIngredients(initIngredients(ingred))
+  }, [dish.title, ingred])
+
+  const extraCost = useMemo(() => {
+    let cost = 0
+    for (const name in ingredients) {
+      cost += (ingredients[name].count || 0) * (ingredients[name].price || 0)
+    }
+
+    return cost
+  }, [ingredients])
+
+  const handleClear = () => {
+    setIngredients(initIngredients(ingred || []))
+  }
+
+  const handleChangeQuantity = (
+    action: 'DECREASE' | 'INCREASE',
+    ingredient: string
+  ) => {
+    setIngredients(prev => ({
+      ...prev,
+      [ingredient]: {
+        count:
+          action === 'DECREASE'
+            ? Math.max(prev[ingredient].count - 1, 0)
+            : prev[ingredient].count + 1,
+        price: prev[ingredient].price
+      }
+    }))
+  }
+
+  return (
+    <Card
+      className={cn(
+        'relative flex min-h-full flex-col overflow-clip rounded-[30px] border-primary-light',
+        className
+      )}
+      data-testid='product-card'
+    >
+      <CardHeader className='relative aspect-[5/3.8417] '>
+        <Image
+          src={dish.image || 'https://placehold.co/600x400.png'}
+          fill
+          className='object-cover'
+          sizes='(max-width: 390px) 100vw, (max-width: 834px) 50vw, 33vw'
+          alt={dish.title}
+          data-testid='product-card-surface-image'
+        />
+      </CardHeader>
+
+      <CardContent className='flex flex-1 flex-col justify-between p-4'>
+        <div>
+          <h4
+            className='text-xl font-medium'
+            data-testid='product-card-name'
+          >
+            {dish.title}
+          </h4>
+          <p
+            className='my-6 max-w-max text-sm'
+            data-testid='product-card-desc'
+          >
+            {dish.composition || 'Опису немає'}
+          </p>
+        </div>
+        <div className='flex items-center justify-between'>
+          <div className={cn('flex flex-col', dish.weight && 'gap-8')}>
+            {dish.weight ? (
+              <span
+                className='text-sm opacity-70'
+                data-testid='product-card-mass'
+              >
+                Вага: {formatMass(dish.weight)}
+              </span>
+            ) : (
+              <span />
+            )}
+            <span
+              className='text-[1.625rem]/[1.967rem] font-medium text-black'
+              data-testid='product-card-price'
+            >
+              {dish.price.toFixed(0)}₴
+            </span>
+          </div>
+
+          {/* Modal Menu */}
+          <div className='flex flex-col gap-4 xl:gap-5'>
+            {dish.composition && (
+              <BrandButton
+                kind='outlined'
+                onClick={() => setOpened(!opened)}
+                role='modal-button'
+              >
+                Додати інгредієнт
+              </BrandButton>
+            )}
+
+            <div
+              className={cn(
+                'fixed left-0 top-14 z-50 h-full w-full overflow-y-auto rounded-[20px] bg-white p-8 font-medium transition-all duration-500 md:max-w-[700px] md:translate-x-12 xl:left-2/4 xl:max-h-[591px] xl:max-w-[1088px] xl:-translate-x-2/4',
+                opened
+                  ? '-translate-y-14 opacity-100 xl:-translate-y-0'
+                  : 'translate-y-[-1000px] opacity-80 transition-transform duration-500'
+              )}
+              data-testid='modal-content'
+            >
+              {/* Close button */}
+              <X
+                size={32}
+                className='mb-3 ml-auto cursor-pointer text-grey'
+                onClick={setOpened.bind(null, false)}
+                data-testid='modal-close-button'
+              />
+
+              <div className='mx-auto max-w-max md:flex md:flex-row-reverse md:gap-6'>
+                {/* Ingredients Grid */}
+                <Ingredients
+                  ingredients={ingred || []}
+                  ingredientsQuantity={ingredients}
+                  handleChangeQuantity={handleChangeQuantity}
+                />
+                {/* End Ingredients Grid */}
+
+                {/* Product Preview and Controllers */}
+                <div className='mt-5 flex flex-1 flex-col gap-5 border-t border-t-primary-light py-4 md:m-0 md:border-0 md:p-0'>
+                  <div className='flex items-center justify-between gap-6 md:flex-col-reverse'>
+                    <div className='md:text-center'>
+                      <p
+                        className='text-[1.125rem]/[1.463rem] font-semibold'
+                        data-testid='modal-preview-name'
+                      >
+                        {dish.title}
+                      </p>
+                      <p
+                        className='mb-3 mt-5 text-[1.625rem] font-semibold'
+                        data-testid='modal-preview-total'
+                      >
+                        {(dish.price + extraCost).toFixed(1)}₴
+                      </p>
+                    </div>
+
+                    {dish.image && (
+                      <div className='relative ml-auto min-h-[100px] min-w-[100px] md:min-h-[200px] md:min-w-[200px] xl:min-h-[240px] xl:min-w-[240px]'>
+                        <Image
+                          className='h-full w-full rounded-lg object-cover'
+                          src={dish.image}
+                          fill
+                          alt={dish.title}
+                          data-testid='modal-preview-image'
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Mobile controllers */}
+                  <BrandButton
+                    className='xl:hidden'
+                    kind='outlined'
+                    onClick={() => handleClear()}
+                    role='modal-clear-mobile'
+                  >
+                    Очистити
+                  </BrandButton>
+                  <BrandButton
+                    className='xl:hidden'
+                    kind='filled'
+                    role='modal-add-mobile'
+                  >
+                    Додати
+                  </BrandButton>
+                  {/* End Mobile controllers */}
+                </div>
+              </div>
+              {/* Laptop controllers*/}
+              <div className='container hidden justify-end gap-10 px-64 xl:flex'>
+                <BrandButton
+                  className='w-56'
+                  kind='outlined'
+                  onClick={() => handleClear()}
+                  role='modal-clear-laptop'
+                >
+                  Очистити
+                </BrandButton>
+                <BrandButton
+                  className='w-56'
+                  kind='filled'
+                  role='modal-add-laptop'
+                >
+                  Додати
+                </BrandButton>
+              </div>
+              {/* End Laptop controllers*/}
+
+              {/* End Product Preview and Controllers */}
+            </div>
+            {/* End Modal Menu */}
+
+            <BrandButton
+              kind='filled'
+              role='cart-button'
+            >
+              До кошика
+            </BrandButton>
+          </div>
+        </div>
+      </CardContent>
+
+      {dish.isHit && <HitLabel />}
+    </Card>
+  )
+}

@@ -1,1 +1,1 @@
-export { dishApi } from './dish.api'
+export * from './dishes.service'

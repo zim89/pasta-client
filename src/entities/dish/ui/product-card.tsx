@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import Image from 'next/image'
-
 import { formatMass } from '../lib'
 import type { Dish } from '../model'
 import { HitLabel } from './hit-label'
@@ -8,14 +7,14 @@ import { HitLabel } from './hit-label'
 export const ProductCard = ({
   dish,
   addIngredientSlot,
-  addToCartSlot,
+  addToCartSlot
 }: {
   dish: Dish
   addIngredientSlot?: ReactNode
   addToCartSlot?: ReactNode
 }) => {
   return (
-    <div className='border-primary-light/50 relative w-full overflow-clip rounded-[30px]'>
+    <div className='relative w-full overflow-clip rounded-[30px] border-primary-light/50'>
       <div className='relative aspect-[5/3.8417]'>
         <Image
           src={dish.image ? dish.image : 'https://placehold.co/600x400.png'}
@@ -34,9 +33,11 @@ export const ProductCard = ({
         </p>
         <div className='flex items-center justify-between'>
           <div className='flex flex-col gap-8'>
-            <p className='text-sm/[18.2px] opacity-70'>
-              Вага: {formatMass(dish.weight)}
-            </p>
+            {dish.weight && (
+              <p className='text-sm/[18.2px] opacity-70'>
+                Вага: {formatMass(dish.weight)}
+              </p>
+            )}
             <p className='text-[26px]/[31.47px] font-medium'>
               {dish.price.toFixed(0)}₴
             </p>

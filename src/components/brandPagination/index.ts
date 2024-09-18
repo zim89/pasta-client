@@ -1,0 +1,1 @@
+export { BrandPagination } from './BrandPagination'
