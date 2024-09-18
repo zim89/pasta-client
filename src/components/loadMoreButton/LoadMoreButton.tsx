@@ -1,9 +1,9 @@
-import { Button, ButtonProps } from '../ui/button'
+import { Button, ButtonProps } from '../../shared/ui/common/button'
 
 export const LoadMoreButton = (props: ButtonProps) => {
   return (
     <Button
-      className='md:hidden p-0 font-normal w-full mt-6 mb-[3.75rem]'
+      className='mb-[3.75rem] mt-6 w-full p-0 font-normal md:hidden'
       {...props}
     >
       <span className='inline-block border-b border-b-primary-light'>

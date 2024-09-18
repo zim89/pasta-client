@@ -6,7 +6,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator
-} from '@/components/ui/breadcrumb'
+} from '@/shared/ui/common/breadcrumb'
 
 export const PageBreadcrumb = ({
   crumbs

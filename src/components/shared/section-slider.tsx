@@ -1,17 +1,17 @@
 'use client'
 
-import type { Dish } from '@/types/dish.types'
 import { NewsCard } from '@/components/sections/new-dishes/ui/news-card'
+import { ProductCard } from '../productCard'
+import type { Dish } from '@/entities/dish/model/types'
+import { useMedia } from '@/shared/lib/hooks/useMedia'
+import { cn } from '@/shared/lib/utils/cn-merge'
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious
-} from '@/components/ui/carousel'
-import { cn } from '@/lib/utils'
-import { useMedia } from '@/hooks/useMedia'
-import { ProductCard } from '../productCard'
+} from '@/shared/ui/common/carousel'
 
 export const SectionSlider = ({
   data,

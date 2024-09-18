@@ -5,7 +5,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger
-} from '@/components/ui/sheet'
+} from '@/shared/ui/common/sheet'
 
 type Props = {
   children(trigger: typeof SheetTrigger): React.ReactNode

@@ -1,8 +1,8 @@
-import { Ingredient as TIngredient } from '@/types/dish.types'
 import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import img from '@/assets/icons/features/feat3_sm.svg'
 import classes from '../classes.module.css'
+import { Ingredient as TIngredient } from '@/entities/ingredient/model/types'
+import img from '@/shared/assets/icons/features/feat3_sm.svg'
+import { Button } from '@/shared/ui/common/button'
 
 export type Props = {
   ingredients: TIngredient[]

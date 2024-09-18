@@ -1,8 +1,6 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import { cn } from '@/lib/utils'
-import { calculateParams } from '@/helpers/brandPagination.helpers'
 import {
   Pagination,
   PaginationContent,
@@ -11,7 +9,9 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious
-} from '../ui/pagination'
+} from '../../shared/ui/common/pagination'
+import { calculateParams } from '@/shared/lib/utils/brand-pagination-funcs'
+import { cn } from '@/shared/lib/utils/cn-merge'
 
 type Props = {
   pages: number

@@ -1,5 +1,5 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { cn } from '@/lib/utils'
+import { cn } from '@/shared/lib/utils/cn-merge'
 
 const items = ['Все меню', 'Паста', 'Різотто', 'Супчіки', 'Напої', 'Інше']
 

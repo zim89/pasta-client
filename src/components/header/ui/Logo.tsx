@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import logoLight from '@/assets/icons/logo/logo-light.svg'
-import logoPrimary from '@/assets/icons/logo/logo-primary.svg'
+import logoLight from '@/shared/assets/icons/logo/logo-light.svg'
+import logoPrimary from '@/shared/assets/icons/logo/logo-primary.svg'
 
 export const Logo = () => {
   return (
@@ -12,7 +12,7 @@ export const Logo = () => {
       {/* Mobile logo */}
       <Image
         src={logoLight.src}
-        className='md:hidden ml-4'
+        className='ml-4 md:hidden'
         width={54.94}
         height={58.04}
         alt='Logo di Pasta La Pepito'

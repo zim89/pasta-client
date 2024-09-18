@@ -5,7 +5,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue
-} from '@/components/ui/select'
+} from '@/shared/ui/common/select'
 
 const items: { [key: string]: string } = {
   popular: 'За популярністю',

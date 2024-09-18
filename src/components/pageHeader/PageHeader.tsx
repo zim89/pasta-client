@@ -8,7 +8,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator
-} from '../ui/breadcrumb'
+} from '../../shared/ui/common/breadcrumb'
 
 type Props = {
   title: string
@@ -48,7 +48,7 @@ export const PageHeader = ({ breadcrumbs, title, rightSection }: Props) => {
 
       {/* Mobile breadcrumb */}
       <div
-        className='my-8 md:mt-5 xl:mb-[60px] flex md:block justify-center items-center'
+        className='my-8 flex items-center justify-center md:mt-5 md:block xl:mb-[60px]'
         data-testid='breadcrumb-mobile'
       >
         <Link
@@ -60,7 +60,7 @@ export const PageHeader = ({ breadcrumbs, title, rightSection }: Props) => {
         </Link>
         <div className='flex items-center justify-center'>
           <h1
-            className='font-alegreya text-center text-[28px] md:text-4xl xl:text-[3.125rem]'
+            className='text-center font-alegreya text-[28px] md:text-4xl xl:text-[3.125rem]'
             data-testid='breadcrumb-title'
           >
             {title}

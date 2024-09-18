@@ -2,7 +2,7 @@ import { render } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 import '@/lib/mockIntersectionObserver'
 import { NewDishes } from './'
-import * as exports from '@/data/newDishes.data'
+import * as exports from '@/shared/data/newDishes.data'
 
 describe('NewDishes', () => {
   test('should render', () => {

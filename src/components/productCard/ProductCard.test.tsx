@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 import { ProductCard } from './ProductCard'
-import { menu } from '@/data/menu.data'
+import { menu } from '@/shared/data/menu.data'
 
 describe('ProductCard', () => {
   test('should render', () => {

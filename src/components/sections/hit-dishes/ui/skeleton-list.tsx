@@ -1,5 +1,5 @@
 import { ProductCardSkeleton } from '@/components/productCard'
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton } from '@/shared/ui/common/skeleton'
 
 export const SkeletonList = () => {
   return (

@@ -1,6 +1,6 @@
 import { Search, X } from 'lucide-react'
-import { clear } from '@/helpers/search.helpers'
-import { Input } from '../ui/input'
+import { Input } from '../../shared/ui/common/input'
+import { clear } from '@/shared/lib/utils/search-funcs'
 
 export type Props = {
   value: string
@@ -9,7 +9,7 @@ export type Props = {
 
 export const SearchInput = ({ onSearch, value }: Props) => {
   return (
-    <div className='flex items-center bg-white border border-opacity-50 border-primary-light px-5 rounded-2.5xl py-[0.125rem] my-8 w-full md:max-w-[20em] xl:max-w-[39.125em]'>
+    <div className='my-8 flex w-full items-center rounded-2.5xl border border-primary-light border-opacity-50 bg-white px-5 py-[0.125rem] md:max-w-[20em] xl:max-w-[39.125em]'>
       <Search size={24} />
       <Input
         data-testid='search-input'
@@ -17,7 +17,7 @@ export const SearchInput = ({ onSearch, value }: Props) => {
         onChange={e => onSearch(e.target.value)}
         type='text'
         placeholder='Пошук'
-        className='border-0 focus-visible:-ring-1 placeholder:font-inter text-base'
+        className='focus-visible:-ring-1 border-0 text-base placeholder:font-inter'
         style={{
           backgroundColor: 'transparent'
         }}

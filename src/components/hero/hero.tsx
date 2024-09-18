@@ -1,13 +1,13 @@
 import Image from 'next/image'
-import hero from '@/assets/images/hero.jpg'
-import parsley from '@/assets/images/parsley.png'
-import { Button } from '../ui/button'
+import { Button } from '../../shared/ui/common/button'
+import hero from '@/shared/assets/images/hero.jpg'
+import parsley from '@/shared/assets/images/parsley.png'
 
 export const Hero = () => {
   return (
     <div
       // Adjusted container width since 500px screens on tablets to ensure the hero looks pretty.
-      className='md:static h-[274px] min-[500px]:h-[480px] xl:h-[824px] overflow-clip md:-mt-[82px]'
+      className='h-[274px] overflow-clip min-[500px]:h-[480px] md:static md:-mt-[82px] xl:h-[824px]'
       style={{
         filter: 'saturate(1.7)'
       }}
@@ -16,21 +16,21 @@ export const Hero = () => {
         src={hero.src}
         fill
         style={{ top: '-15px' }}
-        className='object-cover -z-10 object-center md:scale-[1.75] md:object-[11em_7em] xl:scale-[1.6] xl:object-[13em_7em]'
+        className='-z-10 object-cover object-center md:scale-[1.75] md:object-[11em_7em] xl:scale-[1.6] xl:object-[13em_7em]'
         alt=''
       />
 
-      <div className='hidden md:block container translate-y-20 xl:translate-y-24'>
-        <h1 className='font-alegreya text-[4.375rem]/[4.375rem] xl:text-[8.125rem]/[8.938rem] text-primary-dark font-medium xl:font-bold'>
+      <div className='container hidden translate-y-20 md:block xl:translate-y-24'>
+        <h1 className='font-alegreya text-[4.375rem]/[4.375rem] font-medium text-primary-dark xl:text-[8.125rem]/[8.938rem] xl:font-bold'>
           Pasta <br className='hidden xl:block' /> La{' '}
           <br className='xl:hidden' />
           Pepito
         </h1>
-        <p className='max-w-[280px] xl:max-w-[400px] text-sm/[1.225rem] xl:text-base mt-6'>
+        <p className='mt-6 max-w-[280px] text-sm/[1.225rem] xl:max-w-[400px] xl:text-base'>
           Відчуйте аромат і неперевершений смак італійських страв, якими тепер
           можна насолоджуватися прямо вдома.
         </p>
-        <div className='relative flex items-center max-h-24 max-w-32 mt-20'>
+        <div className='relative mt-20 flex max-h-24 max-w-32 items-center'>
           <Image
             src={parsley}
             className='absolute'
@@ -40,12 +40,12 @@ export const Hero = () => {
             }}
             alt=''
           />
-          <Button className='ml-10 z-20 bg-primary-light text-sm xl:text-lg/[1.463rem] font-medium opacity-90 text-white rounded-[30px] px-9 py-6 xl:px-14 cursor-pointer'>
+          <Button className='z-20 ml-10 cursor-pointer rounded-[30px] bg-primary-light px-9 py-6 text-sm font-medium text-white opacity-90 xl:px-14 xl:text-lg/[1.463rem]'>
             Подивитися меню
           </Button>
         </div>
       </div>
-      <div className='flex items-end h-full md:hidden scale-x-[1.4]'>
+      <div className='flex h-full scale-x-[1.4] items-end md:hidden'>
         <svg
           className='w-full'
           xmlns='http://www.w3.org/2000/svg'

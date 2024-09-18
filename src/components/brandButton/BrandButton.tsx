@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react'
-import { cn } from '@/lib/utils'
-import { Button, ButtonProps } from '../ui/button'
+import { Button, ButtonProps } from '../../shared/ui/common/button'
+import { cn } from '@/shared/lib/utils/cn-merge'
 
 export type Props = Omit<ButtonProps, 'className' | 'kind'> & {
   kind: 'outlined' | 'filled'
@@ -19,7 +19,7 @@ export const BrandButton = ({
   return (
     <Button
       {...props}
-      className={cn('py-3 px-6 rounded-[30px]', className)}
+      className={cn('rounded-[30px] px-6 py-3', className)}
       data-testid='brand-btn'
       style={{
         backgroundColor: kind === 'filled' ? primaryColor : secondaryColor,

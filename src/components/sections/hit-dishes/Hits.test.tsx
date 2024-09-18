@@ -2,7 +2,7 @@ import { render } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 import '@/lib/mockIntersectionObserver'
 import { HitDishes } from './hit-dishes'
-import * as exports from '@/data/menu.data'
+import * as exports from '@/shared/data/menu.data'
 
 describe('Hits', () => {
   test('should render', () => {

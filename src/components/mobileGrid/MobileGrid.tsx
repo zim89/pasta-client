@@ -1,7 +1,7 @@
 import { Datagrid, DatagridProps, List, ListProps } from 'react-admin'
-import { PAGINATION_LIMIT_MOBILE } from '@/constants/app.const'
+import { Button } from '../../shared/ui/common/button'
 import { EntityGrid } from '../entityGrid'
-import { Button } from '../ui/button'
+import { PAGINATION_LIMIT_MOBILE } from '@/shared/constants/app.const'
 
 type Props<T> = {
   displayedRows: T[]

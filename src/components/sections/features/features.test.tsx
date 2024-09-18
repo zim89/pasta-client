@@ -2,7 +2,7 @@ import { Features } from '.'
 import { render } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 import '@/lib/mockIntersectionObserver'
-import * as exports from '@/data/features.data'
+import * as exports from '@/shared/data/features.data'
 
 describe('Features', () => {
   test('should render', () => {

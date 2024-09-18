@@ -3,10 +3,10 @@
 import { useQuery } from '@tanstack/react-query'
 import { SectionSlider } from '@/components/shared/section-slider'
 import { SectionTitle } from '@/components/shared/section-title'
-import { QUERY_KEYS } from '@/constants/query.const'
 import { CardSkeleton } from './ui/card-skeleton'
 import { NewsCard } from './ui/news-card'
-import { dishService } from '@/services/dishes.service'
+import { dishService } from '@/entities/dish/api/dishes.service'
+import { QUERY_KEYS } from '@/shared/constants/query.const'
 
 export const NewDishes = () => {
   const { isLoading, isError, data, error } = useQuery({

@@ -1,11 +1,11 @@
 'use client'
 
-import type { Dish } from '@/types/dish.types'
-import { usePagination } from '@/hooks/usePagination'
 import { MenuGrid } from './menu-grid'
 import { MenuGridMobile } from './menu-grid-mobile'
 import { MenuSlider } from './menu-slider'
 import { PagePagination } from './page-pagination'
+import type { Dish } from '@/entities/dish/model/types'
+import { usePagination } from '@/shared/lib/hooks/usePagination'
 
 export const MenuList = ({ data }: { data: Dish[] }) => {
   const { paginatedData, total } = usePagination(data)

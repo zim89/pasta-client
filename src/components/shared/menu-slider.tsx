@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
-import type { Dish } from '@/types/dish.types'
 import { ProductCard } from '@/components/productCard'
+import type { Dish } from '@/entities/dish/model/types'
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious
-} from '@/components/ui/carousel'
-import { type CarouselApi } from '@/components/ui/carousel'
+} from '@/shared/ui/common/carousel'
+import { type CarouselApi } from '@/shared/ui/common/carousel'
 
 export const MenuSlider = ({ data }: { data: Dish[] }) => {
   const [api, setApi] = useState<CarouselApi>()

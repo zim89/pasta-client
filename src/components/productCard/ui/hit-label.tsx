@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import hit_png from '@/assets/images/decoration/hit.png'
+import hit_png from '@/shared/assets/images/decoration/hit.png'
 
 export const HitLabel = () => {
   return (

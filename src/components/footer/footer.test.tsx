@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 import { Footer } from './'
-import * as pays from '@/data/footer.data'
-import * as links from '@/data/links.data'
+import * as pays from '@/shared/data/footer.data'
+import * as links from '@/shared/data/links.data'
 
 describe('Footer', () => {
   test('should render', () => {

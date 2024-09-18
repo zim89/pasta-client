@@ -1,5 +1,5 @@
-import { Dish } from '@/types/dish.types'
 import { ProductCard } from '../productCard/ProductCard'
+import { Dish } from '@/entities/dish/model/types'
 
 type Props = {
   products: Dish[]

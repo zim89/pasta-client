@@ -1,11 +1,11 @@
+import { cn } from '@/shared/lib/utils/cn-merge'
 import {
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
   Carousel as ShadCNCarousel
-} from '@/components/ui/carousel'
-import { cn } from '@/lib/utils'
+} from '@/shared/ui/common/carousel'
 
 type Props = {
   children(item: typeof CarouselItem): React.ReactNode
@@ -24,9 +24,9 @@ export const BrandCarousel = ({ children, className }: Props) => {
       <CarouselContent className='-ml-10'>
         {children(CarouselItem)}
       </CarouselContent>
-      <div className='flex gap-10 items-center absolute h-10 w-[120px] -top-[72.8px] right-0'>
-        <CarouselPrevious className='top-0 left-0 translate-x-0 translate-y-0' />
-        <CarouselNext className='top-0 right-0 translate-x-0 translate-y-0' />
+      <div className='absolute -top-[72.8px] right-0 flex h-10 w-[120px] items-center gap-10'>
+        <CarouselPrevious className='left-0 top-0 translate-x-0 translate-y-0' />
+        <CarouselNext className='right-0 top-0 translate-x-0 translate-y-0' />
       </div>
     </ShadCNCarousel>
   )

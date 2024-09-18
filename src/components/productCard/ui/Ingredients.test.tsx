@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
-import { initIngredients } from '@/helpers/productCard.helpers'
 import { Ingredient, Ingredients } from './Ingredients'
+import { initIngredients } from '@/shared/lib/utils/product-card-funcs'
 
 describe('Ingredients', () => {
   test('should render', () => {

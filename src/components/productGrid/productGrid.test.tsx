@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 import { ProductGrid } from './'
-import { menu } from '@/data/menu.data'
+import { menu } from '@/shared/data/menu.data'
 
 describe('Product Grid', () => {
   const testProducts = menu.slice(0, 6)

@@ -1,6 +1,6 @@
 'use client'
 
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton } from '@/shared/ui/common/skeleton'
 
 export const ProductCardSkeleton = () => {
   return (

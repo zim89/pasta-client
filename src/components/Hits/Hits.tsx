@@ -1,9 +1,9 @@
-import { Dish } from '@/types/dish.types'
 import Image from 'next/image'
 import Link from 'next/link'
 import hot_chilly from '@/assets/images/hits-pepper.png'
 import { BrandCarousel } from '../brandCarousel'
 import { ProductCard } from '../productCard'
+import { Dish } from '@/entities/dish/model/types'
 
 type Props = {
   dishes: Dish[]
@@ -23,12 +23,12 @@ export default function Hits({ dishes }: Props) {
             alt='Chilly'
             width={146.34}
             height={59.95}
-            className='object-contain hidden xl:block -rotate-6 -mt-20 -ml-4'
+            className='-ml-4 -mt-20 hidden -rotate-6 object-contain xl:block'
           />
         </div>
 
         {/* Mobile and laptop layout */}
-        <div className='flex flex-col gap-6 md:hidden xl:flex xl:gap-16 xl:justify-between xl:flex-row'>
+        <div className='flex flex-col gap-6 md:hidden xl:flex xl:flex-row xl:justify-between xl:gap-16'>
           {dishes.slice(0, 3).map((dish, index) => (
             <ProductCard
               className='w-full'
@@ -45,7 +45,7 @@ export default function Hits({ dishes }: Props) {
               {dishes.map((dish, index) => (
                 <CarouselItem
                   // Width substracted to a half of left margin (first slide's margin and the rest)
-                  className='basis-[calc(50%-23px)] first:ml-6 ml-[22px]'
+                  className='ml-[22px] basis-[calc(50%-23px)] first:ml-6'
                   key={index}
                   data-testid='carousel-item'
                 >
@@ -59,7 +59,7 @@ export default function Hits({ dishes }: Props) {
           )}
         </BrandCarousel>
 
-        <div className='text-center mt-6 md:mt-8 xl:mt-10 md:text-right'>
+        <div className='mt-6 text-center md:mt-8 md:text-right xl:mt-10'>
           <Link
             className='border-b border-b-primary-light'
             href='/menu'

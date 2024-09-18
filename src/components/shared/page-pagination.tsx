@@ -2,6 +2,8 @@
 
 import { useCallback } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { PAGINATION_LIMIT } from '@/shared/constants/app.const'
+import { cn } from '@/shared/lib/utils/cn-merge'
 import {
   Pagination,
   PaginationContent,
@@ -9,9 +11,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious
-} from '@/components/ui/pagination'
-import { cn } from '@/lib/utils'
-import { PAGINATION_LIMIT } from '@/constants/app.const'
+} from '@/shared/ui/common/pagination'
 
 export const PagePagination = ({ total }: { total: number }) => {
   const path = usePathname()

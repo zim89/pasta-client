@@ -1,6 +1,6 @@
-import { Feature } from '@/types/feature.types'
 import Image from 'next/image'
 import { BrandCarousel } from '@/components/brandCarousel'
+import { Feature } from '@/entities/advantage/model/types'
 
 type Props = {
   features: Feature[]
@@ -22,7 +22,7 @@ export const TabletFeatures = ({ features, classNames }: Props) => {
               >
                 <div
                   data-testid='feature-item-tablet'
-                  className='border border-primary-light/50 rounded-[30px] flex flex-col items-center justify-center py-[20.5px] px-2 h-full'
+                  className='flex h-full flex-col items-center justify-center rounded-[30px] border border-primary-light/50 px-2 py-[20.5px]'
                 >
                   <Image
                     src={item.image}
@@ -31,10 +31,10 @@ export const TabletFeatures = ({ features, classNames }: Props) => {
                     width={80}
                     className='mb-6'
                   />
-                  <h3 className='text-base/[19.2px] font-medium mb-2'>
+                  <h3 className='mb-2 text-base/[19.2px] font-medium'>
                     {item.title}
                   </h3>
-                  <p className='text-sm/[18.2px] text-center px-4'>
+                  <p className='px-4 text-center text-sm/[18.2px]'>
                     {item.description}
                   </p>
                 </div>

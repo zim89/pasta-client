@@ -1,21 +1,21 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { LogoLightIcon, PinIcon } from '@/components/icons-pack'
-import veggies from '@/assets/images/footer-veggies.png'
 import { InstagramButton } from './ui/instagram-button'
-import { payList } from '@/data/footer.data'
-import { additionalLinks, navLinks } from '@/data/links.data'
+import veggies from '@/shared/assets/images/footer-veggies.png'
+import { payList } from '@/shared/data/footer.data'
+import { additionalLinks, navLinks } from '@/shared/data/links.data'
+import { LogoLightIcon, PinIcon } from '@/shared/ui/icons-pack'
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
     <footer
-      className='py-[26px] bg-primary-dark md:py-8 xl:pb-10'
+      className='bg-primary-dark py-[26px] md:py-8 xl:pb-10'
       data-testid='footer'
     >
       <div className='container'>
-        <div className='mb-8 space-y-2 text-white text-sm/[18.2px] md:hidden'>
+        <div className='mb-8 space-y-2 text-sm/[18.2px] text-white md:hidden'>
           <p className='flex items-center'>
             <PinIcon />
             <span>м. Kиїв, вул. Еспланадна, 34/2</span>
@@ -24,7 +24,7 @@ export const Footer = () => {
           <p>+380 (96) 612 27 20</p>
         </div>
 
-        <div className='hidden md:flex md:gap-[45.67px] md:mb-10 xl:justify-between'>
+        <div className='hidden md:mb-10 md:flex md:gap-[45.67px] xl:justify-between'>
           <Link href='/'>
             <LogoLightIcon />
           </Link>
@@ -59,7 +59,7 @@ export const Footer = () => {
             ))}
           </ul>
 
-          <div className='space-y-2 text-[13px]/[16.9px] text-white text-right xl:text-sm/[18.2px]'>
+          <div className='space-y-2 text-right text-[13px]/[16.9px] text-white xl:text-sm/[18.2px]'>
             <p className='flex items-center'>
               <PinIcon />
               <span>м. Kиїв, вул. Еспланадна, 34/2</span>
@@ -71,7 +71,7 @@ export const Footer = () => {
         </div>
 
         {/* FIXME: Add valid links */}
-        <ul className='mb-8 flex justify-between items-baseline md:hidden'>
+        <ul className='mb-8 flex items-baseline justify-between md:hidden'>
           <Link
             href='/'
             className='textLink-light'
@@ -86,8 +86,8 @@ export const Footer = () => {
           </Link>
         </ul>
 
-        <div className='flex flex-col gap-8 md:flex-row-reverse md:justify-between items-end'>
-          <ul className='flex justify-between items-center md:justify-start md:gap-[33.68px]'>
+        <div className='flex flex-col items-end gap-8 md:flex-row-reverse md:justify-between'>
+          <ul className='flex items-center justify-between md:justify-start md:gap-[33.68px]'>
             {payList.map(item => (
               <li key={item.label}>
                 <Image
@@ -105,11 +105,11 @@ export const Footer = () => {
             src={veggies}
             width={259}
             height={120}
-            className='hidden xl:block -mb-4'
+            className='-mb-4 hidden xl:block'
             alt=''
           />
 
-          <p className='text-white text-sm/[18.2px] md:text-[13px]/[16.9px] xl:text-sm'>
+          <p className='text-sm/[18.2px] text-white md:text-[13px]/[16.9px] xl:text-sm'>
             © Ресторан «Pasta la Pepito»,{' '}
             <span data-testid='current-year'>{currentYear}</span>
           </p>

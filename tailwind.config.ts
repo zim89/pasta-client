@@ -24,6 +24,7 @@ const config = {
       light: '#FBFBFB',
       grey: '#6F7273',
       primary: {
+        lightest: '#d4e3e8',
         light: '#0C99A2',
         DEFAULT: '#047585',
         dark: '#035C68'

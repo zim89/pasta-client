@@ -1,7 +1,7 @@
 import { ChevronLeft } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import parsley_img from '@/assets/images/decoration/parsley.png'
+import parsley_img from '@/shared/assets/images/decoration/parsley.png'
 
 export const PageTitle = ({ title }: { title: string }) => {
   return (

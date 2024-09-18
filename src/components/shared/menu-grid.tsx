@@ -1,5 +1,5 @@
-import type { Dish } from '@/types/dish.types'
 import { ProductCard } from '../productCard'
+import type { Dish } from '@/entities/dish/model/types'
 
 export const MenuGrid = ({ data }: { data: Dish[] }) => {
   return (

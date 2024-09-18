@@ -1,6 +1,6 @@
-import { Dish } from '@/types/dish.types'
 import { BrandCarousel } from '../brandCarousel'
 import { Card } from './ui/Card'
+import { Dish } from '@/entities/dish/model/types'
 
 type Props = {
   newDishes: Dish[]
@@ -15,7 +15,7 @@ export const NewDishes = ({ newDishes }: Props) => {
       <div className='container'>
         <h2 className='heading'>Новинки</h2>
         {/* Mobile and laptop layout */}
-        <div className='flex flex-col gap-6 md:hidden xl:flex xl:gap-24 xl:justify-between xl:flex-row'>
+        <div className='flex flex-col gap-6 md:hidden xl:flex xl:flex-row xl:justify-between xl:gap-24'>
           {newDishes.map(dish => (
             <Card
               key={dish.id}
@@ -32,7 +32,7 @@ export const NewDishes = ({ newDishes }: Props) => {
                 <CarouselItem
                   // Width substracted to a half of left margin
                   data-testid='carousel-item'
-                  className='basis-[calc(50%-7px)] first:pl-10 ml-[14px] first:ml-0'
+                  className='ml-[14px] basis-[calc(50%-7px)] first:ml-0 first:pl-10'
                   key={dish.id}
                 >
                   <Card dish={dish} />

@@ -1,11 +1,11 @@
 'use client'
 
-import { Feature } from '@/types/feature.types'
 import { useQuery } from '@tanstack/react-query'
 import { LaptopFeatures } from '@/components/sections/features/ui/LaptopFeatures'
 import { MobileFeatures } from '@/components/sections/features/ui/MobileFeatures'
 import { TabletFeatures } from '@/components/sections/features/ui/TabletFeatures'
-import { axiosBase } from '@/api/interceptors'
+import { Feature } from '@/entities/advantage/model/types'
+import { axiosBase } from '@/shared/api/axios'
 
 export const Features = () => {
   const { data } = useQuery({

@@ -1,16 +1,17 @@
 import { useEffect, useMemo, useState } from 'react'
-import type { Dish, Ingredient } from '@/types/dish.types'
 import { useQuery } from '@tanstack/react-query'
 import { X } from 'lucide-react'
 import Image from 'next/image'
-import { cn } from '@/lib/utils'
-import { formatMass } from '@/helpers/newDishes.helpers'
-import { initIngredients } from '@/helpers/productCard.helpers'
-import { axiosBase } from '@/api/interceptors'
+import { Card, CardContent, CardHeader } from '../../shared/ui/common/card'
 import { BrandButton } from '../brandButton'
-import { Card, CardContent, CardHeader } from '../ui/card'
 import { Ingredients } from './ui/Ingredients'
 import { HitLabel } from './ui/hit-label'
+import type { Dish } from '@/entities/dish/model/types'
+import { Ingredient } from '@/entities/ingredient/model/types'
+import { axiosBase } from '@/shared/api/axios'
+import { cn } from '@/shared/lib/utils/cn-merge'
+import { formatMass } from '@/shared/lib/utils/menu-funcs'
+import { initIngredients } from '@/shared/lib/utils/product-card-funcs'
 
 export const ProductCard = ({
   dish,

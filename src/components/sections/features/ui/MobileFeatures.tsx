@@ -1,6 +1,6 @@
-import { Feature } from '@/types/feature.types'
 import Image from 'next/image'
-import { cn } from '@/lib/utils'
+import { Feature } from '@/entities/advantage/model/types'
+import { cn } from '@/shared/lib/utils/cn-merge'
 
 type Props = {
   features: Feature[]
@@ -14,19 +14,19 @@ export const MobileFeatures = ({ features, className }: Props) => {
         <li
           data-testid='feature-item-mobile'
           key={item.title}
-          className='p-2 border-[0.86px] border-primary-light/70 rounded-[25.91px]'
+          className='rounded-[25.91px] border-[0.86px] border-primary-light/70 p-2'
         >
           <Image
             src={item.image}
             width={64}
             height={64}
             alt={item.title}
-            className='mb-3 w-auto mx-auto'
+            className='mx-auto mb-3 w-auto'
           />
-          <h3 className='text-sm/[16.8px] font-semibold text-center mb-1.5'>
+          <h3 className='mb-1.5 text-center text-sm/[16.8px] font-semibold'>
             {item.title}
           </h3>
-          <p className='text-xs/[14.4px] text-center px-2'>
+          <p className='px-2 text-center text-xs/[14.4px]'>
             {item.description}
           </p>
         </li>

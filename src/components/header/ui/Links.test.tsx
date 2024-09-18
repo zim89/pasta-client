@@ -2,7 +2,7 @@ import { render } from '@testing-library/react'
 import * as nextMod from 'next/navigation'
 import { describe, expect, test, vi } from 'vitest'
 import { Links } from './Links'
-import * as exports from '@/data/burgerLinks.data'
+import * as exports from '@/shared/data/burgerLinks.data'
 
 vi.mock('next/navigation')
 

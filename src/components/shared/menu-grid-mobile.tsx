@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import type { Dish } from '@/types/dish.types'
-import { PAGINATION_LIMIT_MOBILE } from '@/constants/app.const'
 import { ProductCard } from '../productCard'
+import type { Dish } from '@/entities/dish/model/types'
+import { PAGINATION_LIMIT_MOBILE } from '@/shared/constants/app.const'
 
 export const MenuGridMobile = ({ data }: { data: Dish[] }) => {
   const [page, setPage] = useState(1)

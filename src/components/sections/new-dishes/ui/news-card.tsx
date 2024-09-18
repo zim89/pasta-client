@@ -1,9 +1,9 @@
-import type { Dish } from '@/types/dish.types'
 import { ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import { formatMass } from '@/helpers/newDishes.helpers'
 import { CardTitle } from './card-title'
+import type { Dish } from '@/entities/dish/model/types'
+import { formatMass } from '@/shared/lib/utils/menu-funcs'
+import { Button } from '@/shared/ui/common/button'
 
 export const NewsCard = ({ dish }: { dish: Dish }) => {
   return (

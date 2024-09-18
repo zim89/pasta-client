@@ -5,11 +5,11 @@ import { AlignLeft, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils'
-import { useActive } from '@/hooks/useActive'
-import parsley from '@/assets/images/parsley.png'
-import { Button } from '../ui/button'
-import { links } from '@/data/burgerLinks.data'
+import { Button } from '../../shared/ui/common/button'
+import parsley from '@/shared/assets/images/parsley.png'
+import { menuLinks } from '@/shared/data/links.data'
+import { useActive } from '@/shared/lib/hooks/useActive'
+import { cn } from '@/shared/lib/utils/cn-merge'
 
 export const BurgerMenu = () => {
   const [opened, setOpened] = useState(false)
@@ -40,27 +40,27 @@ export const BurgerMenu = () => {
       <div
         data-testid='burger-menu'
         className={cn(
-          'absolute p-8 left-0 top-0 ml-5 mt-5 rounded-[20px] w-[calc(100%-40px)] font-medium bg-light transition-all duration-500',
+          'absolute left-0 top-0 ml-5 mt-5 w-[calc(100%-40px)] rounded-[20px] bg-light p-8 font-medium transition-all duration-500',
           opened
             ? '-translate-y-14 opacity-100'
-            : 'translate-y-[-1000px] transition-transform duration-500 opacity-80'
+            : 'translate-y-[-1000px] opacity-80 transition-transform duration-500'
         )}
       >
         {/* Close button */}
         <X
           data-testid='close-btn'
           size={32}
-          className='text-grey ml-auto cursor-pointer'
+          className='ml-auto cursor-pointer text-grey'
           onClick={setOpened.bind(null, false)}
         />
         {/* Links */}
         <ul className='flex flex-col items-center gap-10'>
-          {links.map(link => {
+          {menuLinks.map(link => {
             return (
               <li
                 key={link.label}
                 className={cn(
-                  'text-black transition-all duration-300 border-b-0 border-b-primary-light',
+                  'border-b-0 border-b-primary-light text-black transition-all duration-300',
                   active === link.href && 'border-b-2'
                 )}
               >

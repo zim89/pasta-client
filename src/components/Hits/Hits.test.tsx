@@ -1,9 +1,9 @@
-import { Dish } from '@/types/dish.types'
 import { render } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 import '@/lib/mockIntersectionObserver'
 import Hits from './Hits'
-import * as exports from '@/data/menu.data'
+import { Dish } from '@/entities/dish/model/types'
+import * as exports from '@/shared/data/menu.data'
 
 describe('Hits', () => {
   test('should render', () => {

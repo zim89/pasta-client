@@ -1,8 +1,8 @@
 import { Instagram, ShoppingCart, Smartphone } from 'lucide-react'
+import { Button } from '../../shared/ui/common/button'
+import { PinIcon } from '../../shared/ui/icons-pack'
 import { BurgerMenu } from '../burgerMenu'
 import CartButton from '../cartButton/CartButton'
-import { PinIcon } from '../icons-pack'
-import { Button } from '../ui/button'
 import { Links } from './ui/Links'
 import { Logo } from './ui/Logo'
 import { Search } from './ui/Search'
@@ -12,7 +12,7 @@ export const Header = () => {
     <header className='md:bg-transparent md:mt-0'>
       <div className='bg-primary'>
         <div className='container py-2'>
-          <div className='flex items-center justify-center md:justify-between xl:justify-normal pt-1 pb-3 text-white text-sm'>
+          <div className='flex items-center justify-center pb-3 pt-1 text-sm text-white md:justify-between xl:justify-normal'>
             <p className='hidden md:flex md:items-center'>
               <PinIcon />
               <span>Kиїв, Еспланадна, 34/2</span>
@@ -26,7 +26,7 @@ export const Header = () => {
               <Smartphone size={20} />
               <span>+380 (96) 612 27 20</span>
             </p>
-            <p className='hidden xl:block ml-5 mr-[44px]'>
+            <p className='ml-5 mr-[44px] hidden xl:block'>
               +380 (96) 612 27 20
             </p>
 
@@ -34,29 +34,29 @@ export const Header = () => {
               href='https://www.instagram.com/la_pepito.kyiv/'
               target='_blank'
               rel='noopener noreferrer'
-              className='hidden xl:flex items-center justify-center size-12 text-white transition-colors duration-300  hover:text-accent'
+              className='hidden size-12 items-center justify-center text-white transition-colors duration-300 hover:text-accent  xl:flex'
             >
               <Instagram className='size-7 flex-none' />
             </a>
           </div>
         </div>
       </div>
-      <div className='bg-primary md:bg-[transparent] backdrop-blur-sm relative z-50'>
-        <div className='flex justify-between items-center container'>
-          <div className='xl:hidden md:mr-28'>
+      <div className='relative z-50 bg-primary backdrop-blur-sm md:bg-[transparent]'>
+        <div className='container flex items-center justify-between'>
+          <div className='md:mr-28 xl:hidden'>
             <BurgerMenu />
           </div>
 
           <Logo />
           <Links />
           <div className='flex items-center'>
-            <div className='md:hidden text-white mr-4 -mb-[6px]'>
+            <div className='-mb-[6px] mr-4 text-white md:hidden'>
               <Search />
             </div>
             <CartButton>
               {Trigger => (
                 <>
-                  <Trigger className='flex flex-col md:flex-row md:gap-5 md:px-8 md:py-[6px] text-[0.625rem] rounded-[30px] text-white md:text-black md:bg-white md:border md:border-primary md:hover:opacity-90 items-center'>
+                  <Trigger className='flex flex-col items-center rounded-[30px] text-[0.625rem] text-white md:flex-row md:gap-5 md:border md:border-primary md:bg-white md:px-8 md:py-[6px] md:text-black md:hover:opacity-90'>
                     <div>
                       <span>0</span>
 
@@ -64,7 +64,7 @@ export const Header = () => {
                         <ShoppingCart size={24} />
                       </div>
                     </div>
-                    <span className='hidden md:inline text-sm'>00,00 грн</span>
+                    <span className='hidden text-sm md:inline'>00,00 грн</span>
                   </Trigger>
                 </>
               )}

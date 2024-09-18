@@ -1,6 +1,6 @@
 import { AppBar } from 'react-admin'
-import { OptionsIcon } from '../icons-pack'
-import { Button } from '../ui/button'
+import { Button } from '../../shared/ui/common/button'
+import { OptionsIcon } from '../../shared/ui/icons-pack'
 
 export const AdminAppBar = () => (
   <AppBar>
