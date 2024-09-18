@@ -1,4 +1,4 @@
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/lib/utils/cn-merge'
 
 function Skeleton({
   className,
@@ -6,7 +6,10 @@ function Skeleton({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn('animate-pulse rounded-md bg-gray-200', className)}
+      className={cn(
+        'bg-slate-100 dark:bg-slate-800 animate-pulse rounded-md',
+        className
+      )}
       {...props}
     />
   )

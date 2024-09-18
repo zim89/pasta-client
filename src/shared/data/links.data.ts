@@ -1,54 +1,56 @@
-import { APP_PAGES } from '../constants'
+import { APP_PAGES } from '@/shared/config/pages-url.config'
 
-export const LINKS = [
+// It's used in burger menu
+export const menuLinks = [
   {
     label: 'Головна',
-    href: APP_PAGES.HOME,
+    href: APP_PAGES['HOME']
   },
   {
     label: 'Меню',
-    href: APP_PAGES.MENU,
+    href: APP_PAGES['MENU']
   },
   {
     label: 'Про нас',
-    href: APP_PAGES.ABOUT,
+    href: APP_PAGES['ABOUT']
   },
   {
     label: 'Доставка і оплата',
-    href: APP_PAGES.DELIVERY,
+    href: APP_PAGES['DELIVERY']
   },
   {
     label: 'Контакти',
-    href: APP_PAGES.CONTACTS,
-  },
-] as const
+    href: APP_PAGES['CONTACTS']
+  }
+]
 
-export const FOOTER_LINKS = [
+export const navLinks = [
   {
     label: 'Про нас',
-    href: `${APP_PAGES.ABOUT}`,
+    href: `${APP_PAGES.ABOUT}`
   },
   {
     label: 'Меню',
-    href: `${APP_PAGES.MENU}`,
+    href: `${APP_PAGES.MENU}`
   },
   {
     label: 'Доставка і оплата',
-    href: `${APP_PAGES.DELIVERY}`,
-  },
-] as const
+    href: `${APP_PAGES.DELIVERY}`
+  }
+]
 
-export const ADDITIONAL_LINKS = [
+// FIXME: Add valid links
+export const additionalLinks = [
   {
     label: 'Контакти',
-    href: `${APP_PAGES.CONTACTS}`,
+    href: `${APP_PAGES.CONTACTS}`
   },
   {
     label: 'Договір публічної оферти',
-    href: `${APP_PAGES.HOME}`,
+    href: `${APP_PAGES.HOME}`
   },
   {
     label: 'Політика конфіденційності',
-    href: `${APP_PAGES.HOME}`,
-  },
-] as const
+    href: `${APP_PAGES.HOME}`
+  }
+]

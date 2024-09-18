@@ -1,10 +1,9 @@
-export interface Dish {
+export type Dish = {
   id: number
-  slug: string
   title: string
-  weight: number
-  volume: number | null
-  composition: string
+  weight: number | null
+  volume: number
+  composition: null | string
   price: number
   image: string
   type: string
