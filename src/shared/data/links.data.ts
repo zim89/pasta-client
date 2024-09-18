@@ -1,4 +1,4 @@
-import { APP_PAGES } from '@/shared/config/pages-url.config'
+import { APP_PAGES } from "../constants" 
 
 // It's used in burger menu
 export const LINKS_DATA = [

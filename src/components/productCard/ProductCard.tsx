@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
 import { X } from 'lucide-react'
 import Image from 'next/image'
+import { useQuery } from '@tanstack/react-query'
 import { Card, CardContent, CardHeader } from '../../shared/ui/common/card'
 import { BrandButton } from '../brandButton'
 import { Ingredients } from './ui/Ingredients'
@@ -34,7 +34,7 @@ export const ProductCard = ({
   })
 
   const [ingredients, setIngredients] = useState<{
-    [P in string]: {
+    [P: string]: {
       count: number
       price: number
     }
