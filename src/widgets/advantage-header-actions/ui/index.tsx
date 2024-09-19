@@ -1,7 +1,8 @@
 import { PlusCircle } from 'lucide-react'
-import { HeaderActions } from '@/components/headerActions'
+
 import { AddAdvantage } from '@/features/admin/create-advantage'
 import { AdminDialog } from '@/shared/ui/admin/admin-dialog'
+import { HeaderActions } from '@/shared/ui/admin/admin-header-actions'
 
 export const AdvantageHeaderActions = () => {
   return (
@@ -10,7 +11,7 @@ export const AdvantageHeaderActions = () => {
         title='Додати секцію'
         buttonProps={{
           text: 'Додати секцію',
-          leftSection: <PlusCircle size={24} />
+          leftSection: <PlusCircle size={24} />,
         }}
       >
         {() => <AddAdvantage />}

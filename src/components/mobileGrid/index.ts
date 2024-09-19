@@ -1,1 +1,0 @@
-export { MobileGrid } from './MobileGrid'

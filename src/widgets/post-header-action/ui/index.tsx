@@ -1,20 +1,20 @@
 import { PlusCircle } from 'lucide-react'
 
-import { CreateIngredient } from '@/features/admin/create-ingredient'
+import { CreatePost } from '@/features/admin/create-post/ui'
 import { AdminDialog } from '@/shared/ui/admin/admin-dialog'
 import { HeaderActions } from '@/shared/ui/admin/admin-header-actions'
 
-export const IngredientHeaderActions = () => {
+export const PostHeaderActions = () => {
   return (
-    <HeaderActions title='Каталог інгредієнтів'>
+    <HeaderActions title='Список постів'>
       <AdminDialog
-        title='Додати інгредієнт'
+        title='Додати новий пост'
         buttonProps={{
-          text: 'Додати інгредієнт',
+          text: 'Додати новий пост',
           leftSection: <PlusCircle size={24} />,
         }}
       >
-        {() => <CreateIngredient />}
+        {() => <CreatePost />}
       </AdminDialog>
     </HeaderActions>
   )

@@ -1,26 +1,16 @@
-'use client'
-
 import { useEffect, useState } from 'react'
-import {
-  ImageField,
-  List,
-  NumberField,
-  TextField,
-  useGetList,
-} from 'react-admin'
+import { ImageField, List, UrlField, useGetList } from 'react-admin'
 
 import { EntitiesGrid } from '@/widgets/entities-grid'
-import { IngredientHeaderActions } from '@/widgets/ingredient-header-actions'
 import { MobileEntitiesGrid } from '@/widgets/mobile-entities-grid'
-import { Ingredient } from '@/entities/ingredient/model/types'
-import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
-import { useMedia } from '@/shared/lib/hooks/useMedia'
-import { usePaginate } from '@/shared/lib/hooks/usePaginate'
+import { PostHeaderActions } from '@/widgets/post-header-action'
+import { Post } from '@/entities/post/model/type'
+import { useHashParamValue, useMedia, usePaginate } from '@/shared/lib/hooks'
 
-export const IngredientList = () => {
+export const PostsList = () => {
   const { isMobileScreen } = useMedia()
-  const { data } = useGetList('ingredient')
-  const [displayedRows, setDisplayedRows] = useState<Ingredient[]>(data || [])
+  const { data } = useGetList('insta-posts')
+  const [displayedRows, setDisplayedRows] = useState<Post[]>(data || [])
 
   const limitParam = useHashParamValue('perPage')
   const pageParam = useHashParamValue('page')
@@ -36,7 +26,7 @@ export const IngredientList = () => {
   useEffect(() => {
     if (!sortParam || !orderParam) return
 
-    const sort = sortParam as keyof Ingredient
+    const sort = sortParam as keyof Post
 
     setDisplayedRows([
       ...displayedRows.sort((a, b) => {
@@ -72,7 +62,7 @@ export const IngredientList = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           displayedRows={displayedRows}
-          actions={<IngredientHeaderActions />}
+          actions={<PostHeaderActions />}
           renderGrid={rows => (
             <EntitiesGrid displayedRows={rows}>
               <ImageField
@@ -81,21 +71,12 @@ export const IngredientList = () => {
                 cellClassName='size-12 object-contain'
                 sortable={false}
               />
-              <TextField source='name' label='Найменування' />
-              <NumberField source='price' label='Ціна' cellClassName='size-2' />
-              <NumberField
-                source='weight'
-                label='Вага'
-                cellClassName='size-2'
-              />
+              <UrlField source='link' label='Лінк' />
             </EntitiesGrid>
           )}
         />
       ) : (
-        <List
-          className='hidden p-4 md:block'
-          actions={<IngredientHeaderActions />}
-        >
+        <List className='hidden p-4 md:block' actions={<PostHeaderActions />}>
           <EntitiesGrid displayedRows={paginated}>
             <ImageField
               source='image'
@@ -103,9 +84,7 @@ export const IngredientList = () => {
               cellClassName='size-12 object-contain'
               sortable={false}
             />
-            <TextField source='name' label='Найменування' />
-            <NumberField source='price' label='Ціна' cellClassName='size-2' />
-            <NumberField source='weight' label='Вага' cellClassName='size-2' />
+            <UrlField source='link' label='Лінк' />
           </EntitiesGrid>
         </List>
       )}
