@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from 'react'
 import { Datagrid, ImageField, List, TextField, useGetList } from 'react-admin'
-import { EntityGrid } from '@/components/entityGrid'
-import { MobileGrid } from '@/components/mobileGrid'
+
+import { AdvantageHeaderActions } from '@/widgets/advantage-header-actions'
+import { EntitiesGrid } from '@/widgets/entities-grid'
+import { MobileEntitiesGrid } from '@/widgets/mobile-entities-grid'
 import { Feature } from '@/entities/advantage/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
 import { usePaginate } from '@/shared/lib/hooks/usePaginate'
-import { AdvantageHeaderActions } from '@/widgets/advantage-header-actions'
 
 export const AdvantagesList = () => {
   const { isMobileScreen } = useMedia()
@@ -23,7 +24,7 @@ export const AdvantagesList = () => {
   const [currentPage, { paginated, setLimit, setCurrentPage }] = usePaginate(
     displayedRows,
     Number(pageParam),
-    Number(limitParam)
+    Number(limitParam),
   )
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export const AdvantagesList = () => {
       ...displayedRows.sort((a, b) => {
         if (orderParam === 'DESC') return b[sort]! < a[sort]! ? -1 : 1
         return a[sort]! < b[sort]! ? -1 : 1
-      })
+      }),
     ])
   }, [sortParam, orderParam])
 
@@ -61,48 +62,33 @@ export const AdvantagesList = () => {
   return (
     <>
       {isMobileScreen ? (
-        <MobileGrid
+        <MobileEntitiesGrid
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           displayedRows={displayedRows}
           actions={<AdvantageHeaderActions />}
           renderGrid={rows => (
-            <EntityGrid displayedRows={rows}>
+            <EntitiesGrid displayedRows={rows}>
               <ImageField
                 source='image'
                 cellClassName='size-8 object-contain'
                 label='Постер'
               />
-              <TextField
-                source='title'
-                label='Найменування'
-              />
-              <TextField
-                source='description'
-                label='Опис'
-              />
-            </EntityGrid>
+              <TextField source='title' label='Найменування' />
+              <TextField source='description' label='Опис' />
+            </EntitiesGrid>
           )}
         />
       ) : (
-        <List
-          className='p-4'
-          actions={<AdvantageHeaderActions />}
-        >
+        <List className='p-4' actions={<AdvantageHeaderActions />}>
           <Datagrid data={paginated}>
             <ImageField
               source='image'
               cellClassName='size-8 object-contain'
               label='Постер'
             />
-            <TextField
-              source='title'
-              label='Найменування'
-            />
-            <TextField
-              source='description'
-              label='Опис'
-            />
+            <TextField source='title' label='Найменування' />
+            <TextField source='description' label='Опис' />
           </Datagrid>
         </List>
       )}
