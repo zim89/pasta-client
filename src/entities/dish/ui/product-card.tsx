@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import Image from 'next/image'
+
 import { formatMass } from '../lib'
 import type { Dish } from '../model'
 import { HitLabel } from './hit-label'
@@ -7,14 +8,14 @@ import { HitLabel } from './hit-label'
 export const ProductCard = ({
   dish,
   addIngredientSlot,
-  addToCartSlot
+  addToCartSlot,
 }: {
   dish: Dish
-  addIngredientSlot?: ReactNode
-  addToCartSlot?: ReactNode
+  addIngredientSlot: ReactNode
+  addToCartSlot: ReactNode
 }) => {
   return (
-    <div className='relative w-full overflow-clip rounded-[30px] border-primary-light/50'>
+    <div className='relative w-full overflow-hidden rounded-[30px] border border-primary-light/50'>
       <div className='relative aspect-[5/3.8417]'>
         <Image
           src={dish.image ? dish.image : 'https://placehold.co/600x400.png'}
@@ -32,20 +33,19 @@ export const ProductCard = ({
           {dish.composition}
         </p>
         <div className='flex items-center justify-between'>
-          <div className='flex flex-col gap-8'>
-            {dish.weight && (
+          <div className='flex flex-1 flex-col gap-4'>
+            <div className='flex items-center justify-between'>
               <p className='text-sm/[18.2px] opacity-70'>
-                Вага: {formatMass(dish.weight)}
+                Вага: {dish.weight ? formatMass(dish.weight) : 'weight'}
               </p>
-            )}
-            <p className='text-[26px]/[31.47px] font-medium'>
-              {dish.price.toFixed(0)}₴
-            </p>
-          </div>
-
-          <div className='flex flex-col gap-4 xl:gap-5'>
-            {addIngredientSlot}
-            {addToCartSlot}
+              {addIngredientSlot}
+            </div>
+            <div className='flex items-center justify-between'>
+              <p className='text-[26px]/[31.47px] font-medium'>
+                {dish.price.toFixed(0)}₴
+              </p>
+              {addToCartSlot}
+            </div>
           </div>
         </div>
       </div>

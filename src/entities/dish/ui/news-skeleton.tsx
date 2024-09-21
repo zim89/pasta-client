@@ -5,7 +5,7 @@ import camera_100_icon from '@/shared/assets/icons/camera-100.png'
 
 export const NewsSkeleton = () => {
   return (
-    <div className='rounded-4xl flex border border-gray-400'>
+    <div className='flex overflow-hidden rounded-4xl border border-gray-500'>
       <Skeleton className='relative size-[196px]'>
         <Image
           src={camera_100_icon}

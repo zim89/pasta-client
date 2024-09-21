@@ -3,6 +3,7 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import { Check, Edit2, X } from 'lucide-react'
 import { useShowContext } from 'react-admin'
+
 import { Order } from '@/entities/order/model/types'
 import { AdminDialog } from '@/shared/ui/admin/admin-dialog'
 
@@ -17,8 +18,8 @@ export const ShowOrder = () => {
       apartmentNumber: '',
       city: '',
       region: '',
-      postalCode: ''
-    }
+      postalCode: '',
+    },
   )
 
   useEffect(() => {
@@ -120,7 +121,7 @@ export const ShowOrder = () => {
                     buttonProps={{
                       text: '',
                       className: 'p-0 size-4 pointer-cursor',
-                      rightSection: <Check size={16} />
+                      rightSection: <Check size={16} />,
                     }}
                   >
                     {() => <p>Hello</p>}

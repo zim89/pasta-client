@@ -1,22 +1,24 @@
 import { DataProvider, fetchUtils } from 'react-admin'
+
 import { SERVER_URL } from '@/shared/constants'
 import { retrieveToken } from '@/shared/lib/utils/admin-data-provider-funcs'
 
 const resourcesWithImages = ['dish', 'our-advantages', 'ingredient']
 
 export const dataProvider: DataProvider = {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getList: async (resource, params) => {
     const { token } = retrieveToken()
     const response = await fetchUtils.fetchJson(`${SERVER_URL}/${resource}`, {
       user: {
         token: `Bearer ${token}`,
-        authenticated: !!token
-      }
+        authenticated: !!token,
+      },
     })
 
     return {
       data: response.json,
-      total: response.json.length
+      total: response.json.length,
     }
   },
   getOne: async (resource, params) => {
@@ -30,17 +32,18 @@ export const dataProvider: DataProvider = {
     const response = await fetchUtils.fetchJson(url, {
       user: {
         token: `Bearer ${token}`,
-        authenticated: !!token
-      }
+        authenticated: !!token,
+      },
     })
 
     return {
-      data: response.json
+      data: response.json,
     }
   },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getMany: async (resource, params) => {
     return {
-      data: []
+      data: [],
     }
   },
   create: async (resource, params) => {
@@ -52,12 +55,16 @@ export const dataProvider: DataProvider = {
 
     if (resourcesWithImages.includes(resource)) {
       const form = new FormData()
-      for (let prop in data) {
+      // change let on const
+      for (const prop in data) {
         form.append(prop, data[prop])
       }
       form.delete('image')
       form.append('image', data.image.rawFile)
-      resource === 'dish' && form.append('isNew', 'true')
+
+      if (resource === 'dish') {
+        form.append('isNew', 'true')
+      }
 
       requestBody = form
     } else {
@@ -69,12 +76,12 @@ export const dataProvider: DataProvider = {
       body: requestBody,
       user: {
         token: `Bearer ${token}`,
-        authenticated: !!token
-      }
+        authenticated: !!token,
+      },
     })
 
     return {
-      data: response.json
+      data: response.json,
     }
   },
   delete: async (resource, params) => {
@@ -88,13 +95,13 @@ export const dataProvider: DataProvider = {
         method: 'DELETE',
         user: {
           token: `Bearer ${token}`,
-          authenticated: !!token
-        }
-      }
+          authenticated: !!token,
+        },
+      },
     )
 
     return {
-      data: response.json
+      data: response.json,
     }
   },
   update: async (resource, params) => {
@@ -109,13 +116,13 @@ export const dataProvider: DataProvider = {
         body: JSON.stringify(data),
         user: {
           token: `Bearer ${token}`,
-          authenticated: !!token
-        }
-      }
+          authenticated: !!token,
+        },
+      },
     )
 
     return {
-      data: response.json
+      data: response.json,
     }
   },
   deleteMany: async (resource, params) => {
@@ -124,29 +131,33 @@ export const dataProvider: DataProvider = {
 
     const { token } = retrieveToken()
 
+    // Свойство "response" объявлено, но его значение не было прочитано.ts(6133)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const response = await fetchUtils.fetchJson(`${SERVER_URL}/${resource}`, {
       method: 'DELETE',
       body: JSON.stringify({
-        ids
+        ids,
       }),
       user: {
         token: `Bearer ${token}`,
-        authenticated: !!token
-      }
+        authenticated: !!token,
+      },
     })
 
     return {
-      data: ids
+      data: ids,
     }
   },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updateMany: async (resource, params) => {
     return {
-      data: []
+      data: [],
     }
   },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getManyReference: async (resource, params) => {
     return {
-      data: []
+      data: [],
     }
-  }
+  },
 }

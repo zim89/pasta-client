@@ -1,1 +1,1 @@
-export {}
+export { HitProducts } from './hit-products'

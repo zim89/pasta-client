@@ -9,6 +9,7 @@ export type Dish = {
   type: string
   isHit: boolean
   isNew: boolean
+  customizable: boolean
 }
 
 export interface HitsAndNewsResponse {

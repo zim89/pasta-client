@@ -1,72 +1,40 @@
-import { Logo, PinIcon } from '@/shared/ui'
-import { Instagram, Search, Smartphone } from 'lucide-react'
+import { PinIcon } from '@/shared/ui'
+import { Search, Smartphone } from 'lucide-react'
 
-import { BurgerMenu } from './burger-menu'
 import { Navbar } from './navbar'
 
 export const Header = () => {
   return (
-    <header className='md:bg-transparent md:mt-0'>
+    <header className='fixed z-20 w-full'>
       <div className='bg-primary'>
-        <div className='container py-2'>
-          <div className='flex items-center justify-center pb-3 pt-1 text-sm text-white md:justify-between xl:justify-normal'>
-            <p className='hidden md:flex md:items-center'>
-              <PinIcon />
-              <span>Kиїв, Еспланадна, 34/2</span>
-            </p>
-            <p className='text-center xl:mx-[44px] xl:mr-auto'>
+        <div className='container'>
+          <div className='relative pb-[7px] pt-3 text-center text-xs/[15.6px] text-white md:pb-4 md:text-sm/[18.2px]'>
+            <p className='mb-4 md:absolute md:left-1/2 md:top-[13px] md:m-0 md:-translate-x-1/2'>
               Доставка щоденно з 12.00 до 20.00
             </p>
 
-            <p className='hidden md:flex md:items-center md:gap-1'>
-              <Search />
-              <Smartphone size={20} />
-              <span>+380 (96) 612 27 20</span>
-            </p>
-            <p className='ml-5 mr-[44px] hidden xl:block'>
-              +380 (96) 612 27 20
-            </p>
+            <Navbar className='md:hidden' />
 
-            <a
-              href='https://www.instagram.com/la_pepito.kyiv/'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='hidden size-12 items-center justify-center text-white transition-colors duration-300 hover:text-accent xl:flex'
-            >
-              <Instagram className='size-7 flex-none' />
-            </a>
+            <div className='hidden md:flex md:items-center md:justify-between'>
+              <p className='flex items-center gap-0.5'>
+                <PinIcon />
+                <span>Kиїв, Еспланадна, 34/2</span>
+              </p>
+              <div className='flex items-center gap-3'>
+                <Search className='size-5 stroke-[1.5px]' />
+                <a href='tel:+380966122720' className='flex items-center gap-3'>
+                  <Smartphone className='size-5 stroke-[1.5px]' />
+                  <p>+380 (96) 612 27 20</p>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div className='relative z-50 bg-primary backdrop-blur-sm md:bg-[transparent]'>
-        <div className='container flex items-center justify-between'>
-          <div className='md:mr-28 xl:hidden'>
-            <BurgerMenu />
-          </div>
 
-          <Logo />
+      <div className='absolute -bottom-[82px] left-0 right-0 z-10 hidden md:block xl:-bottom-[90px]'>
+        <div className='container'>
           <Navbar />
-          <div className='flex items-center'>
-            <div className='-mb-[6px] mr-4 text-white md:hidden'>
-              <Search />
-            </div>
-            {/* <CartButton>
-              {Trigger => (
-                <>
-                  <Trigger className='flex flex-col items-center rounded-[30px] text-[0.625rem] text-white md:flex-row md:gap-5 md:border md:border-primary md:bg-white md:px-8 md:py-[6px] md:text-black md:hover:opacity-90'>
-                    <div>
-                      <span>0</span>
-
-                      <div className='-mt-[5px]'>
-                        <ShoppingCart size={24} />
-                      </div>
-                    </div>
-                    <span className='hidden text-sm md:inline'>00,00 грн</span>
-                  </Trigger>
-                </>
-              )}
-            </CartButton> */}
-          </div>
         </div>
       </div>
     </header>
