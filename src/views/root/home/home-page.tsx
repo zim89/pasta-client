@@ -1,3 +1,4 @@
+import { Contacts } from '@/widgets/root/contacts'
 import { Features } from '@/widgets/root/features'
 import { Hero } from '@/widgets/root/hero'
 import { HitProducts } from '@/widgets/root/hit-products'
@@ -10,6 +11,7 @@ export const HomePage = () => {
       <NewProducts />
       <HitProducts />
       <Features />
+      <Contacts />
     </div>
   )
 }
