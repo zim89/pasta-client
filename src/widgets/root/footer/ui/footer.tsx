@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { LogoLightIcon, PinIcon } from '@/shared/ui'
 
 import { ADDITIONAL_LINKS, FOOTER_LINKS } from '@/shared/data'
+import decor_img from '@/shared/assets/images/decoration/footer-veggies.png'
 import { PAY_LIST } from '../model'
 import { InstagramButton } from './instagram-button'
 
@@ -11,9 +12,16 @@ export const Footer = () => {
 
   return (
     <footer
-      className='bg-primary-dark py-[26px] md:py-8 xl:pb-10'
+      className='relative bg-primary-dark py-[26px] md:py-8 xl:pb-10'
       data-testid='footer'
     >
+      <Image
+        src={decor_img}
+        width={259}
+        height={120}
+        alt='Features decoration image'
+        className='absolute bottom-[7px] left-1/2 hidden -translate-x-1/2 xl:block'
+      />
       <div className='container'>
         <div className='mb-8 space-y-2 text-sm/[18.2px] text-white md:hidden'>
           <p className='flex items-center'>
