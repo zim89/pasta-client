@@ -1,3 +1,4 @@
+import { Features } from '@/widgets/root/features'
 import { Hero } from '@/widgets/root/hero'
 import { HitProducts } from '@/widgets/root/hit-products'
 import { NewProducts } from '@/widgets/root/new-products'
@@ -8,6 +9,7 @@ export const HomePage = () => {
       <Hero />
       <NewProducts />
       <HitProducts />
+      <Features />
     </div>
   )
 }

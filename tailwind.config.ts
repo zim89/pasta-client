@@ -24,6 +24,7 @@ const config = {
       black: 'rgb(0, 17, 20)',
       white: '#FFFFFF',
       background: '#FBFBFB',
+      'card-background': '#fefefe',
       light: '#FBFBFB',
       gray: {
         300: '#f3f3f3',

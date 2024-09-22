@@ -10,7 +10,7 @@ import { HitMobile } from './hit-mobile'
 import { HitsLoading } from './hits-loading'
 import { HitsSlider } from './hits-slider'
 
-export const HitProducts = () => {
+export const HitProducts: React.FC = () => {
   const { isLoading, data } = useQuery({
     queryKey: [QUERY_KEYS.HITS_NEWS],
     queryFn: () => dishService.getHitsAndNews(),

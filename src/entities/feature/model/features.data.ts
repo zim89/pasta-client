@@ -6,8 +6,9 @@ import feat3_sm from '@/shared/assets/icons/features/feat3_sm.svg'
 import feat3 from '@/shared/assets/icons/features/feat3.svg'
 import feat4_sm from '@/shared/assets/icons/features/feat4_sm.svg'
 import feat4 from '@/shared/assets/icons/features/feat4.svg'
+import type { Feature } from './types'
 
-export const FEATURES_DATA = [
+export const FEATURES_DATA: Feature[] = [
   {
     title: 'Традиційні рецепти',
     desc: 'Справжня італійська кухня',
@@ -17,19 +18,20 @@ export const FEATURES_DATA = [
     icon: feat1,
   },
   {
-    title: 'Персоналізація страв',
-    desc: 'Додай улюблений інгредієнт',
-    desc_full: 'Наші клієнти можуть додати до страви улюблені інгредієнти',
-    icon_sm: feat2_sm,
-    icon: feat2,
-  },
-  {
     title: 'Зручна оплата',
     desc: 'Оплата готівкою або карткою',
     desc_full: 'Ви можете розрахуватись готівкою, карткою або безготівково',
     icon_sm: feat3_sm,
     icon: feat3,
   },
+  {
+    title: 'Персоналізація страв',
+    desc: 'Додай улюблений інгредієнт',
+    desc_full: 'Наші клієнти можуть додати до страви улюблені інгредієнти',
+    icon_sm: feat2_sm,
+    icon: feat2,
+  },
+
   {
     title: 'Безкоштовна доставка',
     desc: 'При замовленні від 700 грн.',
