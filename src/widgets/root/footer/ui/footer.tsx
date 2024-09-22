@@ -39,7 +39,7 @@ export const Footer = () => {
           <ul className='space-y-2'>
             {FOOTER_LINKS.map(item => (
               <li key={item.label} data-testid='nav-link'>
-                <Link href={item.href} className='textLink-light'>
+                <Link href={item.href} className='textLink-light text-nowrap'>
                   {item.label}
                 </Link>
               </li>
@@ -48,7 +48,7 @@ export const Footer = () => {
           <ul className='space-y-2'>
             {ADDITIONAL_LINKS.map(item => (
               <li key={item.label} data-testid='additional-link'>
-                <Link href={item.href} className='textLink-light'>
+                <Link href={item.href} className='textLink-light text-nowrap'>
                   {item.label}
                 </Link>
               </li>
