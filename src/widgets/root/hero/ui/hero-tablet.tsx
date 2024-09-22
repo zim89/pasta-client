@@ -11,7 +11,7 @@ import parsley_tablet from '@/shared/assets/images/hero/parsley-hero-tablet.png'
 export const HeroTablet = () => {
   return (
     <div className='hidden md:block'>
-      <div className='relative h-[589.5px] xl:h-[758px]'>
+      <div className='relative h-[480px] xl:h-[758px]'>
         <Image
           src={poster_md}
           alt='Hero Image'
