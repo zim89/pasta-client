@@ -48,7 +48,7 @@ export const Footer = () => {
           </ul>
 
           <div className='space-y-2 text-right text-[13px]/[16.9px] text-white xl:text-sm/[18.2px]'>
-            <p className='flex items-center'>
+            <p className='flex items-center text-nowrap'>
               <PinIcon />
               <span>м. Kиїв, вул. Еспланадна, 34/2</span>
             </p>
