@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-  }
-
   body {
     @apply bg-light text-black;
   }
@@ -13,15 +10,18 @@
 
 @layer components {
   .section {
-    @apply pb-0 pt-10 md:py-9 xl:py-[55px];
   }
 
   /* FIXME: delete after refactor */
-  .section .heading {
-    @apply mb-5 text-center text-[1.75rem]/[2.275rem] font-medium md:mb-8 md:text-start md:text-[2rem]/[2.6rem] xl:mb-16 xl:text-center;
+  .section h2 {
+    @apply mb-6 text-center text-[28px]/[36.4px] tracking-wide md:mb-8 md:text-left md:text-[32px]/[41.6px] xl:mb-10 xl:text-center xl:text-[40px]/[52px];
   }
 
   .textLink-light {
     @apply text-[0.813rem]/[1.056rem] text-white transition-colors duration-300 hover:text-accent xl:text-sm/[1.138rem];
+  }
+
+  .btn-primary {
+    @apply rounded-[30px] py-[12.5px] text-center;
   }
 }

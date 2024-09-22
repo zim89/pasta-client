@@ -1,7 +1,10 @@
+'use client'
+
 import { useState } from 'react'
-import { cn } from '@/shared/lib/utils'
+
 import { Button } from '@/shared/ui/common/button'
 import { Dialog, DialogContent, DialogTitle } from '@/shared/ui/common/dialog'
+import { cn } from '@/shared/lib/utils'
 
 type Props = {
   children: () => React.ReactNode
@@ -27,11 +30,7 @@ export const AdminDialog = ({ children, title, buttonProps }: Props) => {
         {buttonProps.text}
         {buttonProps.rightSection}
       </Button>
-      <Dialog
-        open={opened}
-        onOpenChange={setOpened}
-        modal
-      >
+      <Dialog open={opened} onOpenChange={setOpened} modal>
         <DialogContent>
           <DialogTitle>{title}</DialogTitle>
           <div className='flex items-center'>{children()}</div>

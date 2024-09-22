@@ -1,6 +1,6 @@
 'use client'
 
-import { Edit, ImageInput, SimpleForm, TextInput } from 'react-admin'
+import { Edit, SimpleForm, TextInput } from 'react-admin'
 
 import { CustomEditFormToolbar } from '@/features/admin/custom-edit-form-toolbar'
 import { BrandImageInput } from '@/shared/ui/admin/brand-image-input'

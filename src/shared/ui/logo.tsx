@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { cn } from '@/shared/lib/utils'
 import logoLight from '@/shared/assets/icons/logo/logo-light.svg'
 import logoPrimary from '@/shared/assets/icons/logo/logo-primary.svg'
 
-export const Logo = () => {
+export const Logo = ({ className }: { className?: string }) => {
   return (
-    <Link href='/' className='py-2 md:py-0'>
+    <Link href='/' className={cn(className)}>
       {/* Mobile logo */}
       <Image
         src={logoLight.src}

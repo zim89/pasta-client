@@ -1,1 +1,1 @@
-export {}
+export { NewProducts } from './new-products'

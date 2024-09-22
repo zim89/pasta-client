@@ -1,4 +1,5 @@
 import { AuthProvider, fetchUtils } from 'react-admin'
+
 import { SERVER_URL } from '@/shared/constants'
 import { KEYS } from '@/shared/constants/localstorage.const'
 
@@ -8,8 +9,8 @@ export const authProvider: AuthProvider = {
       `${SERVER_URL}/auth/admin/login`,
       {
         method: 'POST',
-        body: JSON.stringify({ email: username, password })
-      }
+        body: JSON.stringify({ email: username, password }),
+      },
     )
 
     const { admin, accessToken, refreshToken } = response.json
@@ -18,7 +19,7 @@ export const authProvider: AuthProvider = {
     localStorage.setItem(KEYS.refreshToken, refreshToken)
 
     return {
-      data: admin
+      data: admin,
     }
   },
   checkAuth: async () => {
@@ -45,5 +46,5 @@ export const authProvider: AuthProvider = {
   },
   handleCallback: async () => {
     return Promise.resolve()
-  }
+  },
 }
