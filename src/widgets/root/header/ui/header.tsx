@@ -32,7 +32,7 @@ export const Header = () => {
         </div>
       </div>
 
-      <div className='absolute -bottom-[82px] left-0 right-0 z-10 hidden md:block xl:-bottom-[90px]'>
+      <div className='hidden md:block'>
         <div className='container'>
           <Navbar />
         </div>
