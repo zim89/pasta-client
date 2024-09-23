@@ -22,7 +22,7 @@ export const NewsSlider = ({ data }: { data: Dish[] }) => {
           <CarouselItem key={dish.id} className='basis-1/2 pl-[30px]'>
             <NewsCard
               dish={dish}
-              addToCartSlot={<AddToCart variant='icon' />}
+              addToCartSlot={<AddToCart dish={dish} variant='icon' />}
             />
           </CarouselItem>
         ))}

@@ -33,7 +33,7 @@ export const HitMobile = ({
                 addIngredientSlot={
                   <AddIngredient disabled={dish.customizable ?? false} />
                 }
-                addToCartSlot={<AddToCart variant='btn' />}
+                addToCartSlot={<AddToCart dish={dish} variant='btn' />}
               />
             </li>
           ))}

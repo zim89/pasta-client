@@ -1,11 +1,14 @@
 import { ShoppingCart } from 'lucide-react'
 
+import type { Dish } from '@/entities/dish'
 import { cn } from '@/shared/lib/utils'
 
 export const AddToCart = ({
+  dish,
   variant = 'btn',
   className,
 }: {
+  dish: Dish
   variant: 'icon' | 'btn'
   className?: string
 }) => {

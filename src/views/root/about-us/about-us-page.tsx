@@ -5,7 +5,7 @@ import poster from '@/shared/assets/images/about-us-poster.jpg'
 
 export const AboutUsPage = () => {
   return (
-    <div className='pb-[60px] pt-8 md:pb-[72px] md:pt-[106px] xl:pb-[120px] xl:pt-[140px]'>
+    <div className='page-wrap'>
       <div className='container'>
         <PageBreadcrumbs crumbs={[{ label: 'Про нас' }]} />
 
