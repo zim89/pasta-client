@@ -31,7 +31,7 @@ export const NewProducts = () => {
               .slice(0, 3)
               .map(dish => (
                 <NewsCard
-                  addToCartSlot={<AddToCart variant='icon' />}
+                  addToCartSlot={<AddToCart dish={dish} variant='icon' />}
                   key={dish.id}
                   dish={dish}
                 />

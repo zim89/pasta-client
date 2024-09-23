@@ -12,7 +12,10 @@
   .section {
   }
 
-  /* FIXME: delete after refactor */
+  .page-wrap {
+    @apply pb-[60px] pt-8 md:pb-[72px] md:pt-[106px] xl:pb-[120px] xl:pt-[140px];
+  }
+
   .section h2 {
     @apply mb-6 text-center text-[28px]/[36.4px] tracking-wide md:mb-8 md:text-left md:text-[32px]/[41.6px] xl:mb-10 xl:text-center xl:text-[40px]/[52px];
   }

@@ -10,6 +10,7 @@ export type Dish = {
   isHit: boolean
   isNew: boolean
   customizable: boolean
+  orderCount: number
 }
 
 export interface HitsAndNewsResponse {
