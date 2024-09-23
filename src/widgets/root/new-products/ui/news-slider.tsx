@@ -14,7 +14,7 @@ export const NewsSlider = ({ data }: { data: Dish[] }) => {
     <Carousel
       opts={{
         align: 'start',
-        slidesToScroll: 2,
+        slidesToScroll: 1,
       }}
     >
       <CarouselContent className='-ml-[30px]'>

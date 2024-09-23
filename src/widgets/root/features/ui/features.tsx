@@ -2,6 +2,7 @@ import Image from 'next/image'
 
 import { FeatureCard, FEATURES_DATA } from '@/entities/feature'
 import decor_image from '@/shared/assets/images/decoration/features-veggies.png'
+import decor_bottom_image from '@/shared/assets/images/decoration/features-veggies2.png'
 import { FeaturesSlider } from './feature-slider'
 
 export const Features = () => {
@@ -25,6 +26,13 @@ export const Features = () => {
             height={147}
             alt='Features decoration image'
             className='absolute -left-20 -top-10 -z-10 hidden xl:block'
+          />
+          <Image
+            src={decor_bottom_image}
+            width={147}
+            height={133.39}
+            alt='Features decoration image'
+            className='absolute -bottom-14 -right-9 -z-10 hidden xl:block'
           />
         </div>
 

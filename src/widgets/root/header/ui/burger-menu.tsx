@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -19,10 +20,11 @@ import { LINKS_DATA } from '@/shared/data/links.data'
 import parsley from '@/shared/assets/images/decoration/parsley.png'
 
 export const BurgerMenu = () => {
+  const [isOpen, setIsOpen] = useState(false)
   const path = usePathname()
 
   return (
-    <Dialog>
+    <Dialog onOpenChange={setIsOpen} open={isOpen}>
       <DialogTrigger className='xl:hidden'>
         <AlignLeft className='size-10 stroke-[1.5px]' />
       </DialogTrigger>
@@ -32,7 +34,7 @@ export const BurgerMenu = () => {
           <DialogTitle>Mobile menu</DialogTitle>
           <DialogDescription>Open mobile menu.</DialogDescription>
         </DialogHeader>
-        <DialogClose className='absolute right-10 top-[46px] text-grey md:right-8 md:top-[38px]'>
+        <DialogClose className='text-grey absolute right-10 top-[46px] md:right-8 md:top-[38px]'>
           <X className='size-8' />
         </DialogClose>
 
@@ -42,6 +44,7 @@ export const BurgerMenu = () => {
             return (
               <li
                 key={link.label}
+                onClick={() => setIsOpen(false)}
                 className={cn(
                   'border-b-0 border-b-primary-light text-center text-xl/[26px] font-medium text-black transition-all duration-300',
                   isActive && 'border-b-2',
