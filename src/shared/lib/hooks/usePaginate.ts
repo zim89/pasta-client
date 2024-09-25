@@ -1,18 +1,19 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { useMedia } from './useMedia'
-import { PAGINATION_LIMIT } from '@/shared/constants/app.const'
 
-export const usePaginate = <T = any>(
+import { PAGINATION_LIMIT } from '@/shared/constants/app.const'
+import { useMedia } from './useMedia'
+
+export const usePaginate = <T>(
   allItems: T[],
   page?: number,
-  perPage = PAGINATION_LIMIT
+  perPage = PAGINATION_LIMIT,
 ) => {
   const [limit, setLimit] = useState(perPage)
   const [paginated, setPaginated] = useState<T[]>([])
   const params = useSearchParams()
   const [currentPage, setCurrentPage] = useState(
-    page || parseInt(params.get('page') || '1')
+    page || parseInt(params.get('page') || '1'),
   )
   const { isMobileScreen } = useMedia()
 
@@ -36,6 +37,6 @@ export const usePaginate = <T = any>(
 
   return [
     currentPage,
-    { paginated, setPaginated, params, setLimit, setCurrentPage }
+    { paginated, setPaginated, params, setLimit, setCurrentPage },
   ] as const
 }

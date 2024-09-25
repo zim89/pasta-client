@@ -4,6 +4,7 @@ import type { Dish } from '@/entities/dish'
 import { cn } from '@/shared/lib/utils'
 
 export const AddToCart = ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   dish,
   variant = 'btn',
   className,
