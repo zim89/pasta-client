@@ -1,11 +1,4 @@
-import { Weight } from 'lucide-react'
-import {
-  BooleanInput,
-  Create,
-  ImageInput,
-  SimpleForm,
-  TextInput,
-} from 'react-admin'
+import { BooleanInput, Create, SimpleForm, TextInput } from 'react-admin'
 
 import { BrandImageInput } from '@/shared/ui/admin/brand-image-input'
 import { CustomCreateFormToolbar } from '../../custom-create-form-toolbar'

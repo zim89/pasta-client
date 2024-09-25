@@ -1,10 +1,4 @@
-import {
-  Create,
-  ImageInput,
-  NumberInput,
-  SimpleForm,
-  TextInput,
-} from 'react-admin'
+import { Create, NumberInput, SimpleForm, TextInput } from 'react-admin'
 
 import { BrandImageInput } from '@/shared/ui/admin/brand-image-input'
 import { CustomCreateFormToolbar } from '../../custom-create-form-toolbar'
