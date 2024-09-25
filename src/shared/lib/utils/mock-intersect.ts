@@ -12,4 +12,5 @@ global.IntersectionObserver = class IntersectionObserver {
   unobserve() {
     return null
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } as any
