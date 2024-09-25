@@ -27,4 +27,8 @@
   .btn-primary {
     @apply rounded-[30px] py-[12.5px] text-center;
   }
+
+  .btn-icon {
+    @apply flex size-10 items-center justify-center text-white transition-colors duration-300 hover:text-accent;
+  }
 }

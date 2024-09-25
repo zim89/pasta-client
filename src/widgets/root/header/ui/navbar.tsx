@@ -3,12 +3,12 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Logo } from '@/shared/ui'
-import { Search } from 'lucide-react'
 
 import { CartButton } from '@/widgets/root/cart-button'
 import { cn } from '@/shared/lib/utils'
 import { LINKS_DATA } from '@/shared/data/links.data'
 import { BurgerMenu } from './burger-menu'
+import { SearchButton } from './search-button'
 
 export const Navbar = ({ className }: { className?: string }) => {
   const path = usePathname()
@@ -42,8 +42,8 @@ export const Navbar = ({ className }: { className?: string }) => {
         })}
       </ul>
 
-      <div className='flex items-center gap-7 text-white'>
-        <Search className='size-[30px] stroke-[1.5px] md:hidden' />
+      <div className='flex items-center gap-3 text-white'>
+        <SearchButton className='md:hidden' />
         <CartButton />
       </div>
     </nav>
