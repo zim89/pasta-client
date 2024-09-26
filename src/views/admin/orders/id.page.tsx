@@ -1,12 +1,16 @@
 'use client'
 
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { Button } from '@/shared/ui'
 import { Check, Edit2, X } from 'lucide-react'
 import { useShowContext } from 'react-admin'
+
 import { Order } from '@/entities/order/model/types'
 import { AdminDialog } from '@/shared/ui/admin/admin-dialog'
 
 export const ShowOrder = () => {
+  const streetField = useRef<HTMLDivElement>(null)
+
   const { record, refetch } = useShowContext()
   const [source, setSource] = useState<Order>(record)
   const [isEditingOrder, setIsEditingOrder] = useState(false)
@@ -17,8 +21,8 @@ export const ShowOrder = () => {
       apartmentNumber: '',
       city: '',
       region: '',
-      postalCode: ''
-    }
+      postalCode: '',
+    },
   )
 
   useEffect(() => {
@@ -30,6 +34,12 @@ export const ShowOrder = () => {
   }, [record])
 
   useEffect(() => {
+    if (streetField.current && isEditingOrder) {
+      streetField.current.focus()
+    }
+  }, [isEditingOrder, streetField])
+
+  useEffect(() => {
     if (source) setAddress(source.deliveryAdress)
   }, [source])
 
@@ -38,6 +48,10 @@ export const ShowOrder = () => {
   }
 
   if (!source) return null
+
+  const handleUpdate = () => {
+    console.log(address)
+  }
 
   return (
     <>
@@ -120,10 +134,23 @@ export const ShowOrder = () => {
                     buttonProps={{
                       text: '',
                       className: 'p-0 size-4 pointer-cursor',
-                      rightSection: <Check size={16} />
+                      rightSection: <Check size={16} />,
                     }}
                   >
-                    {() => <p>Hello</p>}
+                    {() => (
+                      <>
+                        <p className='text-sm text-grey'>
+                          Інформація про замовлення буде змінено.
+                        </p>
+
+                        <Button
+                          onClick={handleUpdate}
+                          className='ml-auto rounded-lg border hover:bg-black hover:text-white'
+                        >
+                          <Edit2 size={16} className='mr-2' /> Зберегти
+                        </Button>
+                      </>
+                    )}
                   </AdminDialog>
                   <X
                     size={16}
@@ -136,20 +163,26 @@ export const ShowOrder = () => {
             <div className='grid grid-cols-[auto,1fr] items-center'>
               <>
                 <h3 className='border-b border-primary-lightest p-2'>Місто</h3>
-                <div
-                  contentEditable={isEditingOrder}
-                  suppressContentEditableWarning
-                  className='border-b border-l border-primary-lightest p-2'
-                >
+                <div className='border-b border-l border-primary-lightest p-2 outline-none'>
                   {address.city}
                 </div>
               </>
               <>
                 <h3 className='border-b border-primary-lightest p-2'>Вулиця</h3>
                 <div
+                  ref={streetField}
                   contentEditable={isEditingOrder}
                   suppressContentEditableWarning
-                  className='border-b border-l border-primary-lightest p-2'
+                  className={
+                    'border-b border-l border-primary-lightest p-2 focus:rounded focus:!shadow-none'
+                  }
+                  style={
+                    isEditingOrder
+                      ? {
+                          boxShadow: 'inset 0px 0px 0px 1px #d4e3e8',
+                        }
+                      : undefined
+                  }
                 >
                   {address.street}
                 </div>
@@ -161,20 +194,36 @@ export const ShowOrder = () => {
                 <div
                   contentEditable={isEditingOrder}
                   suppressContentEditableWarning
-                  className='border-b border-l border-primary-lightest p-2'
+                  className={
+                    'border-b border-l border-primary-lightest p-2 focus:rounded focus:!shadow-none'
+                  }
+                  style={
+                    isEditingOrder
+                      ? {
+                          boxShadow: 'inset 0px 0px 0px 1px #d4e3e8',
+                        }
+                      : undefined
+                  }
                 >
                   {address.buildingNumber}
                 </div>
               </>
               {address.flatNumber != null && (
                 <>
-                  <h3 className='border-b border-primary-lightest p-2'>
+                  <h3 className='border-b border-primary-lightest p-2 focus:rounded focus:!shadow-none'>
                     Квартира
                   </h3>
                   <div
                     contentEditable={isEditingOrder}
                     suppressContentEditableWarning
-                    className='border-b border-l border-primary-lightest p-2'
+                    className={'border-b border-l border-primary-lightest p-2'}
+                    style={
+                      isEditingOrder
+                        ? {
+                            boxShadow: 'inset 0px 0px 0px 1px #d4e3e8',
+                          }
+                        : undefined
+                    }
                   >
                     {address.flatNumber}
                   </div>
@@ -188,7 +237,16 @@ export const ShowOrder = () => {
                   <div
                     contentEditable={isEditingOrder}
                     suppressContentEditableWarning
-                    className='border-b border-l border-primary-lightest p-2'
+                    className={
+                      'border-b border-l border-primary-lightest p-2 focus:rounded focus:!shadow-none'
+                    }
+                    style={
+                      isEditingOrder
+                        ? {
+                            boxShadow: 'inset 0px 0px 0px 1px #d4e3e8',
+                          }
+                        : undefined
+                    }
                   >
                     {address.entrance}
                   </div>
@@ -205,7 +263,16 @@ export const ShowOrder = () => {
                       e.target.textContent &&
                       handleInput(e.target.textContent, 'intercomCode')
                     }
-                    className='border-l border-primary-lightest p-2'
+                    className={
+                      'border-l border-primary-lightest p-2 focus:rounded focus:!shadow-none'
+                    }
+                    style={
+                      isEditingOrder
+                        ? {
+                            boxShadow: 'inset 0px 0px 0px 1px #d4e3e8',
+                          }
+                        : undefined
+                    }
                   ></div>
                 </>
               )}

@@ -3,17 +3,20 @@ import {
   ImageInput,
   NumberInput,
   SimpleForm,
-  TextInput
+  TextInput,
 } from 'react-admin'
+
+import { BrandImageInput } from '@/shared/ui/admin/brand-image-input'
+import { CustomCreateFormToolbar } from '../../custom-create-form-toolbar'
 
 export const CreateIngredient = () => {
   return (
-    <Create>
-      <SimpleForm>
-        <TextInput source='name' />
-        <NumberInput source='price' />
-        <NumberInput source='weight' />
-        <ImageInput source='image' />
+    <Create className='w-full'>
+      <SimpleForm toolbar={<CustomCreateFormToolbar />}>
+        <TextInput source='name' label='Назва' />
+        <NumberInput source='price' label='Ціна' />
+        <NumberInput source='weight' label='Вага' />
+        <BrandImageInput source='image' />
       </SimpleForm>
     </Create>
   )

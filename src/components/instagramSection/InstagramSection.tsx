@@ -1,10 +1,13 @@
+'use client'
+
 import Image from 'next/image'
+
 import {
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-  Carousel as ShadCNCarousel
+  Carousel as ShadCNCarousel,
 } from '@/shared/ui/common/carousel'
 
 export default function InstagramSection() {
@@ -13,17 +16,14 @@ export default function InstagramSection() {
       <div className='container'>
         <h2 className='heading !text-start md:max-w-[290px] xl:!mb-32 xl:max-w-full xl:!text-center'>
           Приєднуйтесь до нас в{' '}
-          <a
-            href='/'
-            className='text-primary'
-          >
+          <a href='/' className='text-primary'>
             Instagram
           </a>
         </h2>
         <ShadCNCarousel
           opts={{
             align: 'start',
-            slidesToScroll: 1
+            slidesToScroll: 1,
           }}
         >
           <div className='absolute -top-[72.8px] right-0 hidden h-10 w-[120px] items-center gap-10 md:flex'>
