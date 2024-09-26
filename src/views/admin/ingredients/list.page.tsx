@@ -6,15 +6,16 @@ import {
   List,
   NumberField,
   TextField,
-  useGetList
+  useGetList,
 } from 'react-admin'
-import { EntityGrid } from '@/components/entityGrid'
-import { MobileGrid } from '@/components/mobileGrid'
+
+import { EntitiesGrid } from '@/widgets/admin/entities-grid'
+import { IngredientHeaderActions } from '@/widgets/admin/ingredient-header-actions'
+import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
 import { Ingredient } from '@/entities/ingredient/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
 import { usePaginate } from '@/shared/lib/hooks/usePaginate'
-import { IngredientHeaderActions } from '@/widgets/ingredient-header-actions'
 
 export const IngredientList = () => {
   const { isMobileScreen } = useMedia()
@@ -29,7 +30,7 @@ export const IngredientList = () => {
   const [currentPage, { paginated, setLimit, setCurrentPage }] = usePaginate(
     displayedRows,
     Number(pageParam),
-    Number(limitParam)
+    Number(limitParam),
   )
 
   useEffect(() => {
@@ -41,7 +42,7 @@ export const IngredientList = () => {
       ...displayedRows.sort((a, b) => {
         if (orderParam === 'DESC') return b[sort]! < a[sort]! ? -1 : 1
         return a[sort]! < b[sort]! ? -1 : 1
-      })
+      }),
     ])
   }, [sortParam, orderParam])
 
@@ -67,34 +68,27 @@ export const IngredientList = () => {
   return (
     <>
       {isMobileScreen ? (
-        <MobileGrid
+        <MobileEntitiesGrid
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           displayedRows={displayedRows}
           actions={<IngredientHeaderActions />}
           renderGrid={rows => (
-            <EntityGrid displayedRows={rows}>
+            <EntitiesGrid displayedRows={rows}>
               <ImageField
                 source='image'
                 label='Постер'
                 cellClassName='size-12 object-contain'
                 sortable={false}
               />
-              <TextField
-                source='name'
-                label='Найменування'
-              />
-              <NumberField
-                source='price'
-                label='Ціна'
-                cellClassName='size-2'
-              />
+              <TextField source='name' label='Найменування' />
+              <NumberField source='price' label='Ціна' cellClassName='size-2' />
               <NumberField
                 source='weight'
                 label='Вага'
                 cellClassName='size-2'
               />
-            </EntityGrid>
+            </EntitiesGrid>
           )}
         />
       ) : (
@@ -102,28 +96,17 @@ export const IngredientList = () => {
           className='hidden p-4 md:block'
           actions={<IngredientHeaderActions />}
         >
-          <EntityGrid displayedRows={paginated}>
+          <EntitiesGrid displayedRows={paginated}>
             <ImageField
               source='image'
               label='Постер'
               cellClassName='size-12 object-contain'
               sortable={false}
             />
-            <TextField
-              source='name'
-              label='Найменування'
-            />
-            <NumberField
-              source='price'
-              label='Ціна'
-              cellClassName='size-2'
-            />
-            <NumberField
-              source='weight'
-              label='Вага'
-              cellClassName='size-2'
-            />
-          </EntityGrid>
+            <TextField source='name' label='Найменування' />
+            <NumberField source='price' label='Ціна' cellClassName='size-2' />
+            <NumberField source='weight' label='Вага' cellClassName='size-2' />
+          </EntitiesGrid>
         </List>
       )}
     </>

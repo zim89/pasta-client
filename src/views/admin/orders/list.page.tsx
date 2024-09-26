@@ -10,15 +10,16 @@ import {
   NumberField,
   SingleFieldList,
   TextField,
-  useGetList
+  useGetList,
 } from 'react-admin'
-import { EntityGrid } from '@/components/entityGrid'
-import { MobileGrid } from '@/components/mobileGrid'
+
+import { EntitiesGrid } from '@/widgets/admin/entities-grid'
+import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
+import { OrderHeaderActions } from '@/widgets/admin/order-header-actions'
 import { Order } from '@/entities/order/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
 import { usePaginate } from '@/shared/lib/hooks/usePaginate'
-import { OrderHeaderActions } from '@/widgets/order-header-actions'
 
 export const OrdersList = () => {
   const { isMobileScreen } = useMedia()
@@ -33,7 +34,7 @@ export const OrdersList = () => {
   const [currentPage, { paginated, setLimit, setCurrentPage }] = usePaginate(
     displayedRows,
     Number(pageParam),
-    Number(limitParam)
+    Number(limitParam),
   )
 
   useEffect(() => {
@@ -45,7 +46,7 @@ export const OrdersList = () => {
       ...displayedRows.sort((a, b) => {
         if (orderParam === 'DESC') return b[sort]! < a[sort]! ? -1 : 1
         return a[sort]! < b[sort]! ? -1 : 1
-      })
+      }),
     ])
   }, [sortParam, orderParam])
 
@@ -71,26 +72,17 @@ export const OrdersList = () => {
   return (
     <>
       {isMobileScreen ? (
-        <MobileGrid
+        <MobileEntitiesGrid
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           displayedRows={displayedRows}
           empty={false}
           actions={<OrderHeaderActions />}
           renderGrid={rows => (
-            <EntityGrid displayedRows={rows}>
-              <TextField
-                source='number'
-                label='Номер'
-              />
-              <TextField
-                source='orderDetail.name'
-                label='Клієнт'
-              />
-              <ArrayField
-                source='orderItems'
-                label='Продукти'
-              >
+            <EntitiesGrid displayedRows={rows}>
+              <TextField source='number' label='Номер' />
+              <TextField source='orderDetail.name' label='Клієнт' />
+              <ArrayField source='orderItems' label='Продукти'>
                 <SingleFieldList
                   linkType={false}
                   className='max-w-[600px]'
@@ -99,23 +91,11 @@ export const OrdersList = () => {
                   <ChipField source='dish.title' />
                 </SingleFieldList>
               </ArrayField>
-              <DateField
-                source='orderDetail.date'
-                label='Дата'
-              />
-              <BooleanField
-                source='pickup'
-                label='Самовивіз'
-              />
-              <NumberField
-                source='totalPrice'
-                label='Вартість'
-              />
-              <TextField
-                source='orderDetail.payType'
-                label='Оплата'
-              />
-            </EntityGrid>
+              <DateField source='orderDetail.date' label='Дата' />
+              <BooleanField source='pickup' label='Самовивіз' />
+              <NumberField source='totalPrice' label='Вартість' />
+              <TextField source='orderDetail.payType' label='Оплата' />
+            </EntitiesGrid>
           )}
         />
       ) : (
@@ -124,19 +104,10 @@ export const OrdersList = () => {
           empty={false}
           actions={<OrderHeaderActions />}
         >
-          <EntityGrid displayedRows={paginated}>
-            <TextField
-              source='number'
-              label='Номер'
-            />
-            <TextField
-              source='orderDetail.name'
-              label='Клієнт'
-            />
-            <ArrayField
-              source='orderItems'
-              label='Продукти'
-            >
+          <EntitiesGrid displayedRows={paginated}>
+            <TextField source='number' label='Номер' />
+            <TextField source='orderDetail.name' label='Клієнт' />
+            <ArrayField source='orderItems' label='Продукти'>
               <SingleFieldList
                 linkType={false}
                 className='max-w-[600px]'
@@ -145,23 +116,11 @@ export const OrdersList = () => {
                 <ChipField source='dish.title' />
               </SingleFieldList>
             </ArrayField>
-            <DateField
-              source='orderDetail.date'
-              label='Дата'
-            />
-            <BooleanField
-              source='pickup'
-              label='Самовивіз'
-            />
-            <NumberField
-              source='totalPrice'
-              label='Вартість'
-            />
-            <TextField
-              source='orderDetail.payType'
-              label='Оплата'
-            />
-          </EntityGrid>
+            <DateField source='orderDetail.date' label='Дата' />
+            <BooleanField source='pickup' label='Самовивіз' />
+            <NumberField source='totalPrice' label='Вартість' />
+            <TextField source='orderDetail.payType' label='Оплата' />
+          </EntitiesGrid>
         </List>
       )}
     </>

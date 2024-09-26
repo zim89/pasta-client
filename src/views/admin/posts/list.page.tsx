@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { EntityGrid } from '@/components/entityGrid'
-import { MobileGrid } from '@/components/mobileGrid'
-import { ImageField, List, TextField, UrlField, useGetList } from 'react-admin'
+import { ImageField, List, UrlField, useGetList } from 'react-admin'
 
-import { PostHeaderActions } from '@/widgets/post-header-action'
+import { EntitiesGrid } from '@/widgets/admin/entities-grid'
+import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
+import { PostHeaderActions } from '@/widgets/admin/post-header-action'
 import { Post } from '@/entities/post/model/type'
 import { useHashParamValue, useMedia, usePaginate } from '@/shared/lib/hooks'
 
@@ -58,13 +58,13 @@ export const PostsList = () => {
   return (
     <>
       {isMobileScreen ? (
-        <MobileGrid
+        <MobileEntitiesGrid
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           displayedRows={displayedRows}
           actions={<PostHeaderActions />}
           renderGrid={rows => (
-            <EntityGrid displayedRows={rows}>
+            <EntitiesGrid displayedRows={rows}>
               <ImageField
                 source='image'
                 label='Постер'
@@ -72,12 +72,12 @@ export const PostsList = () => {
                 sortable={false}
               />
               <UrlField source='link' label='Лінк' />
-            </EntityGrid>
+            </EntitiesGrid>
           )}
         />
       ) : (
         <List className='hidden p-4 md:block' actions={<PostHeaderActions />}>
-          <EntityGrid displayedRows={paginated}>
+          <EntitiesGrid displayedRows={paginated}>
             <ImageField
               source='image'
               label='Постер'
@@ -85,7 +85,7 @@ export const PostsList = () => {
               sortable={false}
             />
             <UrlField source='link' label='Лінк' />
-          </EntityGrid>
+          </EntitiesGrid>
         </List>
       )}
     </>

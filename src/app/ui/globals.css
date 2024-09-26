@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-  }
-
   body {
     @apply bg-light text-black;
   }
@@ -13,15 +10,35 @@
 
 @layer components {
   .section {
-    @apply pb-0 pt-10 md:py-9 xl:py-[55px];
   }
 
-  /* FIXME: delete after refactor */
-  .section .heading {
-    @apply mb-5 text-center text-[1.75rem]/[2.275rem] font-medium md:mb-8 md:text-start md:text-[2rem]/[2.6rem] xl:mb-16 xl:text-center;
+  .page-wrap {
+    @apply pb-[60px] pt-8 md:pb-[72px] md:pt-[106px] xl:pb-[120px] xl:pt-[140px];
+  }
+
+  .section h2 {
+    @apply mb-6 text-center text-[28px]/[36.4px] tracking-wide md:mb-8 md:text-left md:text-[32px]/[41.6px] xl:mb-10 xl:text-center xl:text-[40px]/[52px];
   }
 
   .textLink-light {
     @apply text-[0.813rem]/[1.056rem] text-white transition-colors duration-300 hover:text-accent xl:text-sm/[1.138rem];
+  }
+
+  .outline-link {
+    @apply rounded-4xl border border-primary-light bg-white py-[13.5px] text-center text-sm/[18.2px] font-medium text-primary-light transition-colors duration-300 hover:border-primary hover:text-primary disabled:cursor-not-allowed disabled:border-disabled disabled:bg-disabled disabled:text-gray-600;
+  }
+
+  .btn-primary {
+    @apply rounded-[30px] py-[12.5px] text-center;
+  }
+
+  .btn-icon {
+    @apply flex size-10 items-center justify-center text-white transition-colors duration-300 hover:text-accent;
+  }
+
+  .glassmorphic-bg {
+    backdrop-filter: blur(5px) saturate(60%);
+    -webkit-backdrop-filter: blur(1px) saturate(100%);
+    background-color: rgba(255, 255, 255, 0.5);
   }
 }

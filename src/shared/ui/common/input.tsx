@@ -4,11 +4,12 @@ import { cva, VariantProps } from 'class-variance-authority'
 import { cn } from '@/shared/lib/utils/cn-merge'
 
 const inputVariants = cva(
-  'file:bg-transparent placeholder:text-slate-500 dark:border-slate-800 dark:bg-slate-950 dark:placeholder:text-slate-400 flex h-10 w-full rounded-md border bg-white px-3 py-2 text-[15px] file:border-0 file:text-sm file:font-medium focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+  'bg-white file:bg-transparent dark:border-slate-800 dark:placeholder:text-slate-400 flex h-10 w-full rounded-md border px-3 py-2 text-[15px] file:border-0 file:text-sm file:font-medium focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: 'border-b-1 border-0 border-b-black',
+        default:
+          'border-0 border-b-[1px] border-b-gray-500 rounded-none px-0 py-2 placeholder:text-gray-500 bg-opacity-0',
       },
     },
     defaultVariants: {

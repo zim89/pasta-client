@@ -1,22 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useMediaQuery } from 'usehooks-ts'
+
 import type { Dish } from '@/entities/dish/model/types'
 import { PAGINATION_LIMIT } from '@/shared/constants/app.const'
 
 export const usePagination = (data: Dish[]) => {
   const [paginatedData, setPaginatedData] = useState<Dish[]>(data)
   const [total, setTotal] = useState(0)
+
   const searchParams = useSearchParams()
   const page = parseInt(searchParams.get('page') ?? '1')
   const filter = searchParams.get('filter') ?? ''
   const sort = searchParams.get('sort') ?? ''
   const isTablet = useMediaQuery('(max-width: 1439px)')
-  const isMobile = useMediaQuery('(max-width: 833px)')
 
   useEffect(() => {
-    if (isMobile) return
-
     let result
 
     switch (sort) {
@@ -29,12 +28,12 @@ export const usePagination = (data: Dish[]) => {
         break
 
       default:
-        result = data
+        result = [...data].sort((a, b) => b.orderCount - a.orderCount)
     }
 
     if (filter) {
       result = result.filter(dish =>
-        dish.type.toLowerCase().includes(filter.toLowerCase())
+        dish.type.toLowerCase().includes(filter.toLowerCase()),
       )
     }
 
@@ -57,6 +56,6 @@ export const usePagination = (data: Dish[]) => {
   return {
     paginatedData,
     total,
-    hasPagination: total > PAGINATION_LIMIT
+    hasPagination: total > PAGINATION_LIMIT,
   }
 }

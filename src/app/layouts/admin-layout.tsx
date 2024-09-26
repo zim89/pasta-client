@@ -1,9 +1,5 @@
 'use client'
 
-import { authProvider } from '@/app/providers/auth-provider'
-import { dataProvider } from '@/app/providers/data-provider'
-import { theme } from '@/app/ui/admin-theme'
-import { AdminAppBar } from '@/components/AdminAppBar'
 import {
   AdvantageIcon,
   MenuInstagramIcon,
@@ -23,6 +19,9 @@ import {
   Show,
 } from 'react-admin'
 
+import { authProvider } from '@/app/providers/auth-provider'
+import { dataProvider } from '@/app/providers/data-provider'
+import { theme } from '@/app/ui/admin-theme'
 import { EditAdvantage } from '@/views/admin/advantages/edit.page'
 import { AdvantagesList } from '@/views/admin/advantages/list.page'
 import { EditProduct } from '@/views/admin/dishes/edit.page'
@@ -33,6 +32,7 @@ import { ShowOrder } from '@/views/admin/orders/id.page'
 import { OrdersList } from '@/views/admin/orders/list.page'
 import { EditPost } from '@/views/admin/posts/edit.page'
 import { PostsList } from '@/views/admin/posts/list.page'
+import { AdminAppBar } from '@/shared/ui/admin/admin-bar'
 
 const CustomLayout = ({ children }: { children: React.ReactNode }) => {
   return <Layout appBar={AdminAppBar}>{children}</Layout>

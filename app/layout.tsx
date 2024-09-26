@@ -1,21 +1,23 @@
 import { Suspense } from 'react'
 import type { Metadata } from 'next'
+
 import { Providers } from '@/app/providers/root-providers'
 import { alegreya, inter } from '@/app/ui/fonts'
+import { SITE_NAME } from '@/shared/constants'
+import { cn } from '@/shared/lib/utils'
+
 import '@/app/ui/globals.css'
-import { SITE_NAME } from '@/shared/constants/seo.const'
-import { cn } from '@/shared/lib/utils/cn-merge'
 
 export const metadata: Metadata = {
   title: {
     default: SITE_NAME,
-    template: `%s | ${SITE_NAME}`
+    template: `%s | ${SITE_NAME}`,
   },
-  description: ''
+  description: '',
 }
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
@@ -25,7 +27,7 @@ export default function RootLayout({
         className={cn(
           'min-h-screen antialiased',
           alegreya.variable,
-          inter.className
+          inter.className,
         )}
       >
         <Suspense>

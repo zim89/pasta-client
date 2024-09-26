@@ -1,6 +1,5 @@
 'use client'
 
-import { Dialog, DialogContent, DialogTitle } from '@/shared/ui'
 import {
   BooleanInput,
   EditBase,
@@ -8,7 +7,6 @@ import {
   SimpleForm,
   TextInput,
   useRecordContext,
-  WarnWhenUnsavedChanges,
 } from 'react-admin'
 
 import { CustomEditFormToolbar } from '@/features/admin/custom-edit-form-toolbar'

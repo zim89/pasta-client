@@ -1,5 +1,5 @@
-import { SearchPageWrapper } from './ui/SearchPageWrapper'
+import { SearchPage } from '@/views/root/search/search-page'
 
 export default function Page() {
-  return <SearchPageWrapper />
+  return <SearchPage />
 }

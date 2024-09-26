@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from 'react'
 import { ImageField, List, TextField, useGetList } from 'react-admin'
-import { EntityGrid } from '@/components/entityGrid'
-import { MobileGrid } from '@/components/mobileGrid'
+
+import { DishHeaderActions } from '@/widgets/admin/dish-header-actions'
+import { EntitiesGrid } from '@/widgets/admin/entities-grid'
+import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
 import { Dish } from '@/entities/dish/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
 import { usePaginate } from '@/shared/lib/hooks/usePaginate'
-import { DishHeaderActions } from '@/widgets/dish-header-actions'
 
 export const ProductList = () => {
   const { isMobileScreen } = useMedia()
@@ -23,7 +24,7 @@ export const ProductList = () => {
   const [currentPage, { paginated, setLimit, setCurrentPage }] = usePaginate(
     displayedRows,
     Number(pageParam),
-    Number(limitParam)
+    Number(limitParam),
   )
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export const ProductList = () => {
       ...displayedRows.sort((a, b) => {
         if (orderParam === 'DESC') return b[sort]! < a[sort]! ? -1 : 1
         return a[sort]! < b[sort]! ? -1 : 1
-      })
+      }),
     ])
   }, [sortParam, orderParam])
 
@@ -61,91 +62,52 @@ export const ProductList = () => {
   return (
     <>
       {isMobileScreen ? (
-        <MobileGrid
+        <MobileEntitiesGrid
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           actions={<DishHeaderActions />}
           displayedRows={displayedRows}
           renderGrid={rows => (
-            <EntityGrid displayedRows={rows}>
+            <EntitiesGrid displayedRows={rows}>
               <ImageField
                 source='image'
                 cellClassName='size-8 object-contain'
                 sortable={false}
                 label='Фото'
               />
-              <TextField
-                source='title'
-                label='Назва'
-              />
-              <TextField
-                source='type'
-                sortable={false}
-                label='Тип'
-              />
+              <TextField source='title' label='Назва' />
+              <TextField source='type' sortable={false} label='Тип' />
               <TextField
                 source='composition'
                 sortable={false}
                 label='Композиція'
               />
-              <TextField
-                source='price'
-                label='Ціна'
-              />
-              <TextField
-                source='weight'
-                sortable={false}
-                label='Вага'
-              />
-              <TextField
-                source='volume'
-                sortable={false}
-                label='Обсяг'
-              />
-            </EntityGrid>
+              <TextField source='price' label='Ціна' />
+              <TextField source='weight' sortable={false} label='Вага' />
+              <TextField source='volume' sortable={false} label='Обсяг' />
+            </EntitiesGrid>
           )}
         />
       ) : (
-        <List
-          className='p-4'
-          actions={<DishHeaderActions />}
-        >
-          <EntityGrid displayedRows={paginated}>
+        <List className='p-4' actions={<DishHeaderActions />}>
+          <EntitiesGrid displayedRows={paginated}>
             <ImageField
               source='image'
               cellClassName='size-8 object-contain'
               sortable={false}
               label='Фото'
             />
-            <TextField
-              source='title'
-              label='Назва'
-            />
-            <TextField
-              source='type'
-              sortable={false}
-              label='Тип'
-            />
+            <TextField source='title' label='Назва' />
+            <TextField source='type' sortable={false} label='Тип' />
             <TextField
               source='composition'
               sortable={false}
               label='Композиція'
             />
-            <TextField
-              source='price'
-              label='Ціна'
-            />
-            <TextField
-              source='weight'
-              sortable={false}
-              label='Вага'
-            />
-            <TextField
-              source='volume'
-              sortable={false}
-              label='Обсяг'
-            />
-          </EntityGrid>
+            <TextField source='price' label='Ціна' />
+            <TextField source='weight' sortable={false} label='Вага' />
+            <TextField source='volume' sortable={false} label='Обсяг' />
+          </EntitiesGrid>
         </List>
       )}
     </>

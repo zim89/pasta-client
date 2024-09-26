@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { LogoLightIcon, PinIcon } from '@/shared/ui'
 
 import { ADDITIONAL_LINKS, FOOTER_LINKS } from '@/shared/data'
+import decor_img from '@/shared/assets/images/decoration/footer-veggies.png'
 import { PAY_LIST } from '../model'
 import { InstagramButton } from './instagram-button'
 
@@ -11,9 +12,16 @@ export const Footer = () => {
 
   return (
     <footer
-      className='bg-primary-dark py-[26px] md:py-8 xl:pb-10'
+      className='relative bg-primary-dark py-[26px] md:py-8 xl:pb-10'
       data-testid='footer'
     >
+      <Image
+        src={decor_img}
+        width={259}
+        height={120}
+        alt='Features decoration image'
+        className='absolute bottom-[7px] left-1/2 hidden -translate-x-1/2 xl:block'
+      />
       <div className='container'>
         <div className='mb-8 space-y-2 text-sm/[18.2px] text-white md:hidden'>
           <p className='flex items-center'>
@@ -31,7 +39,7 @@ export const Footer = () => {
           <ul className='space-y-2'>
             {FOOTER_LINKS.map(item => (
               <li key={item.label} data-testid='nav-link'>
-                <Link href={item.href} className='textLink-light'>
+                <Link href={item.href} className='textLink-light text-nowrap'>
                   {item.label}
                 </Link>
               </li>
@@ -40,7 +48,7 @@ export const Footer = () => {
           <ul className='space-y-2'>
             {ADDITIONAL_LINKS.map(item => (
               <li key={item.label} data-testid='additional-link'>
-                <Link href={item.href} className='textLink-light'>
+                <Link href={item.href} className='textLink-light text-nowrap'>
                   {item.label}
                 </Link>
               </li>
@@ -48,7 +56,7 @@ export const Footer = () => {
           </ul>
 
           <div className='space-y-2 text-right text-[13px]/[16.9px] text-white xl:text-sm/[18.2px]'>
-            <p className='flex items-center'>
+            <p className='flex items-center text-nowrap'>
               <PinIcon />
               <span>м. Kиїв, вул. Еспланадна, 34/2</span>
             </p>

@@ -1,14 +1,15 @@
 import type { ReactNode } from 'react'
 import Image from 'next/image'
+
 import { formatMass } from '../lib'
 import type { Dish } from '../model'
 
 export const NewsCard = ({
   dish,
-  addToCartSlot
+  addToCartSlot,
 }: {
   dish: Dish
-  addToCartSlot?: ReactNode
+  addToCartSlot: ReactNode
 }) => {
   return (
     <div className='flex gap-[22px] overflow-clip rounded-xl border border-primary-light/50 xl:gap-[18px] xl:rounded-[30px]'>
@@ -33,7 +34,7 @@ export const NewsCard = ({
         )}
 
         <div className='relative'>
-          <p className='px-[5.5px] text-base/[19.36px] font-semibold xl:text-[22px]/[28.6px] xl:font-medium'>
+          <p className='text-base/[19.36px] font-semibold xl:text-[22px]/[28.6px] xl:font-medium'>
             {dish.price}₴
           </p>
 

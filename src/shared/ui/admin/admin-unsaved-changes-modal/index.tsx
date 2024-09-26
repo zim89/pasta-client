@@ -5,6 +5,7 @@ import { Button } from '../../common'
 type Props = {
   enable?: boolean | undefined
   formRootPathName?: string | undefined
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formControl?: any
 }
 
@@ -14,6 +15,16 @@ export const AdminUnsavedChangesModal = (props: Props) => {
     props.formRootPathName,
     props.formControl,
   )
+
+  const handleLeave = () => {
+    if (blocker.proceed) blocker.proceed()
+    if (blocker.reset) blocker.reset()
+  }
+
+  const handleClose = () => {
+    // You need to reset the blocker as it works only once at a time
+    if (blocker.reset) blocker.reset()
+  }
 
   return (
     <>
@@ -30,21 +41,8 @@ export const AdminUnsavedChangesModal = (props: Props) => {
           </p>
         </hgroup>
         <div className='flex justify-end'>
-          <Button
-            onClick={() => {
-              // You need to reset the blocker as it works only once at a time
-              blocker.reset && blocker.reset()
-            }}
-          >
-            Закрити
-          </Button>
-          <Button
-            onClick={() => {
-              blocker.proceed && blocker.proceed()
-              blocker.reset && blocker.reset()
-            }}
-            className='text-[#f64a4a]'
-          >
+          <Button onClick={handleClose}>Закрити</Button>
+          <Button onClick={handleLeave} className='text-[#f64a4a]'>
             Залишити
           </Button>
         </div>
