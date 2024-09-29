@@ -1,6 +1,7 @@
 'use client'
 
 import { PropsWithChildren, useState } from 'react'
+import { UnsavedChangesProvider } from '@/shared/context/root-unsaved-changes'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
@@ -17,7 +18,7 @@ export const Providers = ({ children }: PropsWithChildren) => {
 
   return (
     <QueryClientProvider client={client}>
-      {children}
+      <UnsavedChangesProvider>{children}</UnsavedChangesProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )

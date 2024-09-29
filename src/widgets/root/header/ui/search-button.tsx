@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { WithBlock } from '@/shared/ui/with-block'
 import { Search } from 'lucide-react'
 
 import { APP_PAGES } from '@/shared/constants'
@@ -13,8 +14,10 @@ export const SearchButton = ({ className }: { className?: string }) => {
   if (path === APP_PAGES.SEARCH) return null
 
   return (
-    <Link href={APP_PAGES.SEARCH} className={cn('btn-icon', className)}>
-      <Search className='size-8 stroke-[1.5px] md:size-6' />
-    </Link>
+    <WithBlock>
+      <Link href={APP_PAGES.SEARCH} className={cn('btn-icon', className)}>
+        <Search className='size-8 stroke-[1.5px] md:size-6' />
+      </Link>
+    </WithBlock>
   )
 }

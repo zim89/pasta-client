@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { LogoLightIcon, PinIcon } from '@/shared/ui'
+import { WithBlock } from '@/shared/ui/with-block'
 
 import { ADDITIONAL_LINKS, FOOTER_LINKS } from '@/shared/data'
 import decor_img from '@/shared/assets/images/decoration/footer-veggies.png'
@@ -33,24 +34,30 @@ export const Footer = () => {
         </div>
 
         <div className='hidden md:mb-10 md:flex md:gap-[45.67px] xl:justify-between'>
-          <Link href='/'>
-            <LogoLightIcon />
-          </Link>
+          <WithBlock>
+            <Link href='/'>
+              <LogoLightIcon />
+            </Link>
+          </WithBlock>
           <ul className='space-y-2'>
             {FOOTER_LINKS.map(item => (
               <li key={item.label} data-testid='nav-link'>
-                <Link href={item.href} className='textLink-light text-nowrap'>
-                  {item.label}
-                </Link>
+                <WithBlock>
+                  <Link href={item.href} className='textLink-light text-nowrap'>
+                    {item.label}
+                  </Link>
+                </WithBlock>
               </li>
             ))}
           </ul>
           <ul className='space-y-2'>
             {ADDITIONAL_LINKS.map(item => (
               <li key={item.label} data-testid='additional-link'>
-                <Link href={item.href} className='textLink-light text-nowrap'>
-                  {item.label}
-                </Link>
+                <WithBlock>
+                  <Link href={item.href} className='textLink-light text-nowrap'>
+                    {item.label}
+                  </Link>
+                </WithBlock>
               </li>
             ))}
           </ul>
@@ -68,12 +75,16 @@ export const Footer = () => {
 
         {/* FIXME: Add valid links */}
         <ul className='mb-8 flex items-baseline justify-between md:hidden'>
-          <Link href='/' className='textLink-light'>
-            Договір публічної оферти
-          </Link>
-          <Link href='/' className='textLink-light'>
-            Політика конфіденційності
-          </Link>
+          <WithBlock>
+            <Link href='/' className='textLink-light'>
+              Договір публічної оферти
+            </Link>
+          </WithBlock>
+          <WithBlock>
+            <Link href='/' className='textLink-light'>
+              Політика конфіденційності
+            </Link>
+          </WithBlock>
         </ul>
 
         <div className='flex flex-col gap-8 md:flex-row-reverse md:justify-between'>

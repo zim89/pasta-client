@@ -7,7 +7,7 @@ import { Blocker, useBlocker } from 'react-router-dom'
  * - If the user confirms, the navigation continues and the changes are lost.
  * - If the user cancels, the navigation is cancelled and the changes are kept.
  */
-export const useWarnWhenUnsavedChanges = (
+export const useAdminWarnWhenUnsavedChanges = (
   enable: boolean,
   formRootPathname?: string,
   control?: Control,

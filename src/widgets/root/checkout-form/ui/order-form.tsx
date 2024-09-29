@@ -1,65 +1,34 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useContext, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { Button, Input } from '@/shared/ui'
+import { WithBlock } from '@/shared/ui/with-block'
 import { WithRequiredMark } from '@/shared/ui/with-required-mark'
 import { useFormik } from 'formik'
 
 import { Autocomplete } from '@/widgets/root/checkout-form/ui/autocomplete'
 import { Dish } from '@/entities/dish'
+import { orderItems } from '@/entities/order-item'
+import { useRootWarnWhenUnsavedChanges } from '@/shared/lib/hooks/useRootWarnWhenUnsavedChanges'
 import { streets } from '@/shared/data/streets.data'
-import { OrderField } from './OrderField'
+import { OrderField } from '../../../../entities/order-item/ui/order-field'
 
-const selectedDishes: Dish[] = [
-  {
-    id: 1,
-    title: 'Напій Pepsi zero',
-    slug: 'napij-pepsi-zero',
-    weight: null,
-    volume: null,
-    composition: null,
-    price: 72,
-    image:
-      'https://images.bolt.eu/store/2024/2024-04-07/c128ea29-2204-4644-bf60-b2f4b8a05c3d.webp',
-    type: 'Напій',
-    orderCount: 42,
-    isNew: false,
-    customizable: false,
-  },
-  {
-    id: 4,
-    title: 'Вода негазована',
-    slug: 'voda-negazovana',
-    weight: null,
-    volume: 0.5,
-    composition: null,
-    price: 68,
-    image:
-      'https://images.bolt.eu/store/2023/2023-02-16/1a4c621b-ee06-4c79-9ea3-8181077de4b5.jpeg',
-    type: 'Напій',
-    orderCount: 44,
-    isNew: false,
-    customizable: false,
-  },
-  {
-    id: 3,
-    title: 'Паста "Карбонара"',
-    slug: 'pasta-karbonara',
-    weight: 320,
-    volume: null,
-    composition: 'Вершковий соус з беконом, пармезаном і жовтком',
-    price: 329,
-    image:
-      'https://images.bolt.eu/store/2022/2022-03-29/3609559b-2928-4f05-98c4-6df02772e616.jpeg',
-    type: 'Паста',
-    orderCount: 35,
-    isNew: false,
-    customizable: true,
-  },
-]
+export type OrderItem = {
+  id: number
+  quantity: number
+  image: Dish['image']
+  title: Dish['title']
+  price: Dish['price']
+}
 
-export const CheckoutForm = () => {
+export const OrderForm = () => {
+  const [_, setUnsavedChanges] = useRootWarnWhenUnsavedChanges()
+
+  useEffect(() => {
+    setUnsavedChanges(true)
+  }, [])
+
   const formik = useFormik({
     initialValues: {
       city: 'Київ',
@@ -69,7 +38,13 @@ export const CheckoutForm = () => {
       appartmentHouse: '',
       story: '',
       intercom: '',
-      selectedDishes,
+      orderItems: orderItems.map((dish, index) => ({
+        id: index,
+        quantity: 1,
+        image: dish.image,
+        title: dish.title,
+        price: dish.price,
+      })),
     },
     onSubmit: values => {
       console.log(values)
@@ -83,6 +58,49 @@ export const CheckoutForm = () => {
       )
       .slice(0, 15)
   }, [formik.values.street])
+
+  const changeQuantity = (op: 'INCREASE' | 'DECREASE', id: number) => {
+    const candidate = formik.values.orderItems.find(item => item.id === id)
+
+    if (candidate) {
+      let newValues: OrderItem[] = []
+
+      switch (op) {
+        case 'DECREASE':
+          newValues = formik.values.orderItems.map(dish =>
+            dish.id === id
+              ? {
+                  ...dish,
+                  quantity: Math.max(0, dish.quantity - 1),
+                }
+              : dish,
+          )
+          break
+        case 'INCREASE':
+          newValues = formik.values.orderItems.map(dish =>
+            dish.id === id
+              ? {
+                  ...dish,
+                  quantity: dish.quantity + 1,
+                }
+              : dish,
+          )
+          break
+      }
+
+      formik.setFieldValue('orderItems', newValues)
+    }
+  }
+
+  const removeOrderItem = (id: number) => {
+    const candidate = formik.values.orderItems.find(item => item.id === id)
+    if (candidate) {
+      formik.setFieldValue(
+        'selectedDishes',
+        formik.values.orderItems.filter(item => item.id !== id),
+      )
+    }
+  }
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -159,18 +177,25 @@ export const CheckoutForm = () => {
               {...formik.getFieldProps('intercom')}
             />
           </div>
-          <Link href='/menu' className='outline-link mt-auto'>
-            Повернутись до меню
-          </Link>
+          <WithBlock>
+            <Link href='/menu' className='outline-link mt-auto block'>
+              Повернутись до меню
+            </Link>
+          </WithBlock>
         </div>
         <div className='flex w-full flex-col'>
           <h3 className='mb-8 text-[26px]/[31.47px] font-medium'>
             Ваше замовлення
           </h3>
           <p>Мінімальна сума для безкоштовної доставки 700 грн</p>
-          {formik.values.selectedDishes.length > 0 &&
-            formik.values.selectedDishes.map(order => (
-              <OrderField key={order.id} dish={order} removeDish={() => {}} />
+          {formik.values.orderItems.length > 0 &&
+            formik.values.orderItems.map(order => (
+              <OrderField
+                key={order.id}
+                item={order}
+                removeDish={removeOrderItem}
+                changeQuantity={changeQuantity}
+              />
             ))}
           <div className='mt-auto flex flex-col gap-4 self-end xl:w-[413px]'>
             <p className='inline-flex justify-between'>

@@ -1,4 +1,4 @@
-import { useWarnWhenUnsavedChanges } from '@/shared/lib/hooks/useWarnWhenUnsavedChanges'
+import { useAdminWarnWhenUnsavedChanges } from '@/shared/lib/hooks/useAdminWarnWhenUnsavedChanges'
 import { cn } from '@/shared/lib/utils'
 import { Button } from '../../common'
 
@@ -10,7 +10,7 @@ type Props = {
 }
 
 export const AdminUnsavedChangesModal = (props: Props) => {
-  const blocker = useWarnWhenUnsavedChanges(
+  const blocker = useAdminWarnWhenUnsavedChanges(
     !!props.enable,
     props.formRootPathName,
     props.formControl,
@@ -36,7 +36,7 @@ export const AdminUnsavedChangesModal = (props: Props) => {
       >
         <hgroup>
           <h3 className='font-semibold'>Залишити сторінку?</h3>
-          <p className='my-2 text-sm text-grey'>
+          <p className='text-grey my-2 text-sm'>
             Зміни, які ви внесли, можуть бути не збережені.
           </p>
         </hgroup>

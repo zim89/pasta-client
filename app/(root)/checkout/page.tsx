@@ -1,11 +1,5 @@
-import { CheckoutForm } from '@/widgets/root/checkout-form'
+import { CheckoutPage } from '@/views/root/checkout/checkout-page'
 
 export default function CartPage() {
-  return (
-    <div className='page-wrap'>
-      <div className='container'>
-        <CheckoutForm />
-      </div>
-    </div>
-  )
+  return <CheckoutPage />
 }

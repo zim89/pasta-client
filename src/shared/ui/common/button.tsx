@@ -17,6 +17,7 @@ const buttonVariants = cva(
           'bg-primary-light py-[12.5px] text-[18px]/[23.4px] font-normal text-white',
         link: 'text-black opacity-50',
         activeLink: 'text-black',
+        plain: 'focus-visible:ring-0 focus-visible:ring-offset-0',
       },
       size: {
         default: 'h-10 px-4 py-2',

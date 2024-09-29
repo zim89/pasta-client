@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Logo } from '@/shared/ui'
+import { WithBlock } from '@/shared/ui/with-block'
 
 import { CartButton } from '@/widgets/root/cart-button'
 import { cn } from '@/shared/lib/utils'
@@ -28,15 +29,17 @@ export const Navbar = ({ className }: { className?: string }) => {
           const isActive = path === item.href
           return (
             <li key={index}>
-              <Link
-                className={cn(
-                  'relative after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-primary-light after:transition-all after:duration-300 hover:after:w-full',
-                  isActive && 'after:w-full after:bg-black',
-                )}
-                href={item.href}
-              >
-                {item.label}
-              </Link>
+              <WithBlock>
+                <Link
+                  className={cn(
+                    'relative after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-primary-light after:transition-all after:duration-300 hover:after:w-full',
+                    isActive && 'after:w-full after:bg-black',
+                  )}
+                  href={item.href}
+                >
+                  {item.label}
+                </Link>
+              </WithBlock>
             </li>
           )
         })}
