@@ -12,17 +12,17 @@ const buttonVariants = cva(
         default:
           'bg-slate-900 text-slate-50 hover:bg-slate-900/90 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90',
         outline:
-          'h-11 border border-primary-light bg-white text-sm/[18.2px] font-medium text-primary-light transition-colors duration-300 hover:border-primary hover:text-primary disabled:cursor-not-allowed disabled:border-disabled disabled:bg-disabled disabled:text-gray-600',
+          'border border-primary-light bg-white text-sm/[18.2px] font-medium text-primary-light transition-colors duration-300 hover:border-primary hover:text-primary disabled:cursor-not-allowed disabled:border-disabled disabled:bg-disabled disabled:text-gray-600',
         filled:
-          'bg-primary-light py-[12.5px] text-[18px]/[23.4px] font-normal text-white',
+          'bg-primary-light py-3 text-[18px]/[23.4px] font-normal text-white rounded-[30px]',
         link: 'text-black opacity-50',
         activeLink: 'text-black',
         plain: 'focus-visible:ring-0 focus-visible:ring-offset-0',
       },
       size: {
         default: 'h-10 px-4 py-2',
-        sm: 'h-9 rounded-md px-3',
-        lg: 'h-11 rounded-md px-8',
+        sm: 'h-9 px-3',
+        lg: 'h-11 px-8',
         icon: 'h-10 w-10',
       },
     },
