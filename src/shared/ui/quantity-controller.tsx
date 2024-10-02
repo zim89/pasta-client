@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { DeleteItemModal } from '@/widgets/root/delete-item-modal'
-import { Button, Dialog, DialogContent } from './common'
+import { Button } from './common'
 
 type Props = {
   decrease: () => void

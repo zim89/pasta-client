@@ -10,13 +10,12 @@ import { useFormik } from 'formik'
 import { orderItems } from '@/entities/order-item'
 import { DELIVERY_PRICE } from '@/shared/constants'
 import { useRootWarnWhenUnsavedChanges } from '@/shared/lib/hooks/useRootWarnWhenUnsavedChanges'
-import { OrderField } from '../../../../entities/order-item/ui/order-field'
-import { OrderItem } from '../model'
 import { DeliverySection } from './delivery-section'
 import { OrderFields } from './order-fields'
 
 export const OrderForm = () => {
   const router = useRouter()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setUnsavedChanges] = useRootWarnWhenUnsavedChanges()
 
   useEffect(() => {
