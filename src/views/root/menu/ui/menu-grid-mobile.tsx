@@ -18,9 +18,7 @@ export const MenuGridMobile = ({ data }: { data: Dish[] }) => {
             <li key={dish.id}>
               <ProductCard
                 dish={dish}
-                addIngredientSlot={
-                  <AddIngredient disabled={dish.customizable} />
-                }
+                addIngredientSlot={<AddIngredient dish={dish} />}
                 addToCartSlot={<AddToCart dish={dish} variant='btn' />}
               />
             </li>
@@ -28,7 +26,7 @@ export const MenuGridMobile = ({ data }: { data: Dish[] }) => {
       </ul>
 
       {pages > 1 && page !== pages && (
-        <div className='flex items-center justify-center'>
+        <div className='mt-6 flex items-center justify-center'>
           <button
             disabled={page === pages}
             onClick={() => setPage(prev => prev + 1)}

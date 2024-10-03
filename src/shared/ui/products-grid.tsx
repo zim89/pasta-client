@@ -10,7 +10,9 @@ export const ProductsGrid = ({ data }: { data: Dish[] }) => {
           <li key={dish.id}>
             <ProductCard
               dish={dish}
-              addIngredientSlot={<AddIngredient disabled={dish.customizable} />}
+              addIngredientSlot={
+                <AddIngredient dish={dish} disabled={dish.customizable} />
+              }
               addToCartSlot={<AddToCart dish={dish} variant='btn' />}
             />
           </li>

@@ -30,9 +30,7 @@ export const HitsSlider = ({ data }: { data: Dish[] }) => {
             >
               <ProductCard
                 dish={dish}
-                addIngredientSlot={
-                  <AddIngredient disabled={dish.customizable ?? false} />
-                }
+                addIngredientSlot={<AddIngredient dish={dish} />}
                 addToCartSlot={<AddToCart dish={dish} variant='btn' />}
               />
             </CarouselItem>

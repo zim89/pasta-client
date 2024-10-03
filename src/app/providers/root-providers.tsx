@@ -4,6 +4,8 @@ import { PropsWithChildren, useState } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
+import { CartStoreProvider } from '@/entities/cart'
+
 export const Providers = ({ children }: PropsWithChildren) => {
   const [client] = useState(
     new QueryClient({
@@ -17,8 +19,10 @@ export const Providers = ({ children }: PropsWithChildren) => {
 
   return (
     <QueryClientProvider client={client}>
-      {children}
-      <ReactQueryDevtools initialIsOpen={false} />
+      <CartStoreProvider>
+        {children}
+        <ReactQueryDevtools initialIsOpen={false} />
+      </CartStoreProvider>
     </QueryClientProvider>
   )
 }
