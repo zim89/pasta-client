@@ -27,10 +27,14 @@ const config = {
       'card-background': '#fefefe',
       light: '#FBFBFB',
       gray: {
-        300: '#f3f3f3',
-        500: '#9FA3A4',
-        600: '#94999A',
-        700: '#6F7273',
+        '300': '#f3f3f3',
+        '400': '#dbdbdb',
+        '500': '#9FA3A4',
+        '600': '#94999A',
+        '700': '#6F7273',
+      },
+      green: {
+        '100': '#F2F6F6',
       },
       primary: {
         lightest: '#d4e3e8',
@@ -53,12 +57,20 @@ const config = {
       },
       keyframes: {
         'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
+          from: {
+            height: '0',
+          },
+          to: {
+            height: 'var(--radix-accordion-content-height)',
+          },
         },
         'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
+          from: {
+            height: 'var(--radix-accordion-content-height)',
+          },
+          to: {
+            height: '0',
+          },
         },
       },
       fontFamily: {

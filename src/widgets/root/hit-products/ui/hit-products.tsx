@@ -37,7 +37,7 @@ export const HitProducts: React.FC = () => {
         <div className='hidden md:block'>
           {isLoading && <HitsLoading />}
 
-          {!isLoading && data && <HitsSlider data={data.news} />}
+          {!isLoading && data && <HitsSlider data={data.hits} />}
         </div>
       </div>
     </section>

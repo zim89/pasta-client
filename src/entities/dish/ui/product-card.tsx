@@ -38,13 +38,13 @@ export const ProductCard = ({
               <p className='text-sm/[18.2px] opacity-70'>
                 Вага: {dish.weight ? formatMass(dish.weight) : 'weight'}
               </p>
-              {addIngredientSlot}
+              <div className='w-[200px] xl:w-[220px]'>{addIngredientSlot}</div>
             </div>
             <div className='flex items-center justify-between'>
               <p className='text-[26px]/[31.47px] font-medium'>
                 {dish.price.toFixed(0)}₴
               </p>
-              {addToCartSlot}
+              <div className='w-[200px] xl:w-[220px]'>{addToCartSlot}</div>
             </div>
           </div>
         </div>

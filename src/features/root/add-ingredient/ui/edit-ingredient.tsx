@@ -1,11 +1,4 @@
-'use client'
-
 import { useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { X } from 'lucide-react'
-
-import type { Dish } from '@/entities/dish'
-import { ingredientService } from '@/entities/ingredient'
 import {
   Dialog,
   DialogClose,
@@ -13,12 +6,17 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/shared/ui/common/dialog'
+} from '@/shared/ui/common'
+import { useQuery } from '@tanstack/react-query'
+import { SquarePen, X } from 'lucide-react'
+
+import type { CartItem } from '@/entities/cart'
+import { ingredientService } from '@/entities/ingredient'
 import { QUERY_KEYS } from '@/shared/constants'
 import { cn } from '@/shared/lib/utils'
-import { IngredientForm } from './ingredient-form'
+import { IngredientFormEdit } from './ingredient-form-edit'
 
-export const AddIngredient = ({ dish }: { dish: Dish }) => {
+export const EditIngredient = ({ item }: { item: CartItem }) => {
   const { isLoading, data } = useQuery({
     queryKey: [QUERY_KEYS.INGREDIENTS],
     queryFn: () => ingredientService.getAll(),
@@ -29,8 +27,12 @@ export const AddIngredient = ({ dish }: { dish: Dish }) => {
   return (
     <>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger disabled={!dish.customizable} className='btn-secondary'>
-          Додати інгредієнти
+        <DialogTrigger
+          disabled={item.dish.customizable === false}
+          className='btn-text-primary'
+        >
+          <span>Редагувати</span>
+          <SquarePen className='size-5 stroke-[1.5px]' />
         </DialogTrigger>
 
         <DialogContent
@@ -42,6 +44,7 @@ export const AddIngredient = ({ dish }: { dish: Dish }) => {
             <DialogTitle>Додати інгредієнти</DialogTitle>
           </DialogHeader>
           <DialogClose
+            aria-hidden='true'
             className={cn(
               'btn-close',
               'absolute right-8 top-5 md:right-6 md:top-6 xl:right-12 xl:top-8',
@@ -50,9 +53,18 @@ export const AddIngredient = ({ dish }: { dish: Dish }) => {
             <X className='size-8 stroke-[1.5px]' />
           </DialogClose>
 
-          {data && !isLoading && <IngredientForm data={data} dish={dish} />}
+          {data && !isLoading && (
+            <IngredientFormEdit data={data} item={item} setOpen={setOpen} />
+          )}
         </DialogContent>
       </Dialog>
     </>
   )
 }
+
+// return (
+//     <button className='btn-text-primary'>
+//       <span>Редагувати</span>
+//       <SquarePen className='size-5 stroke-[1.5px]' />
+//     </button>
+// )

@@ -30,9 +30,7 @@ export const HitMobile = ({
             <li key={dish.id}>
               <ProductCard
                 dish={dish}
-                addIngredientSlot={
-                  <AddIngredient disabled={dish.customizable ?? false} />
-                }
+                addIngredientSlot={<AddIngredient dish={dish} />}
                 addToCartSlot={<AddToCart dish={dish} variant='btn' />}
               />
             </li>
