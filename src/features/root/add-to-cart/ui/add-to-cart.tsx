@@ -20,7 +20,6 @@ export const AddToCart = ({
   const onClick = () => {
     addToCart({
       dish,
-      count: 1,
       ingredients: [],
     })
     toggleCartDrawer()
