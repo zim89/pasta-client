@@ -23,7 +23,7 @@ type Props = {
 export const WithBlock = ({
   children,
   warningHeading = 'Увага!',
-  warningSubtitle = 'Не збережені дані будуть втрачені назавжди 😮. Продовжити?',
+  warningSubtitle = 'Не збережені дані можуть будуть втрачені назавжди 😮 Продовжити?',
 }: Props) => {
   const router = useRouter()
   const [thereAreUnsavedChanges, setUnsavedChanges] =

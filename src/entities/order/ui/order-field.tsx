@@ -4,16 +4,20 @@ import { QuantityController } from '@/shared/ui/quantity-controller'
 import { Trash2 } from 'lucide-react'
 
 import { DeleteItemModal } from '@/widgets/root/delete-item-modal'
+import { useCartStore } from '@/entities/cart'
 import { OrderItem } from '../model'
 
 type Props = {
   item: OrderItem
-  removeDish: (id: number) => void
-  changeQuantity: (op: 'INCREASE' | 'DECREASE', id: number) => void
+  removeDish: (id: string) => void
+  changeQuantity: (op: 'INCREASE' | 'DECREASE', id: string) => void
 }
 
 export const OrderField = ({ item, removeDish, changeQuantity }: Props) => {
   const [deleteModalOpened, setDeleteModalOpened] = useState(false)
+  const { cart, incrementItem, decrementItem, removeFromCart } = useCartStore(
+    state => state,
+  )
 
   return (
     <div className='flex flex-wrap gap-y-4 border-b border-b-primary-light pb-4 pt-4 xl:items-center xl:pt-6'>
@@ -30,13 +34,14 @@ export const OrderField = ({ item, removeDish, changeQuantity }: Props) => {
       </p>
       <div className='order-[2] mx-auto xl:order-none xl:mx-0'>
         <QuantityController
-          value={item.quantity}
-          decrease={() => changeQuantity('DECREASE', item.id)}
-          increase={() => changeQuantity('INCREASE', item.id)}
-          handleRemove={() => removeDish(item.id)}
+          value={item.count}
+          decrease={() => decrementItem(item.id)}
+          increase={() => incrementItem(item.id)}
+          handleRemove={() => removeFromCart(item.id)}
         />
       </div>
-      <p className='order-[3] self-center text-[22px]/[26px] font-medium xl:order-none xl:mx-[47px] xl:text-[22px]/[28.6px]'>
+
+      <p className='xxl:mx-0 order-[3] ml-auto text-right text-[22px]/[26px] font-medium xl:order-none xl:mx-[47px] xl:flex-1 xl:text-[22px]/[28.6px]'>
         {item.price}₴
       </p>
       <div className='order-[1] self-center xl:order-none xl:ml-auto'>

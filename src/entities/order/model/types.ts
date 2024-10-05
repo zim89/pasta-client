@@ -1,9 +1,13 @@
-import { Dish } from '../../dish/model/types'
+import { CartIngredient } from '@/entities/cart'
+import type { Dish } from '@/entities/dish'
 
-type OrderItem = {
-  id: number
-  dish: Dish
-  orderItemIngredients: { id: number; quantity: number }[]
+export type OrderItem = {
+  id: string
+  count: number
+  image: Dish['image']
+  title: Dish['title']
+  price: Dish['price']
+  ingredients: CartIngredient[]
 }
 
 type DeliveryAddress = {

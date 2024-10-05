@@ -37,9 +37,7 @@ export const MenuSlider = ({ data }: { data: Dish[] }) => {
             <CarouselItem key={dish.id} className='basis-1/2 pl-[38px]'>
               <ProductCard
                 dish={dish}
-                addIngredientSlot={
-                  <AddIngredient disabled={dish.customizable} />
-                }
+                addIngredientSlot={<AddIngredient dish={dish} />}
                 addToCartSlot={<AddToCart dish={dish} variant='btn' />}
               />
             </CarouselItem>

@@ -1,5 +1,4 @@
 import { PinIcon } from '@/shared/ui'
-import { WithBlock } from '@/shared/ui/with-block'
 import { Smartphone } from 'lucide-react'
 
 import { Navbar } from './navbar'
@@ -24,15 +23,11 @@ export const Header = () => {
               </p>
               <div className='flex items-center'>
                 <SearchButton />
-                <WithBlock>
-                  <a
-                    href='tel:+380966122720'
-                    className='flex items-center gap-2'
-                  >
-                    <Smartphone className='size-6 stroke-[1.5px]' />
-                    <p>+380 (96) 612 27 20</p>
-                  </a>
-                </WithBlock>
+
+                <a href='tel:+380966122720' className='flex items-center gap-2'>
+                  <Smartphone className='size-6 stroke-[1.5px]' />
+                  <p>+380 (96) 612 27 20</p>
+                </a>
               </div>
             </div>
           </div>

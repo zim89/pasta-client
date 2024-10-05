@@ -4,7 +4,6 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { WithBlock } from '@/shared/ui/with-block'
 import { AlignLeft, X } from 'lucide-react'
 
 import {
@@ -43,17 +42,16 @@ export const BurgerMenu = () => {
           {LINKS_DATA.map(link => {
             const isActive = path === link.href
             return (
-              <WithBlock key={link.label}>
-                <li
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    'border-b-0 border-b-primary-light text-center text-xl/[26px] font-medium text-black transition-all duration-300',
-                    isActive && 'border-b-2',
-                  )}
-                >
-                  <Link href={link.href}>{link.label}</Link>
-                </li>
-              </WithBlock>
+              <li
+                key={link.label}
+                onClick={() => setIsOpen(false)}
+                className={cn(
+                  'border-b-0 border-b-primary-light text-center text-xl/[26px] font-medium text-black transition-all duration-300',
+                  isActive && 'border-b-2',
+                )}
+              >
+                <Link href={link.href}>{link.label}</Link>
+              </li>
             )
           })}
         </ul>

@@ -29,7 +29,11 @@
   }
 
   .btn-primary {
-    @apply rounded-[30px] py-[12.5px] text-center;
+    @apply flex h-11 w-full items-center justify-center rounded-4xl border border-primary-light bg-primary-light text-base/[20.8px] font-medium text-white transition-colors duration-300 hover:border-primary hover:bg-primary disabled:cursor-not-allowed disabled:border-disabled disabled:bg-disabled disabled:text-gray-600;
+  }
+
+  .btn-secondary {
+    @apply flex h-11 w-full items-center justify-center rounded-4xl border border-primary-light bg-background text-base/[20.8px] font-medium text-primary-light transition-colors duration-300 hover:border-primary hover:text-primary disabled:cursor-not-allowed disabled:border-disabled disabled:bg-disabled disabled:text-gray-600;
   }
 
   .btn-icon {
@@ -40,5 +44,13 @@
     backdrop-filter: blur(5px) saturate(60%);
     -webkit-backdrop-filter: blur(1px) saturate(100%);
     background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .btn-text-primary {
+    @apply flex items-center gap-1 py-[5.5px] text-[13px]/[16.9px] text-primary-light transition-colors duration-300 hover:text-primary;
+  }
+
+  .btn-close {
+    @apply text-gray-700 outline-none transition-colors duration-300 hover:text-black;
   }
 }

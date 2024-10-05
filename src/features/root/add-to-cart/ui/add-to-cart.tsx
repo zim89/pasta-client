@@ -1,10 +1,12 @@
+'use client'
+
 import { ShoppingCart } from 'lucide-react'
 
+import { useCartStore } from '@/entities/cart'
 import type { Dish } from '@/entities/dish'
 import { cn } from '@/shared/lib/utils'
 
 export const AddToCart = ({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   dish,
   variant = 'btn',
   className,
@@ -13,8 +15,19 @@ export const AddToCart = ({
   variant: 'icon' | 'btn'
   className?: string
 }) => {
+  const { toggleCartDrawer, addToCart } = useCartStore(state => state)
+
+  const onClick = () => {
+    addToCart({
+      dish,
+      ingredients: [],
+    })
+    toggleCartDrawer()
+  }
+
   return (
     <button
+      onClick={onClick}
       className={cn(
         'bg-primary-light text-base/[20.8px] font-medium text-white transition-colors duration-300 hover:bg-primary',
         variant === 'icon'
