@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -28,6 +28,8 @@ export const IngredientFormEdit = ({
 }) => {
   const { editIngredients } = useCartStore(state => state)
   const FormSchema = generateFormSchema(data)
+
+  const [price, setPrice] = useState(item.price)
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -64,7 +66,12 @@ export const IngredientFormEdit = ({
                   control={form.control}
                   name={i.name}
                   render={({ field }) => (
-                    <IngredientFormItem i={i} field={field} form={form} />
+                    <IngredientFormItem
+                      i={i}
+                      field={field}
+                      form={form}
+                      setPrice={setPrice}
+                    />
                   )}
                 />
               </li>
@@ -85,7 +92,7 @@ export const IngredientFormEdit = ({
         </div>
 
         <div className='space-y-6 md:space-y-9'>
-          <DishCard dish={item.dish} />
+          <DishCard dish={item.dish} price={price} />
 
           <div className='space-y-6 xl:hidden'>
             <button
