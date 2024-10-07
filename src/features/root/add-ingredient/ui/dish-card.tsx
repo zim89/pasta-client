@@ -14,7 +14,7 @@ export const DishCard = ({ dish, price }: { dish: Dish; price: number }) => {
       </div>
 
       {/* Dish image */}
-      <div className='relative h-[104px] overflow-hidden rounded-[8.81px] md:h-[200px] md:rounded-xl xl:h-[240px]'>
+      <div className='relative h-[104px] w-[104px] overflow-hidden rounded-[8.81px] md:h-[200px] md:w-[200px] md:rounded-xl xl:h-[240px] xl:w-[240px]'>
         <Image
           src={dish.image}
           alt={dish.title}
