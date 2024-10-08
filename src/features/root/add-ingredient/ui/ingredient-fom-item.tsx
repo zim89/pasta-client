@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from 'react'
 import Image from 'next/image'
 import type { ControllerRenderProps, UseFormReturn } from 'react-hook-form'
 
@@ -14,11 +15,23 @@ export const IngredientFormItem = ({
   i,
   field,
   form,
+  setPrice,
 }: {
   i: Ingredient
   field: ControllerRenderProps
   form: UseFormReturn
+  setPrice: Dispatch<SetStateAction<number>>
 }) => {
+  const onIncrement = () => {
+    form.setValue(i.name, form.getValues(i.name) + 1)
+    setPrice(prev => prev + i.price)
+  }
+
+  const onDecrement = () => {
+    form.setValue(i.name, form.getValues(i.name) - 1)
+    setPrice(prev => prev - i.price)
+  }
+
   return (
     <>
       <FormItem className='space-y-0 p-1 xl:hidden'>
@@ -44,7 +57,7 @@ export const IngredientFormItem = ({
           <button
             disabled={form.getValues(i.name) === 0}
             type='button'
-            onClick={() => form.setValue(i.name, form.getValues(i.name) - 1)}
+            onClick={onDecrement}
             className='flex size-8 items-center justify-center border-[1.26px] border-black/5 text-[22px]/[28.6px] font-medium'
           >
             -
@@ -58,7 +71,7 @@ export const IngredientFormItem = ({
           </FormControl>
           <button
             type='button'
-            onClick={() => form.setValue(i.name, form.getValues(i.name) + 1)}
+            onClick={onIncrement}
             className='flex size-8 items-center justify-center border-[1.26px] border-black/5 text-[22px]/[28.6px] font-medium'
           >
             +
@@ -92,7 +105,7 @@ export const IngredientFormItem = ({
             <button
               disabled={form.getValues(i.name) === 0}
               type='button'
-              onClick={() => form.setValue(i.name, form.getValues(i.name) - 1)}
+              onClick={onDecrement}
               className='flex size-[26px] items-center justify-center rounded-md border border-black/5 text-sm/[18.2px] font-medium'
             >
               -
@@ -106,7 +119,7 @@ export const IngredientFormItem = ({
             </FormControl>
             <button
               type='button'
-              onClick={() => form.setValue(i.name, form.getValues(i.name) + 1)}
+              onClick={onIncrement}
               className='flex size-[26px] items-center justify-center rounded-md border border-black/5 text-sm/[18.2px] font-medium'
             >
               +
