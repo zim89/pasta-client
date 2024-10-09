@@ -1,67 +1,42 @@
+import { CartItem } from '@/entities/cart'
 import { OrderField, OrderItem } from '@/entities/order'
-import { OrderForm } from '../model'
 import { SliderOrderFields } from './slider-order-fields'
 
 type Props = {
-  form: OrderForm
+  cart: CartItem[]
+  decrementItem: (id: string) => void
+  incrementItem: (id: string) => void
+  removeFromCart: (id: string) => void
 }
 
-export const OrderFields = ({ form }: Props) => {
-  const orderItems = form.getValues().orderItems
-
-  const changeQuantity = (op: 'INCREASE' | 'DECREASE', id: string) => {
-    const candidate = orderItems.find(item => item.id === id)
-
-    if (candidate) {
-      let newValues: OrderItem[] = []
-
-      switch (op) {
-        case 'DECREASE':
-          newValues = orderItems.map(dish =>
-            dish.id === id
-              ? {
-                  ...dish,
-                  quantity: Math.max(0, dish.count - 1),
-                }
-              : dish,
-          )
-          break
-        case 'INCREASE':
-          newValues = orderItems.map(dish =>
-            dish.id === id
-              ? {
-                  ...dish,
-                  quantity: dish.count + 1,
-                }
-              : dish,
-          )
-          break
-      }
-
-      form.setValue('orderItems', newValues)
-    }
+export const OrderFields = ({
+  cart,
+  decrementItem,
+  incrementItem,
+  removeFromCart,
+}: Props) => {
+  const removeOrderItem = (id: string) => {
+    removeFromCart(id)
   }
 
-  const removeOrderItem = (id: string) => {
-    const candidate = orderItems.find(item => item.id === id)
-    if (candidate) {
-      form.setValue(
-        'orderItems',
-        orderItems.filter(item => item.id !== id),
-      )
+  const changeQuantity = (op: 'INCREASE' | 'DECREASE', id: string) => {
+    if (op === 'INCREASE') {
+      incrementItem(id)
+    } else {
+      decrementItem(id)
     }
   }
 
   return (
     <div>
-      {orderItems.length > 3 ? (
+      {cart.length > 3 ? (
         <SliderOrderFields
-          orders={orderItems}
+          orders={cart}
           removeDish={removeOrderItem}
           changeQuantity={changeQuantity}
         />
       ) : (
-        orderItems.map(order => (
+        cart.map(order => (
           <OrderField
             key={order.id}
             item={order}

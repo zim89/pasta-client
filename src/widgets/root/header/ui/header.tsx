@@ -1,12 +1,42 @@
+'use client'
+
+import { CSSProperties, useEffect, useState } from 'react'
 import { PinIcon } from '@/shared/ui'
 import { Smartphone } from 'lucide-react'
 
 import { Navbar } from './navbar'
 import { SearchButton } from './search-button'
 
+// Threshold at which the header's background opacity reaches its maximum value (100% white)
+const THRESHOLD = 600
+
 export const Header = () => {
+  const [headerOffsetState, setHeaderOffsetState] = useState(0)
+
+  useEffect(() => {
+    // When the page after a reload initially is scrolled down, it then fill the header appropriately
+    setHeaderOffsetState(() => Math.min(window.scrollY, THRESHOLD))
+
+    // When the user scrolls, the header offset changes accordingly
+    const handleScroll = () => {
+      // Cancelling the scroll tracking for optimization purposes
+      if (window.scrollY > THRESHOLD * 2) return
+      setHeaderOffsetState(window.scrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <header className='fixed z-20 w-full'>
+    <header
+      className='fixed z-20 w-full bg-white'
+      style={
+        {
+          '--tw-bg-opacity': (headerOffsetState / THRESHOLD).toFixed(1),
+        } as CSSProperties
+      }
+    >
       <div className='flex h-[110px] items-center bg-primary md:h-12'>
         <div className='container flex-1'>
           <div className='relative text-center text-xs/[15.6px] text-white md:text-sm/[18.2px]'>

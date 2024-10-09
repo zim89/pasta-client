@@ -1,10 +1,17 @@
-import { Button, ColouredTrash, Dialog, DialogContent } from '@/shared/ui'
+import {
+  Button,
+  ColouredTrash,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from '@/shared/ui'
 
 type Props = {
   openingButton: React.ReactNode
   opened: boolean
   handleOpenChange: (val: boolean) => void
   handleConfirm: () => void
+  title: string
 }
 
 export const DeleteItemModal = ({
@@ -12,13 +19,15 @@ export const DeleteItemModal = ({
   handleOpenChange,
   opened,
   handleConfirm,
+  title,
 }: Props) => {
   return (
     <>
       {/* Opening button */}
       {openingButton}
       <Dialog open={opened} onOpenChange={handleOpenChange}>
-        <DialogContent>
+        <DialogContent aria-describedby={undefined}>
+          <DialogTitle>{title}</DialogTitle>
           <div className='flex items-center gap-8'>
             <ColouredTrash />
             <div>

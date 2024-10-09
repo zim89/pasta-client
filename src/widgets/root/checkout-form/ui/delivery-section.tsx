@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { Input } from '@/shared/ui'
 import { WithRequiredMark } from '@/shared/ui/with-required-mark'
 
@@ -9,7 +8,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/shared/ui/common/form'
-import { streets } from '@/shared/data/streets.data'
 import { OrderForm } from '../model'
 
 type Props = {
@@ -17,19 +15,6 @@ type Props = {
 }
 
 export const DeliverySection = ({ form }: Props) => {
-  const formValues = form.getValues()
-
-  const suggestions = useMemo(() => {
-    // Removes duplicates and finds a match to a search string
-    return Array.from(
-      new Set(
-        streets.filter(str =>
-          str.toLowerCase().includes(formValues.street.toLowerCase()),
-        ),
-      ),
-    )
-  }, [formValues.street.length])
-
   return (
     <div className='flex w-full max-w-[400px] flex-col gap-7 rounded-[20px] border border-primary-light px-[10px] py-6 md:border-0 md:py-0'>
       <h3 className='mb-1 text-[18px]/[23.4px] font-medium xl:text-center xl:text-[26px]/[31.47px]'>
@@ -67,7 +52,12 @@ export const DeliverySection = ({ form }: Props) => {
                 marginTop: 0,
               }}
             >
-              <Input id='street' {...field} />
+              <Input
+                id='street'
+                {...field}
+                placeholder='Введіть вулицю'
+                required
+              />
             </FormControl>
             <FormMessage />
           </FormItem>

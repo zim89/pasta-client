@@ -7,7 +7,6 @@ import { useForm } from 'react-hook-form'
 import { useCartStore } from '@/entities/cart'
 import { Form } from '@/shared/ui/common/form'
 import { DELIVERY_PRICE } from '@/shared/constants'
-import { useRootWarnWhenUnsavedChanges } from '@/shared/lib/hooks/useRootWarnWhenUnsavedChanges'
 import { DeliverySection } from './delivery-section'
 import { OrderFields } from './order-fields'
 
@@ -18,7 +17,9 @@ type Props = {
 
 export const OrderForm = ({ proceedOrderSlot, returnToMenuSlot }: Props) => {
   const router = useRouter()
-  const { cart } = useCartStore(state => state)
+  const { cart, decrementItem, incrementItem, removeFromCart } = useCartStore(
+    state => state,
+  )
 
   const form = useForm({
     defaultValues: {
@@ -29,26 +30,16 @@ export const OrderForm = ({ proceedOrderSlot, returnToMenuSlot }: Props) => {
       appartmentHouse: '',
       story: '',
       intercom: '',
-      orderItems: cart.map(item => ({
-        id: item.id,
-        count: item.count,
-        image: item.dish.image,
-        title: item.dish.title,
-        price: item.dish.price,
-        ingredients: item.ingredients,
-      })),
     },
   })
 
   useEffect(() => {
-    if (!form.getValues().orderItems.length) {
+    if (!cart.length) {
       router.push('/menu')
     }
-  }, [form])
+  }, [cart.length])
 
-  const subTotal = form
-    .getValues()
-    .orderItems.reduce((acc, prev) => acc + prev.price * prev.count, 0)
+  const subTotal = cart.reduce((acc, prev) => acc + prev.price * prev.count, 0)
 
   const handleSubmit = (values: typeof form.formState.defaultValues) => {
     console.log(values)
@@ -66,7 +57,12 @@ export const OrderForm = ({ proceedOrderSlot, returnToMenuSlot }: Props) => {
             <p className='mb-1 text-sm xl:text-base'>
               Мінімальна сума для безкоштовної доставки 700 грн
             </p>
-            <OrderFields form={form} />
+            <OrderFields
+              cart={cart}
+              decrementItem={decrementItem}
+              incrementItem={incrementItem}
+              removeFromCart={removeFromCart}
+            />
             <div className='mt-auto flex w-[320px] flex-col gap-4 self-end pt-16 xl:w-[413px]'>
               <p className='inline-flex justify-between'>
                 <span className='text-[18px]/[23.4px]'>Товарів на суму:</span>
@@ -77,8 +73,8 @@ export const OrderForm = ({ proceedOrderSlot, returnToMenuSlot }: Props) => {
               <p className='inline-flex justify-between'>
                 <span className='text-[18px]/[23.4px]'>Доставка:</span>
 
-                <span className='text-[26px]/[31.47px] font-medium'>
-                  {subTotal && DELIVERY_PRICE}₴
+                <span className='text-[18px]/[23.4px]'>
+                  за тарифами оператора
                 </span>
               </p>
               <p className='inline-flex justify-between'>
@@ -93,7 +89,7 @@ export const OrderForm = ({ proceedOrderSlot, returnToMenuSlot }: Props) => {
           </div>
         </div>
         {/* Controllers */}
-        <div className='flex flex-col justify-between gap-8 md:flex-row md:items-center'>
+        <div className='flex flex-col justify-between gap-8 md:items-end'>
           <div className='mt-auto'>{returnToMenuSlot}</div>
           {proceedOrderSlot}
         </div>
