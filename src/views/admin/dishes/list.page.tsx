@@ -6,6 +6,7 @@ import { ImageField, List, TextField, useGetList } from 'react-admin'
 import { DishHeaderActions } from '@/widgets/admin/dish-header-actions'
 import { EntitiesGrid } from '@/widgets/admin/entities-grid'
 import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
+import { CreateProduct } from '@/features/admin/create-dish'
 import { Dish } from '@/entities/dish/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
@@ -66,6 +67,7 @@ export const ProductList = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           actions={<DishHeaderActions />}
+          empty={<CreateProduct />}
           displayedRows={displayedRows}
           renderGrid={rows => (
             <EntitiesGrid displayedRows={rows}>
@@ -89,7 +91,11 @@ export const ProductList = () => {
           )}
         />
       ) : (
-        <List className='p-4' actions={<DishHeaderActions />}>
+        <List
+          className='p-4'
+          actions={<DishHeaderActions />}
+          empty={<CreateProduct />}
+        >
           <EntitiesGrid displayedRows={paginated}>
             <ImageField
               source='image'

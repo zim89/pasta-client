@@ -6,18 +6,9 @@ import {
   OrderIcon,
   PastaIcon,
   PepperIcon,
-  UserIcon,
 } from '@/shared/ui/icons-pack'
 import { QueryClient } from '@tanstack/react-query'
-import {
-  Admin,
-  Edit,
-  EditGuesser,
-  Layout,
-  ListGuesser,
-  Resource,
-  Show,
-} from 'react-admin'
+import { Admin, Edit, Layout, Resource, Show } from 'react-admin'
 
 import { authProvider } from '@/app/providers/auth-provider'
 import { dataProvider } from '@/app/providers/data-provider'
@@ -108,15 +99,6 @@ export default function AdminLayout() {
         }}
         list={PostsList}
         edit={EditPost}
-      />
-      <Resource
-        name='user'
-        icon={UserIcon}
-        options={{
-          label: 'Користувачі',
-        }}
-        list={ListGuesser}
-        edit={EditGuesser}
       />
     </Admin>
   )

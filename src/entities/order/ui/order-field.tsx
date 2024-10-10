@@ -22,7 +22,7 @@ export const OrderField = ({ item, removeDish }: Props) => {
     <div className='flex flex-col gap-y-4 border-b border-b-primary-light py-4 xl:flex-row xl:justify-between xl:pt-6'>
       {/* First row: Poster, title and ingredients */}
       <div className='flex w-full gap-3 xl:max-w-[360px] xl:gap-4'>
-        <div className='relative h-full max-h-[90px] w-full max-w-[90px] overflow-hidden rounded-xl xl:max-h-[104px] xl:max-w-[104px]'>
+        <div className='relative h-[90px] w-full max-w-[90px] overflow-hidden rounded-xl xl:h-[104px] xl:max-w-[104px]'>
           <Image
             src={item.dish.image}
             alt={item.dish.title}
