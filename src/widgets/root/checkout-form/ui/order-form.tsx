@@ -28,16 +28,6 @@ export const OrderForm = () => {
     },
   })
 
-  useEffect(() => {
-    toggleCartDrawer()
-  }, [])
-
-  useEffect(() => {
-    if (!cart.length) {
-      router.push('/menu')
-    }
-  }, [cart.length])
-
   const handleSubmit = (values: typeof form.formState.defaultValues) => {
     console.log(values)
   }

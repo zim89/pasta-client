@@ -2,19 +2,11 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/shared/ui'
 import { QuantityController } from '@/shared/ui/quantity-controller'
 import { Trash2 } from 'lucide-react'
 
 import { DeleteItemModal } from '@/widgets/root/delete-item-modal'
 import { CartItem, useCartStore } from '@/entities/cart'
-import { formatMass } from '@/entities/dish/lib'
 
 type Props = {
   item: CartItem
@@ -29,8 +21,8 @@ export const OrderField = ({ item, removeDish }: Props) => {
   return (
     <div className='flex flex-col gap-y-4 border-b border-b-primary-light py-4 xl:flex-row xl:justify-between xl:pt-6'>
       {/* First row: Poster, title and ingredients */}
-      <div className='flex w-full gap-3 xl:max-w-[360px]'>
-        <div className='relative max-h-[90px] w-full max-w-[90px] overflow-hidden rounded-xl'>
+      <div className='flex w-full gap-3 xl:max-w-[360px] xl:gap-4'>
+        <div className='relative h-full max-h-[90px] w-full max-w-[90px] overflow-hidden rounded-xl xl:max-h-[104px] xl:max-w-[104px]'>
           <Image
             src={item.dish.image}
             alt={item.dish.title}
