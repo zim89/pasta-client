@@ -27,7 +27,7 @@ export const DeleteItemModal = ({
       {openingButton}
       <Dialog open={opened} onOpenChange={handleOpenChange}>
         <DialogContent aria-describedby={undefined}>
-          <DialogTitle>{title}</DialogTitle>
+          <DialogTitle hidden>{title}</DialogTitle>
           <div className='flex items-center gap-8'>
             <ColouredTrash />
             <div>

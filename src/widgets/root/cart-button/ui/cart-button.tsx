@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { ShoppingCart, X } from 'lucide-react'
 
 import { CartItemEditable } from '@/features/root/edit-cart'
@@ -15,10 +16,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/shared/ui/common/sheet'
+import { cn } from '@/shared/lib/utils'
 
 export const CartButton = () => {
   const { opened, cart, totalPrice, totalCount, toggleCartDrawer } =
     useCartStore(state => state)
+
+  const path = usePathname()
 
   return (
     <Sheet open={opened} onOpenChange={toggleCartDrawer}>
@@ -76,7 +80,14 @@ export const CartButton = () => {
             <span className='text-xl/[26px]'>{`${totalPrice?.toFixed(2)} ₴`}</span>
           </p>
           <div className='space-y-8'>
-            <Link href='/checkout' className='btn-primary'>
+            <Link
+              href='/checkout'
+              className={cn(
+                'btn-primary',
+                path === '/checkout' &&
+                  'pointer-events-none border-gray-700 bg-gray-600',
+              )}
+            >
               Оформити замовлення
             </Link>
             <SheetClose aria-hidden='true' className='btn-secondary'>

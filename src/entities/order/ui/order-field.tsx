@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import Image from 'next/image'
 import {
@@ -25,69 +27,76 @@ export const OrderField = ({ item, removeDish }: Props) => {
   const { incrementItem, decrementItem } = useCartStore(state => state)
 
   return (
-    <div className='flex flex-wrap gap-y-4 border-b border-b-primary-light pb-4 pt-4 xl:items-center xl:pt-6'>
-      <div className='flex-2 relative size-20 overflow-hidden rounded-xl'>
-        <Image
-          src={item.dish.image}
-          alt={item.dish.title}
-          fill
-          className='h-full w-full object-cover'
-        />
-      </div>
-      <div className='inline-flex max-w-[240px] flex-[100%] flex-wrap gap-2 px-[22px] text-[18px]/[23.4px] font-medium'>
-        <p>{item.dish.title}</p>
-        {item.ingredients.length > 0 && (
-          <Select>
-            <SelectTrigger className='h-8 max-w-min gap-2'>
-              <SelectValue placeholder='Інгредієнти' />
-            </SelectTrigger>
-            <SelectContent>
-              {item.ingredients.map(ingr => (
-                <SelectItem key={ingr.id} value={ingr.name}>
-                  {ingr.name} - {formatMass(ingr.weight)} (
-                  {ingr.price * ingr.count}₴)
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        )}
-      </div>
-      <div className='order-[2] mx-auto xl:order-none xl:mx-0'>
-        <QuantityController
-          value={item.count}
-          decrementProps={{
-            disabled: item.count <= 1,
-          }}
-          incrementProps={{
-            disabled: item.dish.orderCount <= item.count,
-          }}
-          decrease={() => decrementItem(item.id)}
-          increase={() => incrementItem(item.id)}
-        />
+    <div className='flex flex-col gap-y-4 border-b border-b-primary-light py-4 xl:flex-row xl:justify-between xl:pt-6'>
+      {/* First row: Poster, title and ingredients */}
+      <div className='flex w-full gap-3 xl:max-w-[360px]'>
+        <div className='relative max-h-[90px] w-full max-w-[90px] overflow-hidden rounded-xl'>
+          <Image
+            src={item.dish.image}
+            alt={item.dish.title}
+            fill
+            className='h-full w-full object-cover'
+          />
+        </div>
+        <div className='w-full text-base/[20.8px] font-medium md:text-[18px]/[23.4px]'>
+          <p className='mb-2'>{item.dish.title}</p>
+          <div className='flex flex-col rounded-xl bg-primary-lightest px-3 py-2 text-sm/[18.2px]'>
+            <h3 className='mb-1 font-medium'>Додаткові інгредієнти:</h3>
+            <p className='font-normal'>
+              {item.ingredients.length > 0
+                ? item.ingredients.reduce(
+                    (acc, prev) =>
+                      acc.length
+                        ? acc + ', ' + prev.name + ` (${prev.count})`
+                        : acc + prev.name + ` (${prev.count})`,
+                    '',
+                  )
+                : 'немає'}
+            </p>
+          </div>
+        </div>
       </div>
 
-      <p className='xxl:mx-0 order-[3] ml-auto text-right text-[22px]/[26px] font-medium xl:order-none xl:mx-[47px] xl:flex-1 xl:text-[22px]/[28.6px]'>
-        {item.price}₴
-      </p>
-      <div className='order-[1] self-center xl:order-none xl:ml-auto'>
-        <DeleteItemModal
-          handleOpenChange={val => setDeleteModalOpened(val)}
-          opened={deleteModalOpened}
-          title='Delete Item'
-          handleConfirm={() => {
-            removeDish(item.id)
-            setDeleteModalOpened(false)
-          }}
-          openingButton={
-            <button
-              type='button'
-              onClick={() => setDeleteModalOpened(true)}
-              className='ml-auto'
-            >
-              <Trash2 size={24} className='text-gray-500' />
-            </button>
-          }
-        />
+      {/* Second row: Price, quantity and delete btn */}
+      <div className='flex items-center gap-3 xl:gap-10'>
+        <div className='w-[90px] xl:w-auto'>
+          <DeleteItemModal
+            handleOpenChange={val => setDeleteModalOpened(val)}
+            opened={deleteModalOpened}
+            title='Delete Item'
+            handleConfirm={() => {
+              removeDish(item.id)
+              setDeleteModalOpened(false)
+            }}
+            openingButton={
+              <button
+                type='button'
+                onClick={() => setDeleteModalOpened(true)}
+                className='ml-auto'
+              >
+                <Trash2 size={24} className='text-gray-500' />
+              </button>
+            }
+          />
+        </div>
+
+        <div className='xl:order-[-1]'>
+          <QuantityController
+            value={item.count}
+            decrementProps={{
+              disabled: item.count <= 1,
+            }}
+            incrementProps={{
+              disabled: item.dish.orderCount <= item.count,
+            }}
+            decrease={() => decrementItem(item.id)}
+            increase={() => incrementItem(item.id)}
+          />
+        </div>
+
+        <p className='ml-auto text-center text-xl/[26px] font-medium xl:order-[-1] xl:w-14'>
+          {item.price}₴
+        </p>
       </div>
     </div>
   )

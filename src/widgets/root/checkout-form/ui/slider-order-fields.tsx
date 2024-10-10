@@ -6,10 +6,11 @@ import {
   CarouselPrevious,
 } from '@/shared/ui'
 
-import { OrderField, OrderItem } from '@/entities/order'
+import { CartItem } from '@/entities/cart'
+import { OrderField } from '@/entities/order'
 
 type Props = {
-  orders: OrderItem[]
+  orders: CartItem[]
   removeDish: (id: string) => void
   changeQuantity: (op: 'INCREASE' | 'DECREASE', id: string) => void
 }

@@ -1,5 +1,5 @@
 import { CartItem } from '@/entities/cart'
-import { OrderField, OrderItem } from '@/entities/order'
+import { OrderField } from '@/entities/order'
 import { SliderOrderFields } from './slider-order-fields'
 
 type Props = {
@@ -29,13 +29,14 @@ export const OrderFields = ({
 
   return (
     <div>
-      {cart.length > 3 ? (
-        <SliderOrderFields
-          orders={cart}
-          removeDish={removeOrderItem}
-          changeQuantity={changeQuantity}
-        />
-      ) : (
+      {
+        // cart.length > 3 ? (
+        //   <SliderOrderFields
+        //     orders={cart}
+        //     removeDish={removeOrderItem}
+        //     changeQuantity={changeQuantity}
+        //   />
+        // ) : (
         cart.map(order => (
           <OrderField
             key={order.id}
@@ -43,8 +44,9 @@ export const OrderFields = ({
             removeDish={removeOrderItem}
             changeQuantity={changeQuantity}
           />
+          //   ))
         ))
-      )}
+      }
     </div>
   )
 }
