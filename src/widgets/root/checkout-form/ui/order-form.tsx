@@ -1,21 +1,15 @@
 'use client'
 
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import { ReturnToMenu } from '@/shared/ui/return-to-menu'
 import { useForm } from 'react-hook-form'
 
 import { ProceedOrder } from '@/features/root/proceed-order'
-import { useCartStore } from '@/entities/cart'
 import { Form } from '@/shared/ui/common/form'
 import { DeliverySection } from './delivery-section'
 import { OrderControllers } from './order-controllers'
 import { OrderSection } from './order-section'
 
 export const OrderForm = () => {
-  const router = useRouter()
-  const { cart, toggleCartDrawer } = useCartStore(state => state)
-
   const form = useForm({
     defaultValues: {
       city: 'Київ',

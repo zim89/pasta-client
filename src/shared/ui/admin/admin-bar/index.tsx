@@ -12,8 +12,6 @@ type PasswordChangeMenuItemProps = {
 }
 
 const PasswordChangeMenuItem = ({
-  open,
-  setOpen,
   handleClick,
 }: PasswordChangeMenuItemProps) => {
   return (
@@ -40,7 +38,7 @@ const UserMenuListOptions = () => {
   }
 
   const handleOpenChange = (value: boolean) => {
-    !value && menu?.onClose()
+    if (!value) menu?.onClose()
     setModalOpened(value)
   }
 

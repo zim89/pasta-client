@@ -1,6 +1,5 @@
 import { CartItem } from '@/entities/cart'
 import { OrderField } from '@/entities/order'
-import { SliderOrderFields } from './slider-order-fields'
 
 type Props = {
   cart: CartItem[]

@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
-import { CheckIcon, Dot, DotIcon } from 'lucide-react'
+import { Dot } from 'lucide-react'
 
 import { cn } from '@/shared/lib/utils'
 
