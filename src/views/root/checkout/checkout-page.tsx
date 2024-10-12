@@ -4,13 +4,13 @@ import { ReturnToMenu } from '@/shared/ui/return-to-menu'
 import { OrderForm } from '@/widgets/root/checkout-form'
 import { OrderControllers } from '@/widgets/root/checkout-form/ui/order-controllers'
 import { OrderSection } from '@/widgets/root/checkout-form/ui/order-section'
-import { ProceedOrder } from '@/features/root/proceed-order'
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from '@/shared/ui/common/tabs'
+import { PaymentLink } from './ui/PaymentLink'
 
 export const CheckoutPage = () => {
   return (
@@ -45,7 +45,7 @@ export const CheckoutPage = () => {
               </div>
             </div>
             <OrderControllers
-              proceedOrderSlot={<ProceedOrder />}
+              proceedOrderSlot={<PaymentLink />}
               returnToMenuSlot={<ReturnToMenu />}
             />
           </TabsContent>

@@ -16,7 +16,12 @@ import { QUERY_KEYS } from '@/shared/constants'
 import { cn } from '@/shared/lib/utils'
 import { IngredientFormEdit } from './ingredient-form-edit'
 
-export const EditIngredient = ({ item }: { item: CartItem }) => {
+type Props = {
+  item: CartItem
+  triggerButton?: React.ReactElement
+}
+
+export const EditIngredient = ({ item, triggerButton }: Props) => {
   const { isLoading, data } = useQuery({
     queryKey: [QUERY_KEYS.INGREDIENTS],
     queryFn: () => ingredientService.getAll(),
@@ -31,8 +36,14 @@ export const EditIngredient = ({ item }: { item: CartItem }) => {
           disabled={item.dish.customizable === false}
           className='btn-text-primary'
         >
-          <span>Редагувати</span>
-          <SquarePen className='size-5 stroke-[1.5px]' />
+          {triggerButton ? (
+            triggerButton
+          ) : (
+            <>
+              <span>Редагувати</span>
+              <SquarePen className='size-5 stroke-[1.5px]' />
+            </>
+          )}
         </DialogTrigger>
 
         <DialogContent

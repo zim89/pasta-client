@@ -1,6 +1,10 @@
 import { Button } from '@/shared/ui'
 
-export const ProceedOrder = () => {
+type Props = {
+  children?: React.ReactNode
+}
+
+export const ProceedOrder = ({ children = 'Оформити замовлення' }: Props) => {
   return (
     <Button
       type='submit'
@@ -8,7 +12,7 @@ export const ProceedOrder = () => {
       variant='filled'
       size='lg'
     >
-      Оформити замовлення
+      {children}
     </Button>
   )
 }

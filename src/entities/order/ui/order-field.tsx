@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { QuantityController } from '@/shared/ui/quantity-controller'
-import { Trash2 } from 'lucide-react'
+import { SquarePen, Trash2 } from 'lucide-react'
 
 import { DeleteItemModal } from '@/widgets/root/delete-item-modal'
 import { EditIngredient } from '@/features/root/add-ingredient'
@@ -34,10 +34,19 @@ export const OrderField = ({ item, removeDish }: Props) => {
         <div className='w-full text-base/[20.8px] font-medium md:text-[18px]/[23.4px]'>
           <p className='mb-2'>{item.dish.title}</p>
           <div className='flex flex-col rounded-xl bg-primary-lightest px-3 py-2 text-sm/[18.2px]'>
-            <h3 className='mb-1 font-medium'>Додаткові інгредієнти:</h3>
-            <div className='flex justify-end'>
-              <EditIngredient item={item} />
-            </div>
+            <h3 className='mb-1 inline-flex items-center justify-between font-medium'>
+              Додаткові інгредієнти:
+              <EditIngredient
+                triggerButton={
+                  <SquarePen
+                    className='text-primary-light'
+                    strokeWidth={1}
+                    size={20}
+                  />
+                }
+                item={item}
+              />
+            </h3>
             <p className='font-normal'>
               {item.ingredients.length > 0
                 ? item.ingredients.reduce(
