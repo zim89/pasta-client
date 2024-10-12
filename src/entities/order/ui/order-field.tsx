@@ -6,6 +6,7 @@ import { QuantityController } from '@/shared/ui/quantity-controller'
 import { Trash2 } from 'lucide-react'
 
 import { DeleteItemModal } from '@/widgets/root/delete-item-modal'
+import { EditIngredient } from '@/features/root/add-ingredient'
 import { CartItem, useCartStore } from '@/entities/cart'
 
 type Props = {
@@ -34,6 +35,9 @@ export const OrderField = ({ item, removeDish }: Props) => {
           <p className='mb-2'>{item.dish.title}</p>
           <div className='flex flex-col rounded-xl bg-primary-lightest px-3 py-2 text-sm/[18.2px]'>
             <h3 className='mb-1 font-medium'>Додаткові інгредієнти:</h3>
+            <div className='flex justify-end'>
+              <EditIngredient item={item} />
+            </div>
             <p className='font-normal'>
               {item.ingredients.length > 0
                 ? item.ingredients.reduce(

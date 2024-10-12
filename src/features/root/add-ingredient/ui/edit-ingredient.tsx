@@ -61,10 +61,3 @@ export const EditIngredient = ({ item }: { item: CartItem }) => {
     </>
   )
 }
-
-// return (
-//     <button className='btn-text-primary'>
-//       <span>Редагувати</span>
-//       <SquarePen className='size-5 stroke-[1.5px]' />
-//     </button>
-// )

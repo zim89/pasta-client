@@ -29,24 +29,14 @@ export const OrderFields = ({
 
   return (
     <div>
-      {
-        // cart.length > 3 ? (
-        //   <SliderOrderFields
-        //     orders={cart}
-        //     removeDish={removeOrderItem}
-        //     changeQuantity={changeQuantity}
-        //   />
-        // ) : (
-        cart.map(order => (
-          <OrderField
-            key={order.id}
-            item={order}
-            removeDish={removeOrderItem}
-            changeQuantity={changeQuantity}
-          />
-          //   ))
-        ))
-      }
+      {cart.map(order => (
+        <OrderField
+          key={order.id}
+          item={order}
+          removeDish={removeOrderItem}
+          changeQuantity={changeQuantity}
+        />
+      ))}
     </div>
   )
 }

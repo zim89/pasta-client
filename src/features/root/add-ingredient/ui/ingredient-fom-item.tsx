@@ -35,8 +35,8 @@ export const IngredientFormItem = ({
   return (
     <>
       <FormItem className='space-y-0 p-1 xl:hidden'>
-        <FormLabel className='inline-block pb-2 text-sm/[18.2px] font-semibold'>
-          {i.name.charAt(0).toUpperCase() + i.name.slice(1)}
+        <FormLabel className='inline-block pb-2 text-sm/[18.2px] font-semibold capitalize'>
+          {i.label}
         </FormLabel>
 
         <div className='flex items-center gap-1 pb-3'>
