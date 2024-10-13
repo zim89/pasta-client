@@ -1,20 +1,35 @@
 import * as React from 'react'
+import { cva, VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/shared/lib/utils/cn-merge'
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+const inputVariants = cva(
+  'bg-white file:bg-transparent dark:border-slate-800 dark:placeholder:text-slate-400 flex h-10 w-full rounded-md border px-3 py-2 text-[15px] file:border-0 file:text-sm file:font-medium focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+  {
+    variants: {
+      variant: {
+        default:
+          'border-0 border-b-[1px] border-b-gray-500 rounded-none px-0 py-2 placeholder:text-gray-500 bg-opacity-0',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  },
+)
+
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+  extends React.InputHTMLAttributes<HTMLInputElement>,
+    VariantProps<typeof inputVariants> {
+  asChild?: boolean
+}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, ...props }, ref) => {
+  ({ className, type, variant, ...props }, ref) => {
     return (
       <input
         type={type}
-        className={cn(
-          'border-slate-200 file:bg-transparent placeholder:text-slate-500 focus-visible:ring-slate-950 dark:border-slate-800 dark:bg-slate-950 dark:ring-offset-slate-950 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300 flex h-10 w-full rounded-md border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-          className,
-        )}
+        className={cn(inputVariants({ variant, className }))}
         ref={ref}
         {...props}
       />

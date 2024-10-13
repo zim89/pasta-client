@@ -1,13 +1,13 @@
 export type Dish = {
   id: number
   title: string
+  slug: string
   weight: number | null
-  volume: number
+  volume: number | null
   composition: null | string
   price: number
   image: string
   type: string
-  isHit: boolean
   isNew: boolean
   customizable: boolean
   orderCount: number

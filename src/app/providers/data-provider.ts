@@ -3,11 +3,15 @@ import { DataProvider, fetchUtils } from 'react-admin'
 import { SERVER_URL } from '@/shared/constants'
 import { retrieveToken } from '@/shared/lib/utils/admin-data-provider-funcs'
 
-const resourcesWithImages = ['dish', 'our-advantages', 'ingredient']
+const resourcesWithImages = [
+  'dish',
+  'our-advantages',
+  'ingredient',
+  'insta-posts',
+]
 
 export const dataProvider: DataProvider = {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getList: async (resource, params) => {
+  getList: async resource => {
     const { token } = retrieveToken()
     const response = await fetchUtils.fetchJson(`${SERVER_URL}/${resource}`, {
       user: {
@@ -16,9 +20,11 @@ export const dataProvider: DataProvider = {
       },
     })
 
+    const data = response.json
+
     return {
-      data: response.json,
-      total: response.json.length,
+      data,
+      total: data.length,
     }
   },
   getOne: async (resource, params) => {
@@ -40,8 +46,8 @@ export const dataProvider: DataProvider = {
       data: response.json,
     }
   },
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getMany: async (resource, params) => {
+
+  getMany: async () => {
     return {
       data: [],
     }
@@ -55,7 +61,7 @@ export const dataProvider: DataProvider = {
 
     if (resourcesWithImages.includes(resource)) {
       const form = new FormData()
-      // change let on const
+
       for (const prop in data) {
         form.append(prop, data[prop])
       }
@@ -126,14 +132,11 @@ export const dataProvider: DataProvider = {
     }
   },
   deleteMany: async (resource, params) => {
-    console.log('Deletion ')
     const { ids } = params
 
     const { token } = retrieveToken()
 
-    // Свойство "response" объявлено, но его значение не было прочитано.ts(6133)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const response = await fetchUtils.fetchJson(`${SERVER_URL}/${resource}`, {
+    await fetchUtils.fetchJson(`${SERVER_URL}/${resource}`, {
       method: 'DELETE',
       body: JSON.stringify({
         ids,
@@ -148,14 +151,14 @@ export const dataProvider: DataProvider = {
       data: ids,
     }
   },
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  updateMany: async (resource, params) => {
+
+  updateMany: async () => {
     return {
       data: [],
     }
   },
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getManyReference: async (resource, params) => {
+
+  getManyReference: async () => {
     return {
       data: [],
     }

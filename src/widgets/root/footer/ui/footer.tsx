@@ -36,6 +36,7 @@ export const Footer = () => {
           <Link href='/'>
             <LogoLightIcon />
           </Link>
+
           <ul className='space-y-2'>
             {FOOTER_LINKS.map(item => (
               <li key={item.label} data-testid='nav-link'>
@@ -71,6 +72,7 @@ export const Footer = () => {
           <Link href='/' className='textLink-light'>
             Договір публічної оферти
           </Link>
+
           <Link href='/' className='textLink-light'>
             Політика конфіденційності
           </Link>

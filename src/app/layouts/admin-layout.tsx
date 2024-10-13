@@ -1,27 +1,18 @@
 'use client'
 
-import { authProvider } from '@/app/providers/auth-provider'
-import { dataProvider } from '@/app/providers/data-provider'
-import { theme } from '@/app/ui/admin-theme'
 import {
   AdvantageIcon,
   MenuInstagramIcon,
   OrderIcon,
   PastaIcon,
   PepperIcon,
-  UserIcon,
 } from '@/shared/ui/icons-pack'
 import { QueryClient } from '@tanstack/react-query'
-import {
-  Admin,
-  Edit,
-  EditGuesser,
-  Layout,
-  ListGuesser,
-  Resource,
-  Show,
-} from 'react-admin'
+import { Admin, Edit, Layout, Resource, Show } from 'react-admin'
 
+import { authProvider } from '@/app/providers/auth-provider'
+import { dataProvider } from '@/app/providers/data-provider'
+import { theme } from '@/app/ui/admin-theme'
 import { EditAdvantage } from '@/views/admin/advantages/edit.page'
 import { AdvantagesList } from '@/views/admin/advantages/list.page'
 import { EditProduct } from '@/views/admin/dishes/edit.page'
@@ -108,15 +99,6 @@ export default function AdminLayout() {
         }}
         list={PostsList}
         edit={EditPost}
-      />
-      <Resource
-        name='user'
-        icon={UserIcon}
-        options={{
-          label: 'Користувачі',
-        }}
-        list={ListGuesser}
-        edit={EditGuesser}
       />
     </Admin>
   )

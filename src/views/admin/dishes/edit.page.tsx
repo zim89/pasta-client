@@ -10,6 +10,7 @@ import {
 } from 'react-admin'
 
 import { CustomEditFormToolbar } from '@/features/admin/custom-edit-form-toolbar'
+import { AdminUnsavedChangesModal } from '@/shared/ui/admin/admin-unsaved-changes-modal'
 import { BrandImageInput } from '@/shared/ui/admin/brand-image-input'
 
 export const EditProduct = () => {
@@ -19,7 +20,11 @@ export const EditProduct = () => {
 
   return (
     <EditBase>
-      <SimpleForm warnWhenUnsavedChanges toolbar={<CustomEditFormToolbar />}>
+      <SimpleForm
+        warnWhenUnsavedChanges
+        WarnWhenUnsavedChangesComponent={AdminUnsavedChangesModal}
+        toolbar={<CustomEditFormToolbar />}
+      >
         <TextInput source='title' label='Назва' />
         <TextInput source='weight' label='Вага' />
         <TextInput source='volume' label='Обсяг' />

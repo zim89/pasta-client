@@ -24,6 +24,10 @@
     @apply text-[0.813rem]/[1.056rem] text-white transition-colors duration-300 hover:text-accent xl:text-sm/[1.138rem];
   }
 
+  .outline-link {
+    @apply rounded-4xl border border-primary-light bg-white py-[12px] text-center text-sm/[18.2px] font-medium text-primary-light transition-colors duration-300 hover:border-primary hover:text-primary disabled:cursor-not-allowed disabled:border-disabled disabled:bg-disabled disabled:text-gray-600;
+  }
+
   .btn-primary {
     @apply flex h-11 w-full items-center justify-center rounded-4xl border border-primary-light bg-primary-light text-base/[20.8px] font-medium text-white transition-colors duration-300 hover:border-primary hover:bg-primary disabled:cursor-not-allowed disabled:border-disabled disabled:bg-disabled disabled:text-gray-600;
   }
@@ -34,6 +38,12 @@
 
   .btn-icon {
     @apply flex size-10 items-center justify-center text-white transition-colors duration-300 hover:text-accent;
+  }
+
+  .glassmorphic-bg {
+    backdrop-filter: blur(5px) saturate(60%);
+    -webkit-backdrop-filter: blur(1px) saturate(100%);
+    background-color: rgba(255, 255, 255, 0.5);
   }
 
   .btn-text-primary {

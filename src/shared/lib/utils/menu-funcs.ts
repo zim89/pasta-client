@@ -1,9 +1,10 @@
 import { ReadonlyURLSearchParams } from 'next/navigation'
+
 import { Dish } from '@/entities/dish/model/types'
 
 export const removeParam = (
   pageParams: ReadonlyURLSearchParams,
-  key: string
+  key: string,
 ) => {
   const newParams = new URLSearchParams(pageParams)
   newParams.delete(key)
@@ -13,9 +14,10 @@ export const removeParam = (
 export const sortDishes = (raw: Dish[], sortValue: string) => {
   if (!raw.length) return []
 
+  // TODO: adjust this; change isHit param
   switch (sortValue) {
-    case 'За популярністю':
-      return raw.sort((a, b) => (a.isHit > b.isHit ? -1 : 1))
+    // case 'За популярністю':
+    //   return raw.sort((a, b) => (a.isHit > b.isHit ? -1 : 1))
 
     case 'За спаданням ціни':
       return raw.sort((a, b) => (a.price < b.price ? 1 : -1))

@@ -9,10 +9,12 @@ export const ProductCard = ({
   dish,
   addIngredientSlot,
   addToCartSlot,
+  isHit = false,
 }: {
   dish: Dish
   addIngredientSlot: ReactNode
   addToCartSlot: ReactNode
+  isHit?: boolean
 }) => {
   return (
     <div className='relative w-full overflow-hidden rounded-[30px] border border-primary-light/50'>
@@ -50,7 +52,7 @@ export const ProductCard = ({
         </div>
       </div>
 
-      {dish.isHit && <HitLabel />}
+      {isHit && <HitLabel />}
     </div>
   )
 }

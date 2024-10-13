@@ -10,14 +10,14 @@ export function PinIcon() {
       <path
         d='M10.3037 1.875C7.19824 1.875 4.67871 4.27305 4.67871 7.22656C4.67871 10.625 8.42871 16.0105 9.80566 17.8707C9.86282 17.9492 9.93773 18.0131 10.0243 18.0572C10.1108 18.1012 10.2066 18.1242 10.3037 18.1242C10.4008 18.1242 10.4966 18.1012 10.5831 18.0572C10.6697 18.0131 10.7446 17.9492 10.8018 17.8707C12.1787 16.0113 15.9287 10.6277 15.9287 7.22656C15.9287 4.27305 13.4092 1.875 10.3037 1.875Z'
         stroke='currentColor'
-        strokeWidth='0.938931'
+        strokeWidth='1.2'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
       <path
         d='M10.3037 9.375C11.3392 9.375 12.1787 8.53553 12.1787 7.5C12.1787 6.46447 11.3392 5.625 10.3037 5.625C9.26818 5.625 8.42871 6.46447 8.42871 7.5C8.42871 8.53553 9.26818 9.375 10.3037 9.375Z'
         stroke='currentColor'
-        strokeWidth='0.938931'
+        strokeWidth='1.2'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
@@ -719,6 +719,152 @@ export const UserIcon = () => {
           <path
             fill='black'
             d='M.5 31.983a.503.503 0 0 0 .612-.354c1.03-3.843 5.216-4.839 7.718-5.435c.627-.149 1.122-.267 1.444-.406c2.85-1.237 3.779-3.227 4.057-4.679a.5.5 0 0 0-.165-.473c-1.484-1.281-2.736-3.204-3.526-5.416a.492.492 0 0 0-.103-.171c-1.045-1.136-1.645-2.337-1.645-3.294c0-.559.211-.934.686-1.217a.5.5 0 0 0 .243-.408C10.042 5.036 13.67 1.026 18.12 1l.107.007c4.472.062 8.077 4.158 8.206 9.324a.498.498 0 0 0 .178.369c.313.265.459.601.459 1.057c0 .801-.427 1.786-1.201 2.772a.522.522 0 0 0-.084.158c-.8 2.536-2.236 4.775-3.938 6.145a.502.502 0 0 0-.178.483c.278 1.451 1.207 3.44 4.057 4.679c.337.146.86.26 1.523.403c2.477.536 6.622 1.435 7.639 5.232a.5.5 0 0 0 .966-.26c-1.175-4.387-5.871-5.404-8.393-5.95c-.585-.127-1.09-.236-1.336-.344c-1.86-.808-3.006-2.039-3.411-3.665c1.727-1.483 3.172-3.771 3.998-6.337c.877-1.14 1.359-2.314 1.359-3.317c0-.669-.216-1.227-.644-1.663C27.189 4.489 23.19.076 18.227.005l-.149-.002c-4.873.026-8.889 4.323-9.24 9.83c-.626.46-.944 1.105-.944 1.924c0 1.183.669 2.598 1.84 3.896c.809 2.223 2.063 4.176 3.556 5.543c-.403 1.632-1.55 2.867-3.414 3.676c-.241.105-.721.22-1.277.352c-2.541.604-7.269 1.729-8.453 6.147a.5.5 0 0 0 .354.612z'
+          />
+        </g>
+      </svg>
+    </svg>
+  )
+}
+
+export const ColouredTrash = () => {
+  return (
+    <svg
+      width='60px'
+      height='60px'
+      viewBox='0 0 512 512'
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <rect
+        width='60px'
+        height='60px'
+        x='0'
+        y='0'
+        rx='30'
+        fill='transparent'
+        stroke='transparent'
+        strokeWidth='0'
+        strokeOpacity='100%'
+        paintOrder='stroke'
+      ></rect>
+      <svg
+        width='512px'
+        height='512px'
+        viewBox='0 0 100 100'
+        fill='currentColor'
+        x='0'
+        y='0'
+        role='img'
+        xmlns='http://www.w3.org/2000/svg'
+      >
+        <g fill='currentColor'>
+          <path
+            fill='#3498DB'
+            d='M50 0c27.613 0 50 22.386 50 50c0 27.615-22.387 50-50 50c-27.614 0-50-22.385-50-50C0 22.386 22.386 0 50 0z'
+          />
+          <defs>
+            <circle id='flatUiTrash0' cx='50' cy='50' r='50' />
+          </defs>
+          <clipPath id='flatUiTrash1'>
+            <use href='#flatUiTrash0' />
+          </clipPath>
+          <path
+            fill='#2980B9'
+            d='M0 100h31L20 49L0 69z'
+            clipPath='url(#flatUiTrash1)'
+          />
+          <defs>
+            <circle id='flatUiTrash2' cx='50' cy='50' r='50' />
+          </defs>
+          <clipPath id='flatUiTrash3'>
+            <use href='#flatUiTrash2' />
+          </clipPath>
+          <path
+            fill='#EBEDEE'
+            d='M74.736 100L80 50H20l5.263 50z'
+            clipPath='url(#flatUiTrash3)'
+          />
+          <defs>
+            <circle id='flatUiTrash4' cx='50' cy='50' r='50' />
+          </defs>
+          <clipPath id='flatUiTrash5'>
+            <use href='#flatUiTrash4' />
+          </clipPath>
+          <path
+            fill='#C3C9CD'
+            d='M50 100V50H20l5.172 50z'
+            clipPath='url(#flatUiTrash5)'
+          />
+          <defs>
+            <circle id='flatUiTrash6' cx='50' cy='50' r='50' />
+          </defs>
+          <clipPath id='flatUiTrash7'>
+            <use href='#flatUiTrash6' />
+          </clipPath>
+          <g clipPath='url(#flatUiTrash7)'>
+            <path
+              fill='#95A5A6'
+              d='m79.982 50.801l-.26.004C77.756 53.738 65.203 56 50 56c-15.15 0-27.67-2.246-29.704-5.164h-.285C19.956 50.834 20 53.945 20 54c0 3.314 13.432 6 30 6c16.568 0 30-2.686 30-6c0-.066.038-3.238-.018-3.199z'
+            />
+            <path
+              fill='#7F8C8D'
+              d='M50.078 60h-.357C33.281 59.971 20 57.295 20 54c0-.055-.044-3.166.011-3.164c.01 0 15.013 0 30.009-.005c.024.009.08 9.185.058 9.169z'
+            />
+            <path
+              fill='#EBEDEE'
+              d='M50 44c16.568 0 30 2.687 30 6c0 3.314-13.432 6-30 6c-16.568 0-30-2.686-30-6c0-3.313 13.432-6 30-6z'
+            />
+            <path
+              fill='#F1C40E'
+              d='M50 56c7.678 0 14.678-.577 19.98-1.525l-9.48-9.479l-11.005 11.002L50 56z'
+            />
+            <path
+              fill='#fff'
+              d='M50 56c4.227 0 8.247-.175 11.895-.49L46 39.615L30.978 54.639C36.154 55.488 42.776 56 50 56z'
+            />
+          </g>
+          <defs>
+            <circle id='flatUiTrash8' cx='50' cy='50' r='50' />
+          </defs>
+          <clipPath id='flatUiTrash9'>
+            <use href='#flatUiTrash8' />
+          </clipPath>
+          <path
+            fill='#95A5A6'
+            d='M33.628 100L32 65a2 2 0 0 0-4 0l1.628 35h4z'
+            clipPath='url(#flatUiTrash9)'
+          />
+          <defs>
+            <circle id='flatUiTrasha' cx='50' cy='50' r='50' />
+          </defs>
+          <clipPath id='flatUiTrashb'>
+            <use href='#flatUiTrasha' />
+          </clipPath>
+          <path
+            fill='#BDC3C7'
+            d='M69.372 100L71 65a2 2 0 0 0-4 0l-1.628 35h4z'
+            clipPath='url(#flatUiTrashb)'
+          />
+          <defs>
+            <circle id='flatUiTrashc' cx='50' cy='50' r='50' />
+          </defs>
+          <clipPath id='flatUiTrashd'>
+            <use href='#flatUiTrashc' />
+          </clipPath>
+          <path
+            fill='#BDC3C7'
+            d='M59.21 100L60 66a2 2 0 0 0-4 0l-.79 34h4z'
+            clipPath='url(#flatUiTrashd)'
+          />
+          <defs>
+            <circle id='flatUiTrashe' cx='50' cy='50' r='50' />
+          </defs>
+          <clipPath id='flatUiTrashf'>
+            <use href='#flatUiTrashe' />
+          </clipPath>
+          <path
+            fill='#95A5A6'
+            d='M43.791 100L43 66a2 2 0 0 0-4 0l.791 34h4z'
+            clipPath='url(#flatUiTrashf)'
           />
         </g>
       </svg>

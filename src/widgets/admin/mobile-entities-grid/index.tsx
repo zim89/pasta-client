@@ -1,7 +1,7 @@
 import { List, ListProps } from 'react-admin'
 
+import { Button } from '@/shared/ui/common/button'
 import { PAGINATION_LIMIT_MOBILE } from '@/shared/constants/app.const'
-import { Button } from '../../shared/ui/common/button'
 
 type Props<T> = {
   displayedRows: T[]
