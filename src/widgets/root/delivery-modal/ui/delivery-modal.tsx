@@ -26,6 +26,7 @@ export const DeliveryModal = () => {
           <DialogTitle>Доставка і оплата</DialogTitle>
         </DialogHeader>
         <DialogClose
+          aria-hidden='true'
           className={cn('btn-close', 'absolute right-12 top-8 md:right-14')}
         >
           <X className='size-8 stroke-[1.5px]' />
