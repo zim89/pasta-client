@@ -1,26 +1,33 @@
 'use client'
 
+import type { MouseEventHandler } from 'react'
 import { ShoppingCart } from 'lucide-react'
 
-import { useCartStore } from '@/entities/cart'
+import { useCartStore, type CartIngredient } from '@/entities/cart'
 import type { Dish } from '@/entities/dish'
 import { cn } from '@/shared/lib/utils'
 
 export const AddToCart = ({
   dish,
+  count = 1,
+  ingredients = [],
   variant = 'btn',
   className,
 }: {
   dish: Dish
+  count?: number
+  ingredients?: CartIngredient[]
   variant: 'icon' | 'btn'
   className?: string
 }) => {
   const { toggleCartDrawer, addToCart } = useCartStore(state => state)
 
-  const onClick = () => {
+  const onClick: MouseEventHandler<HTMLButtonElement> = e => {
+    e.preventDefault()
     addToCart({
       dish,
-      ingredients: [],
+      count,
+      ingredients,
     })
     toggleCartDrawer()
   }

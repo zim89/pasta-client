@@ -49,12 +49,13 @@ export const createCartStore = (initState: CartState = defaultInitState) => {
             const cart = get().cart
             const newItemPrice =
               newItem.dish.price +
-              calculateIngredientsPrice(newItem.ingredients)
+              calculateIngredientsPrice(newItem.ingredients) * newItem.count
+
             const updatedCart = [
               {
                 id: nanoid(),
                 ...newItem,
-                count: 1,
+                count: newItem.count,
                 price: newItemPrice,
               },
               ...cart,

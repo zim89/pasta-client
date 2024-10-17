@@ -18,9 +18,11 @@ import { IngredientFormItem } from './ingredient-fom-item'
 export const IngredientForm = ({
   data,
   dish,
+  count = 1,
 }: {
   data: Ingredient[]
   dish: Dish
+  count?: number
 }) => {
   const { addToCart, toggleCartDrawer } = useCartStore(state => state)
   const FormSchema = generateFormSchema(data)
@@ -45,10 +47,10 @@ export const IngredientForm = ({
         }
         return acc
       }, [] as CartIngredient[])
-      addToCart({ dish, ingredients })
+      addToCart({ dish, ingredients, count })
       toggleCartDrawer()
     },
-    [data, addToCart, toggleCartDrawer, dish],
+    [data, addToCart, dish, count, toggleCartDrawer],
   )
 
   return (
@@ -93,7 +95,7 @@ export const IngredientForm = ({
         </div>
 
         <div className='space-y-6 md:space-y-9'>
-          <DishCard dish={dish} price={price} />
+          <DishCard dish={dish} price={price * count} />
 
           <div className='space-y-6 xl:hidden'>
             <button
