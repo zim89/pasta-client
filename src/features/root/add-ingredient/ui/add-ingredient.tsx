@@ -18,7 +18,15 @@ import { QUERY_KEYS } from '@/shared/constants'
 import { cn } from '@/shared/lib/utils'
 import { IngredientForm } from './ingredient-form'
 
-export const AddIngredient = ({ dish }: { dish: Dish }) => {
+export const AddIngredient = ({
+  dish,
+  count = 1,
+  className = '',
+}: {
+  dish: Dish
+  count?: number
+  className?: string
+}) => {
   const { isLoading, data } = useQuery({
     queryKey: [QUERY_KEYS.INGREDIENTS],
     queryFn: () => ingredientService.getAll(),
@@ -29,7 +37,10 @@ export const AddIngredient = ({ dish }: { dish: Dish }) => {
   return (
     <>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger disabled={!dish.customizable} className='btn-secondary'>
+        <DialogTrigger
+          disabled={!dish.customizable}
+          className={cn('btn-secondary', className)}
+        >
           Додати інгредієнти
         </DialogTrigger>
 
@@ -50,7 +61,9 @@ export const AddIngredient = ({ dish }: { dish: Dish }) => {
             <X className='size-8 stroke-[1.5px]' />
           </DialogClose>
 
-          {data && !isLoading && <IngredientForm data={data} dish={dish} />}
+          {data && !isLoading && (
+            <IngredientForm data={data} dish={dish} count={count} />
+          )}
         </DialogContent>
       </Dialog>
     </>

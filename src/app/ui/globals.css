@@ -53,4 +53,8 @@
   .btn-close {
     @apply text-gray-700 outline-none transition-colors duration-300 hover:text-black;
   }
+
+  .title-2 {
+    @apply text-[26px]/[31.47px] font-medium tracking-wide md:text-[32px]/[41.6px] xl:text-[26px]/[31.47px];
+  }
 }
