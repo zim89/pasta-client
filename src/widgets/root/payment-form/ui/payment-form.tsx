@@ -4,7 +4,6 @@ import { ReturnToMenu } from '@/shared/ui/return-to-menu'
 import { useForm } from 'react-hook-form'
 
 import { ProceedOrder } from '@/features/root/proceed-order'
-import { useOrderStore } from '@/entities/order/model/order-store-provider'
 import { Form } from '@/shared/ui/common/form'
 import { OrderControllers } from '../../checkout-form/ui/order-controllers'
 import { DesktopComposition } from './desktop-composition'
@@ -12,8 +11,6 @@ import { MobileComposition } from './mobile-compostion'
 import { TabletComposition } from './tablet-composition'
 
 export const PaymentForm = () => {
-  const { shippingAddress } = useOrderStore(state => state)
-
   const form = useForm({
     defaultValues: {
       name: '',
