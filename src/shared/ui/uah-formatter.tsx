@@ -13,6 +13,7 @@ export const UAHFormatter = ({
   format = {
     notation: 'standard',
     minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   },
   ...rest
 }: Props) => {
