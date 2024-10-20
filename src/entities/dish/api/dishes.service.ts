@@ -16,6 +16,13 @@ class DishService {
     const response = await axiosBase.get<Dish[]>(this.BASE_URL)
     return response.data
   }
+
+  async getDishBySlug(slug: string) {
+    const response = await axiosBase.get<Dish>(
+      this.BASE_URL + `/by-slug/${slug}`,
+    )
+    return response.data
+  }
 }
 
 export const dishService = new DishService()

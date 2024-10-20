@@ -13,5 +13,6 @@ export interface CartItem {
 
 export interface CartItemPayload {
   dish: Dish
+  count: number
   ingredients: CartIngredient[]
 }

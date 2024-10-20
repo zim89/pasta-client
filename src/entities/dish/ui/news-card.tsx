@@ -27,9 +27,13 @@ export const NewsCard = ({
           {dish.title}
         </h3>
 
-        {dish.weight && (
+        {dish.weight ? (
           <p className='pb-2 text-sm/[16.94px] opacity-70 xl:pb-0 xl:text-[13px]/[16.9px] xl:opacity-80'>
             Вага: {formatMass(dish.weight)}
+          </p>
+        ) : (
+          <p className='pb-2 text-sm/[16.94px] opacity-70 xl:pb-0 xl:text-[13px]/[16.9px] xl:opacity-80'>
+            Вага: не вказано
           </p>
         )}
 
