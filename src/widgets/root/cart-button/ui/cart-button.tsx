@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { UAHFormatter } from '@/shared/ui/uah-formatter'
 import { ShoppingCart, X } from 'lucide-react'
 
 import { CartItemEditable } from '@/features/root/edit-cart'
@@ -17,6 +18,7 @@ import {
   SheetTrigger,
 } from '@/shared/ui/common/sheet'
 import { cn } from '@/shared/lib/utils'
+import { Indicator } from './indicator'
 
 export const CartButton = () => {
   const { opened, cart, totalPrice, totalCount, toggleCartDrawer } =
@@ -28,17 +30,16 @@ export const CartButton = () => {
     <Sheet open={opened} onOpenChange={toggleCartDrawer}>
       <SheetTrigger aria-hidden='true'>
         <>
-          <ShoppingCart className='size-[30px] stroke-[1.5px] md:hidden' />
+          <div className='relative md:hidden'>
+            <Indicator value={totalCount} className='-top-[10px]' />
+            <ShoppingCart className='size-[30px] stroke-[1.5px]' />
+          </div>
           <span className='hidden items-center gap-5 rounded-[20px] border border-primary-lightest/50 bg-white px-8 py-1.5 text-black md:flex'>
             <span className='relative flex h-[34px] items-end'>
-              <span className='absolute left-1/2 top-0 -translate-x-1/2 text-xs/none'>
-                {totalCount}
-              </span>
+              <Indicator value={totalCount} />
               <ShoppingCart className='size-6 stroke-[1.5px]' />
             </span>
-            <span className='text-sm/[16.8px]'>
-              {totalPrice.toFixed(2)} грн.
-            </span>
+            <UAHFormatter value={totalPrice} />
           </span>
         </>
       </SheetTrigger>
@@ -62,7 +63,7 @@ export const CartButton = () => {
           </SheetTitle>
         </SheetHeader>
 
-        <ScrollArea type='scroll'>
+        <ScrollArea type='scroll' className='landscape:min-h-[160px]'>
           {cart.length > 0 && (
             <ul className='grid grid-cols-1 gap-4 md:gap-6'>
               {cart.map(item => (
@@ -77,7 +78,7 @@ export const CartButton = () => {
         <SheetFooter className='space-y-10 md:space-y-8'>
           <p className='flex items-baseline justify-between py-4 font-medium md:py-3'>
             <span className='text-lg/[23.4px]'>Всього:</span>
-            <span className='text-xl/[26px]'>{`${totalPrice?.toFixed(2)} ₴`}</span>
+            <UAHFormatter value={totalPrice} className='text-xl/[26px]' />
           </p>
           <div className='space-y-8'>
             <Link

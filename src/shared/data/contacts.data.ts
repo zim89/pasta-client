@@ -14,7 +14,7 @@ export const CONTACTS_DATA = [
   },
   {
     label: 'Графік роботи',
-    value: 'Пн-нд: 12:00 – 20:00',
+    value: 'пн-нд: 12:00 – 20:00',
     icon: React.createElement(ContactTimeIcon),
   },
   {

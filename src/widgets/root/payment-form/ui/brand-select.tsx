@@ -52,6 +52,7 @@ export const BrandSelect = ({ data, classNames, ...rest }: Props) => {
       >
         {data.map((item, index) => (
           <SelectItem
+            disabled={item.value === 'UNAVAILABLE'}
             key={index}
             className={cn(
               'p-1',

@@ -18,7 +18,8 @@ export const Contacts = () => {
                     <span>{item.label}</span>
                   </h3>
 
-                  <p className='h-[34px] text-[13px]/[16.9px] md:h-9 md:text-sm/[18.2px] xl:h-[38px] xl:text-base/[19.2px]'>
+                  {/* Fixed width according to the bug: https://trello.com/c/C5uxtpUi/71-the-number-of-the-house-is-in-a-different-line-than-the-street-in-the-%D0%BA%D0%BE%D0%BD%D1%82%D0%B0%D0%BA%D1%82%D0%B8-block-on-the-main-page */}
+                  <p className='h-[34px] w-[101%] text-[13px]/[16.9px] md:h-9 md:text-sm/[18.2px] xl:h-[38px] xl:text-base/[19.2px]'>
                     {item.label === 'Instagram' ? (
                       <span>
                         {item.value} <br />в{' '}

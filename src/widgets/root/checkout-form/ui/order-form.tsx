@@ -1,15 +1,21 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { ReturnToMenu } from '@/shared/ui/return-to-menu'
 import { useForm } from 'react-hook-form'
 
 import { ProceedOrder } from '@/features/root/proceed-order'
+import { OrderState } from '@/entities/order/model/order-store'
+import { useOrderStore } from '@/entities/order/model/order-store-provider'
 import { Form } from '@/shared/ui/common/form'
 import { DeliverySection } from './delivery-section'
 import { OrderControllers } from './order-controllers'
 import { OrderSection } from './order-section'
 
 export const OrderForm = () => {
+  const router = useRouter()
+  const { setShippingAddress } = useOrderStore(state => state)
+
   const form = useForm({
     defaultValues: {
       city: 'Київ',
@@ -23,7 +29,20 @@ export const OrderForm = () => {
   })
 
   const handleSubmit = (values: typeof form.formState.defaultValues) => {
-    console.log(values)
+    if (values) {
+      const address: OrderState['shippingAddress'] = {
+        city: values.city!,
+        street: values.street!,
+        houseNumber: values.buildingNumber!,
+        entrance: values.entrance,
+        appartmentNumber: values.appartmentHouse,
+        story: values.story,
+        intercomCode: values.intercom,
+      }
+
+      setShippingAddress(address)
+      router.push('/payment')
+    }
   }
 
   return (

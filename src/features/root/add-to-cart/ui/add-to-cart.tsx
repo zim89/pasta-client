@@ -15,14 +15,13 @@ export const AddToCart = ({
   variant: 'icon' | 'btn'
   className?: string
 }) => {
-  const { toggleCartDrawer, addToCart } = useCartStore(state => state)
+  const { addToCart } = useCartStore(state => state)
 
   const onClick = () => {
     addToCart({
       dish,
       ingredients: [],
     })
-    toggleCartDrawer()
   }
 
   return (
