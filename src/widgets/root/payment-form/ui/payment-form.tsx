@@ -26,8 +26,6 @@ export const PaymentForm = () => {
     },
   })
 
-  console.log('Shipping Address: ', shippingAddress)
-
   const handleSubmit = () => {
     console.log('Processing payment form...')
   }
