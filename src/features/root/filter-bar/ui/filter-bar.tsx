@@ -26,39 +26,37 @@ export const FilterBar = () => {
   }
 
   return (
-    <div className='mb-8 h-[47px] md:mb-10'>
-      <div className=''>
-        <Carousel
-          opts={{
-            align: 'start',
-            slidesToScroll: 1,
-          }}
-        >
-          <CarouselContent className='-ml-5'>
-            {DISH_TYPES.map(category => {
-              const isActive =
-                searchParams.get('filter') === category ||
-                (category === 'Все меню' && !searchParams.has('filter'))
+    <div className='mb-8 h-[47px] max-w-screen-sm md:mb-10 md:max-w-max'>
+      <Carousel
+        opts={{
+          align: 'start',
+          slidesToScroll: 1,
+        }}
+      >
+        <CarouselContent className='-ml-5'>
+          {DISH_TYPES.map(category => {
+            const isActive =
+              searchParams.get('filter') === category ||
+              (category === 'Все меню' && !searchParams.has('filter'))
 
-              return (
-                <CarouselItem key={category} className='basis-auto pl-5'>
-                  <button
-                    onClick={() => onClick(category)}
-                    className={cn(
-                      'h-[47px] rounded-[30px] border px-5 text-lg/[23.4px] xl:px-10',
-                      isActive
-                        ? 'border-primary-light text-primary-light'
-                        : 'border-black/20 text-black',
-                    )}
-                  >
-                    {category}
-                  </button>
-                </CarouselItem>
-              )
-            })}
-          </CarouselContent>
-        </Carousel>
-      </div>
+            return (
+              <CarouselItem key={category} className='basis-auto pl-5'>
+                <button
+                  onClick={() => onClick(category)}
+                  className={cn(
+                    'h-[47px] rounded-[30px] border px-5 text-lg/[23.4px] xl:px-10',
+                    isActive
+                      ? 'border-primary-light text-primary-light'
+                      : 'border-black/20 text-black',
+                  )}
+                >
+                  {category}
+                </button>
+              </CarouselItem>
+            )
+          })}
+        </CarouselContent>
+      </Carousel>
     </div>
   )
 }

@@ -42,10 +42,11 @@ export const ProductCard = ({
         </Link>
 
         <div className='flex items-center justify-between'>
-          <div className='flex flex-1 flex-col gap-4'>
+          <div className='flex flex-1 flex-col gap-4 xl:gap-5'>
             <div className='flex items-center justify-between'>
               <p className='text-sm/[18.2px] opacity-70'>
-                Вага: {dish.weight ? formatMass(dish.weight) : 'weight'}
+                {dish.type === 'Напій' ? "Об'єм:" : 'Вага:'}{' '}
+                {dish.weight ? formatMass(dish.weight) : 'не визначено'}
               </p>
               <div className='w-[200px] xl:w-[220px]'>{addIngredientSlot}</div>
             </div>

@@ -20,7 +20,7 @@ export const AddToCart = ({
   variant: 'icon' | 'btn'
   className?: string
 }) => {
-  const { toggleCartDrawer, addToCart } = useCartStore(state => state)
+  const { addToCart } = useCartStore(state => state)
 
   const onClick: MouseEventHandler<HTMLButtonElement> = e => {
     e.preventDefault()
@@ -29,7 +29,6 @@ export const AddToCart = ({
       count,
       ingredients,
     })
-    toggleCartDrawer()
   }
 
   return (

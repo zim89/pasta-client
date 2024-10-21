@@ -1,3 +1,4 @@
+import deepEqual from 'deep-equal'
 import { nanoid } from 'nanoid'
 import { createStore } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
@@ -51,21 +52,51 @@ export const createCartStore = (initState: CartState = defaultInitState) => {
               newItem.dish.price +
               calculateIngredientsPrice(newItem.ingredients) * newItem.count
 
-            const updatedCart = [
-              {
-                id: nanoid(),
-                ...newItem,
-                count: newItem.count,
-                price: newItemPrice,
-              },
-              ...cart,
-            ]
+            const candidate = cart.find(
+              item =>
+                item.dish.id === newItem.dish.id &&
+                deepEqual(item.ingredients, newItem.ingredients),
+            )
 
-            set(() => ({
-              cart: updatedCart,
-              totalCount: calculateCartCount(updatedCart),
-              totalPrice: calculateCartPrice(updatedCart),
-            }))
+            // If a dish with the same ingredients' set as newcoming dish is already in the cart, then just increase its quantity and price
+            if (candidate) {
+              const updatedCart = cart.map(item =>
+                item.dish.id === candidate.dish.id
+                  ? {
+                      ...item,
+                      count: item.count + 1,
+                      price:
+                        item.price +
+                        item.dish.price +
+                        calculateIngredientsPrice(item.ingredients),
+                    }
+                  : item,
+              )
+
+              set(() => ({
+                cart: updatedCart,
+                totalCount: calculateCartCount(updatedCart),
+                totalPrice: calculateCartPrice(updatedCart),
+              }))
+
+              // If there is no dish in the cart with the same ingredients' set as newcoming dish, then just add a new entry to the cart
+            } else {
+              const updatedCart = [
+                {
+                  id: nanoid(),
+                  ...newItem,
+                  count: newItem.count,
+                  price: newItemPrice,
+                },
+                ...cart,
+              ]
+
+              set(() => ({
+                cart: updatedCart,
+                totalCount: calculateCartCount(updatedCart),
+                totalPrice: calculateCartPrice(updatedCart),
+              }))
+            }
           },
           removeFromCart: id => {
             const cart = get().cart

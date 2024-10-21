@@ -16,6 +16,10 @@ type Props = {
 export const DeliverySection = ({ form }: Props) => {
   const { deliveryDate } = form.getValues()
 
+  const timeFrames = isItTimeString(deliveryDate)
+    ? calculateTime(deliveryDate)
+    : calculateTime()
+
   return (
     <div className='flex w-full flex-col gap-6 rounded-[20px] border border-primary-light px-[10px] py-6 md:max-w-[320px] md:border-0 xl:max-w-full'>
       <h3 className='mb-1 text-[18px]/[23.4px] font-medium md:text-[22px]/[28.6px]'>
@@ -59,9 +63,14 @@ export const DeliverySection = ({ form }: Props) => {
               >
                 <BrandSelect
                   data={
-                    isItTimeString(deliveryDate)
-                      ? calculateTime(deliveryDate)
-                      : calculateTime()
+                    timeFrames.length
+                      ? timeFrames
+                      : [
+                          {
+                            label: 'Заклад більше не працює в цей день. ',
+                            value: 'UNAVAILABLE',
+                          },
+                        ]
                   }
                   placeholder='Оберіть час'
                   onValueChange={e => field.onChange(e)}

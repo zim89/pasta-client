@@ -49,7 +49,7 @@ export const Header = () => {
             <div className='hidden md:flex md:items-center md:justify-between'>
               <p className='flex items-center gap-0.5'>
                 <PinIcon />
-                <span>Kиїв, Еспланадна, 34/2</span>
+                <span>Kиїв, вул. Еспланадна, 34/2</span>
               </p>
               <div className='flex items-center'>
                 <SearchButton />
