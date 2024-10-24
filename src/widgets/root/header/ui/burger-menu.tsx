@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AlignLeft, X } from 'lucide-react'
 
+import { DeliveryModal } from '@/widgets/root/delivery-modal'
 import {
   Dialog,
   DialogClose,
@@ -48,12 +49,18 @@ export const BurgerMenu = () => {
                 className={cn(
                   'border-b-0 border-b-primary-light text-center text-xl/[26px] font-medium text-black transition-all duration-300',
                   isActive && 'border-b-2',
+                  link.order,
                 )}
               >
-                <Link href={link.href}>{link.label}</Link>
+                <Link href={link.href} scroll={link.scroll}>
+                  {link.label}
+                </Link>
               </li>
             )
           })}
+          <li className='order-4'>
+            <DeliveryModal className='border-b-0 border-b-primary-light text-center text-xl/[26px] font-medium text-black transition-all duration-300' />
+          </li>
         </ul>
 
         <Image
