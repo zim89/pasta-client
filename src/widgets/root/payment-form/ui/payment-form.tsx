@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { ReturnToMenu } from '@/shared/ui/return-to-menu'
 import { useForm } from 'react-hook-form'
 
@@ -11,6 +12,8 @@ import { MobileComposition } from './mobile-compostion'
 import { TabletComposition } from './tablet-composition'
 
 export const PaymentForm = () => {
+  const router = useRouter()
+
   const form = useForm({
     defaultValues: {
       name: '',
@@ -18,13 +21,14 @@ export const PaymentForm = () => {
       email: '',
       deliveryDate: 'today',
       deliveryTime: '',
-      paymentMethod: '',
+      paymentMethod: 'card',
       comment: '',
     },
   })
 
   const handleSubmit = () => {
     console.log('Processing payment form...')
+    router.push('/confirmation/3edw9cn2edcn28efg34')
   }
 
   return (
