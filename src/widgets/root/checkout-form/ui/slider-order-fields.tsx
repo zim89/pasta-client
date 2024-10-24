@@ -6,6 +6,7 @@ import {
   CarouselPrevious,
 } from '@/shared/ui'
 
+import { DeleteOrderItem } from '@/features/root/delete-order-item'
 import { CartItem } from '@/entities/cart'
 import { OrderField } from '@/entities/order'
 
@@ -37,7 +38,9 @@ export const SliderOrderFields = ({
                   <OrderField
                     key={order.id}
                     item={order}
-                    removeDish={removeDish}
+                    deleteOrderItemSlot={
+                      <DeleteOrderItem item={order} removeDish={removeDish} />
+                    }
                     changeQuantity={changeQuantity}
                   />
                 ))}

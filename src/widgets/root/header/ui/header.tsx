@@ -41,7 +41,7 @@ export const Header = () => {
         <div className='container flex-1'>
           <div className='relative text-center text-xs/[15.6px] text-white md:text-sm/[18.2px]'>
             <p className='mb-4 md:absolute md:left-1/2 md:top-1/2 md:m-0 md:-translate-x-1/2 md:-translate-y-1/2'>
-              Доставка щоденно з 12.00 до 20.00
+              Замовлення щоденно з 12.00 до 20.00
             </p>
 
             <Navbar className='md:hidden' />

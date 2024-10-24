@@ -1,13 +1,19 @@
-import { CartIngredient } from '@/entities/cart'
 import type { Dish } from '@/entities/dish'
+import { Ingredient } from '@/entities/ingredient'
 
 export type OrderItem = {
-  id: string
-  count: number
-  image: Dish['image']
-  title: Dish['title']
-  price: Dish['price']
-  ingredients: CartIngredient[]
+  dish: {
+    id: number
+    title: Dish['title']
+    weight: Dish['weight']
+    volume: Dish['volume']
+    composition: Dish['composition']
+    price: Dish['price']
+    image: Dish['image']
+    type: Dish['type']
+    isNew: Dish['isNew']
+  }
+  orderItemIngredients: { id: Ingredient['id']; quantity: number }[]
 }
 
 type DeliveryAddress = {

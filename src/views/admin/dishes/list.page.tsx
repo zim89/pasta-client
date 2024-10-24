@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { ImageField, List, TextField, useGetList } from 'react-admin'
 
 import { DishHeaderActions } from '@/widgets/admin/dish-header-actions'
@@ -13,6 +14,7 @@ import { useMedia } from '@/shared/lib/hooks/useMedia'
 import { usePaginate } from '@/shared/lib/hooks/usePaginate'
 
 export const ProductList = () => {
+  const router = useRouter()
   const { isMobileScreen } = useMedia()
   const { data } = useGetList('dish')
   const [displayedRows, setDisplayedRows] = useState<Dish[]>(data || [])
@@ -27,6 +29,10 @@ export const ProductList = () => {
     Number(pageParam),
     Number(limitParam),
   )
+
+  useEffect(() => {
+    router.replace('#/dish?perPage=5&page=1')
+  }, [])
 
   useEffect(() => {
     if (!sortParam || !orderParam) return
@@ -44,7 +50,7 @@ export const ProductList = () => {
   useEffect(() => {
     if (data) {
       setDisplayedRows(data)
-      setLimit(5)
+      setLimit(Number(limitParam))
     }
   }, [data])
 
@@ -95,6 +101,7 @@ export const ProductList = () => {
           className='p-4'
           actions={<DishHeaderActions />}
           empty={<CreateProduct />}
+          perPage={Number(limitParam)}
         >
           <EntitiesGrid displayedRows={paginated}>
             <ImageField

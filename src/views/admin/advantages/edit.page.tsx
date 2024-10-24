@@ -6,18 +6,25 @@ import { CustomEditFormToolbar } from '@/features/admin/custom-edit-form-toolbar
 import { AdminUnsavedChangesModal } from '@/shared/ui/admin/admin-unsaved-changes-modal'
 import { BrandImageInput } from '@/shared/ui/admin/brand-image-input'
 
-export const EditAdvantage = () => (
-  <Edit resource='our-advantages' className='w-full'>
-    <SimpleForm
-      warnWhenUnsavedChanges
-      WarnWhenUnsavedChangesComponent={AdminUnsavedChangesModal}
-      toolbar={<CustomEditFormToolbar />}
-    >
-      <TextInput source='title' label='Найменування' />
+export const EditAdvantage = () => {
+  const match = window.location.hash.match(/(\d)+/)
+  const id = match ? Number(match[0]) : null
 
-      <TextInput source='description' label='Опис' />
+  if (!id || !Number.isInteger(id)) return
 
-      <BrandImageInput source='image' />
-    </SimpleForm>
-  </Edit>
-)
+  return (
+    <Edit resource='our-advantages' className='w-full'>
+      <SimpleForm
+        warnWhenUnsavedChanges
+        WarnWhenUnsavedChangesComponent={AdminUnsavedChangesModal}
+        toolbar={<CustomEditFormToolbar />}
+      >
+        <TextInput source='title' label='Найменування' />
+
+        <TextInput source='description' label='Опис' />
+
+        <BrandImageInput source='image' />
+      </SimpleForm>
+    </Edit>
+  )
+}

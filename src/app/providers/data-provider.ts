@@ -115,11 +115,27 @@ export const dataProvider: DataProvider = {
 
     const { token } = retrieveToken()
 
+    let requestBody: FormData | string
+
+    if (resourcesWithImages.includes(resource)) {
+      const form = new FormData()
+
+      for (const prop in data) {
+        form.append(prop, data[prop])
+      }
+      form.delete('image')
+      form.append('image', data.image.rawFile)
+
+      requestBody = form
+    } else {
+      requestBody = JSON.stringify(data)
+    }
+
     const response = await fetchUtils.fetchJson(
       `${SERVER_URL}/${resource}/${id}`,
       {
         method: 'PATCH',
-        body: JSON.stringify(data),
+        body: requestBody,
         user: {
           token: `Bearer ${token}`,
           authenticated: !!token,

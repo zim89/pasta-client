@@ -1,3 +1,5 @@
+import { useSearchParams } from 'next/navigation'
+
 import {
   FormControl,
   FormField,
@@ -14,6 +16,11 @@ type Props = {
 }
 
 export const DeliverySection = ({ form }: Props) => {
+  const params = useSearchParams()
+  const isPickup = !!params.get('pickup')
+
+  console.log(isPickup)
+
   const { deliveryDate } = form.getValues()
 
   const timeFrames = isItTimeString(deliveryDate)
@@ -51,6 +58,7 @@ export const DeliverySection = ({ form }: Props) => {
         />
 
         <FormField
+          disabled={isPickup}
           control={form.control}
           name='deliveryTime'
           render={({ field }) => (
@@ -75,6 +83,7 @@ export const DeliverySection = ({ form }: Props) => {
                   placeholder='Оберіть час'
                   onValueChange={e => field.onChange(e)}
                   value={field.value}
+                  disabled={isPickup}
                 />
               </FormControl>
               <FormMessage />

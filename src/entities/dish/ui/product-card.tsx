@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { APP_PAGES } from '@/shared/constants'
-import { formatMass } from '../lib'
+import { formatMeasurement } from '../lib/dish.helpers'
 import type { Dish } from '../model'
 import { HitLabel } from './hit-label'
 
@@ -45,8 +45,7 @@ export const ProductCard = ({
           <div className='flex flex-1 flex-col gap-4 xl:gap-5'>
             <div className='flex items-center justify-between'>
               <p className='text-sm/[18.2px] opacity-70'>
-                {dish.type === 'Напій' ? "Об'єм:" : 'Вага:'}{' '}
-                {dish.weight ? formatMass(dish.weight) : 'не визначено'}
+                {formatMeasurement(dish)}
               </p>
               <div className='w-[200px] xl:w-[220px]'>{addIngredientSlot}</div>
             </div>

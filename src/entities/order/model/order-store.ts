@@ -10,6 +10,15 @@ export type OrderState = {
     story?: string
     intercomCode?: string
   }
+  orderDetails: {
+    name: string
+    phone: string
+    date: string
+    time: string
+    payType: string
+    email?: string
+    comment?: string
+  }
 }
 
 export type OrderActions = {
@@ -27,6 +36,15 @@ export const defaultInitState: OrderState = {
     appartmentNumber: '',
     story: '',
     intercomCode: '',
+  },
+  orderDetails: {
+    name: '',
+    phone: '',
+    payType: '',
+    date: '',
+    time: '',
+    email: '',
+    comment: '',
   },
 }
 
