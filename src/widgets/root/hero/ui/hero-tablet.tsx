@@ -34,7 +34,7 @@ export const HeroTablet = () => {
             </h1>
             <p className='mb-[76px] text-sm/[19.6px] xl:mb-[72px] xl:w-[408px] xl:text-base'>
               Відчуйте аромат і неперевершений смак наших італійських страв,
-              якими тепер можна насолоджуватися прямо вдома.
+              якими тепер можна насолоджуватися прямо вдома
             </p>
             <div className='relative'>
               <Link
