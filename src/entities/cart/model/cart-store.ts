@@ -49,7 +49,7 @@ export const createCartStore = (initState: CartState = defaultInitState) => {
           addToCart: newItem => {
             const cart = get().cart
             const newItemPrice =
-              newItem.dish.price +
+              newItem.dish.price * newItem.count +
               calculateIngredientsPrice(newItem.ingredients) * newItem.count
 
             const candidate = cart.find(
