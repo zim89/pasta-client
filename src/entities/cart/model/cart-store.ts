@@ -65,11 +65,12 @@ export const createCartStore = (initState: CartState = defaultInitState) => {
                 item.dish.id === candidate.dish.id
                   ? {
                       ...item,
-                      count: item.count + 1,
+                      count: item.count + newItem.count,
                       price:
                         item.price +
-                        item.dish.price +
-                        calculateIngredientsPrice(item.ingredients),
+                        (item.dish.price +
+                          calculateIngredientsPrice(item.ingredients)) *
+                          newItem.count,
                     }
                   : item,
               )
