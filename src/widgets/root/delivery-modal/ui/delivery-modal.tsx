@@ -12,10 +12,10 @@ import {
 import { cn } from '@/shared/lib/utils'
 import decor_img from '@/shared/assets/images/decoration/features-veggies2.png'
 
-export const DeliveryModal = () => {
+export const DeliveryModal = ({ className }: { className?: string }) => {
   return (
     <Dialog>
-      <DialogTrigger className='border-b text-lg/[23.4px]'>
+      <DialogTrigger className={cn('border-b text-lg/[23.4px]', className)}>
         Доставка і оплата
       </DialogTrigger>
       <DialogContent

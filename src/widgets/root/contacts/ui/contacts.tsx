@@ -4,7 +4,10 @@ import { CONTACTS_DATA } from '@/shared/data'
 
 export const Contacts = () => {
   return (
-    <section className='section pt-10 md:pt-[72px] xl:pt-24'>
+    <section
+      id='contacts'
+      className='section scroll-mt-24 pt-10 md:scroll-mt-20 md:pt-[72px] xl:scroll-mt-12 xl:pt-24'
+    >
       <div className='container'>
         <h2>Контакти</h2>
 
