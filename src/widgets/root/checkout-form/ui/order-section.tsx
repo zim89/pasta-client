@@ -1,5 +1,7 @@
 'use client'
 
+import { OrderSummary } from '@/shared/ui/order-summary'
+
 import { useCartStore } from '@/entities/cart'
 import { OrderFields } from './order-fields'
 
@@ -21,25 +23,7 @@ export const OrderSection = () => {
         incrementItem={incrementItem}
         removeFromCart={removeFromCart}
       />
-      <div className='mt-auto flex w-[320px] flex-col gap-4 self-end pt-16 xl:w-[413px]'>
-        <p className='inline-flex justify-between'>
-          <span className='text-[18px]/[23.4px]'>Товарів на суму:</span>
-          <span className='text-[26px]/[31.47px] font-medium'>
-            {totalPrice}₴
-          </span>
-        </p>
-        <p className='inline-flex justify-between'>
-          <span className='text-[18px]/[23.4px]'>Доставка:</span>
-
-          <span className='text-[18px]/[23.4px]'>за тарифами оператора</span>
-        </p>
-        <p className='inline-flex justify-between'>
-          <span className='text-[22px]/[28.6px] font-medium'>
-            Сума до сплати:
-          </span>
-          <span className='text-4xl/[41.6px] font-medium'>{totalPrice}₴</span>
-        </p>
-      </div>
+      <OrderSummary totalPrice={totalPrice} />
     </div>
   )
 }

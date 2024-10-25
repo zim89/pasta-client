@@ -7,6 +7,7 @@ export const CreateIngredient = () => {
   return (
     <Create className='w-full'>
       <SimpleForm toolbar={<CustomCreateFormToolbar />}>
+        <TextInput source='label' label='Мітка' />
         <TextInput source='name' label='Назва' />
         <NumberInput source='price' label='Ціна' />
         <NumberInput source='weight' label='Вага' />

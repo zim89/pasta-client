@@ -77,7 +77,7 @@ export const calculateTime = (
 
     result.push({ label: currentTime, value: currentTime })
 
-    currentMinute += 10
+    currentMinute += 30
   }
 
   return result

@@ -32,8 +32,12 @@ export const EditProduct = () => {
         <TextInput source='composition' label='Композиція' />
         <BrandImageInput source='image' />
         <TextInput source='type' label='Категорія' />
-        <BooleanInput source='isHit' label='Хіт?' />
-        <BooleanInput source='isNew' label='Новинка?' />
+        <BooleanInput source='isNew' label='Новинка?' defaultValue={true} />
+        <BooleanInput
+          source='customizable'
+          label='Кастомізується?'
+          defaultValue={true}
+        />
       </SimpleForm>
     </EditBase>
   )
