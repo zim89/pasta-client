@@ -27,6 +27,7 @@ export const MenuPage = () => {
 
   useEffect(() => {
     if (isMobile) router.replace(path, { scroll: false })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMobile])
 
   return (
