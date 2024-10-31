@@ -14,6 +14,7 @@ import {
 import { EntitiesGrid } from '@/widgets/admin/entities-grid'
 import { IngredientHeaderActions } from '@/widgets/admin/ingredient-header-actions'
 import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
+import { BulkDeleteIngredients } from '@/features/admin/bulk-delete-ingredients'
 import { Ingredient } from '@/entities/ingredient/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
@@ -85,7 +86,10 @@ export const IngredientList = () => {
             </ListBase>
           }
           renderGrid={rows => (
-            <EntitiesGrid displayedRows={rows}>
+            <EntitiesGrid
+              displayedRows={rows}
+              bulkActions={<BulkDeleteIngredients />}
+            >
               <ImageField
                 source='image'
                 label='Постер'
@@ -113,7 +117,10 @@ export const IngredientList = () => {
           }
           perPage={Number(limitParam)}
         >
-          <EntitiesGrid displayedRows={paginated}>
+          <EntitiesGrid
+            displayedRows={paginated}
+            bulkActions={<BulkDeleteIngredients />}
+          >
             <ImageField
               source='image'
               label='Постер'

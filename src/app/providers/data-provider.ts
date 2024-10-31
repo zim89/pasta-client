@@ -63,7 +63,7 @@ export const dataProvider: DataProvider = {
       const form = new FormData()
 
       for (const prop in data) {
-        form.append(prop, data[prop])
+        form.append(prop, data[prop] || null)
       }
       form.delete('image')
       form.append('image', data.image.rawFile)

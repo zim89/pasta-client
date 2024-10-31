@@ -5,6 +5,7 @@ import { ImageField, List, ListBase, UrlField, useGetList } from 'react-admin'
 import { EntitiesGrid } from '@/widgets/admin/entities-grid'
 import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
 import { PostHeaderActions } from '@/widgets/admin/post-header-action'
+import { BulkDeletePosts } from '@/features/admin/bulk-delete-posts'
 import type { Post } from '@/entities/post'
 import { useHashParamValue, useMedia, usePaginate } from '@/shared/lib/hooks'
 
@@ -74,7 +75,10 @@ export const PostsList = () => {
           displayedRows={displayedRows}
           actions={<PostHeaderActions />}
           renderGrid={rows => (
-            <EntitiesGrid displayedRows={rows}>
+            <EntitiesGrid
+              displayedRows={rows}
+              bulkActions={<BulkDeletePosts />}
+            >
               <ImageField
                 source='image'
                 label='Постер'
@@ -96,7 +100,10 @@ export const PostsList = () => {
             </ListBase>
           }
         >
-          <EntitiesGrid displayedRows={paginated}>
+          <EntitiesGrid
+            displayedRows={paginated}
+            bulkActions={<BulkDeletePosts />}
+          >
             <ImageField
               source='image'
               label='Постер'

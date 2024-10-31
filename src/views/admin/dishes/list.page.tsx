@@ -2,11 +2,19 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ImageField, List, ListBase, TextField, useGetList } from 'react-admin'
+import {
+  ImageField,
+  List,
+  ListBase,
+  TextField,
+  useGetList,
+  WithRecord,
+} from 'react-admin'
 
 import { DishHeaderActions } from '@/widgets/admin/dish-header-actions'
 import { EntitiesGrid } from '@/widgets/admin/entities-grid'
 import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
+import { BulkDeleteDishes } from '@/features/admin/bulk-delete-dishes'
 import { Dish } from '@/entities/dish/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
@@ -79,7 +87,10 @@ export const ProductList = () => {
           }
           displayedRows={displayedRows}
           renderGrid={rows => (
-            <EntitiesGrid displayedRows={rows}>
+            <EntitiesGrid
+              displayedRows={rows}
+              bulkActions={<BulkDeleteDishes />}
+            >
               <ImageField
                 source='image'
                 cellClassName='size-8 object-contain'
@@ -121,7 +132,10 @@ export const ProductList = () => {
           }
           perPage={Number(limitParam)}
         >
-          <EntitiesGrid displayedRows={paginated}>
+          <EntitiesGrid
+            displayedRows={paginated}
+            bulkActions={<BulkDeleteDishes />}
+          >
             <ImageField
               source='image'
               cellClassName='size-8 object-contain'
@@ -136,18 +150,15 @@ export const ProductList = () => {
               label='Композиція'
             />
             <TextField source='price' label='Ціна (₴)' />
-            <TextField
-              source='weight'
-              sortable={false}
-              label='Вага (грам)'
-              emptyText='Не визначено'
-              cellClassName='!font-inter'
-            />
-            <TextField
-              source='volume'
-              sortable={false}
-              label="Об'єм (л)"
-              emptyText='Не визначено'
+            <WithRecord
+              label="Вага/Об'єм"
+              render={record => (
+                <span>
+                  {record.type === 'Напої'
+                    ? `${record.volume} л`
+                    : `${record.weight} гр`}
+                </span>
+              )}
             />
           </EntitiesGrid>
         </List>
