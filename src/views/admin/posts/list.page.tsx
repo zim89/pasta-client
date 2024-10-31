@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
-import { ImageField, List, UrlField, useGetList } from 'react-admin'
+import { ImageField, List, ListBase, UrlField, useGetList } from 'react-admin'
 
 import { EntitiesGrid } from '@/widgets/admin/entities-grid'
 import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
 import { PostHeaderActions } from '@/widgets/admin/post-header-action'
-import { CreatePost } from '@/features/admin/create-post/ui'
 import type { Post } from '@/entities/post'
 import { useHashParamValue, useMedia, usePaginate } from '@/shared/lib/hooks'
 
@@ -60,7 +59,11 @@ export const PostsList = () => {
     <>
       {isMobileScreen ? (
         <MobileEntitiesGrid
-          empty={<CreatePost />}
+          empty={
+            <ListBase>
+              <PostHeaderActions />
+            </ListBase>
+          }
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           displayedRows={displayedRows}
@@ -81,7 +84,11 @@ export const PostsList = () => {
         <List
           className='hidden p-4 md:block'
           actions={<PostHeaderActions />}
-          empty={<CreatePost />}
+          empty={
+            <ListBase>
+              <PostHeaderActions />
+            </ListBase>
+          }
         >
           <EntitiesGrid displayedRows={paginated}>
             <ImageField

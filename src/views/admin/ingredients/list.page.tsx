@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import {
   ImageField,
   List,
+  ListBase,
   NumberField,
   TextField,
   useGetList,
@@ -12,7 +13,6 @@ import {
 import { EntitiesGrid } from '@/widgets/admin/entities-grid'
 import { IngredientHeaderActions } from '@/widgets/admin/ingredient-header-actions'
 import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
-import { CreateIngredient } from '@/features/admin/create-ingredient'
 import { Ingredient } from '@/entities/ingredient/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
@@ -74,7 +74,11 @@ export const IngredientList = () => {
           setCurrentPage={setCurrentPage}
           displayedRows={displayedRows}
           actions={<IngredientHeaderActions />}
-          empty={<CreateIngredient />}
+          empty={
+            <ListBase>
+              <IngredientHeaderActions />
+            </ListBase>
+          }
           renderGrid={rows => (
             <EntitiesGrid displayedRows={rows}>
               <ImageField
@@ -97,7 +101,11 @@ export const IngredientList = () => {
         <List
           className='hidden p-4 md:block'
           actions={<IngredientHeaderActions />}
-          empty={<CreateIngredient />}
+          empty={
+            <ListBase>
+              <IngredientHeaderActions />
+            </ListBase>
+          }
         >
           <EntitiesGrid displayedRows={paginated}>
             <ImageField

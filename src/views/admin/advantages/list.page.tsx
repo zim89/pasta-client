@@ -1,12 +1,18 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Datagrid, ImageField, List, TextField, useGetList } from 'react-admin'
+import {
+  Datagrid,
+  ImageField,
+  List,
+  ListBase,
+  TextField,
+  useGetList,
+} from 'react-admin'
 
 import { AdvantageHeaderActions } from '@/widgets/admin/advantage-header-actions'
 import { EntitiesGrid } from '@/widgets/admin/entities-grid'
 import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
-import { AddAdvantage } from '@/features/admin/create-advantage'
 import { Feature } from '@/entities/feature'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
@@ -67,7 +73,11 @@ export const AdvantagesList = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           displayedRows={displayedRows}
-          empty={<AddAdvantage />}
+          empty={
+            <ListBase>
+              <AdvantageHeaderActions />
+            </ListBase>
+          }
           actions={<AdvantageHeaderActions />}
           renderGrid={rows => (
             <EntitiesGrid displayedRows={rows}>
@@ -84,8 +94,12 @@ export const AdvantagesList = () => {
       ) : (
         <List
           className='p-4'
+          empty={
+            <ListBase>
+              <AdvantageHeaderActions />
+            </ListBase>
+          }
           actions={<AdvantageHeaderActions />}
-          empty={<AddAdvantage />}
         >
           <Datagrid data={paginated}>
             <ImageField
