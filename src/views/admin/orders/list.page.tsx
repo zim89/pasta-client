@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   ArrayField,
   BooleanField,
@@ -23,6 +24,7 @@ import { useMedia } from '@/shared/lib/hooks/useMedia'
 import { usePaginate } from '@/shared/lib/hooks/usePaginate'
 
 export const OrdersList = () => {
+  const router = useRouter()
   const { isMobileScreen } = useMedia()
   const { data } = useGetList('order')
   const [displayedRows, setDisplayedRows] = useState<Order[]>(data || [])
@@ -37,6 +39,10 @@ export const OrdersList = () => {
     Number(pageParam),
     Number(limitParam),
   )
+
+  useEffect(() => {
+    router.replace('#/order?perPage=5&page=1')
+  }, [])
 
   useEffect(() => {
     if (!sortParam || !orderParam) return
@@ -54,7 +60,6 @@ export const OrdersList = () => {
   useEffect(() => {
     if (data) {
       setDisplayedRows(data)
-      setLimit(5)
     }
   }, [data])
 
@@ -111,6 +116,7 @@ export const OrdersList = () => {
               <OrderHeaderActions />
             </ListBase>
           }
+          perPage={Number(limitParam)}
           actions={<OrderHeaderActions />}
         >
           <EntitiesGrid displayedRows={paginated}>
