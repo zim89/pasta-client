@@ -29,7 +29,6 @@ export const Footer = () => {
             <span>м. Kиїв, вул. Еспланадна, 34/2</span>
           </p>
           <p>+380 (96) 612 27 20</p>
-          <p>+380 (96) 612 27 20</p>
         </div>
 
         <div className='hidden md:mb-10 md:flex md:gap-[45.67px] xl:justify-between'>
@@ -61,7 +60,6 @@ export const Footer = () => {
               <PinIcon />
               <span>м. Kиїв, вул. Еспланадна, 34/2</span>
             </p>
-            <p>+380 (96) 612 27 20</p>
             <p>+380 (96) 612 27 20</p>
             <InstagramButton />
           </div>
