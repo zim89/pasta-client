@@ -7,6 +7,7 @@ import {
   ChipField,
   DateField,
   List,
+  ListBase,
   NumberField,
   SingleFieldList,
   TextField,
@@ -20,7 +21,6 @@ import { Order } from '@/entities/order/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
 import { usePaginate } from '@/shared/lib/hooks/usePaginate'
-import { EmptyComponent } from './ui/EmptyComponent'
 
 export const OrdersList = () => {
   const { isMobileScreen } = useMedia()
@@ -77,7 +77,11 @@ export const OrdersList = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           displayedRows={displayedRows}
-          empty={<EmptyComponent />}
+          empty={
+            <ListBase>
+              <OrderHeaderActions />
+            </ListBase>
+          }
           actions={<OrderHeaderActions />}
           renderGrid={rows => (
             <EntitiesGrid displayedRows={rows}>
@@ -102,7 +106,11 @@ export const OrdersList = () => {
       ) : (
         <List
           className='hidden p-4 md:block'
-          empty={<EmptyComponent />}
+          empty={
+            <ListBase>
+              <OrderHeaderActions />
+            </ListBase>
+          }
           actions={<OrderHeaderActions />}
         >
           <EntitiesGrid displayedRows={paginated}>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ImageField, List, TextField, useGetList } from 'react-admin'
+import { ImageField, List, ListBase, TextField, useGetList } from 'react-admin'
 
 import { DishHeaderActions } from '@/widgets/admin/dish-header-actions'
 import { EntitiesGrid } from '@/widgets/admin/entities-grid'
@@ -73,7 +73,11 @@ export const ProductList = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           actions={<DishHeaderActions />}
-          empty={<CreateProduct />}
+          empty={
+            <ListBase>
+              <DishHeaderActions />
+            </ListBase>
+          }
           displayedRows={displayedRows}
           renderGrid={rows => (
             <EntitiesGrid displayedRows={rows}>
@@ -100,7 +104,11 @@ export const ProductList = () => {
         <List
           className='p-4'
           actions={<DishHeaderActions />}
-          empty={<CreateProduct />}
+          empty={
+            <ListBase>
+              <DishHeaderActions />
+            </ListBase>
+          }
           perPage={Number(limitParam)}
         >
           <EntitiesGrid displayedRows={paginated}>

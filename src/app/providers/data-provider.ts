@@ -23,8 +23,8 @@ export const dataProvider: DataProvider = {
     const data = response.json
 
     return {
-      data,
-      total: data.length,
+      data: [],
+      total: 0,
     }
   },
   getOne: async (resource, params) => {

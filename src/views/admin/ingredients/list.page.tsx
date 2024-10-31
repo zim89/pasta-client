@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import {
   ImageField,
   List,
+  ListBase,
   NumberField,
   TextField,
   useGetList,
@@ -74,7 +75,11 @@ export const IngredientList = () => {
           setCurrentPage={setCurrentPage}
           displayedRows={displayedRows}
           actions={<IngredientHeaderActions />}
-          empty={<CreateIngredient />}
+          empty={
+            <ListBase>
+              <IngredientHeaderActions />
+            </ListBase>
+          }
           renderGrid={rows => (
             <EntitiesGrid displayedRows={rows}>
               <ImageField
@@ -97,7 +102,11 @@ export const IngredientList = () => {
         <List
           className='hidden p-4 md:block'
           actions={<IngredientHeaderActions />}
-          empty={<CreateIngredient />}
+          empty={
+            <ListBase>
+              <IngredientHeaderActions />
+            </ListBase>
+          }
         >
           <EntitiesGrid displayedRows={paginated}>
             <ImageField
