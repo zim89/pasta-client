@@ -13,7 +13,6 @@ import {
 import { EntitiesGrid } from '@/widgets/admin/entities-grid'
 import { IngredientHeaderActions } from '@/widgets/admin/ingredient-header-actions'
 import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
-import { CreateIngredient } from '@/features/admin/create-ingredient'
 import { Ingredient } from '@/entities/ingredient/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
