@@ -95,7 +95,18 @@ export const ProductList = () => {
               />
               <TextField source='price' label='Ціна' />
               <TextField source='weight' sortable={false} label='Вага' />
-              <TextField source='volume' sortable={false} label='Обсяг' />
+              <TextField
+                source='weight'
+                sortable={false}
+                label='Вага'
+                emptyText='Не визначено'
+              />
+              <TextField
+                source='volume'
+                sortable={false}
+                label="Об'єм"
+                emptyText='Не визначено'
+              />
             </EntitiesGrid>
           )}
         />
@@ -124,9 +135,20 @@ export const ProductList = () => {
               sortable={false}
               label='Композиція'
             />
-            <TextField source='price' label='Ціна' />
-            <TextField source='weight' sortable={false} label='Вага' />
-            <TextField source='volume' sortable={false} label='Обсяг' />
+            <TextField source='price' label='Ціна (₴)' />
+            <TextField
+              source='weight'
+              sortable={false}
+              label='Вага (грам)'
+              emptyText='Не визначено'
+              cellClassName='!font-inter'
+            />
+            <TextField
+              source='volume'
+              sortable={false}
+              label="Об'єм (л)"
+              emptyText='Не визначено'
+            />
           </EntitiesGrid>
         </List>
       )}

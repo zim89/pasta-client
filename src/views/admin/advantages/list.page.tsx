@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   Datagrid,
   ImageField,
@@ -19,6 +20,7 @@ import { useMedia } from '@/shared/lib/hooks/useMedia'
 import { usePaginate } from '@/shared/lib/hooks/usePaginate'
 
 export const AdvantagesList = () => {
+  const router = useRouter()
   const { isMobileScreen } = useMedia()
   const { data } = useGetList('our-advantages')
   const [displayedRows, setDisplayedRows] = useState<Feature[]>(data || [])
@@ -33,6 +35,10 @@ export const AdvantagesList = () => {
     Number(pageParam),
     Number(limitParam),
   )
+
+  useEffect(() => {
+    router.replace('#/our-advantages?perPage=5&page=1')
+  }, [])
 
   useEffect(() => {
     if (!sortParam || !orderParam) return
@@ -50,7 +56,6 @@ export const AdvantagesList = () => {
   useEffect(() => {
     if (data) {
       setDisplayedRows(data)
-      setLimit(5)
     }
   }, [data])
 
@@ -100,6 +105,7 @@ export const AdvantagesList = () => {
             </ListBase>
           }
           actions={<AdvantageHeaderActions />}
+          perPage={Number(limitParam)}
         >
           <Datagrid data={paginated}>
             <ImageField

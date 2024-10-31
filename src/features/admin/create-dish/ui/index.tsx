@@ -18,8 +18,8 @@ export const CreateProduct = () => (
       <TextInput source='composition' label='Композиція' />
       <div className='flex gap-2'>
         <TextInput source='price' label='Ціна' />
-        <TextInput source='weight' label='Вага' />
-        <TextInput source='volume' label='Обсяг' />
+        <TextInput source='weight' label='Вага (грам)' />
+        <TextInput source='volume' label="Об'єм (л)" />
       </div>
       <BrandImageInput source='image' />
       <BooleanInput source='customizable' label='Кастомізація' />
