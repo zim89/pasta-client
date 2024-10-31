@@ -10,6 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/shared/ui/common/accordion'
+import img_placeholder from '@/shared/assets/images/img-square-placeholder.png'
 
 export const CartItemEditable = ({ item }: { item: CartItem }) => {
   const { removeFromCart, incrementItem, decrementItem } = useCartStore(
@@ -31,7 +32,7 @@ export const CartItemEditable = ({ item }: { item: CartItem }) => {
         </button>
         <div className='relative size-20 overflow-hidden rounded-xl'>
           <Image
-            src={item.dish.image}
+            src={item.dish.image ? item.dish.image : img_placeholder}
             alt={item.dish.title}
             fill
             sizes='100%'
