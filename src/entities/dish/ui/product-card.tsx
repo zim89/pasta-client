@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { APP_PAGES } from '@/shared/constants'
+import img_placeholder from '@/shared/assets/images/placeholders/img-rectangle.png'
 import { formatMeasurement } from '../lib/dish.helpers'
 import type { Dish } from '../model'
 import { HitLabel } from './hit-label'
@@ -23,7 +24,7 @@ export const ProductCard = ({
       <Link href={`${APP_PAGES.MENU}/${dish.slug}`}>
         <div className='relative aspect-[5/3.8417]'>
           <Image
-            src={dish.image ? dish.image : 'https://placehold.co/600x400.png'}
+            src={dish.image ? dish.image : img_placeholder}
             fill
             sizes='100%'
             alt={dish.title}
