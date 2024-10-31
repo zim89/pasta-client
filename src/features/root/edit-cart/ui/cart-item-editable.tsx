@@ -10,7 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/shared/ui/common/accordion'
-import img_placeholder from '@/shared/assets/images/img-square-placeholder.png'
+import img_placeholder from '@/shared/assets/images/placeholders/img-square.png'
 
 export const CartItemEditable = ({ item }: { item: CartItem }) => {
   const { removeFromCart, incrementItem, decrementItem } = useCartStore(
