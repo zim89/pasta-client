@@ -34,13 +34,14 @@ export const CartButton = () => {
             <Indicator value={totalCount} className='-top-[10px]' />
             <ShoppingCart className='size-[30px] stroke-[1.5px]' />
           </div>
-          <span className='hidden items-center gap-5 rounded-[20px] border border-primary-lightest/50 bg-white px-8 py-1.5 text-black md:flex'>
+
+          <div className='hidden items-center gap-5 rounded-[20px] border border-primary-light/50 bg-white px-8 py-1.5 text-black transition-colors duration-300 hover:border-primary-light md:flex'>
             <span className='relative flex h-[34px] items-end'>
               <Indicator value={totalCount} />
               <ShoppingCart className='size-6 stroke-[1.5px]' />
             </span>
             <UAHFormatter value={totalPrice} />
-          </span>
+          </div>
         </>
       </SheetTrigger>
 
