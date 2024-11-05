@@ -1,3 +1,7 @@
 export const DeliveryAndPaymentPage = () => {
-  return <div>DeliveryAndPaymentPage</div>
+  return (
+    <div className='page-wrap'>
+      <div className='container'>DeliveryAndPaymentPage</div>
+    </div>
+  )
 }
