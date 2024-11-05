@@ -32,7 +32,7 @@ export const ProductCard = ({
           />
         </div>
       </Link>
-      <div className='p-4'>
+      <div className='p-4 pb-6 xl:px-5 xl:pb-8'>
         <Link href={`${APP_PAGES.MENU}/${dish.slug}`}>
           <h4 className='mb-1 h-[46px] text-xl/[26px] font-medium'>
             <span>{dish.title}</span>
