@@ -37,24 +37,20 @@ export const FOOTER_LINKS = [
     label: 'Меню',
     href: `${APP_PAGES.MENU}`,
   },
-  {
-    label: 'Доставка і оплата',
-    href: `${APP_PAGES.DELIVERY}`,
-  },
 ] as const
 
 // FIXME: Add valid links
 export const ADDITIONAL_LINKS = [
   {
     label: 'Контакти',
-    href: `${APP_PAGES.CONTACTS}`,
+    href: `/#contacts`,
   },
   {
     label: 'Договір публічної оферти',
-    href: `${APP_PAGES.HOME}`,
+    href: `${APP_PAGES.PUBLIC_OFFER}`,
   },
   {
     label: 'Політика конфіденційності',
-    href: `${APP_PAGES.HOME}`,
+    href: `${APP_PAGES.PRIVACY_POLICY}`,
   },
 ] as const

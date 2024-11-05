@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { DialogDescription } from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
 
 import {
@@ -18,12 +19,12 @@ export const DeliveryModal = ({ className }: { className?: string }) => {
       <DialogTrigger className={cn('border-b text-lg/[23.4px]', className)}>
         Доставка і оплата
       </DialogTrigger>
-      <DialogContent
-        aria-describedby={undefined}
-        className='w-[342px] max-w-max !rounded-4xl border-0 px-12 pb-[169px] pt-20 md:w-[620px] md:px-14 md:pb-[120px]'
-      >
+      <DialogContent className='w-[342px] max-w-max !rounded-4xl border-0 px-12 pb-[169px] pt-20 md:w-[620px] md:px-14 md:pb-[120px]'>
         <DialogHeader className='hidden'>
           <DialogTitle>Доставка і оплата</DialogTitle>
+          <DialogDescription className='hidden'>
+            Доставка і оплата
+          </DialogDescription>
         </DialogHeader>
         <DialogClose
           aria-hidden='true'
