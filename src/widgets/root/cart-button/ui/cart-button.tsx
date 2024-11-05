@@ -64,7 +64,7 @@ export const CartButton = () => {
           </SheetTitle>
         </SheetHeader>
 
-        <ScrollArea type='scroll' className='landscape:min-h-[160px]'>
+        <ScrollArea type='auto' className='pr-3 landscape:min-h-[160px]'>
           {cart.length > 0 && (
             <ul className='grid grid-cols-1 gap-4 md:gap-6'>
               {cart.map(item => (
