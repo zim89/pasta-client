@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-
 import { useRouter } from 'next/navigation'
 import {
   Datagrid,
@@ -15,6 +14,7 @@ import {
 import { AdvantageHeaderActions } from '@/widgets/admin/advantage-header-actions'
 import { EntitiesGrid } from '@/widgets/admin/entities-grid'
 import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
+import { BulkDeleteAdvantages } from '@/features/admin/bulk-delete-advantages/ui'
 import { Feature } from '@/entities/feature'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
@@ -86,7 +86,10 @@ export const AdvantagesList = () => {
           }
           actions={<AdvantageHeaderActions />}
           renderGrid={rows => (
-            <EntitiesGrid displayedRows={rows}>
+            <EntitiesGrid
+              displayedRows={rows}
+              bulkActions={<BulkDeleteAdvantages />}
+            >
               <ImageField
                 source='image'
                 cellClassName='size-8 object-contain'
@@ -108,12 +111,16 @@ export const AdvantagesList = () => {
           actions={<AdvantageHeaderActions />}
           perPage={Number(limitParam)}
         >
-          <Datagrid data={paginated}>
+          <Datagrid
+            data={paginated}
+            bulkActionButtons={<BulkDeleteAdvantages />}
+          >
             <ImageField
               source='image'
               cellClassName='size-8 object-contain'
               label='Постер'
             />
+
             <TextField source='title' label='Найменування' />
             <TextField source='description' label='Опис' />
           </Datagrid>
