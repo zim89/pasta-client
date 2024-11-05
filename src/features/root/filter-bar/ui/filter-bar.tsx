@@ -35,14 +35,15 @@ export const FilterBar = () => {
       >
         <CarouselContent className='-ml-5'>
           {DISH_TYPES.map(category => {
+            console.log(searchParams.get('filter'))
             const isActive =
-              searchParams.get('filter') === category ||
-              (category === 'Все меню' && !searchParams.has('filter'))
+              searchParams.get('filter') === category.value ||
+              (category.value === 'Все меню' && !searchParams.has('filter'))
 
             return (
-              <CarouselItem key={category} className='basis-auto pl-5'>
+              <CarouselItem key={category.value} className='basis-auto pl-5'>
                 <button
-                  onClick={() => onClick(category)}
+                  onClick={() => onClick(category.value)}
                   className={cn(
                     'h-[47px] rounded-[30px] border px-5 text-lg/[23.4px] xl:px-10',
                     isActive
@@ -50,7 +51,7 @@ export const FilterBar = () => {
                       : 'border-black/20 text-black',
                   )}
                 >
-                  {category}
+                  {category.label}
                 </button>
               </CarouselItem>
             )

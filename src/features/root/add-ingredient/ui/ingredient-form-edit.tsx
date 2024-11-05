@@ -48,7 +48,7 @@ export const IngredientFormEdit = ({
       setOpen(false)
     },
 
-    [data, editIngredients, item.id],
+    [data, editIngredients, item.id, setOpen],
   )
 
   const [price, setPrice] = useState(item.price)
@@ -64,7 +64,7 @@ export const IngredientFormEdit = ({
         className='flex flex-col md:flex-row-reverse md:gap-6 xl:gap-10'
       >
         <div className='relative mb-5 h-full flex-1 xl:m-0 xl:h-[633px]'>
-          <ScrollArea type='scroll' className='!absolute inset-0 pr-2'>
+          <ScrollArea type='auto' className='!absolute inset-0 pr-3'>
             <ul className='grid grid-cols-2 gap-x-8 gap-y-4 md:flex-1 md:grid-cols-3 md:gap-4'>
               {data.map(i => (
                 <li key={i.id}>
