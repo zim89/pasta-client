@@ -3,7 +3,7 @@ import { defaultTheme } from 'react-admin'
 
 export const theme = deepmerge(defaultTheme, {
   typography: {
-    fontFamily: '__Inter_bc20db, __Inter_Fallback_bc20db',
+    fontFamily: '__Inter_6205a0',
   },
   components: {
     RaAppBar: {
@@ -18,7 +18,8 @@ export const theme = deepmerge(defaultTheme, {
         root: {
           borderRight: '1px solid #D3EDEE',
           backgroundColor: '#F2F6F6',
-          height: '100vh',
+          height: 'auto',
+          minHeight: '100vh',
         },
       },
     },

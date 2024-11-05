@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   Datagrid,
   ImageField,
@@ -13,12 +14,14 @@ import {
 import { AdvantageHeaderActions } from '@/widgets/admin/advantage-header-actions'
 import { EntitiesGrid } from '@/widgets/admin/entities-grid'
 import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
+import { BulkDeleteAdvantages } from '@/features/admin/bulk-delete-advantages/ui'
 import { Feature } from '@/entities/feature'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
 import { usePaginate } from '@/shared/lib/hooks/usePaginate'
 
 export const AdvantagesList = () => {
+  const router = useRouter()
   const { isMobileScreen } = useMedia()
   const { data } = useGetList('our-advantages')
   const [displayedRows, setDisplayedRows] = useState<Feature[]>(data || [])
@@ -33,6 +36,10 @@ export const AdvantagesList = () => {
     Number(pageParam),
     Number(limitParam),
   )
+
+  useEffect(() => {
+    router.replace('#/our-advantages?perPage=5&page=1')
+  }, [])
 
   useEffect(() => {
     if (!sortParam || !orderParam) return
@@ -50,7 +57,6 @@ export const AdvantagesList = () => {
   useEffect(() => {
     if (data) {
       setDisplayedRows(data)
-      setLimit(5)
     }
   }, [data])
 
@@ -80,7 +86,10 @@ export const AdvantagesList = () => {
           }
           actions={<AdvantageHeaderActions />}
           renderGrid={rows => (
-            <EntitiesGrid displayedRows={rows}>
+            <EntitiesGrid
+              displayedRows={rows}
+              bulkActions={<BulkDeleteAdvantages />}
+            >
               <ImageField
                 source='image'
                 cellClassName='size-8 object-contain'
@@ -100,13 +109,18 @@ export const AdvantagesList = () => {
             </ListBase>
           }
           actions={<AdvantageHeaderActions />}
+          perPage={Number(limitParam)}
         >
-          <Datagrid data={paginated}>
+          <Datagrid
+            data={paginated}
+            bulkActionButtons={<BulkDeleteAdvantages />}
+          >
             <ImageField
               source='image'
               cellClassName='size-8 object-contain'
               label='Постер'
             />
+
             <TextField source='title' label='Найменування' />
             <TextField source='description' label='Опис' />
           </Datagrid>

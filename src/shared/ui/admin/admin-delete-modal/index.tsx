@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 
 import {
   Dialog,
@@ -10,30 +10,42 @@ import {
   DialogTrigger,
 } from '../../common'
 
-type Props = {
+type Stateless = {
+  kind: 'stateless'
   toggler: React.ReactNode
   children: React.ReactNode
 }
 
-export const AdminDeleteModal = ({ toggler, children }: Props) => {
-  const [open, setOpen] = useState(false)
+type Stateful = {
+  kind: 'stateful'
+  open: boolean
+  onOpenChange: Dispatch<SetStateAction<boolean>>
+  toggler: React.ReactNode
+  children: React.ReactNode
+}
+
+type Props = Stateless | Stateful
+
+export const AdminDeleteModal = (props: Props) => {
+  const [show, setShow] = useState(false)
 
   return (
     <>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger>{toggler}</DialogTrigger>
+      <Dialog
+        open={props.kind === 'stateful' ? props.open : show}
+        onOpenChange={props.kind === 'stateful' ? props.onOpenChange : setShow}
+      >
+        <DialogTrigger>{props.toggler}</DialogTrigger>
         <DialogContent
-          onInteractOutside={() => setOpen(false)}
+          onInteractOutside={() =>
+            (props.kind === 'stateful' ? props.onOpenChange : setShow)(false)
+          }
           aria-describedby={undefined}
         >
           <DialogHeader className='hidden'>
-            <DialogTitle>Видалити секцію</DialogTitle>
+            <DialogTitle>Видалити запис</DialogTitle>
           </DialogHeader>
-
-          <div>
-            <h2>Ви впевнені?</h2>
-          </div>
-          {children}
+          {props.children}
         </DialogContent>
       </Dialog>
     </>

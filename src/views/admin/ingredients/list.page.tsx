@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   ImageField,
   List,
@@ -13,12 +14,14 @@ import {
 import { EntitiesGrid } from '@/widgets/admin/entities-grid'
 import { IngredientHeaderActions } from '@/widgets/admin/ingredient-header-actions'
 import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
+import { BulkDeleteIngredients } from '@/features/admin/bulk-delete-ingredients'
 import { Ingredient } from '@/entities/ingredient/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
 import { usePaginate } from '@/shared/lib/hooks/usePaginate'
 
 export const IngredientList = () => {
+  const router = useRouter()
   const { isMobileScreen } = useMedia()
   const { data } = useGetList('ingredient')
   const [displayedRows, setDisplayedRows] = useState<Ingredient[]>(data || [])
@@ -33,6 +36,10 @@ export const IngredientList = () => {
     Number(pageParam),
     Number(limitParam),
   )
+
+  useEffect(() => {
+    router.replace('#/ingredient?perPage=5&page=1')
+  }, [])
 
   useEffect(() => {
     if (!sortParam || !orderParam) return
@@ -50,7 +57,6 @@ export const IngredientList = () => {
   useEffect(() => {
     if (data) {
       setDisplayedRows(data)
-      setLimit(5)
     }
   }, [data])
 
@@ -80,7 +86,10 @@ export const IngredientList = () => {
             </ListBase>
           }
           renderGrid={rows => (
-            <EntitiesGrid displayedRows={rows}>
+            <EntitiesGrid
+              displayedRows={rows}
+              bulkActions={<BulkDeleteIngredients />}
+            >
               <ImageField
                 source='image'
                 label='Постер'
@@ -106,8 +115,12 @@ export const IngredientList = () => {
               <IngredientHeaderActions />
             </ListBase>
           }
+          perPage={Number(limitParam)}
         >
-          <EntitiesGrid displayedRows={paginated}>
+          <EntitiesGrid
+            displayedRows={paginated}
+            bulkActions={<BulkDeleteIngredients />}
+          >
             <ImageField
               source='image'
               label='Постер'

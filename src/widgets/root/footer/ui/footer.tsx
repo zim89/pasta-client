@@ -2,8 +2,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { LogoLightIcon, PinIcon } from '@/shared/ui'
 
+import { ADDRESS, APP_PAGES, PHONE } from '@/shared/constants'
 import { ADDITIONAL_LINKS, FOOTER_LINKS } from '@/shared/data'
 import decor_img from '@/shared/assets/images/decoration/footer-veggies.png'
+import { DeliveryModal } from '../../delivery-modal'
 import { PAY_LIST } from '../model'
 import { InstagramButton } from './instagram-button'
 
@@ -22,13 +24,13 @@ export const Footer = () => {
         alt='Features decoration image'
         className='absolute bottom-[7px] left-1/2 hidden -translate-x-1/2 xl:block'
       />
-      <div className='container'>
+      <div className='container relative z-10'>
         <div className='mb-8 space-y-2 text-sm/[18.2px] text-white md:hidden'>
           <p className='flex items-center'>
             <PinIcon />
-            <span>м. Kиїв, вул. Еспланадна, 34/2</span>
+            <span>{ADDRESS}</span>
           </p>
-          <p>+380 (96) 612 27 20</p>
+          <p>{PHONE}</p>
         </div>
 
         <div className='hidden md:mb-10 md:flex md:gap-[45.67px] xl:justify-between'>
@@ -44,6 +46,9 @@ export const Footer = () => {
                 </Link>
               </li>
             ))}
+            <li data-testid='nav-link'>
+              <DeliveryModal className='textLink-light text-nowrap border-0' />
+            </li>
           </ul>
           <ul className='space-y-2'>
             {ADDITIONAL_LINKS.map(item => (
@@ -58,20 +63,19 @@ export const Footer = () => {
           <div className='space-y-2 text-right text-[13px]/[16.9px] text-white xl:text-sm/[18.2px]'>
             <p className='flex items-center text-nowrap'>
               <PinIcon />
-              <span>м. Kиїв, вул. Еспланадна, 34/2</span>
+              <span>{ADDRESS}</span>
             </p>
-            <p>+380 (96) 612 27 20</p>
-            <InstagramButton />
+            <p>{PHONE}</p>
+            <InstagramButton className='ml-auto' />
           </div>
         </div>
 
-        {/* FIXME: Add valid links */}
         <ul className='mb-8 flex items-baseline justify-between md:hidden'>
-          <Link href='/' className='textLink-light'>
+          <Link href={APP_PAGES.PUBLIC_OFFER} className='textLink-light'>
             Договір публічної оферти
           </Link>
 
-          <Link href='/' className='textLink-light'>
+          <Link href={APP_PAGES.PRIVACY_POLICY} className='textLink-light'>
             Політика конфіденційності
           </Link>
         </ul>

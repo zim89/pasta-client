@@ -27,7 +27,7 @@ export const EditProduct = () => {
       >
         <TextInput source='title' label='Назва' />
         <TextInput source='weight' label='Вага' />
-        <TextInput source='volume' label='Обсяг' />
+        <TextInput source='volume' label="Об'єм" />
         <NumberInput source='price' label='Ціна' />
         <TextInput source='composition' label='Композиція' />
         <BrandImageInput source='image' />

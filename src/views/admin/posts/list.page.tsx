@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { ImageField, List, ListBase, UrlField, useGetList } from 'react-admin'
 
 import { EntitiesGrid } from '@/widgets/admin/entities-grid'
 import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
 import { PostHeaderActions } from '@/widgets/admin/post-header-action'
+import { BulkDeletePosts } from '@/features/admin/bulk-delete-posts'
 import type { Post } from '@/entities/post'
 import { useHashParamValue, useMedia, usePaginate } from '@/shared/lib/hooks'
 
 export const PostsList = () => {
+  const router = useRouter()
   const { isMobileScreen } = useMedia()
   const { data } = useGetList('insta-posts')
   const [displayedRows, setDisplayedRows] = useState<Post[]>(data || [])
@@ -22,6 +25,10 @@ export const PostsList = () => {
     Number(pageParam),
     Number(limitParam),
   )
+
+  useEffect(() => {
+    router.replace('#/insta-posts?perPage=5&page=1')
+  }, [])
 
   useEffect(() => {
     if (!sortParam || !orderParam) return
@@ -39,7 +46,6 @@ export const PostsList = () => {
   useEffect(() => {
     if (data) {
       setDisplayedRows(data)
-      setLimit(5)
     }
   }, [data])
 
@@ -69,7 +75,10 @@ export const PostsList = () => {
           displayedRows={displayedRows}
           actions={<PostHeaderActions />}
           renderGrid={rows => (
-            <EntitiesGrid displayedRows={rows}>
+            <EntitiesGrid
+              displayedRows={rows}
+              bulkActions={<BulkDeletePosts />}
+            >
               <ImageField
                 source='image'
                 label='Постер'
@@ -84,13 +93,17 @@ export const PostsList = () => {
         <List
           className='hidden p-4 md:block'
           actions={<PostHeaderActions />}
+          perPage={Number(limitParam)}
           empty={
             <ListBase>
               <PostHeaderActions />
             </ListBase>
           }
         >
-          <EntitiesGrid displayedRows={paginated}>
+          <EntitiesGrid
+            displayedRows={paginated}
+            bulkActions={<BulkDeletePosts />}
+          >
             <ImageField
               source='image'
               label='Постер'
