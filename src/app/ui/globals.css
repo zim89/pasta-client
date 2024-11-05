@@ -21,7 +21,7 @@
   }
 
   .textLink-light {
-    @apply text-[0.813rem]/[1.056rem] text-white transition-colors duration-300 hover:text-accent xl:text-sm/[1.138rem];
+    @apply !text-[0.813rem]/[1.056rem] text-white transition-colors duration-300 hover:text-accent xl:text-sm/[1.138rem];
   }
 
   .outline-link {
