@@ -20,7 +20,7 @@ type DeliveryAddress = {
   id: number
   city: string
   street: string
-  buildingNumber: number
+  buildingNumber: string | number
   entrance?: number
   flatNumber?: number
   floor?: number
@@ -47,4 +47,17 @@ export type Order = {
   orderItems: OrderItem[]
   deliveryAdress: DeliveryAddress
   orderDetail: OrderDetail
+}
+
+export type CreateOrder = {
+  items: {
+    dishId: number
+    ingridients: {
+      ingridientId: number
+      quanttity: number
+    }[]
+  }[]
+  pickup: boolean
+  deliveryDetails: Omit<DeliveryAddress, 'id'>
+  orderDetails: Omit<OrderDetail, 'id'>
 }

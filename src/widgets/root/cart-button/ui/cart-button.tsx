@@ -20,6 +20,8 @@ import {
 import { cn } from '@/shared/lib/utils'
 import { Indicator } from './indicator'
 
+const forbiddenPaths = ['/checkout', '/confirmation']
+
 export const CartButton = () => {
   const { opened, cart, totalPrice, totalCount, toggleCartDrawer } =
     useCartStore(state => state)
@@ -85,8 +87,9 @@ export const CartButton = () => {
               href='/checkout'
               className={cn(
                 'btn-primary',
-                path === '/checkout' &&
-                  'pointer-events-none border-gray-700 bg-gray-600',
+                forbiddenPaths.includes(path) ||
+                  (!cart.length &&
+                    'pointer-events-none border-gray-700 bg-gray-600'),
               )}
             >
               Оформити замовлення
