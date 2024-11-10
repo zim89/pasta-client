@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import Image from 'next/image'
 
+import img_placeholder from '@/shared/assets/images/placeholders/img-square.png'
 import { formatMass } from '../lib'
 import type { Dish } from '../model'
 
@@ -15,7 +16,7 @@ export const NewsCard = ({
     <div className='flex gap-[22px] overflow-clip rounded-xl border border-primary-light/50 xl:gap-[18px] xl:rounded-[30px]'>
       <div className='relative h-[159px] w-[135px] xl:h-[196px] xl:w-[196px]'>
         <Image
-          src={dish.image}
+          src={dish.image ? dish.image : img_placeholder}
           fill
           sizes='100%'
           className='object-cover'

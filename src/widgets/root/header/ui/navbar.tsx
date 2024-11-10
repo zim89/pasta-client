@@ -47,7 +47,7 @@ export const Navbar = ({ className }: { className?: string }) => {
         </li>
       </ul>
 
-      <div className='flex items-center gap-3 text-white'>
+      <div className='flex items-center text-white'>
         <SearchButton className='md:hidden' />
         <CartButton />
       </div>

@@ -19,7 +19,7 @@ export const UAHFormatter = ({
 }: Props) => {
   return (
     <span {...rest} className={cn('text-sm/[16.8px]', className)}>
-      {value ? value.toLocaleString('ua', format) : '00,00'} грн
+      {value ? value.toLocaleString('ua', format) : '00,00'}₴
     </span>
   )
 }
