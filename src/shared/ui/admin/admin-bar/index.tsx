@@ -1,13 +1,13 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { useContext } from 'react'
+import { ModalContext } from '@/shared/context/admin-change-password-modal'
 import { LogOut, RectangleEllipsis } from 'lucide-react'
 import { AppBar, useLogout, UserMenu, useUserMenu } from 'react-admin'
 
-import { ChangePasswordModal } from '@/features/admin/change-password-modal'
 import { Button } from '../../common'
 
 type PasswordChangeMenuItemProps = {
   open: boolean
-  setOpen: Dispatch<SetStateAction<boolean>>
+  setOpen: (value: boolean) => void
   handleClick: () => void
 }
 
@@ -31,29 +31,21 @@ const PasswordChangeMenuItem = ({
 const UserMenuListOptions = () => {
   const logout = useLogout()
   const menu = useUserMenu()
-  const [modalOpened, setModalOpened] = useState(false)
+  const { handleChange, opened } = useContext(ModalContext)
 
   const handleClick = () => {
-    setModalOpened(true)
-  }
-
-  const handleOpenChange = (value: boolean) => {
-    if (!value) menu?.onClose()
-    setModalOpened(value)
+    menu?.onClose()
+    handleChange(true)
   }
 
   return (
     <>
       <PasswordChangeMenuItem
         handleClick={handleClick}
-        open={modalOpened}
-        setOpen={setModalOpened}
+        open={opened}
+        setOpen={handleChange}
       />
-      <ChangePasswordModal
-        modal
-        open={modalOpened}
-        onOpenChange={handleOpenChange}
-      />
+
       <Button
         variant='plain'
         className='flex w-full justify-start gap-3 rounded-none text-base hover:bg-black hover:bg-opacity-5'

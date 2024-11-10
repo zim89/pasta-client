@@ -1,16 +1,25 @@
-import { Button } from '@/shared/ui'
+import { Button, ButtonProps } from '@/shared/ui'
+
+import { cn } from '@/shared/lib/utils'
 
 type Props = {
   children?: React.ReactNode
-}
+  onSubmit?: () => void
+} & Omit<ButtonProps, 'children' | 'onClick'>
 
-export const ProceedOrder = ({ children = 'Оформити замовлення' }: Props) => {
+export const ProceedOrder = ({
+  children = 'Оформити замовлення',
+  onSubmit,
+  ...rest
+}: Props) => {
   return (
     <Button
-      type='submit'
-      className='w-full md:max-w-80 xl:max-w-[413px]'
+      {...rest}
+      type={onSubmit ? 'button' : 'submit'}
+      className={cn('w-full md:max-w-80 xl:max-w-[413px]', rest.className)}
       variant='filled'
       size='lg'
+      onClick={onSubmit}
     >
       {children}
     </Button>

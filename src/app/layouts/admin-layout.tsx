@@ -1,5 +1,7 @@
 'use client'
 
+import { useContext } from 'react'
+import { ModalContext } from '@/shared/context/admin-change-password-modal'
 import {
   AdvantageIcon,
   MenuInstagramIcon,
@@ -23,6 +25,7 @@ import { ShowOrder } from '@/views/admin/orders/id.page'
 import { OrdersList } from '@/views/admin/orders/list.page'
 import { EditPost } from '@/views/admin/posts/edit.page'
 import { PostsList } from '@/views/admin/posts/list.page'
+import { ChangePasswordModal } from '@/features/admin/change-password-modal'
 import { AdminAppBar } from '@/shared/ui/admin/admin-bar'
 
 const CustomLayout = ({ children }: { children: React.ReactNode }) => {
@@ -30,76 +33,81 @@ const CustomLayout = ({ children }: { children: React.ReactNode }) => {
 }
 
 export default function AdminLayout() {
+  const { opened, handleChange } = useContext(ModalContext)
+
   return (
-    <Admin
-      dataProvider={dataProvider}
-      authProvider={authProvider}
-      theme={theme}
-      layout={CustomLayout}
-      queryClient={
-        new QueryClient({
-          defaultOptions: {
-            queries: {
-              refetchOnWindowFocus: false,
+    <>
+      <ChangePasswordModal open={opened} onOpenChange={handleChange} />
+      <Admin
+        dataProvider={dataProvider}
+        authProvider={authProvider}
+        theme={theme}
+        layout={CustomLayout}
+        queryClient={
+          new QueryClient({
+            defaultOptions: {
+              queries: {
+                refetchOnWindowFocus: false,
+              },
             },
-          },
-        })
-      }
-    >
-      <Resource
-        name='our-advantages'
-        icon={AdvantageIcon}
-        options={{
-          label: 'Переваги',
-        }}
-        list={AdvantagesList}
-        edit={EditAdvantage}
-      />
-      <Resource
-        name='dish'
-        options={{
-          label: 'Страви',
-        }}
-        icon={PastaIcon}
-        list={ProductList}
-        edit={
-          <Edit>
-            <EditProduct />
-          </Edit>
+          })
         }
-      />
-      <Resource
-        name='ingredient'
-        icon={PepperIcon}
-        options={{
-          label: 'Інгредієнти',
-        }}
-        list={IngredientList}
-        edit={EditIngredient}
-      />
-      <Resource
-        name='order'
-        icon={OrderIcon}
-        hasEdit={false}
-        options={{
-          label: 'Замовлення',
-        }}
-        list={OrdersList}
-        show={
-          <Show>
-            <ShowOrder />
-          </Show>
-        }
-      />
-      <Resource
-        name='insta-posts'
-        icon={MenuInstagramIcon}
-        options={{
-          label: 'Пости',
-        }}
-        list={PostsList}
-        edit={EditPost}
-      />
-    </Admin>
+      >
+        <Resource
+          name='our-advantages'
+          icon={AdvantageIcon}
+          options={{
+            label: 'Переваги',
+          }}
+          list={AdvantagesList}
+          edit={EditAdvantage}
+        />
+        <Resource
+          name='dish'
+          options={{
+            label: 'Страви',
+          }}
+          icon={PastaIcon}
+          list={ProductList}
+          edit={
+            <Edit>
+              <EditProduct />
+            </Edit>
+          }
+        />
+        <Resource
+          name='ingredient'
+          icon={PepperIcon}
+          options={{
+            label: 'Інгредієнти',
+          }}
+          list={IngredientList}
+          edit={EditIngredient}
+        />
+        <Resource
+          name='order'
+          icon={OrderIcon}
+          hasEdit={false}
+          options={{
+            label: 'Замовлення',
+          }}
+          list={OrdersList}
+          show={
+            <Show>
+              <ShowOrder />
+            </Show>
+          }
+        />
+        <Resource
+          name='insta-posts'
+          icon={MenuInstagramIcon}
+          options={{
+            label: 'Пости',
+          }}
+          list={PostsList}
+          edit={EditPost}
+        />
+      </Admin>
+    </>
   )
 }

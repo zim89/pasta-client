@@ -1,8 +1,9 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui'
+import { Form, Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui'
 import { OrderControllers } from '@/shared/ui/order-controllers'
+import { PickupAddress } from '@/shared/ui/pickup-address'
 import { ReturnToMenu } from '@/shared/ui/return-to-menu'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
@@ -10,7 +11,6 @@ import * as yup from 'yup'
 
 import { ProceedOrder } from '@/features/root/proceed-order'
 import { useCartStore } from '@/entities/cart'
-import { Form } from '@/shared/ui/common/form'
 import {
   KEYS,
   LIQPAY_TEST_PRIVATE_KEY,
@@ -18,25 +18,28 @@ import {
 } from '@/shared/constants'
 import { constructLiqpayPayload } from '@/shared/lib/utils/liqpay'
 import { PaymentSection } from '../../payment-section'
-import { ControlledFields } from '../model'
-import { DeliverySection } from './delivery-section'
-import { OrderSection } from './order-section'
 
-export const OrderForm = () => {
+type Fields = {
+  name: string
+  phone: string
+  email?: string
+  deliveryDate: string
+  deliveryTime: string
+  paymentMethod: string
+  comment?: string
+}
+
+type Props = {
+  ordersSlot: React.ReactNode
+}
+
+export const PickupOrderForm = ({ ordersSlot }: Props) => {
   const [currentTab, setCurrentTab] = useState('address')
-  const [addressIsValid, setAddressIsValid] = useState(false)
   const liqpayFormRef = useRef<HTMLFormElement>(null)
   const { totalPrice, cart } = useCartStore(state => state)
 
   const schema = yup
     .object({
-      city: yup.string().required("Поле обов'язкове для заповнення."),
-      street: yup.string().required("Поле обов'язкове для заповнення."),
-      buildingNumber: yup.string().required("Поле обов'язкове для заповнення."),
-      entrance: yup.string(),
-      appartmentHouse: yup.string(),
-      story: yup.string(),
-      intercom: yup.string(),
       name: yup.string().required("Поле обов'язкове для заповнення."),
       phone: yup.string().required("Поле обов'язкове для заповнення."),
       email: yup.string(),
@@ -49,13 +52,6 @@ export const OrderForm = () => {
 
   const form = useForm({
     defaultValues: {
-      city: 'Київ',
-      street: '',
-      buildingNumber: '',
-      entrance: '',
-      appartmentHouse: '',
-      story: '',
-      intercom: '',
       name: '',
       phone: '',
       email: '',
@@ -67,7 +63,7 @@ export const OrderForm = () => {
     resolver: yupResolver(schema),
   })
 
-  const handleSubmit = (values: ControlledFields) => {
+  const handleSubmit = (values: Fields) => {
     if (liqpayFormRef.current) {
       const dataField = liqpayFormRef.current.children[0] as HTMLInputElement
       const signatureField = liqpayFormRef.current
@@ -89,7 +85,8 @@ export const OrderForm = () => {
             })
             .join('\n')}`,
         orderId,
-        result_url: 'https://pasta-la-pepito-fsd.localhost:44382/confirmation',
+        result_url:
+          'https://pasta-la-pepito-fsd.localhost:44382/confirmation?pickup=true',
         info: JSON.stringify({ details: values }),
       })
 
@@ -102,20 +99,7 @@ export const OrderForm = () => {
   }
 
   const proceedNext = async () => {
-    await form.trigger('city')
-    await form.trigger('street')
-    await form.trigger('buildingNumber')
-
-    const streetIsValid = form.getFieldState('street').invalid
-    const cityIsValid = form.getFieldState('city').invalid
-    const buildingNumberIsValid = form.getFieldState('buildingNumber').invalid
-
-    const isValid = !streetIsValid && !cityIsValid && !buildingNumberIsValid
-
-    if (isValid) {
-      setAddressIsValid(true)
-      setCurrentTab('contacts')
-    }
+    setCurrentTab('contacts')
   }
 
   return (
@@ -129,19 +113,21 @@ export const OrderForm = () => {
                 value='address'
               ></TabsTrigger>
               <TabsTrigger
-                disabled={!addressIsValid}
                 className='rounded-[30px] bg-primary-lighter disabled:bg-gray-400'
                 value='contacts'
               ></TabsTrigger>
             </TabsList>
             <TabsContent value='address'>
-              <div className='my-12 flex flex-col gap-8 md:flex-row md:gap-[52px] xl:gap-[180px]'>
-                <DeliverySection form={form} />
-                <OrderSection />
+              <div className='my-12 flex flex-col gap-8 md:flex-row md:gap-[62px] xl:gap-[180px]'>
+                <PickupAddress />
+                <div className='xl:w-[700px]'>{ordersSlot}</div>
               </div>
-
               <OrderControllers
-                proceedOrderSlot={<ProceedOrder onSubmit={proceedNext} />}
+                proceedOrderSlot={
+                  <ProceedOrder onSubmit={proceedNext}>
+                    Оформити замовлення
+                  </ProceedOrder>
+                }
                 returnToMenuSlot={<ReturnToMenu />}
               />
             </TabsContent>

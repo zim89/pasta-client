@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid'
 import { createStore } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 
+import { KEYS } from '@/shared/constants'
 import {
   calculateCartCount,
   calculateCartPrice,
@@ -24,6 +25,7 @@ export type CartActions = {
   incrementItem: (id: string) => void
   decrementItem: (id: string) => void
   editIngredients: (id: string, ingredients: CartIngredient[]) => void
+  clearCart: () => void
 }
 
 export type CartStore = CartState & CartActions
@@ -189,8 +191,11 @@ export const createCartStore = (initState: CartState = defaultInitState) => {
               }))
             }
           },
+          clearCart: () => {
+            set(() => defaultInitState)
+          },
         }),
-        { name: 'cart-storage' },
+        { name: KEYS.cartStorage },
       ),
     ),
   )

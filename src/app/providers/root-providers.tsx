@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import { CartStoreProvider } from '@/entities/cart'
+import { Toaster } from '@/shared/ui/common/sonner'
 
 export const Providers = ({ children }: PropsWithChildren) => {
   const [client] = useState(
@@ -24,6 +25,7 @@ export const Providers = ({ children }: PropsWithChildren) => {
       <UnsavedChangesProvider>
         <CartStoreProvider>
           {children}
+          <Toaster />
           <ReactQueryDevtools initialIsOpen={false} />
         </CartStoreProvider>
       </UnsavedChangesProvider>
