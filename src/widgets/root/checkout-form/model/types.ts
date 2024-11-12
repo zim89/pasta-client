@@ -22,8 +22,7 @@ export type ControlledFields = {
 
 export type PickupFields = SharedFields
 
-// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-export type OrderForm = UseFormReturn<ControlledFields, any, undefined>
+export type OrderForm = UseFormReturn<ControlledFields, unknown, undefined>
 export type PickupOrderForm = UseFormReturn<
   {
     email?: string | undefined
@@ -34,7 +33,6 @@ export type PickupOrderForm = UseFormReturn<
     deliveryTime: string
     paymentMethod: string
   },
-  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-  any,
+  unknown,
   undefined
 >

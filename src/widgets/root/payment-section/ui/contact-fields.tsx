@@ -8,10 +8,10 @@ import {
   FormLabel,
   FormMessage,
 } from '@/shared/ui/common/form'
+import { OrderForm } from '../../checkout-form/model'
 
 type Props = {
-  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-  form: any
+  form: OrderForm
 }
 
 export const ContactFields = ({ form }: Props) => {

@@ -10,7 +10,15 @@ import {
   PepperIcon,
 } from '@/shared/ui/icons-pack'
 import { QueryClient } from '@tanstack/react-query'
-import { Admin, Edit, Layout, Resource, Show } from 'react-admin'
+import {
+  Admin,
+  Edit,
+  EditGuesser,
+  Layout,
+  ListGuesser,
+  Resource,
+  Show,
+} from 'react-admin'
 
 import { authProvider } from '@/app/providers/auth-provider'
 import { dataProvider } from '@/app/providers/data-provider'
@@ -106,6 +114,15 @@ export default function AdminLayout() {
           }}
           list={PostsList}
           edit={EditPost}
+        />
+        <Resource
+          name='category'
+          icon={MenuInstagramIcon}
+          options={{
+            label: 'Категорії',
+          }}
+          list={ListGuesser}
+          edit={EditGuesser}
         />
       </Admin>
     </>
