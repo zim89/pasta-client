@@ -4,27 +4,22 @@ import { useContext } from 'react'
 import { ModalContext } from '@/shared/context/admin-change-password-modal'
 import {
   AdvantageIcon,
+  CategoryIcon,
   MenuInstagramIcon,
   OrderIcon,
   PastaIcon,
   PepperIcon,
 } from '@/shared/ui/icons-pack'
 import { QueryClient } from '@tanstack/react-query'
-import {
-  Admin,
-  Edit,
-  EditGuesser,
-  Layout,
-  ListGuesser,
-  Resource,
-  Show,
-} from 'react-admin'
+import { Admin, Edit, Layout, Resource, Show } from 'react-admin'
 
 import { authProvider } from '@/app/providers/auth-provider'
 import { dataProvider } from '@/app/providers/data-provider'
 import { theme } from '@/app/ui/admin-theme'
 import { EditAdvantage } from '@/views/admin/advantages/edit.page'
 import { AdvantagesList } from '@/views/admin/advantages/list.page'
+import { EditCategory } from '@/views/admin/categories/edit.page'
+import { CategoriesList } from '@/views/admin/categories/list.page'
 import { EditProduct } from '@/views/admin/dishes/edit.page'
 import { ProductList } from '@/views/admin/dishes/list.page'
 import { EditIngredient } from '@/views/admin/ingredients/edit.page'
@@ -117,12 +112,12 @@ export default function AdminLayout() {
         />
         <Resource
           name='category'
-          icon={MenuInstagramIcon}
+          icon={CategoryIcon}
           options={{
             label: 'Категорії',
           }}
-          list={ListGuesser}
-          edit={EditGuesser}
+          list={CategoriesList}
+          edit={EditCategory}
         />
       </Admin>
     </>

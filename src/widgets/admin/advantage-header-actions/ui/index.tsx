@@ -6,7 +6,7 @@ import { HeaderActions } from '@/shared/ui/admin/admin-header-actions'
 
 export const AdvantageHeaderActions = () => {
   return (
-    <HeaderActions title='Наші переваги'>
+    <HeaderActions title='Переваги'>
       <AdminDialog
         title='Додати секцію'
         buttonProps={{
