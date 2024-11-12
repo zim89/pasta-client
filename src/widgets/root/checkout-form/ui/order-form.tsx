@@ -84,7 +84,7 @@ export const OrderForm = () => {
         description: `Замовлення їжі: 
           ${cart
             .map(item => {
-              return `- ${item.dish.type}: ${item.dish.title} x ${item.count} - ${item.price} грн.
+              return `- ${item.dish.category.name}: ${item.dish.title} x ${item.count} - ${item.price} грн.
               - Обрані інгредієнти: ${item.ingredients.length === 0 ? 'не обрано' : item.ingredients.reduce((acc, prev) => acc + ` ${prev.label} (${prev.count}),`, '')}`
             })
             .join('\n')}`,

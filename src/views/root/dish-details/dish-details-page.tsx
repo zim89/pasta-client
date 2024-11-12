@@ -19,10 +19,18 @@ export const DishDetailsPage = ({ slug }: { slug: string }) => {
     <div className='page-wrap'>
       <div className='container'>
         <PageBreadcrumbs
-          crumbs={[
-            { href: APP_PAGES.MENU, label: 'Меню' },
-            { label: data ? data.title : '...' },
-          ]}
+          crumbs={
+            data
+              ? [
+                  { href: APP_PAGES.MENU, label: 'Меню' },
+                  {
+                    href: `${APP_PAGES.MENU}?filter=${data.category.name}`,
+                    label: data.category.name,
+                  },
+                  { label: data.title },
+                ]
+              : [{ href: APP_PAGES.MENU, label: 'Меню' }, { label: '...' }]
+          }
         />
 
         <Link

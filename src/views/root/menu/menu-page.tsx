@@ -10,6 +10,7 @@ import { FilterBar } from '@/features/root/filter-bar'
 import { SortDropdown } from '@/features/root/sort-dropdown'
 import { dishService } from '@/entities/dish'
 import { QUERY_KEYS } from '@/shared/constants'
+import decor_image from '@/shared/assets/images/decoration/parsley-menu.png'
 import { MenuList } from './ui'
 
 const crumbs = [{ label: 'Меню' }]
@@ -26,13 +27,14 @@ export const MenuPage = () => {
 
   useEffect(() => {
     if (isMobile) router.replace(path, { scroll: false })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMobile])
 
   return (
     <div className='page-wrap'>
       <div className='container'>
         <PageBreadcrumbs crumbs={crumbs} />
-        <PageHeading title='Наше меню' />
+        <PageHeading title='Наше меню' image={decor_image} />
         <FilterBar />
         <SortDropdown />
         {!isLoading && data && <MenuList data={data} />}

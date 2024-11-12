@@ -5,7 +5,7 @@ import camera_160_icon from '@/shared/assets/icons/camera-160.png'
 
 export const ProductSkeleton = () => {
   return (
-    <div className='border-gray-400 overflow-hidden rounded-[30px] border'>
+    <div className='overflow-hidden rounded-[30px] border border-gray-400'>
       <Skeleton className='relative h-[260px]'>
         <Image
           src={camera_160_icon}
@@ -15,7 +15,7 @@ export const ProductSkeleton = () => {
           className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform'
         />
       </Skeleton>
-      <div className='px-5 py-4'>
+      <div className='p-4 pb-6 xl:px-5 xl:pb-8'>
         <Skeleton className='mb-[26px] h-6 w-1/2 rounded' />
         <div className='mb-8 space-y-3'>
           <Skeleton className='h-3 rounded' />

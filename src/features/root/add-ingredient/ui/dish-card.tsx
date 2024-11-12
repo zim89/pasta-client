@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 import type { Dish } from '@/entities/dish'
+import img_placeholder from '@/shared/assets/images/placeholders/img-square.png'
 
 export const DishCard = ({ dish, price }: { dish: Dish; price: number }) => {
   return (
@@ -16,7 +17,7 @@ export const DishCard = ({ dish, price }: { dish: Dish; price: number }) => {
       {/* Dish image */}
       <div className='relative h-[104px] w-[104px] overflow-hidden rounded-[8.81px] md:h-[200px] md:w-[200px] md:rounded-xl xl:h-[240px] xl:w-[240px]'>
         <Image
-          src={dish.image}
+          src={dish.image || img_placeholder}
           alt={dish.title}
           fill
           sizes='100%'

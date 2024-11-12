@@ -13,8 +13,8 @@ export const formatVolume = (volume: number) => {
 }
 
 export const formatMeasurement = (dish: Dish) => {
-  return (dish.type === 'Напої' ? "Об'єм: " : 'Вага: ').concat(
-    dish.type !== 'Напої'
+  return (dish.category.name === 'Напої' ? "Об'єм: " : 'Вага: ').concat(
+    dish.category.name !== 'Напої'
       ? dish.weight
         ? formatMass(dish.weight)
         : 'не визначено'

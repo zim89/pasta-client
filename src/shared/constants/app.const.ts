@@ -9,3 +9,9 @@ export const RESOURCES = [
 ] as const
 export const OPENING_HOUR = 12
 export const CLOSING_HOUR = 20
+
+export const PHONE = '+380 (96) 612 27 20'
+export const PHONE_SHORT = '(096)6122720'
+export const ADDRESS = 'Київ, вул. Еспланадна, 34/2'
+export const ADDRESS_SHORT = 'Київ, Еспланадна, 34/2'
+export const ORDER_TIME = 'Замовлення щоденно з 12.00 до 20.00'
