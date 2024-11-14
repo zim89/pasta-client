@@ -8,10 +8,10 @@ import {
   FormLabel,
   FormMessage,
 } from '@/shared/ui/common/form'
-import { OrderForm } from '../model'
 
 type Props = {
-  form: OrderForm
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  form: any
 }
 
 export const DeliverySection = ({ form }: Props) => {
@@ -52,12 +52,7 @@ export const DeliverySection = ({ form }: Props) => {
                 marginTop: 0,
               }}
             >
-              <Input
-                id='street'
-                {...field}
-                placeholder='Введіть вулицю'
-                required
-              />
+              <Input id='street' {...field} placeholder='Введіть вулицю' />
             </FormControl>
             <FormMessage />
           </FormItem>

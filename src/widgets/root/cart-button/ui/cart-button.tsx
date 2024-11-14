@@ -21,6 +21,8 @@ import { cn } from '@/shared/lib/utils'
 import { EmptyCart } from './empty-cart'
 import { Indicator } from './indicator'
 
+const forbiddenPaths = ['/checkout', '/confirmation']
+
 export const CartButton = () => {
   const { opened, cart, totalPrice, totalCount, toggleCartDrawer } =
     useCartStore(state => state)
@@ -93,6 +95,9 @@ export const CartButton = () => {
                 'btn-primary',
                 path === '/checkout' ||
                   (cart.length === 0 &&
+                    'pointer-events-none border-disabled bg-disabled text-gray-600'),
+                forbiddenPaths.includes(path) ||
+                  (!cart.length &&
                     'pointer-events-none border-disabled bg-disabled text-gray-600'),
               )}
             >

@@ -10,6 +10,7 @@ const inputVariants = cva(
       variant: {
         default:
           'border-0 border-b-[1px] border-b-gray-500 rounded-none px-0 py-2 placeholder:text-gray-500 bg-opacity-0',
+        outlined: 'border border-gray-500',
       },
     },
     defaultVariants: {

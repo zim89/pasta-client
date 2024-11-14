@@ -102,7 +102,7 @@ export const ShowOrder = () => {
               </>
               {!source.orderDetail.noChange && (
                 <div className='flex items-center gap-6'>
-                  <span className='min-w-24 border-r border-r-grey p-3'>
+                  <span className='border-r-grey min-w-24 border-r p-3'>
                     Здача з
                   </span>
                   <p>{source.orderDetail.changeFrom}</p>
@@ -139,7 +139,7 @@ export const ShowOrder = () => {
                   >
                     {() => (
                       <>
-                        <p className='text-sm text-grey'>
+                        <p className='text-grey text-sm'>
                           Інформація про замовлення буде змінено.
                         </p>
 

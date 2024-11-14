@@ -1,17 +1,15 @@
 import { PageHeading } from '@/shared/ui'
-import { PickupAddress } from '@/shared/ui/pickup-address'
-import { ReturnToMenu } from '@/shared/ui/return-to-menu'
 
 import { OrderForm } from '@/widgets/root/checkout-form'
-import { OrderControllers } from '@/widgets/root/checkout-form/ui/order-controllers'
 import { OrderSection } from '@/widgets/root/checkout-form/ui/order-section'
+import { PickupOrderForm } from '@/widgets/root/pickup-order'
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from '@/shared/ui/common/tabs'
-import { PaymentLink } from './ui/PaymentLink'
+import { ShowError } from './ui/ShowError'
 
 export const CheckoutPage = () => {
   return (
@@ -31,19 +29,11 @@ export const CheckoutPage = () => {
             <OrderForm />
           </TabsContent>
           <TabsContent value='pickup'>
-            <div className='my-12 flex flex-col gap-8 md:flex-row md:gap-[62px] xl:gap-[180px]'>
-              <PickupAddress />
-              <div className='xl:w-[700px]'>
-                <OrderSection />
-              </div>
-            </div>
-            <OrderControllers
-              proceedOrderSlot={<PaymentLink />}
-              returnToMenuSlot={<ReturnToMenu />}
-            />
+            <PickupOrderForm ordersSlot={<OrderSection />} />
           </TabsContent>
         </Tabs>
       </div>
+      <ShowError />
     </div>
   )
 }
