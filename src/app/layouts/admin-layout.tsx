@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import { ModalContext } from '@/shared/context/admin-change-password-modal'
 import {
   AdvantageIcon,
+  CategoryIcon,
   MenuInstagramIcon,
   OrderIcon,
   PastaIcon,
@@ -17,6 +18,8 @@ import { dataProvider } from '@/app/providers/data-provider'
 import { theme } from '@/app/ui/admin-theme'
 import { EditAdvantage } from '@/views/admin/advantages/edit.page'
 import { AdvantagesList } from '@/views/admin/advantages/list.page'
+import { EditCategory } from '@/views/admin/categories/edit.page'
+import { CategoriesList } from '@/views/admin/categories/list.page'
 import { EditProduct } from '@/views/admin/dishes/edit.page'
 import { ProductList } from '@/views/admin/dishes/list.page'
 import { EditIngredient } from '@/views/admin/ingredients/edit.page'
@@ -106,6 +109,15 @@ export default function AdminLayout() {
           }}
           list={PostsList}
           edit={EditPost}
+        />
+        <Resource
+          name='category'
+          icon={CategoryIcon}
+          options={{
+            label: 'Категорії',
+          }}
+          list={CategoriesList}
+          edit={EditCategory}
         />
       </Admin>
     </>

@@ -1,3 +1,4 @@
+import { OrderForm } from '../../checkout-form/model'
 import { CommentField } from './comment-field'
 import { ContactFields } from './contact-fields'
 import { DeliveryFields } from './delivery-fields'
@@ -5,8 +6,7 @@ import { PaymentMethodField } from './payment-method-field'
 import { TotalSection } from './total-section'
 
 type Props = {
-  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-  form: any
+  form: OrderForm
 }
 
 export const DesktopComposition = ({ form }: Props) => {

@@ -4,6 +4,7 @@ import React from 'react'
 import { QuantityController } from '@/shared/ui/quantity-controller'
 
 import { CartItem, useCartStore } from '@/entities/cart'
+import img_placeholder from '@/shared/assets/images/placeholders/img-square.png'
 import { OrderItemCard } from '../../../../entities/order/ui/order-item-card'
 
 type Props = {
@@ -25,7 +26,7 @@ export const OrderField = ({
     <div className='flex flex-col gap-y-4 border-b border-b-primary-light py-4 xl:flex-row xl:justify-between xl:pt-6'>
       {/* First row: Poster, title and ingredients */}
       <OrderItemCard
-        image={item.dish.image}
+        image={item.dish.image || img_placeholder.src}
         ingredients={item.ingredients}
         title={item.dish.title}
         editIngredientSlot={editIngredientSlot}

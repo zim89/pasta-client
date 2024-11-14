@@ -2,6 +2,7 @@ import Image from 'next/image'
 
 import { EditDishCount } from '@/features/root/edit-dish-count'
 import type { Dish } from '@/entities/dish'
+import img_placeholder from '@/shared/assets/images/placeholders/img-square.png'
 import { DeliveryModal } from '../../delivery-modal'
 import { RecommendDishes } from '../../recommend-dishes'
 
@@ -11,7 +12,7 @@ export const ProductDetails = ({ dish }: { dish: Dish }) => {
       <section className='flex flex-col gap-5 md:flex-row md:gap-12 xl:gap-[100px]'>
         <div className='relative h-[251px] overflow-hidden rounded-[16.89px] border-[0.56px] border-black/30 md:h-[367px] md:w-[347px] md:rounded-4xl xl:h-[454px] xl:w-[620px]'>
           <Image
-            src={dish.image}
+            src={dish.image || img_placeholder}
             alt={dish.title}
             fill
             sizes='100%'

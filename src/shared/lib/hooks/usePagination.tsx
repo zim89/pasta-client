@@ -33,7 +33,7 @@ export const usePagination = (data: Dish[]) => {
 
     if (filter) {
       result = result.filter(dish =>
-        dish.type.toLowerCase().includes(filter.toLowerCase()),
+        dish.category.name.toLowerCase().includes(filter.toLowerCase()),
       )
     }
 

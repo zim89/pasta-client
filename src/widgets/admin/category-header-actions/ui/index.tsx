@@ -1,20 +1,20 @@
 import { PlusCircle } from 'lucide-react'
 
-import { AddAdvantage } from '@/features/admin/create-advantage'
+import { CreateCategory } from '@/features/admin/create-category'
 import { AdminDialog } from '@/shared/ui/admin/admin-dialog'
 import { HeaderActions } from '@/shared/ui/admin/admin-header-actions'
 
-export const AdvantageHeaderActions = () => {
+export const CategoryHeaderActions = () => {
   return (
-    <HeaderActions title='Переваги'>
+    <HeaderActions title='Категорії'>
       <AdminDialog
-        title='Додати секцію'
+        title='Додати категорію'
         buttonProps={{
-          text: 'Додати секцію',
+          text: 'Додати категорію',
           leftSection: <PlusCircle size={24} />,
         }}
       >
-        {() => <AddAdvantage />}
+        {() => <CreateCategory />}
       </AdminDialog>
     </HeaderActions>
   )

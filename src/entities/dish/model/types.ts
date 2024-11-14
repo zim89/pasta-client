@@ -6,11 +6,14 @@ export type Dish = {
   volume: number | null
   composition: null | string
   price: number
-  image: string
-  type: string
+  image: string | null
   isNew: boolean
   customizable: boolean
   orderCount: number
+  category: {
+    id: number
+    name: string
+  }
 }
 
 export interface HitsAndNewsResponse {

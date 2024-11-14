@@ -16,6 +16,7 @@ import {
   LIQPAY_TEST_PUBLIC_KEY,
 } from '@/shared/constants'
 import { constructLiqpayPayload } from '@/shared/lib/utils/liqpay'
+import img_placeholder from '@/shared/assets/images/placeholders/img-square.png'
 import { formatDeliveryString } from './lib/format-delivery-string'
 
 export const ConfirmationPage = () => {
@@ -202,7 +203,7 @@ export const ConfirmationPage = () => {
                   className='border-b border-b-primary xl:flex xl:items-center xl:justify-between xl:pb-4'
                 >
                   <OrderItemCard
-                    image={item.dish.image}
+                    image={item.dish.image || img_placeholder.src}
                     title={item.dish.title}
                     ingredients={item.ingredients}
                   />

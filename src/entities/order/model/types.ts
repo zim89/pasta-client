@@ -10,7 +10,7 @@ export type OrderItem = {
     composition: Dish['composition']
     price: Dish['price']
     image: Dish['image']
-    type: Dish['type']
+    category: Dish['category']
     isNew: Dish['isNew']
   }
   orderItemIngredients: { id: Ingredient['id']; quantity: number }[]

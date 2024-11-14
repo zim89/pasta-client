@@ -24,8 +24,8 @@ export const DishDetailsPage = ({ slug }: { slug: string }) => {
               ? [
                   { href: APP_PAGES.MENU, label: 'Меню' },
                   {
-                    href: `${APP_PAGES.MENU}?filter=${data.type}`,
-                    label: data.type,
+                    href: `${APP_PAGES.MENU}?filter=${data.category.name}`,
+                    label: data.category.name,
                   },
                   { label: data.title },
                 ]
