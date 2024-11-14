@@ -1,8 +1,9 @@
 import * as React from 'react'
-import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
 import Link from 'next/link'
-import { cn } from '@/shared/lib/utils/cn-merge'
+import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
+
 import { ButtonProps, buttonVariants } from '@/shared/ui/common/button'
+import { cn } from '@/shared/lib/utils/cn-merge'
 
 const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
   <nav
@@ -30,11 +31,7 @@ const PaginationItem = React.forwardRef<
   HTMLLIElement,
   React.ComponentProps<'li'>
 >(({ className, ...props }, ref) => (
-  <li
-    ref={ref}
-    className={cn('', className)}
-    {...props}
-  />
+  <li ref={ref} className={cn('', className)} {...props} />
 ))
 PaginationItem.displayName = 'PaginationItem'
 
@@ -52,12 +49,12 @@ const PaginationLink = ({
   <Link
     aria-current={isActive ? 'page' : undefined}
     className={cn(
-      'h-10 w-10 rounded-full border border-primary-light/50 p-0',
+      'h-10 w-10 rounded-full border border-primary-light p-0 text-primary-dark',
       buttonVariants({
         variant: isActive ? 'activeLink' : 'link',
-        size
+        size,
       }),
-      className
+      className,
     )}
     {...props}
   />
@@ -73,7 +70,7 @@ const PaginationPrevious = ({
     size='default'
     className={cn(
       'h-10 w-10 gap-1 rounded-full border border-primary-light/50 p-0 text-primary-light',
-      className
+      className,
     )}
     {...props}
   >
@@ -91,7 +88,7 @@ const PaginationNext = ({
     size='default'
     className={cn(
       'h-10 w-10 gap-1 rounded-full border border-primary-light/50 p-0 text-primary-light',
-      className
+      className,
     )}
     {...props}
   >
@@ -108,14 +105,11 @@ const PaginationEllipsis = ({
     aria-hidden
     className={cn(
       'flex h-10 w-10 items-center justify-center gap-1 rounded-full border border-primary-light/50 p-0',
-      className
+      className,
     )}
     {...props}
   >
-    <MoreHorizontal
-      className='-mb-3 h-4 w-4'
-      color='#00111480'
-    />
+    <MoreHorizontal className='-mb-3 h-4 w-4' color='#00111480' />
     <span className='sr-only'>More pages</span>
   </span>
 )
@@ -128,5 +122,5 @@ export {
   PaginationItem,
   PaginationLink,
   PaginationNext,
-  PaginationPrevious
+  PaginationPrevious,
 }

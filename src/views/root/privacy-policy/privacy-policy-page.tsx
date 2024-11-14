@@ -1,3 +1,7 @@
 export const PrivacyPolicyPage = () => {
-  return <div>PrivacyPolicyPage</div>
+  return (
+    <div className='page-wrap'>
+      <div className='container'>PrivacyPolicyPage</div>
+    </div>
+  )
 }

@@ -26,7 +26,7 @@ export const HitsSlider = ({ data }: { data: Dish[] }) => {
           {data.map(dish => (
             <CarouselItem
               key={dish.id}
-              className='basis-1/2 pl-[38px] xl:basis-1/3 xl:pl-16'
+              className='basis-1/2 pl-[38px] xl:basis-1/3 xl:p-2 xl:pl-16'
             >
               <ProductCard
                 dish={dish}

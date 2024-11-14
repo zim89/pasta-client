@@ -20,13 +20,14 @@ export const ProductCard = ({
   isHit?: boolean
 }) => {
   return (
-    <div className='relative w-full overflow-hidden rounded-[30px] border border-primary-light/50'>
+    <div className='relative w-full overflow-hidden rounded-[30px] border border-primary-light/50 transition-shadow duration-300 hover:border-background hover:shadow-[2px_5px_12px_0_rgb(214,220,220)]'>
       <Link href={`${APP_PAGES.MENU}/${dish.slug}`}>
         <div className='relative aspect-[5/3.8417]'>
           <Image
             src={dish.image ? dish.image : img_placeholder}
             fill
             sizes='100%'
+            priority
             alt={dish.title}
             className='object-cover'
           />
