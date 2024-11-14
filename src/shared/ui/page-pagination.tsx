@@ -44,31 +44,37 @@ export const PagePagination = ({ total }: { total: number }) => {
                   path + '?' + createQueryString('page', (page - 1).toString())
                 }
                 className={cn(
+                  'border-primary-light/50 text-primary-light/50 transition-colors duration-300 hover:border-primary-light hover:text-primary-light',
                   page === 1 &&
-                    'border-grey/50 text-grey/50 pointer-events-none cursor-auto',
+                    'pointer-events-none cursor-auto border-gray-500/50 text-gray-500/50',
                 )}
               />
             </PaginationItem>
 
             <div className='flex items-center gap-5'>
-              {Array.from({ length: pages }).map((_, index) => (
-                <PaginationItem key={index}>
-                  <PaginationLink
-                    href={
-                      path +
-                      '?' +
-                      createQueryString('page', (index + 1).toString())
-                    }
-                    isActive={index + 1 === page}
-                    className={cn(
-                      'text-lg/[23.4px]',
-                      index + 1 === page && 'border-primary-light text-black',
-                    )}
-                  >
-                    {index + 1}
-                  </PaginationLink>
-                </PaginationItem>
-              ))}
+              {Array.from({ length: pages }).map((_, index) => {
+                const isActive = index + 1 === page
+
+                return (
+                  <PaginationItem key={index}>
+                    <PaginationLink
+                      href={
+                        path +
+                        '?' +
+                        createQueryString('page', (index + 1).toString())
+                      }
+                      isActive={isActive}
+                      className={cn(
+                        'border border-primary-light text-lg/[23.4px] text-primary-dark opacity-100 transition-colors duration-300 hover:border-primary-light hover:bg-primary-lighter',
+                        isActive &&
+                          'pointer-events-none bg-primary-light/50 hover:border-primary-light hover:bg-primary-light/50',
+                      )}
+                    >
+                      {index + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                )
+              })}
             </div>
 
             <PaginationItem>
@@ -77,8 +83,9 @@ export const PagePagination = ({ total }: { total: number }) => {
                   path + '?' + createQueryString('page', (page + 1).toString())
                 }
                 className={cn(
+                  'border-primary-light/50 text-primary-light/50 transition-colors duration-300 hover:border-primary-light hover:text-primary-light',
                   page === pages &&
-                    'border-grey/50 text-grey/50 pointer-events-none cursor-auto',
+                    'pointer-events-none cursor-auto border-gray-500/50 text-gray-500/50',
                 )}
               />
             </PaginationItem>

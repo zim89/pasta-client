@@ -35,7 +35,6 @@ export const FilterBar = () => {
       >
         <CarouselContent className='-ml-5'>
           {DISH_TYPES.map(category => {
-            console.log(searchParams.get('filter'))
             const isActive =
               searchParams.get('filter') === category.value ||
               (category.value === 'Все меню' && !searchParams.has('filter'))

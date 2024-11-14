@@ -1,3 +1,7 @@
 export const PublicOfferPage = () => {
-  return <div>PublicOfferPage</div>
+  return (
+    <div className='page-wrap'>
+      <div className='container'>PublicOfferPage</div>
+    </div>
+  )
 }

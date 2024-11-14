@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
+import { APP_PAGES } from '@/shared/constants'
 import img_placeholder from '@/shared/assets/images/placeholders/img-square.png'
 import { formatMass } from '../lib'
 import type { Dish } from '../model'
@@ -12,8 +14,12 @@ export const NewsCard = ({
   dish: Dish
   addToCartSlot: ReactNode
 }) => {
+  // shadow-[2px_5px_12px_rgb(214 220 220)]
   return (
-    <div className='flex gap-[22px] overflow-clip rounded-xl border border-primary-light/50 xl:gap-[18px] xl:rounded-[30px]'>
+    <Link
+      href={`${APP_PAGES.MENU}/${dish.slug}`}
+      className='flex gap-[22px] overflow-hidden rounded-xl border border-primary-light/50 shadow-none transition-shadow duration-300 hover:border-background hover:shadow-[2px_5px_12px_0_rgb(214,220,220)] xl:gap-[18px] xl:rounded-[30px]'
+    >
       <div className='relative h-[159px] w-[135px] xl:h-[196px] xl:w-[196px]'>
         <Image
           src={dish.image ? dish.image : img_placeholder}
@@ -46,6 +52,6 @@ export const NewsCard = ({
           {addToCartSlot && addToCartSlot}
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

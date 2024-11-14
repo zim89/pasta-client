@@ -18,6 +18,7 @@ import {
   SheetTrigger,
 } from '@/shared/ui/common/sheet'
 import { cn } from '@/shared/lib/utils'
+import { EmptyCart } from './empty-cart'
 import { Indicator } from './indicator'
 
 const forbiddenPaths = ['/checkout', '/confirmation']
@@ -68,6 +69,7 @@ export const CartButton = () => {
         </SheetHeader>
 
         <ScrollArea type='auto' className='pr-3 landscape:min-h-[160px]'>
+          {cart.length === 0 && <EmptyCart />}
           {cart.length > 0 && (
             <ul className='grid grid-cols-1 gap-4 md:gap-6'>
               {cart.map(item => (
@@ -80,18 +82,23 @@ export const CartButton = () => {
         </ScrollArea>
 
         <SheetFooter className='space-y-10 md:space-y-8'>
-          <p className='flex items-baseline justify-between py-4 font-medium md:py-3'>
-            <span className='text-lg/[23.4px]'>Всього:</span>
-            <UAHFormatter value={totalPrice} className='text-xl/[26px]' />
-          </p>
+          {cart.length > 0 && (
+            <p className='flex items-baseline justify-between py-4 font-medium md:py-3'>
+              <span className='text-lg/[23.4px]'>Всього:</span>
+              <UAHFormatter value={totalPrice} className='text-xl/[26px]' />
+            </p>
+          )}
           <div className='space-y-8'>
             <Link
               href='/checkout'
               className={cn(
                 'btn-primary',
+                path === '/checkout' ||
+                  (cart.length === 0 &&
+                    'pointer-events-none border-disabled bg-disabled text-gray-600'),
                 forbiddenPaths.includes(path) ||
                   (!cart.length &&
-                    'pointer-events-none border-gray-700 bg-gray-600'),
+                    'pointer-events-none border-disabled bg-disabled text-gray-600'),
               )}
             >
               Оформити замовлення

@@ -1,6 +1,8 @@
 'use client'
 
+import { useEffect } from 'react'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { PageBreadcrumbs } from '@/shared/ui'
 import { useQuery } from '@tanstack/react-query'
 import { ChevronLeft } from 'lucide-react'
@@ -10,10 +12,20 @@ import { dishService } from '@/entities/dish'
 import { APP_PAGES, QUERY_KEYS } from '@/shared/constants'
 
 export const DishDetailsPage = ({ slug }: { slug: string }) => {
-  const { isLoading, data } = useQuery({
+  const { isLoading, data, error } = useQuery({
     queryKey: [QUERY_KEYS.DISH, slug],
     queryFn: () => dishService.getDishBySlug(slug),
+    retry: false,
   })
+
+  useEffect(() => {
+    if (error) {
+      const e = error as Error & { status: number }
+      if (e.status === 404) {
+        return notFound()
+      }
+    }
+  }, [error])
 
   return (
     <div className='page-wrap'>
