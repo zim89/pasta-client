@@ -91,11 +91,11 @@ export const CartButton = () => {
           <div className='space-y-8'>
             <Link
               href='/checkout'
+              onClick={toggleCartDrawer}
               className={cn(
                 'btn-primary',
-                path === '/checkout' ||
-                  (cart.length === 0 &&
-                    'pointer-events-none border-disabled bg-disabled text-gray-600'),
+                (path === '/checkout' || cart.length === 0) &&
+                  'pointer-events-none border-disabled bg-disabled text-gray-600',
                 forbiddenPaths.includes(path) ||
                   (!cart.length &&
                     'pointer-events-none border-disabled bg-disabled text-gray-600'),
