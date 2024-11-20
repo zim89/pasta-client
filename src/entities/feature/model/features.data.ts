@@ -17,13 +17,7 @@ export const FEATURES_DATA: Feature[] = [
     icon_sm: feat1_sm,
     icon: feat1,
   },
-  {
-    title: 'Зручна оплата',
-    desc: 'Оплата готівкою або карткою',
-    desc_full: 'Ви можете розрахуватись готівкою, карткою або безготівково',
-    icon_sm: feat3_sm,
-    icon: feat3,
-  },
+
   {
     title: 'Персоналізація страв',
     desc: 'Додай улюблений інгредієнт',
@@ -31,7 +25,6 @@ export const FEATURES_DATA: Feature[] = [
     icon_sm: feat2_sm,
     icon: feat2,
   },
-
   {
     title: 'Безкоштовна доставка',
     desc: 'При замовленні від 700 грн',
@@ -39,5 +32,12 @@ export const FEATURES_DATA: Feature[] = [
       'При замовленні від 700 грн - безкоштовна доставка в радіусі 2 км від кафе',
     icon_sm: feat4_sm,
     icon: feat4,
+  },
+  {
+    title: 'Зручна оплата',
+    desc: 'Оплата готівкою або карткою',
+    desc_full: 'Ви можете розрахуватись готівкою, карткою або безготівково',
+    icon_sm: feat3_sm,
+    icon: feat3,
   },
 ]
