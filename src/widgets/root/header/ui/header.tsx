@@ -4,7 +4,7 @@ import { CSSProperties, useEffect, useState } from 'react'
 import { PinIcon } from '@/shared/ui'
 import { PhoneIcon } from '@/shared/ui/icons'
 
-import { ADDRESS_SHORT, ORDER_TIME, PHONE_SHORT } from '@/shared/constants'
+import { ADDRESS_SHORT, ORDER_TIME, PHONE } from '@/shared/constants'
 import { InstagramButton } from '../../footer/ui'
 import { Navbar } from './navbar'
 import { SearchButton } from './search-button'
@@ -61,7 +61,7 @@ export const Header = () => {
                   className='flex items-center gap-1 text-white transition-colors duration-300 hover:text-accent xl:pl-6'
                 >
                   <PhoneIcon />
-                  <p>{PHONE_SHORT}</p>
+                  <p>{PHONE}</p>
                 </a>
 
                 <InstagramButton className='hidden xl:flex' />
