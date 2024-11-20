@@ -32,12 +32,16 @@ export const PageBreadcrumbs = ({
               {href ? (
                 <BreadcrumbItem className='opacity-50'>
                   <BreadcrumbLink asChild>
-                    <Link href={href}>{label}</Link>
+                    <Link href={href} className='capitalize'>
+                      {label}
+                    </Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
               ) : (
                 <BreadcrumbItem>
-                  <BreadcrumbLink>{label}</BreadcrumbLink>
+                  <BreadcrumbLink className='capitalize'>
+                    {label}
+                  </BreadcrumbLink>
                 </BreadcrumbItem>
               )}
             </Fragment>

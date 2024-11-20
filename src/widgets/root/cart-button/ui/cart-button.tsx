@@ -17,6 +17,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/shared/ui/common/sheet'
+import { APP_PAGES } from '@/shared/constants'
 import { cn } from '@/shared/lib/utils'
 import { EmptyCart } from './empty-cart'
 import { Indicator } from './indicator'
@@ -91,11 +92,11 @@ export const CartButton = () => {
           <div className='space-y-8'>
             <Link
               href='/checkout'
+              onClick={toggleCartDrawer}
               className={cn(
                 'btn-primary',
-                path === '/checkout' ||
-                  (cart.length === 0 &&
-                    'pointer-events-none border-disabled bg-disabled text-gray-600'),
+                (path === '/checkout' || cart.length === 0) &&
+                  'pointer-events-none border-disabled bg-disabled text-gray-600',
                 forbiddenPaths.includes(path) ||
                   (!cart.length &&
                     'pointer-events-none border-disabled bg-disabled text-gray-600'),
@@ -103,9 +104,13 @@ export const CartButton = () => {
             >
               Оформити замовлення
             </Link>
-            <SheetClose aria-hidden='true' className='btn-secondary'>
-              Повернутися до покупок
-            </SheetClose>
+            <Link
+              href={APP_PAGES.MENU}
+              onClick={toggleCartDrawer}
+              className='btn-secondary'
+            >
+              Повернутися до меню
+            </Link>
           </div>
         </SheetFooter>
       </SheetContent>
