@@ -45,7 +45,7 @@ export const DeliveryModal = ({ className }: { className?: string }) => {
           <div className='space-y-4 text-lg/[23.4px]'>
             <h3 className='text-[26px]/[31.47px] font-medium'>Доставка</h3>
             <div className='space-y-3'>
-              <p>Доставка - щоденно з 12.00 до 20.00.</p>
+              <p>Замовлення - щоденно з 12.00 до 20.00.</p>
               <p>
                 Доставка здійснюється таксі, за тарифами оператора, з розрахунку{' '}
                 <span className='text-primary-light'>10грн - 1 км.</span>
