@@ -29,14 +29,9 @@ export const PaymentMethodField = ({ form }: Props) => {
                 marginTop: 0,
               }}
             >
-              <RadioGroup required>
+              <RadioGroup required defaultValue={field.value}>
                 <div className='flex items-center space-x-2'>
-                  <RadioGroupItem
-                    {...field}
-                    value={`${field.value}`}
-                    id='card'
-                    required
-                  />
+                  <RadioGroupItem {...field} id='card' required />
                   <Label htmlFor='card'>Карткою онлайн</Label>
                 </div>
               </RadioGroup>

@@ -34,7 +34,6 @@ export const DeliverySection = ({ form }: Props) => {
             >
               <Input id='city' {...field} disabled />
             </FormControl>
-            <FormMessage />
           </FormItem>
         )}
       />
@@ -54,7 +53,7 @@ export const DeliverySection = ({ form }: Props) => {
             >
               <Input id='street' {...field} placeholder='Введіть вулицю' />
             </FormControl>
-            <FormMessage />
+            <FormMessage className='text-danger' />
           </FormItem>
         )}
       />
@@ -74,7 +73,7 @@ export const DeliverySection = ({ form }: Props) => {
             >
               <Input {...field} placeholder='Введіть номер будинку' required />
             </FormControl>
-            <FormMessage />
+            <FormMessage className='text-danger' />
           </FormItem>
         )}
       />
@@ -92,7 +91,6 @@ export const DeliverySection = ({ form }: Props) => {
             >
               <Input {...field} placeholder="Введіть номер під'їзду" />
             </FormControl>
-            <FormMessage />
           </FormItem>
         )}
       />
@@ -112,7 +110,6 @@ export const DeliverySection = ({ form }: Props) => {
             >
               <Input {...field} placeholder='Введіть номер квартири' />
             </FormControl>
-            <FormMessage />
           </FormItem>
         )}
       />
@@ -130,7 +127,6 @@ export const DeliverySection = ({ form }: Props) => {
             >
               <Input {...field} placeholder='Введіть номер поверху' />
             </FormControl>
-            <FormMessage />
           </FormItem>
         )}
       />
@@ -148,7 +144,6 @@ export const DeliverySection = ({ form }: Props) => {
             >
               <Input {...field} placeholder='Введіть код домофону' />
             </FormControl>
-            <FormMessage />
           </FormItem>
         )}
       />

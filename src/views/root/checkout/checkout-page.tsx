@@ -29,7 +29,7 @@ export const CheckoutPage = () => {
             <OrderForm />
           </TabsContent>
           <TabsContent value='pickup'>
-            <PickupOrderForm ordersSlot={<OrderSection />} />
+            <PickupOrderForm OrdersSlot={OrderSection} />
           </TabsContent>
         </Tabs>
       </div>

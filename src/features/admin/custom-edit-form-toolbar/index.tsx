@@ -4,7 +4,11 @@ import { DeleteButton, SaveButton } from 'react-admin'
 
 import { AdminDeleteModal } from '@/shared/ui/admin/admin-delete-modal'
 
-export const CustomEditFormToolbar = () => {
+type Props = {
+  DeleteButtonSlot?: React.ReactNode
+}
+
+export const CustomEditFormToolbar = ({ DeleteButtonSlot }: Props) => {
   return (
     <div className='flex justify-between p-4'>
       <SaveButton label='Зберегти' />
@@ -23,7 +27,11 @@ export const CustomEditFormToolbar = () => {
             Даний запис вже не можна буде повернути.
           </DialogDescription>
         </DialogHeader>
-        <DeleteButton className='max-w-min' label='Видалити' />
+        {DeleteButtonSlot ? (
+          DeleteButtonSlot
+        ) : (
+          <DeleteButton className='max-w-min' label='Видалити' />
+        )}
       </AdminDeleteModal>
     </div>
   )

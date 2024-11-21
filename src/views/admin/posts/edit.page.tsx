@@ -5,6 +5,7 @@ import { EditBase, SimpleForm, TextInput, UrlField } from 'react-admin'
 import { CustomEditFormToolbar } from '@/features/admin/custom-edit-form-toolbar'
 import { AdminUnsavedChangesModal } from '@/shared/ui/admin/admin-unsaved-changes-modal'
 import { BrandImageInput } from '@/shared/ui/admin/brand-image-input'
+import { requiredField } from '@/shared/lib/utils/validations'
 
 export const EditPost = () => {
   return (
@@ -17,9 +18,9 @@ export const EditPost = () => {
         <div className='p-2'>
           Діюче посилання: <UrlField source='link' />
         </div>
-        <TextInput source='link' />
+        <TextInput validate={requiredField} source='link' />
 
-        <BrandImageInput source='image' />
+        <BrandImageInput validate={requiredField} source='image' />
       </SimpleForm>
     </EditBase>
   )

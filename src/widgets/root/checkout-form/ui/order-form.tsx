@@ -2,8 +2,6 @@
 
 import { useRef, useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui'
-import { OrderControllers } from '@/shared/ui/order-controllers'
-import { ReturnToMenu } from '@/shared/ui/return-to-menu'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -16,6 +14,7 @@ import {
   LIQPAY_TEST_PRIVATE_KEY,
   LIQPAY_TEST_PUBLIC_KEY,
 } from '@/shared/constants'
+import { cn } from '@/shared/lib/utils'
 import { constructLiqpayPayload } from '@/shared/lib/utils/liqpay'
 import { PaymentSection } from '../../payment-section'
 import { ControlledFields } from '../model'
@@ -121,7 +120,7 @@ export const OrderForm = () => {
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)}>
+        <form noValidate onSubmit={form.handleSubmit(handleSubmit)}>
           <Tabs value={currentTab} onValueChange={val => setCurrentTab(val)}>
             <TabsList className='mx-auto grid w-full max-w-32 grid-cols-2 gap-4'>
               <TabsTrigger
@@ -137,31 +136,24 @@ export const OrderForm = () => {
             <TabsContent value='address'>
               <div className='my-12 flex flex-col gap-8 md:flex-row md:gap-[52px] xl:gap-[180px]'>
                 <DeliverySection form={form} />
-                <OrderSection />
+                <OrderSection
+                  proceedOrderSlot={<ProceedOrder onSubmit={proceedNext} />}
+                />
               </div>
-
-              <OrderControllers
-                proceedOrderSlot={<ProceedOrder onSubmit={proceedNext} />}
-                returnToMenuSlot={<ReturnToMenu />}
-              />
             </TabsContent>
             <TabsContent value='contacts'>
-              <PaymentSection form={form} />
-
-              <OrderControllers
-                className='mt-10 md:mt-[60px]'
+              <PaymentSection
+                form={form}
                 proceedOrderSlot={
                   <ProceedOrder
-                    className={
-                      !cart.length
-                        ? 'pointer-events-none border-gray-700 bg-gray-600'
-                        : ''
-                    }
+                    className={cn(
+                      !cart.length &&
+                        'pointer-events-none border-gray-700 bg-gray-600',
+                    )}
                   >
                     Оплатити
                   </ProceedOrder>
                 }
-                returnToMenuSlot={<ReturnToMenu />}
               />
             </TabsContent>
           </Tabs>

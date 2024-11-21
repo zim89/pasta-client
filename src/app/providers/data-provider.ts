@@ -2,6 +2,7 @@ import { DataProvider, fetchUtils } from 'react-admin'
 
 import { SERVER_URL } from '@/shared/constants'
 import { retrieveToken } from '@/shared/lib/utils/admin-data-provider-funcs'
+import { transliterate } from '@/shared/lib/utils/transliteration'
 
 const resourcesWithImages = [
   'dish',
@@ -63,13 +64,15 @@ export const dataProvider: DataProvider = {
       const form = new FormData()
 
       for (const prop in data) {
-        form.append(prop, data[prop] || null)
+        form.append(prop, data[prop])
       }
       form.delete('image')
       form.append('image', data.image.rawFile)
 
       if (resource === 'dish') {
         form.append('isNew', 'true')
+      } else if (resource === 'ingredient') {
+        form.append('name', transliterate(data.label))
       }
 
       requestBody = form
@@ -94,6 +97,14 @@ export const dataProvider: DataProvider = {
     const { id } = params
 
     const { token } = retrieveToken()
+
+    if (resource === 'category') {
+      const res = await dataProvider.deleteMany('category', { ids: [id] })
+
+      return {
+        data: res.data,
+      }
+    }
 
     const response = await fetchUtils.fetchJson(
       `${SERVER_URL}/${resource}/${id}`,
@@ -125,6 +136,12 @@ export const dataProvider: DataProvider = {
       }
       form.delete('image')
       form.append('image', data.image.rawFile)
+
+      if (resource === 'dish') {
+        form.set('category', data.category.name)
+      } else if (resource === 'ingredient') {
+        form.set('name', transliterate(data.label))
+      }
 
       requestBody = form
     } else {
