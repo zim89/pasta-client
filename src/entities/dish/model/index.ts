@@ -1,1 +1,1 @@
-export type { Dish, HitsAndNewsResponse } from './types'
+export type * from './types'

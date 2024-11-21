@@ -1,26 +1,17 @@
 'use client'
 
-import { PropsWithChildren, useState } from 'react'
+import { PropsWithChildren } from 'react'
 import { UnsavedChangesProvider } from '@/shared/context/root-unsaved-changes'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import { CartStoreProvider } from '@/entities/cart'
 import { Toaster } from '@/shared/ui/common/sonner'
+import { queryClient } from '@/shared/api'
 
 export const Providers = ({ children }: PropsWithChildren) => {
-  const [client] = useState(
-    new QueryClient({
-      defaultOptions: {
-        queries: {
-          refetchOnWindowFocus: false,
-        },
-      },
-    }),
-  )
-
   return (
-    <QueryClientProvider client={client}>
+    <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <UnsavedChangesProvider>
         <CartStoreProvider>
