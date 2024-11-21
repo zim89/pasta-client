@@ -12,8 +12,8 @@ export const HomePage = () => {
       <NewProducts />
       <HitProducts />
       <Features />
-      <Contacts />
       <InstagramPosts />
+      <Contacts />
     </div>
   )
 }
