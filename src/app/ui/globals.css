@@ -17,7 +17,7 @@
   }
 
   .section h2 {
-    @apply mb-6 text-center text-[28px]/[36.4px] tracking-wide md:mb-8 md:text-left md:text-[32px]/[41.6px] xl:mb-10 xl:text-center xl:text-[40px]/[52px];
+    @apply mb-6 text-center text-[28px]/[33.6px] font-medium tracking-wide md:mb-8 md:text-left md:text-[32px]/[41.6px] xl:mb-10 xl:text-center xl:text-[40px]/[52px];
   }
 
   .textLink-light {
