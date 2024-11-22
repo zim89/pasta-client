@@ -3,14 +3,13 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { Button } from '@/shared/ui'
 import { Check, Edit2, X } from 'lucide-react'
-import { useShowContext } from 'react-admin'
+import { useShowContext, useUpdate } from 'react-admin'
 
 import { Order } from '@/entities/order/model/types'
 import { AdminDialog } from '@/shared/ui/admin/admin-dialog'
 
 export const ShowOrder = () => {
   const streetField = useRef<HTMLDivElement>(null)
-
   const { record, refetch } = useShowContext()
   const [source, setSource] = useState<Order>(record)
   const [isEditingOrder, setIsEditingOrder] = useState(false)
@@ -19,11 +18,13 @@ export const ShowOrder = () => {
       street: '',
       houseNumber: '',
       apartmentNumber: '',
-      city: '',
+      city: 'Київ',
       region: '',
       postalCode: '',
     },
   )
+
+  const [update] = useUpdate()
 
   useEffect(() => {
     if (record) return
@@ -43,14 +44,93 @@ export const ShowOrder = () => {
     if (source) setAddress(source.deliveryAdress)
   }, [source])
 
-  const handleInput = (text: string, param: keyof Order['deliveryAdress']) => {
-    setAddress(prev => ({ ...prev, [param]: text }))
+  const handleInput = (
+    source: EventTarget & HTMLDivElement,
+    value: string | number,
+    param: keyof Order['deliveryAdress'],
+  ) => {
+    // Update the state with the new value
+
+    setAddress(prev => {
+      return { ...prev, [param]: value }
+    })
+
+    // Ensure the value is a string
+    const valueStr = value.toString()
+
+    // Wait for the DOM to update with the new value
+    setTimeout(() => {
+      // Create a range and set the start and end positions
+      const range = document.createRange()
+      const selection = window.getSelection()
+
+      // Ensure the source has the correct text content
+      source.textContent = valueStr
+
+      // Set the caret position to the end of the text content
+      const textNode = source.firstChild
+      if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+        const offset = Math.min(
+          valueStr.length,
+          textNode.textContent?.length || 0,
+        )
+        range.setStart(textNode, offset)
+        range.setEnd(textNode, offset)
+
+        // Remove all ranges from the selection
+        selection?.removeAllRanges()
+
+        // Add the new range to the selection
+        selection?.addRange(range)
+      }
+    }, 0)
   }
 
   if (!source) return null
 
-  const handleUpdate = () => {
-    console.log(address)
+  const handleNumberInput = (
+    e: React.ChangeEvent<HTMLDivElement>,
+    param: keyof Order['deliveryAdress'],
+  ) => {
+    const textContent = e.target.textContent
+    if (textContent && !isNaN(Number(textContent))) {
+      handleInput(e.target, Number(textContent), param)
+    } else {
+      // Prevent the default behavior if the input is not a valid number
+      e.preventDefault()
+    }
+  }
+
+  const handleUpdate = async () => {
+    try {
+      await update('order', {
+        id: source.id,
+        data: {
+          items: source.orderItems.map(orderItem => ({
+            dishId: orderItem.dish.id,
+            ingridients: orderItem.orderItemIngredients.map(ingr => ({
+              ingridientId: ingr.id,
+              quantity: ingr.quantity,
+            })),
+          })),
+          pickup: source.pickup,
+          deliveryDetails: {
+            city: source.deliveryAdress.city,
+            street: address.street,
+            buildingNumber: address.buildingNumber,
+            entrance: address.entrance,
+            flatNumber: address.flatNumber,
+            floor: address.floor,
+            intercomCode: address.intercomCode,
+          },
+          orderDetails: source.orderDetail,
+        },
+      })
+      setIsEditingOrder(false)
+    } catch (err) {
+      setIsEditingOrder(false)
+      console.error(err)
+    }
   }
 
   return (
@@ -173,6 +253,10 @@ export const ShowOrder = () => {
                   ref={streetField}
                   contentEditable={isEditingOrder}
                   suppressContentEditableWarning
+                  onInput={(e: ChangeEvent<HTMLDivElement>) =>
+                    e.target.textContent &&
+                    handleInput(e.target, e.target.textContent, 'street')
+                  }
                   className={
                     'border-b border-l border-primary-lightest p-2 focus:rounded focus:!shadow-none'
                   }
@@ -193,9 +277,19 @@ export const ShowOrder = () => {
                 </h3>
                 <div
                   contentEditable={isEditingOrder}
+                  onChange={console.log}
                   suppressContentEditableWarning
                   className={
                     'border-b border-l border-primary-lightest p-2 focus:rounded focus:!shadow-none'
+                  }
+                  onInput={(e: ChangeEvent<HTMLDivElement>) =>
+                    e.target.textContent &&
+                    !isNaN(Number(e.target.textContent)) &&
+                    handleInput(
+                      e.target,
+                      Number(e.target.textContent),
+                      'buildingNumber',
+                    )
                   }
                   style={
                     isEditingOrder
@@ -217,6 +311,15 @@ export const ShowOrder = () => {
                     contentEditable={isEditingOrder}
                     suppressContentEditableWarning
                     className={'border-b border-l border-primary-lightest p-2'}
+                    onInput={(e: ChangeEvent<HTMLDivElement>) =>
+                      e.target.textContent &&
+                      typeof Number(e.target.textContent) === 'number' &&
+                      handleInput(
+                        e.target,
+                        Number(e.target.textContent),
+                        'flatNumber',
+                      )
+                    }
                     style={
                       isEditingOrder
                         ? {
@@ -237,6 +340,9 @@ export const ShowOrder = () => {
                   <div
                     contentEditable={isEditingOrder}
                     suppressContentEditableWarning
+                    onInput={(e: ChangeEvent<HTMLDivElement>) =>
+                      handleNumberInput(e, 'entrance')
+                    }
                     className={
                       'border-b border-l border-primary-lightest p-2 focus:rounded focus:!shadow-none'
                     }
@@ -261,7 +367,11 @@ export const ShowOrder = () => {
                     dangerouslySetInnerHTML={{ __html: address.intercomCode }}
                     onInput={(e: ChangeEvent<HTMLDivElement>) =>
                       e.target.textContent &&
-                      handleInput(e.target.textContent, 'intercomCode')
+                      handleInput(
+                        e.target,
+                        e.target.textContent,
+                        'intercomCode',
+                      )
                     }
                     className={
                       'border-l border-primary-lightest p-2 focus:rounded focus:!shadow-none'

@@ -1,17 +1,24 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useQuery } from '@tanstack/react-query'
 
+import { categoryService } from '@/entities/category'
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from '@/shared/ui/common/carousel'
+import { QUERY_KEYS } from '@/shared/constants'
 import { cn } from '@/shared/lib/utils'
-import { DISH_TYPES } from '../model'
 
 export const FilterBar = () => {
   const router = useRouter()
   const path = usePathname()
   const searchParams = useSearchParams()
+
+  const { isLoading, data } = useQuery({
+    queryKey: [QUERY_KEYS.CATEGORIES],
+    queryFn: () => categoryService.getCategories(),
+  })
 
   const onClick = (category: string) => {
     const params = new URLSearchParams(searchParams.toString())
@@ -26,36 +33,51 @@ export const FilterBar = () => {
   }
 
   return (
-    <div className='mb-8 h-[47px] max-w-screen-sm md:mb-10 md:max-w-max'>
+    <div className='mb-8 h-[47px] max-w-screen-sm md:mb-10 md:max-w-[300%]'>
       <Carousel
         opts={{
           align: 'start',
           slidesToScroll: 1,
         }}
       >
-        <CarouselContent className='-ml-5'>
-          {DISH_TYPES.map(category => {
-            const isActive =
-              searchParams.get('filter') === category.value ||
-              (category.value === 'Все меню' && !searchParams.has('filter'))
-
-            return (
-              <CarouselItem key={category.value} className='basis-auto pl-5'>
+        {!isLoading && data && (
+          <>
+            <CarouselContent className='-ml-5'>
+              <CarouselItem className='basis-auto pl-5'>
                 <button
-                  onClick={() => onClick(category.value)}
+                  onClick={() => onClick('Все меню')}
                   className={cn(
                     'h-[47px] rounded-[30px] border px-5 text-lg/[23.4px] xl:px-10',
-                    isActive
+                    !searchParams.get('filter')
                       ? 'border-primary-light text-primary-light'
                       : 'border-black/20 text-black',
                   )}
                 >
-                  {category.label}
+                  Все меню
                 </button>
               </CarouselItem>
-            )
-          })}
-        </CarouselContent>
+              {data.map(category => {
+                const isActive = searchParams.get('filter') === category.name
+
+                return (
+                  <CarouselItem key={category.name} className='basis-auto pl-5'>
+                    <button
+                      onClick={() => onClick(category.name)}
+                      className={cn(
+                        'h-[47px] rounded-[30px] border px-5 text-lg/[23.4px] capitalize xl:px-10',
+                        isActive
+                          ? 'border-primary-light text-primary-light'
+                          : 'border-black/20 text-black',
+                      )}
+                    >
+                      {category.name}
+                    </button>
+                  </CarouselItem>
+                )
+              })}
+            </CarouselContent>
+          </>
+        )}
       </Carousel>
     </div>
   )

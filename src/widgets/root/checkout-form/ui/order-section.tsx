@@ -1,11 +1,19 @@
 'use client'
 
+import { OrderControllers } from '@/shared/ui/order-controllers'
 import { OrderSummary } from '@/shared/ui/order-summary'
 
+import { ProceedOrder } from '@/features/root/proceed-order'
 import { useCartStore } from '@/entities/cart'
 import { OrderFields } from './order-fields'
 
-export const OrderSection = () => {
+type Props = {
+  proceedOrderSlot?: React.ReactNode
+}
+
+export const OrderSection = ({
+  proceedOrderSlot = <ProceedOrder />,
+}: Props) => {
   const { cart, totalPrice, decrementItem, incrementItem, removeFromCart } =
     useCartStore(state => state)
 
@@ -24,6 +32,10 @@ export const OrderSection = () => {
         removeFromCart={removeFromCart}
       />
       <OrderSummary totalPrice={totalPrice} />
+      <OrderControllers
+        className='mt-10 md:mt-[60px]'
+        proceedOrderSlot={proceedOrderSlot}
+      />
     </div>
   )
 }

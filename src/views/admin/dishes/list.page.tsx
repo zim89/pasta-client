@@ -98,25 +98,27 @@ export const ProductList = () => {
                 label='Фото'
               />
               <TextField source='title' label='Назва' />
-              <TextField source='type' sortable={false} label='Тип' />
+              <TextField source='category.name' sortable={false} label='Тип' />
               <TextField
                 source='composition'
                 sortable={false}
                 label='Композиція'
               />
               <TextField source='price' label='Ціна' />
-              <TextField source='weight' sortable={false} label='Вага' />
-              <TextField
-                source='weight'
-                sortable={false}
-                label='Вага'
-                emptyText='Не визначено'
-              />
-              <TextField
-                source='volume'
-                sortable={false}
-                label="Об'єм"
-                emptyText='Не визначено'
+              <WithRecord
+                label="Вага/Об'єм"
+                render={record => (
+                  <span>
+                    {/* Drink category: 13 */}
+                    {record.category.id === 13
+                      ? record.volume
+                        ? `${record.volume} л`
+                        : 'N/A'
+                      : record.weight
+                        ? `${record.weight} гр`
+                        : 'N/A'}
+                  </span>
+                )}
               />
             </EntitiesGrid>
           )}
@@ -143,7 +145,7 @@ export const ProductList = () => {
               label='Фото'
             />
             <TextField source='title' label='Назва' />
-            <TextField source='type' sortable={false} label='Тип' />
+            <TextField source='category.name' sortable={false} label='Тип' />
             <TextField
               source='composition'
               sortable={false}
@@ -154,9 +156,14 @@ export const ProductList = () => {
               label="Вага/Об'єм"
               render={record => (
                 <span>
-                  {record.type === 'Напої'
-                    ? `${record.volume} л`
-                    : `${record.weight} гр`}
+                  {/* Drink category: 13 */}
+                  {record.category.id === 13
+                    ? record.volume
+                      ? `${record.volume} л`
+                      : 'N/A'
+                    : record.weight
+                      ? `${record.weight} гр`
+                      : 'N/A'}
                 </span>
               )}
             />

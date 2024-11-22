@@ -8,9 +8,9 @@ export const calculateDays = (): { label: string; value: string }[] => {
     const date = new Date(today)
     date.setDate(today.getDate() + day)
 
-    const parsed = `${date.toLocaleString('ua', {
+    const parsed = `${date.toLocaleString('ua-UA', {
       dateStyle: 'short',
-    })} - ${date.toLocaleString('ua', {
+    })} - ${date.toLocaleString('ua-UA', {
       weekday: 'short',
     })}`
 

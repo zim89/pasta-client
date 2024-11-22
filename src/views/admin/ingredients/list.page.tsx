@@ -96,7 +96,7 @@ export const IngredientList = () => {
                 cellClassName='size-12 object-contain'
                 sortable={false}
               />
-              <TextField source='name' label='Найменування' />
+              <TextField source='label' label='Найменування' />
               <NumberField source='price' label='Ціна' cellClassName='size-2' />
               <NumberField
                 source='weight'
@@ -127,7 +127,7 @@ export const IngredientList = () => {
               cellClassName='size-12 object-contain'
               sortable={false}
             />
-            <TextField source='name' label='Найменування' />
+            <TextField source='label' label='Найменування' />
             <NumberField source='price' label='Ціна' cellClassName='size-2' />
             <NumberField source='weight' label='Вага' cellClassName='size-2' />
           </EntitiesGrid>

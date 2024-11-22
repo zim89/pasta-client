@@ -18,6 +18,7 @@ import {
 import { EntitiesGrid } from '@/widgets/admin/entities-grid'
 import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
 import { OrderHeaderActions } from '@/widgets/admin/order-header-actions'
+import { BulkDeleteOrders } from '@/features/admin/bulk-delete-orders'
 import { Order } from '@/entities/order/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
@@ -89,7 +90,10 @@ export const OrdersList = () => {
           }
           actions={<OrderHeaderActions />}
           renderGrid={rows => (
-            <EntitiesGrid displayedRows={rows}>
+            <EntitiesGrid
+              displayedRows={rows}
+              bulkActions={<BulkDeleteOrders />}
+            >
               <TextField source='number' label='Номер' />
               <TextField source='orderDetail.name' label='Клієнт' />
               <ArrayField source='orderItems' label='Продукти'>
@@ -119,7 +123,10 @@ export const OrdersList = () => {
           perPage={Number(limitParam)}
           actions={<OrderHeaderActions />}
         >
-          <EntitiesGrid displayedRows={paginated}>
+          <EntitiesGrid
+            displayedRows={paginated}
+            bulkActions={<BulkDeleteOrders />}
+          >
             <TextField source='number' label='Номер' />
             <TextField source='orderDetail.name' label='Клієнт' />
             <ArrayField source='orderItems' label='Продукти'>

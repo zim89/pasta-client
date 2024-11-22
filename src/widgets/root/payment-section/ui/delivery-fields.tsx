@@ -51,7 +51,6 @@ export const DeliveryFields = ({ form }: Props) => {
                   value={field.value}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -74,7 +73,7 @@ export const DeliveryFields = ({ form }: Props) => {
                       ? timeFrames
                       : [
                           {
-                            label: 'Заклад більше не працює в цей день. ',
+                            label: 'Заклад зачинений. ',
                             value: 'UNAVAILABLE',
                           },
                         ]
@@ -85,7 +84,7 @@ export const DeliveryFields = ({ form }: Props) => {
                   disabled={isPickup}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className='text-danger' />
             </FormItem>
           )}
         />

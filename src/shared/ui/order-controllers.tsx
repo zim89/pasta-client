@@ -4,24 +4,18 @@ import { cn } from '@/shared/lib/utils'
 
 type Props = {
   proceedOrderSlot: React.ReactNode
-  returnToMenuSlot: React.ReactNode
 } & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 
-export const OrderControllers = ({
-  proceedOrderSlot,
-  returnToMenuSlot,
-  ...rest
-}: Props) => {
+export const OrderControllers = ({ proceedOrderSlot, ...rest }: Props) => {
   return (
     <div
       {...rest}
       className={cn(
-        'flex flex-col justify-between gap-8 md:flex-row md:items-end',
+        'flex flex-col justify-end gap-8 md:flex-row md:items-end',
         rest.className,
       )}
     >
       {proceedOrderSlot}
-      <div className='mt-auto md:order-[-1]'>{returnToMenuSlot}</div>
     </div>
   )
 }

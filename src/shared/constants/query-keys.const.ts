@@ -4,4 +4,5 @@ export const QUERY_KEYS: Record<string, string> = {
   DISH: 'dish',
   INGREDIENTS: 'ingredients',
   ORDER: 'order',
+  CATEGORIES: 'categories',
 }

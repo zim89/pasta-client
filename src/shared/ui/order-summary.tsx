@@ -20,7 +20,7 @@ export const OrderSummary = ({
   return (
     <div
       className={cn(
-        'mt-auto flex w-[320px] flex-col gap-4 self-end pt-16 xl:w-[413px]',
+        'flex w-full flex-col gap-4 self-end pt-16',
         classNames?.root,
       )}
     >

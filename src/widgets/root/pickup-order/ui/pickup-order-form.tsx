@@ -2,9 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { Form, Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui'
-import { OrderControllers } from '@/shared/ui/order-controllers'
 import { PickupAddress } from '@/shared/ui/pickup-address'
-import { ReturnToMenu } from '@/shared/ui/return-to-menu'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -17,6 +15,7 @@ import {
   LIQPAY_TEST_PUBLIC_KEY,
 } from '@/shared/constants'
 import { constructLiqpayPayload } from '@/shared/lib/utils/liqpay'
+import { OrderSection } from '../../checkout-form/ui/order-section'
 import { PaymentSection } from '../../payment-section'
 
 type Fields = {
@@ -30,10 +29,10 @@ type Fields = {
 }
 
 type Props = {
-  ordersSlot: React.ReactNode
+  OrdersSlot: typeof OrderSection
 }
 
-export const PickupOrderForm = ({ ordersSlot }: Props) => {
+export const PickupOrderForm = ({ OrdersSlot }: Props) => {
   const [currentTab, setCurrentTab] = useState('address')
   const liqpayFormRef = useRef<HTMLFormElement>(null)
   const { totalPrice, cart } = useCartStore(state => state)
@@ -120,22 +119,22 @@ export const PickupOrderForm = ({ ordersSlot }: Props) => {
             <TabsContent value='address'>
               <div className='my-12 flex flex-col gap-8 md:flex-row md:gap-[62px] xl:gap-[180px]'>
                 <PickupAddress />
-                <div className='xl:w-[700px]'>{ordersSlot}</div>
+                <div className='xl:w-[700px]'>
+                  {
+                    <OrdersSlot
+                      proceedOrderSlot={
+                        <ProceedOrder onSubmit={proceedNext}>
+                          Оформити замовлення
+                        </ProceedOrder>
+                      }
+                    />
+                  }
+                </div>
               </div>
-              <OrderControllers
-                proceedOrderSlot={
-                  <ProceedOrder onSubmit={proceedNext}>
-                    Оформити замовлення
-                  </ProceedOrder>
-                }
-                returnToMenuSlot={<ReturnToMenu />}
-              />
             </TabsContent>
             <TabsContent value='contacts'>
-              <PaymentSection form={form} />
-
-              <OrderControllers
-                className='mt-10 md:mt-[60px]'
+              <PaymentSection
+                form={form}
                 proceedOrderSlot={
                   <ProceedOrder
                     className={
@@ -147,7 +146,6 @@ export const PickupOrderForm = ({ ordersSlot }: Props) => {
                     Оплатити
                   </ProceedOrder>
                 }
-                returnToMenuSlot={<ReturnToMenu />}
               />
             </TabsContent>
           </Tabs>

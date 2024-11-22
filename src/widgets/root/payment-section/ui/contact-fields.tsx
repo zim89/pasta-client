@@ -39,10 +39,9 @@ export const ContactFields = ({ form }: Props) => {
                 {...field}
                 className='placelder:text-[15px] placelder:text-gray-500'
                 placeholder="Ваше ім'я"
-                required
               />
             </FormControl>
-            <FormMessage />
+            <FormMessage className='text-danger' />
           </FormItem>
         )}
       />
@@ -66,10 +65,9 @@ export const ContactFields = ({ form }: Props) => {
                 placeholder='380ХХХХХХХХХ'
                 className='placelder:text-[15px] placelder:text-gray-500'
                 type='tel'
-                required
               />
             </FormControl>
-            <FormMessage />
+            <FormMessage className='text-danger' />
           </FormItem>
         )}
       />
@@ -95,7 +93,6 @@ export const ContactFields = ({ form }: Props) => {
                 type='email'
               />
             </FormControl>
-            <FormMessage />
           </FormItem>
         )}
       />
