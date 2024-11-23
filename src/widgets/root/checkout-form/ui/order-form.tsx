@@ -92,7 +92,7 @@ export const OrderForm = () => {
         orderId,
         result_url:
           process.env.NODE_ENV !== 'production'
-            ? 'https://pasta-la-pepito-fsd.localhost:44382/confirmation'
+            ? 'http://localhost:3000/confirmation'
             : 'https://pasta-client.vercel.app/confirmation',
         info: JSON.stringify({ details: values }),
       })

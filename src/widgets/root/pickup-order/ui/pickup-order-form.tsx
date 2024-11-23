@@ -85,7 +85,9 @@ export const PickupOrderForm = ({ OrdersSlot }: Props) => {
             .join('\n')}`,
         orderId,
         result_url:
-          'https://pasta-la-pepito-fsd.localhost:44382/confirmation?pickup=true',
+          process.env.NODE_ENV !== 'production'
+            ? 'http://localhost:3000/confirmation?pickup=true'
+            : 'https://pasta-la-pepito.vercel.app/confirmation?pickup=true',
         info: JSON.stringify({ details: values }),
       })
 
