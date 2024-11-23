@@ -1,11 +1,11 @@
-import { maxLength, minLength, required } from 'react-admin'
+import { maxLength, maxValue, minValue, required } from 'react-admin'
 
-export const requiredField = required("Поле є обов'язкове для заповнення.")
+export const requiredField = required("Поле обов'язкове для заповнення.")
 export const noMoreThan = (length: number) =>
   maxLength(length, `Поле не повинно перевищувати ${length} символів.`)
 export const valueRange = (min: number, max = Infinity) => {
   return [
-    minLength(min, `Значення повинно бути більшим за ${min}.`),
-    maxLength(max, `Значення повинно бути меншим за ${min}.`),
+    minValue(min, `Значення повинно бути більшим за ${min}.`),
+    maxValue(max, `Значення повинно бути меншим за ${min}.`),
   ]
 }

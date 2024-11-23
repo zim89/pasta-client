@@ -8,6 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/shared/ui/common/form'
+import { cn } from '@/shared/lib/utils'
 import { OrderForm } from '../../checkout-form/model'
 
 type Props = {
@@ -24,24 +25,24 @@ export const ContactFields = ({ form }: Props) => {
       <FormField
         control={form.control}
         name='name'
-        render={({ field }) => (
+        render={({ field, fieldState }) => (
           <FormItem>
             <FormLabel htmlFor='name' className='text-sm font-normal'>
               <WithRequiredMark text="Ім'я" />
             </FormLabel>
-            <FormControl
-              style={{
-                marginTop: 0,
-              }}
-            >
+            <FormControl className='relative !mt-0'>
               <Input
                 id='name'
                 {...field}
-                className='placelder:text-[15px] placelder:text-gray-500'
+                className={cn(
+                  'placeholder:text-[15px] placeholder:text-gray-500',
+                  fieldState.error?.message &&
+                    'border-b-danger placeholder:text-opacity-0',
+                )}
                 placeholder="Ваше ім'я"
               />
             </FormControl>
-            <FormMessage className='text-danger' />
+            <FormMessage className='absolute text-[13px]/[16.9px] text-danger' />
           </FormItem>
         )}
       />
@@ -49,25 +50,25 @@ export const ContactFields = ({ form }: Props) => {
       <FormField
         control={form.control}
         name='phone'
-        render={({ field }) => (
+        render={({ field, fieldState }) => (
           <FormItem>
             <FormLabel htmlFor='phone' className='text-sm font-normal'>
               <WithRequiredMark text='Телефон' />
             </FormLabel>
-            <FormControl
-              style={{
-                marginTop: 0,
-              }}
-            >
+            <FormControl className='relative !mt-0'>
               <Input
                 id='phone'
                 {...field}
                 placeholder='380ХХХХХХХХХ'
-                className='placelder:text-[15px] placelder:text-gray-500'
+                className={cn(
+                  'placeholder:text-[15px] placeholder:text-gray-500',
+                  fieldState.error?.message &&
+                    'border-b-danger placeholder:text-opacity-0',
+                )}
                 type='tel'
               />
             </FormControl>
-            <FormMessage className='text-danger' />
+            <FormMessage className='absolute text-[13px]/[16.9px] text-danger' />
           </FormItem>
         )}
       />
@@ -89,7 +90,7 @@ export const ContactFields = ({ form }: Props) => {
                 id='email'
                 {...field}
                 placeholder='Ваш email'
-                className='placelder:text-[15px] placelder:text-gray-500'
+                className='placeholder:text-[15px] placeholder:text-gray-500'
                 type='email'
               />
             </FormControl>

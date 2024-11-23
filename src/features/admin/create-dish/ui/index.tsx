@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query'
 import {
   BooleanInput,
   Create,
+  number,
   NumberInput,
   SimpleForm,
   TextInput,
@@ -43,10 +44,10 @@ export const CreateProduct = () => {
           inputProps={{ validate: [requiredField] }}
           selectProps={{ required: true, disabled: isLoading || !data }}
         >
-          <SelectTrigger className='h-12 rounded-none rounded-tl-[4px] rounded-tr-[4px] border-0 border-b border-b-gray-700 bg-gray-300 text-[16px] text-gray-700 transition-colors hover:border-b-[#181818] hover:bg-[#dadada] focus:ring-0 focus:ring-offset-0'>
+          <SelectTrigger className='mb-5 h-12 rounded-none rounded-tl-[4px] rounded-tr-[4px] border-0 border-b border-b-gray-700 bg-gray-300 text-[16px] text-gray-700 transition-colors hover:border-b-[#181818] hover:bg-[#dadada] focus:ring-0 focus:ring-offset-0'>
             <SelectValue placeholder='Оберіть категорію *' />
           </SelectTrigger>
-          <SelectContent className='mb-5'>
+          <SelectContent>
             {data?.map(item => (
               <SelectItem key={item.id} value={item.name}>
                 {item.name}
@@ -61,9 +62,12 @@ export const CreateProduct = () => {
             source='price'
             label='Ціна'
             min={0}
-            format={val => parseInt(val)}
             type='number'
-            validate={[requiredField, ...valueRange(1)]}
+            validate={[
+              ...valueRange(1),
+              requiredField,
+              number('Невірний формат числа.'),
+            ]}
           />
           <NumberInput
             source='weight'

@@ -8,7 +8,6 @@ import {
   ChipField,
   DateField,
   List,
-  ListBase,
   NumberField,
   SingleFieldList,
   TextField,
@@ -23,6 +22,7 @@ import { Order } from '@/entities/order/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
 import { usePaginate } from '@/shared/lib/hooks/usePaginate'
+import { Empty } from './ui/Empty'
 
 export const OrdersList = () => {
   const router = useRouter()
@@ -83,11 +83,7 @@ export const OrdersList = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           displayedRows={displayedRows}
-          empty={
-            <ListBase>
-              <OrderHeaderActions />
-            </ListBase>
-          }
+          empty={<Empty />}
           actions={<OrderHeaderActions />}
           renderGrid={rows => (
             <EntitiesGrid
@@ -115,11 +111,7 @@ export const OrdersList = () => {
       ) : (
         <List
           className='hidden p-4 md:block'
-          empty={
-            <ListBase>
-              <OrderHeaderActions />
-            </ListBase>
-          }
+          empty={<Empty />}
           perPage={Number(limitParam)}
           actions={<OrderHeaderActions />}
         >
@@ -138,7 +130,7 @@ export const OrdersList = () => {
                 <ChipField source='dish.title' />
               </SingleFieldList>
             </ArrayField>
-            <DateField source='orderDetail.date' label='Дата' />
+            <TextField source='orderDetail.date' label='Дата' />
             <BooleanField source='pickup' label='Самовивіз' />
             <NumberField source='totalPrice' label='Вартість' />
             <TextField source='orderDetail.payType' label='Оплата' />
