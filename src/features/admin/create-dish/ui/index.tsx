@@ -8,12 +8,10 @@ import { useQuery } from '@tanstack/react-query'
 import {
   BooleanInput,
   Create,
-  minLength,
   number,
   NumberInput,
   SimpleForm,
   TextInput,
-  useInput,
 } from 'react-admin'
 
 import { categoryService } from '@/entities/category'
