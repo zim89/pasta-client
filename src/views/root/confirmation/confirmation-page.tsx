@@ -116,6 +116,8 @@ export const ConfirmationPage = () => {
             },
           }
 
+          console.log('ORDER PAYLOAD: ', payload)
+
           const succededOrder = await orderService.createOrder(payload)
           setSuccededOrder(succededOrder)
 

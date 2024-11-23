@@ -9,6 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/shared/ui/common/form'
+import { cn } from '@/shared/lib/utils'
 import { calculateDays, calculateTime, isItTimeString } from '../lib'
 
 type Props = {
@@ -59,7 +60,7 @@ export const DeliveryFields = ({ form }: Props) => {
           disabled={isPickup}
           control={form.control}
           name='deliveryTime'
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem className='xl:flex-1'>
               <FormLabel className='text-sm font-normal'>Час</FormLabel>
               <FormControl
@@ -70,21 +71,31 @@ export const DeliveryFields = ({ form }: Props) => {
                 <BrandSelect
                   data={
                     timeFrames.length
-                      ? timeFrames
+                      ? deliveryDate === 'today'
+                        ? timeFrames.slice(2)
+                        : timeFrames
                       : [
                           {
-                            label: 'Заклад зачинений. ',
+                            label: 'Заклад зачинений.',
                             value: 'UNAVAILABLE',
                           },
                         ]
                   }
+                  classNames={{
+                    trigger: {
+                      root: cn(
+                        fieldState.error?.message &&
+                          'border-b-danger text-background',
+                      ),
+                    },
+                  }}
                   placeholder='Оберіть час'
                   onValueChange={e => field.onChange(e)}
                   value={field.value}
                   disabled={isPickup}
                 />
               </FormControl>
-              <FormMessage className='text-danger' />
+              <FormMessage className='text-[13px]/[16.9px] text-danger' />
             </FormItem>
           )}
         />

@@ -74,6 +74,8 @@ export const OrderForm = () => {
 
       const orderId = Date.now().toString()
 
+      console.log(cart)
+
       const { data, signature } = constructLiqpayPayload({
         publicKey: `${LIQPAY_TEST_PUBLIC_KEY}`,
         privateKey: `${LIQPAY_TEST_PRIVATE_KEY}`,
@@ -88,7 +90,10 @@ export const OrderForm = () => {
             })
             .join('\n')}`,
         orderId,
-        result_url: 'https://pasta-la-pepito-fsd.localhost:44382/confirmation',
+        result_url:
+          process.env.NODE_ENV !== 'production'
+            ? 'https://pasta-la-pepito-fsd.localhost:44382/confirmation'
+            : 'https://pasta-client.vercel.app/confirmation',
         info: JSON.stringify({ details: values }),
       })
 

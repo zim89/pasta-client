@@ -8,6 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/shared/ui/common/form'
+import { cn } from '@/shared/lib/utils'
 
 type Props = {
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
@@ -32,7 +33,7 @@ export const DeliverySection = ({ form }: Props) => {
                 marginTop: 0,
               }}
             >
-              <Input id='city' {...field} disabled />
+              <Input id='city' className='text-gray-500' {...field} disabled />
             </FormControl>
           </FormItem>
         )}
@@ -41,19 +42,23 @@ export const DeliverySection = ({ form }: Props) => {
       <FormField
         control={form.control}
         name='street'
-        render={({ field }) => (
+        render={({ field, fieldState }) => (
           <FormItem>
             <FormLabel className='text-sm font-normal'>
               <WithRequiredMark text='Вулиця' />
             </FormLabel>
-            <FormControl
-              style={{
-                marginTop: 0,
-              }}
-            >
-              <Input id='street' {...field} placeholder='Введіть вулицю' />
+            <FormControl className='relative !mt-0'>
+              <Input
+                id='street'
+                className={cn(
+                  fieldState.error?.message &&
+                    'border-b-danger placeholder:text-opacity-0',
+                )}
+                {...field}
+                placeholder='Введіть вулицю'
+              />
             </FormControl>
-            <FormMessage className='text-danger' />
+            <FormMessage className='absolute text-[13px]/[16.9px] text-danger' />
           </FormItem>
         )}
       />
@@ -61,19 +66,23 @@ export const DeliverySection = ({ form }: Props) => {
       <FormField
         control={form.control}
         name='buildingNumber'
-        render={({ field }) => (
+        render={({ field, fieldState }) => (
           <FormItem>
             <FormLabel className='text-sm font-normal'>
               <WithRequiredMark text='Номер будинку' />
             </FormLabel>
-            <FormControl
-              style={{
-                marginTop: 0,
-              }}
-            >
-              <Input {...field} placeholder='Введіть номер будинку' required />
+            <FormControl className='relative !mt-0'>
+              <Input
+                {...field}
+                className={cn(
+                  fieldState.error?.message &&
+                    'border-b-danger placeholder:text-opacity-0',
+                )}
+                placeholder='Введіть номер будинку'
+                required
+              />
             </FormControl>
-            <FormMessage className='text-danger' />
+            <FormMessage className='absolute text-[13px]/[16.9px] text-danger' />
           </FormItem>
         )}
       />
