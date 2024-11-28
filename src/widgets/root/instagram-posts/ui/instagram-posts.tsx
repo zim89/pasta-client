@@ -17,6 +17,7 @@ import { cn } from '@/shared/lib/utils'
 export const InstagramPosts = () => {
   const { data, cursor } = usePosts()
   const [api, setApi] = useState<CarouselApi>()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
@@ -51,7 +52,7 @@ export const InstagramPosts = () => {
             }}
           >
             <CarouselContent className='-ml-5 items-center md:-ml-[27px] xl:-ml-[34.67px] xl:h-[360px]'>
-              {data.map((post, idx) => (
+              {data.map(post => (
                 <CarouselItem
                   key={post.id}
                   className={cn(
