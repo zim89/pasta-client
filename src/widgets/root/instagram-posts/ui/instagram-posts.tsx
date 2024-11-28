@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 import { usePosts } from '@/entities/post'
@@ -9,11 +10,26 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from '@/shared/ui/common/carousel'
 import { cn } from '@/shared/lib/utils'
 
 export const InstagramPosts = () => {
   const { data, cursor } = usePosts()
+  const [api, setApi] = useState<CarouselApi>()
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    setCurrent(api.selectedScrollSnap() + 1)
+
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap() + 1)
+    })
+  }, [api])
 
   return (
     <section className='section pt-10 md:pt-[72px]'>
@@ -28,24 +44,26 @@ export const InstagramPosts = () => {
         {data && (
           <Carousel
             className='xl:pt-12'
+            setApi={setApi}
             opts={{
               align: 'start',
               slidesToScroll: 1,
             }}
           >
-            <CarouselContent className='-ml-5 items-center md:-ml-[27px] xl:-ml-[34.67px]'>
-              {data.map(post => (
+            <CarouselContent className='-ml-5 items-center md:-ml-[27px] xl:-ml-[34.67px] xl:h-[360px]'>
+              {data.map((post, idx) => (
                 <CarouselItem
                   key={post.id}
                   className={cn(
-                    'group basis-[251px] pl-5 md:basis-1/3 md:pl-[27px] xl:basis-[306.67px] xl:pl-[34.67px] xl:[&:nth-child(4n+2)]:basis-[394.67px]',
+                    'group h-[251px] basis-[251px] pl-5 transition-all duration-500 md:h-[220px] md:basis-1/3 md:pl-[27px] xl:h-[272px] xl:basis-[306.67px] xl:pl-[34.67px]',
+                    idx === current && 'xl:h-[360px] xl:basis-[384.67px]',
                   )}
                 >
                   <a
                     href={post.link}
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='relative inline-block size-[231px] overflow-hidden rounded-[23.27px] border border-background transition-colors duration-300 hover:border-primary md:size-[220px] md:rounded-4xl xl:size-[272px] xl:group-[&:nth-child(4n+2)]:size-[360px]'
+                    className='relative inline-block size-full overflow-hidden rounded-[23.27px] border border-background transition-colors duration-300 hover:border-primary md:rounded-4xl'
                   >
                     <Image
                       src={post.image}
@@ -59,7 +77,7 @@ export const InstagramPosts = () => {
               ))}
             </CarouselContent>
 
-            <div className='absolute -top-[73px] right-0 flex h-10 items-center gap-10 xl:top-0'>
+            <div className='absolute -top-[73px] right-0 hidden h-10 items-center gap-10 md:flex xl:top-0'>
               <CarouselPrevious className='static translate-x-0 translate-y-0' />
               <CarouselNext className='static translate-x-0 translate-y-0' />
             </div>
