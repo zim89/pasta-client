@@ -34,54 +34,59 @@ export const IngredientFormItem = ({
 
   return (
     <>
-      <FormItem className='space-y-0 p-1 xl:hidden'>
-        <FormLabel className='inline-block pb-2 text-sm/[18.2px] font-semibold capitalize'>
-          {i.label}
-        </FormLabel>
+      <FormItem className='flex flex-col gap-2 space-y-0 p-2 md:flex-row md:p-0'>
+        <div className='space-y-2 md:space-y-0'>
+          <FormLabel className='flex justify-center text-sm/[18.2px] font-semibold capitalize md:hidden'>
+            {i.label}
+          </FormLabel>
 
-        <div className='flex items-center gap-1 pb-3'>
-          <Image
-            src={i.image}
-            alt={i.name}
-            width={64}
-            height={64}
-            className='overflow-hidden rounded-md'
-          />
-          <div className='flex-1 space-y-1 text-xs/[15.6px]'>
-            <p>{`${i.weight} г`}</p>
-            <p>{`${field.value} x ${i.price}₴`}</p>
+          <div className='relative mx-auto size-20 overflow-hidden rounded-md'>
+            <Image
+              src={i.image}
+              alt={i.name}
+              fill={true}
+              sizes='100%'
+              className='object-cover'
+            />
           </div>
         </div>
 
-        <div className='flex items-center justify-between'>
-          <button
-            disabled={form.getValues(i.name) === 0}
-            type='button'
-            onClick={onDecrement}
-            className='flex size-8 items-center justify-center border-[1.26px] border-black/5 text-[22px]/[28.6px] font-medium'
-          >
-            -
-          </button>
-          <FormControl>
-            <Input
-              {...field}
-              readOnly
-              className='flex size-8 items-center justify-center border-[1.26px] border-black/5 p-0 text-center text-[22px]/[28.6px] font-medium'
-            />
-          </FormControl>
-          <button
-            type='button'
-            onClick={onIncrement}
-            className='flex size-8 items-center justify-center border-[1.26px] border-black/5 text-[22px]/[28.6px] font-medium'
-          >
-            +
-          </button>
+        <div className='flex flex-col gap-2 md:justify-between'>
+          <FormLabel className='hidden p-0 text-sm/[18.2px] font-semibold capitalize md:inline-block'>
+            {i.label}
+          </FormLabel>
+          <p className='text-center text-xs/[15.6px] md:text-start'>{`${i.price}₴ / ${i.weight} г`}</p>
+
+          <div className='flex items-center justify-between'>
+            <button
+              disabled={form.getValues(i.name) === 0}
+              type='button'
+              onClick={onDecrement}
+              className='flex size-8 items-center justify-center border-[1.26px] border-black/5 text-[22px]/[28.6px] font-medium'
+            >
+              -
+            </button>
+            <FormControl>
+              <Input
+                {...field}
+                readOnly
+                className='flex size-8 items-center justify-center border-[1.26px] border-black/5 p-0 text-center text-[22px]/[28.6px] font-medium'
+              />
+            </FormControl>
+            <button
+              type='button'
+              onClick={onIncrement}
+              className='flex size-8 items-center justify-center border-[1.26px] border-black/5 text-[22px]/[28.6px] font-medium'
+            >
+              +
+            </button>
+          </div>
         </div>
 
         <FormMessage />
       </FormItem>
 
-      <FormItem className='hidden xl:flex xl:gap-3'>
+      {/* <FormItem className='hidden xl:flex xl:gap-3'>
         <div className='space-y-2'>
           <Image
             src={i.image}
@@ -128,7 +133,7 @@ export const IngredientFormItem = ({
         </div>
 
         <FormMessage />
-      </FormItem>
+      </FormItem> */}
     </>
   )
 }
