@@ -50,6 +50,11 @@ export const DeliveryFields = ({ form }: Props) => {
                   placeholder='Оберіть дату'
                   onValueChange={e => field.onChange(e)}
                   value={field.value}
+                  classNames={{
+                    item: {
+                      root: 'py-[10.5px]',
+                    },
+                  }}
                 />
               </FormControl>
             </FormItem>
@@ -87,6 +92,9 @@ export const DeliveryFields = ({ form }: Props) => {
                         fieldState.error?.message &&
                           'border-b-danger text-background',
                       ),
+                    },
+                    item: {
+                      root: 'py-[10.5px]',
                     },
                   }}
                   placeholder='Оберіть час'

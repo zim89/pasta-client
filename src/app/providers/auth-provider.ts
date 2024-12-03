@@ -1,7 +1,12 @@
-import { AuthProvider, fetchUtils } from 'react-admin'
+import {
+  addRefreshAuthToAuthProvider,
+  AuthProvider,
+  fetchUtils,
+} from 'react-admin'
 
 import { SERVER_URL } from '@/shared/constants'
 import { KEYS } from '@/shared/constants/localstorage.const'
+import { refreshAuth } from '@/shared/lib/utils/admin-auth-provider-funcs'
 
 export const authProvider: AuthProvider = {
   login: async ({ username, password }) => {
@@ -48,3 +53,8 @@ export const authProvider: AuthProvider = {
     return Promise.resolve()
   },
 }
+
+export const authProviderWithRefresh = addRefreshAuthToAuthProvider(
+  authProvider,
+  refreshAuth,
+)

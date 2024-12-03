@@ -13,7 +13,7 @@ import {
 import { QueryClient } from '@tanstack/react-query'
 import { Admin, Edit, Layout, Resource, Show } from 'react-admin'
 
-import { authProvider } from '@/app/providers/auth-provider'
+import { authProviderWithRefresh } from '@/app/providers/auth-provider'
 import { dataProvider } from '@/app/providers/data-provider'
 import { theme } from '@/app/ui/admin-theme'
 import { EditAdvantage } from '@/views/admin/advantages/edit.page'
@@ -31,6 +31,8 @@ import { PostsList } from '@/views/admin/posts/list.page'
 import { ChangePasswordModal } from '@/features/admin/change-password-modal'
 import { AdminAppBar } from '@/shared/ui/admin/admin-bar'
 
+import '@/shared/lib/utils/admin-auth-provider-funcs'
+
 const CustomLayout = ({ children }: { children: React.ReactNode }) => {
   return <Layout appBar={AdminAppBar}>{children}</Layout>
 }
@@ -43,7 +45,7 @@ export default function AdminLayout() {
       <ChangePasswordModal open={opened} onOpenChange={handleChange} />
       <Admin
         dataProvider={dataProvider}
-        authProvider={authProvider}
+        authProvider={authProviderWithRefresh}
         theme={theme}
         layout={CustomLayout}
         queryClient={
