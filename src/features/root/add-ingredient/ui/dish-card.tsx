@@ -5,17 +5,17 @@ import img_placeholder from '@/shared/assets/images/placeholders/img-square.png'
 
 export const DishCard = ({ dish, price }: { dish: Dish; price: number }) => {
   return (
-    <div className='flex gap-4 border-t border-primary-light pt-4 md:w-[200px] md:flex-col-reverse md:gap-6 md:border-0 md:p-0 xl:w-[240px]'>
+    <div className='flex flex-row gap-4 md:w-[313px] md:flex-row-reverse md:gap-5 xl:w-auto xl:flex-col-reverse'>
       {/* Dish desc */}
-      <div className='flex flex-1 flex-col justify-between font-medium md:justify-start md:gap-5'>
-        <h2 className='text-lg/[23.4px] md:text-center md:text-xl/[26px]'>
+      <div className='flex flex-col justify-between font-medium md:gap-5'>
+        <h2 className='text-lg/[23.4px] md:text-xl/[26px] xl:text-center'>
           {dish.title}
         </h2>
-        <p className='text-[26px]/[31.47px] md:text-center'>{price}₴</p>
+        <p className='text-[26px]/[31.47px] xl:text-center'>{price}₴</p>
       </div>
 
       {/* Dish image */}
-      <div className='relative h-[104px] w-[104px] overflow-hidden rounded-[8.81px] md:h-[200px] md:w-[200px] md:rounded-xl xl:h-[240px] xl:w-[240px]'>
+      <div className='relative size-[104px] flex-none overflow-hidden rounded-[8.81px] md:size-[120px] md:rounded-xl xl:h-[240px] xl:w-[240px]'>
         <Image
           src={dish.image || img_placeholder}
           alt={dish.title}

@@ -9,13 +9,12 @@ import { useCartStore, type CartIngredient } from '@/entities/cart'
 import type { Dish } from '@/entities/dish'
 import type { Ingredient } from '@/entities/ingredient'
 import { Form, FormField } from '@/shared/ui/common/form'
-import { ScrollArea } from '@/shared/ui/common/scroll-area'
 import { cn } from '@/shared/lib/utils'
 import { generateFormSchema, generateFormValues } from '../lib'
 import { DishCard } from './dish-card'
 import { IngredientFormItem } from './ingredient-form-item'
 
-export const IngredientForm = ({
+export const IngredientFormDesktop = ({
   data,
   dish,
   count = 1,
@@ -55,45 +54,39 @@ export const IngredientForm = ({
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className='grid grid-rows-[1fr_auto] gap-5 md:gap-8 xl:grid-cols-[240px_1fr] xl:grid-rows-none'
-      >
-        <div className='relative h-full flex-1 grid-rows-[auto_1fr]'>
-          <ScrollArea type='auto' className='!absolute inset-0 pr-3'>
-            <ul className='grid grid-cols-2 gap-x-[18px] gap-y-4 md:flex-1 md:grid-cols-3 md:gap-x-4 md:gap-y-11'>
-              {data.map(i => (
-                <li key={i.id}>
-                  <FormField
-                    control={form.control}
-                    name={i.name}
-                    render={({ field }) => (
-                      <IngredientFormItem
-                        i={i}
-                        field={field}
-                        form={form}
-                        setPrice={setPrice}
-                      />
-                    )}
-                  />
-                </li>
-              ))}
-            </ul>
-          </ScrollArea>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='flex gap-[50px]'>
+        <div>
+          <DishCard dish={dish} price={price * count} />
         </div>
 
-        <div className='flex flex-col gap-6 border-t border-t-primary-light pt-4 md:grid-rows-1 md:flex-row md:gap-[59px] md:pt-8'>
-          <DishCard dish={dish} price={price * count} />
-
-          <div className='flex-1 space-y-6'>
+        <div className='flex-1 space-y-8'>
+          <ul className='grid grid-cols-3 gap-[42px]'>
+            {data.map(i => (
+              <li key={i.id}>
+                <FormField
+                  control={form.control}
+                  name={i.name}
+                  render={({ field }) => (
+                    <IngredientFormItem
+                      i={i}
+                      field={field}
+                      form={form}
+                      setPrice={setPrice}
+                    />
+                  )}
+                />
+              </li>
+            ))}
+          </ul>
+          <div className='flex justify-between'>
             <button
               type='button'
               onClick={onClear}
-              className={cn('btn-secondary')}
+              className={cn('btn-secondary', 'w-[260px]')}
             >
               Очистити
             </button>
-            <button type='submit' className={cn('btn-primary')}>
+            <button type='submit' className={cn('btn-primary', 'w-[260px]')}>
               До кошика
             </button>
           </div>

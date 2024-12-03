@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { X } from 'lucide-react'
+import { useMediaQuery } from 'usehooks-ts'
 
 import type { Dish } from '@/entities/dish'
 import { ingredientService } from '@/entities/ingredient'
@@ -17,6 +18,7 @@ import {
 import { QUERY_KEYS } from '@/shared/constants'
 import { cn } from '@/shared/lib/utils'
 import { IngredientForm } from './ingredient-form'
+import { IngredientFormDesktop } from './ingredient-form-desktop'
 
 export const AddIngredient = ({
   dish,
@@ -27,6 +29,7 @@ export const AddIngredient = ({
   count?: number
   className?: string
 }) => {
+  const isDesktop = useMediaQuery('(min-width: 1440px)')
   const { isLoading, data } = useQuery({
     queryKey: [QUERY_KEYS.INGREDIENTS],
     queryFn: () => ingredientService.getAll(),
@@ -47,7 +50,7 @@ export const AddIngredient = ({
         <DialogContent
           onInteractOutside={() => setOpen(false)}
           aria-describedby={undefined}
-          className='top-0 h-screen max-w-screen-sm translate-y-0 rounded-2.5xl border-0 p-8 pt-16 md:top-[5%] md:h-[90%] md:max-w-[730px] md:rounded-4xl md:px-6 md:pt-[72px] xl:top-1/2 xl:h-auto xl:max-w-[1055px] xl:-translate-y-1/2 xl:p-12 xl:pt-24'
+          className='top-0 h-screen w-[338px] translate-y-0 rounded-2.5xl border-0 p-8 pt-16 md:top-[5%] md:h-[90%] md:min-w-[714px] md:rounded-4xl md:px-6 md:pt-[72px] xl:top-1/2 xl:h-auto xl:min-w-[1065px] xl:-translate-y-1/2 xl:p-12 xl:pt-24'
         >
           <DialogHeader className='hidden'>
             <DialogTitle>Додати інгредієнти</DialogTitle>
@@ -62,7 +65,13 @@ export const AddIngredient = ({
           </DialogClose>
 
           {data && !isLoading && (
-            <IngredientForm data={data} dish={dish} count={count} />
+            <>
+              {isDesktop ? (
+                <IngredientFormDesktop data={data} dish={dish} count={count} />
+              ) : (
+                <IngredientForm data={data} dish={dish} count={count} />
+              )}
+            </>
           )}
         </DialogContent>
       </Dialog>

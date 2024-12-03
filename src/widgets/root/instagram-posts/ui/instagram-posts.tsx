@@ -17,6 +17,7 @@ import { cn } from '@/shared/lib/utils'
 export const InstagramPosts = () => {
   const { data, cursor } = usePosts()
   const [api, setApi] = useState<CarouselApi>()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
@@ -51,19 +52,18 @@ export const InstagramPosts = () => {
             }}
           >
             <CarouselContent className='-ml-5 items-center md:-ml-[27px] xl:-ml-[34.67px] xl:h-[360px]'>
-              {data.map((post, idx) => (
+              {data.map(post => (
                 <CarouselItem
                   key={post.id}
                   className={cn(
-                    'group h-[251px] basis-[251px] pl-5 transition-all duration-500 md:h-[220px] md:basis-1/3 md:pl-[27px] xl:h-[272px] xl:basis-[306.67px] xl:pl-[34.67px]',
-                    idx === current && 'xl:h-[360px] xl:basis-[384.67px]',
+                    'group h-[251px] basis-[251px] pl-5 transition-all duration-500 hover:h-[360px] hover:basis-[394.67px] md:h-[220px] md:basis-1/3 md:pl-[27px] xl:h-[272px] xl:basis-[306.67px] xl:pl-[34.67px]',
                   )}
                 >
                   <a
                     href={post.link}
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='relative inline-block size-full overflow-hidden rounded-[23.27px] border border-background transition-colors duration-300 hover:border-primary md:rounded-4xl'
+                    className='relative inline-block size-full overflow-hidden rounded-[23.27px] md:rounded-4xl'
                   >
                     <Image
                       src={post.image}
