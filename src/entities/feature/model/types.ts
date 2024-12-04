@@ -1,7 +1,6 @@
 export interface Feature {
+  id: number
   title: string
-  desc: string
-  desc_full: string
-  icon_sm: string
-  icon: string
+  description: string
+  image: string
 }

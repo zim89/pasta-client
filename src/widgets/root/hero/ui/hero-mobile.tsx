@@ -7,7 +7,7 @@ import poster_sm from '@/shared/assets/images/hero/hero-sm.png'
 export const HeroMobile = () => {
   return (
     <div className='space-y-4 md:hidden'>
-      <Image src={poster_sm} alt='Hero poster' />
+      <Image src={poster_sm} alt='Hero poster' priority />
       <div className='mx-auto w-[280px] space-y-6'>
         <h1 className='text-center font-alegreya text-[44px]/[52.8px] font-medium text-primary-dark'>
           Pasta <br />
