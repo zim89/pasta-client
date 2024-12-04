@@ -39,12 +39,12 @@ export const PickupOrderForm = ({ OrdersSlot }: Props) => {
 
   const schema = yup
     .object({
-      name: yup.string().required("Поле обов'язкове для заповнення."),
-      phone: yup.string().required("Поле обов'язкове для заповнення."),
+      name: yup.string().required("Поле обов'язкове для заповнення"),
+      phone: yup.string().required("Поле обов'язкове для заповнення"),
       email: yup.string(),
-      deliveryDate: yup.string().required("Поле обов'язкове для заповнення."),
-      deliveryTime: yup.string().required("Поле обов'язкове для заповнення."),
-      paymentMethod: yup.string().required("Поле обов'язкове для заповнення."),
+      deliveryDate: yup.string().required("Поле обов'язкове для заповнення"),
+      deliveryTime: yup.string().required("Поле обов'язкове для заповнення"),
+      paymentMethod: yup.string().required("Поле обов'язкове для заповнення"),
       comment: yup.string(),
     })
     .required()
@@ -120,7 +120,11 @@ export const PickupOrderForm = ({ OrdersSlot }: Props) => {
             </TabsList>
             <TabsContent value='address'>
               <div className='my-12 flex flex-col gap-8 md:flex-row md:gap-[62px] xl:gap-[180px]'>
-                <PickupAddress />
+                <PickupAddress
+                  classNames={{
+                    city: 'text-gray-500',
+                  }}
+                />
                 <div className='xl:w-[700px]'>
                   {
                     <OrdersSlot

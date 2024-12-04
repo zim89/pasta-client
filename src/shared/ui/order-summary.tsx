@@ -32,7 +32,9 @@ export const OrderSummary = ({
         <p className={cn('inline-flex justify-between', classNames?.delivery)}>
           <span className='text-[18px]/[23.4px]'>Доставка:</span>
 
-          <span className='text-[18px]/[23.4px]'>за тарифами оператора</span>
+          <span className='text-[18px]/[23.4px]'>
+            {totalPrice >= 700 ? 'безкоштовно' : 'за тарифами оператора'}
+          </span>
         </p>
       )}
     </div>
