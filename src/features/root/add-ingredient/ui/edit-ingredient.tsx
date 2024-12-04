@@ -9,12 +9,14 @@ import {
 } from '@/shared/ui/common'
 import { useQuery } from '@tanstack/react-query'
 import { SquarePen, X } from 'lucide-react'
+import { useMediaQuery } from 'usehooks-ts'
 
 import type { CartItem } from '@/entities/cart'
 import { ingredientService } from '@/entities/ingredient'
 import { QUERY_KEYS } from '@/shared/constants'
 import { cn } from '@/shared/lib/utils'
 import { IngredientFormEdit } from './ingredient-form-edit'
+import { IngredientFormEditDesktop } from './ingredient-form-edit-desktop'
 
 type Props = {
   item: CartItem
@@ -22,6 +24,7 @@ type Props = {
 }
 
 export const EditIngredient = ({ item, triggerButton }: Props) => {
+  const isDesktop = useMediaQuery('(min-width: 1440px)')
   const { isLoading, data } = useQuery({
     queryKey: [QUERY_KEYS.INGREDIENTS],
     queryFn: () => ingredientService.getAll(),
@@ -65,7 +68,17 @@ export const EditIngredient = ({ item, triggerButton }: Props) => {
           </DialogClose>
 
           {data && !isLoading && (
-            <IngredientFormEdit data={data} item={item} setOpen={setOpen} />
+            <>
+              {isDesktop ? (
+                <IngredientFormEditDesktop
+                  data={data}
+                  item={item}
+                  setOpen={setOpen}
+                />
+              ) : (
+                <IngredientFormEdit data={data} item={item} setOpen={setOpen} />
+              )}
+            </>
           )}
         </DialogContent>
       </Dialog>
