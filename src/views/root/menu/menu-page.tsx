@@ -12,6 +12,7 @@ import { dishService } from '@/entities/dish'
 import { QUERY_KEYS } from '@/shared/constants'
 import decor_image from '@/shared/assets/images/decoration/parsley-menu.png'
 import { MenuList } from './ui'
+import { MenuSkeleton } from './ui/menu-skeleton'
 
 const crumbs = [{ label: 'Меню' }]
 
@@ -37,7 +38,7 @@ export const MenuPage = () => {
         <PageHeading title='Наше меню' image={decor_image} />
         <FilterBar />
         <SortDropdown />
-        {!isLoading && data && <MenuList data={data} />}
+        {isLoading ? <MenuSkeleton /> : data && <MenuList data={data} />}
       </div>
     </div>
   )
