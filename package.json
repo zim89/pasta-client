@@ -1,6 +1,6 @@
 {
   "name": "la-pepito-client",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -26,7 +26,6 @@
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/user-event": "^14.5.2",
     "@vitest/coverage-istanbul": "^2.0.5",
-    "anchor-pki": "^0.3.2",
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
