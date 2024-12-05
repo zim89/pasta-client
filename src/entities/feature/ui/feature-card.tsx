@@ -20,8 +20,8 @@ export const FeatureCard = ({ item }: { item: Feature }) => {
       <h3 className='mb-[6.91px] h-[34px] text-center text-sm/[16.8px] font-semibold md:mb-2 md:h-auto md:text-base/[19.2px] md:font-medium xl:text-lg/[23.4px]'>
         {item.title}
       </h3>
-      <p className='w-[80%] px-4 text-center text-xs/[14.4px] text-black/70 md:w-[70%] md:text-sm/[18.2px] xl:h-[84px] xl:w-full xl:text-base/[20.8px] xl:text-black'>
-        <span className=''>{item.description}</span>
+      <p className='w-[80%] px-3 text-center text-xs/[14.4px] text-black/70 md:w-[70%] md:text-sm/[18.2px] xl:h-[84px] xl:w-full xl:text-base/[20.8px] xl:text-black'>
+        <span>{item.description}</span>
       </p>
     </div>
   )
