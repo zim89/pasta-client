@@ -25,7 +25,7 @@ export const AdminChangePasswordModalProvider = ({
     (value: boolean) => {
       setOpened(value)
     },
-    [opened, setOpened],
+    [setOpened],
   )
 
   return (

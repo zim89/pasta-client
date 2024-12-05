@@ -8,16 +8,18 @@ import { featureService } from '@/entities/feature/api'
 import { QUERY_KEYS } from '@/shared/constants'
 import decor_image from '@/shared/assets/images/decoration/features-veggies.png'
 import decor_bottom_image from '@/shared/assets/images/decoration/features-veggies2.png'
+import { FeatureSkeleton } from './feature-skeleton'
 import { FeaturesSlider } from './feature-slider'
 
 export const Features = () => {
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: [QUERY_KEYS.FEATURES],
     queryFn: async () => {
       return await featureService.getFeatures()
     },
   })
 
+  if (isLoading) return <FeatureSkeleton />
   if (!data) return
 
   return (
