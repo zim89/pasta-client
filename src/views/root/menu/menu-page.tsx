@@ -8,6 +8,7 @@ import { useMediaQuery } from 'usehooks-ts'
 
 import { FilterBar } from '@/features/root/filter-bar'
 import { SortDropdown } from '@/features/root/sort-dropdown'
+import { SortSkeleton } from '@/features/root/sort-dropdown/ui/sort-skeleton'
 import { dishService } from '@/entities/dish'
 import { QUERY_KEYS } from '@/shared/constants'
 import decor_image from '@/shared/assets/images/decoration/parsley-menu.png'
@@ -37,7 +38,7 @@ export const MenuPage = () => {
         <PageBreadcrumbs crumbs={crumbs} />
         <PageHeading title='Наше меню' image={decor_image} />
         <FilterBar />
-        <SortDropdown />
+        {isLoading ? <SortSkeleton /> : <SortDropdown />}
         {isLoading ? <MenuSkeleton /> : data && <MenuList data={data} />}
       </div>
     </div>
