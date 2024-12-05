@@ -13,7 +13,9 @@ export const TotalSection = () => {
       </p>
       <p className='mt-4 inline-flex w-full justify-between'>
         <span className='text-[18px]/[23.4px]'>Доставка:</span>
-        <span className='text-[18px]/[23.4px]'>за тарифами оператора</span>
+        <span className='text-[18px]/[23.4px]'>
+          {totalPrice >= 700 ? 'безкоштовно' : 'за тарифами оператора'}
+        </span>
       </p>
     </div>
   )

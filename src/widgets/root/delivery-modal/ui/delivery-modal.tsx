@@ -1,11 +1,11 @@
 import Image from 'next/image'
-import { DialogDescription } from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
 
 import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -48,18 +48,18 @@ export const DeliveryModal = ({ className }: { className?: string }) => {
               <p>Замовлення - щоденно з 12.00 до 20.00.</p>
               <p>
                 Доставка здійснюється таксі, за тарифами оператора, з розрахунку{' '}
-                <span className='text-primary-light'>10грн - 1 км.</span>
+                <span className='text-primary-light'>10 грн - 1 км.</span>
               </p>
               <p>
                 При замовленні від 700 грн - безкоштовна доставка в радіусі 2 км
-                від кафе.
+                від закладу.
               </p>
-              <p>Також можливий самовивіз замовлення</p>
+              <p>Також можливий самовивіз замовлення.</p>
             </div>
           </div>
           <div className='space-y-4 text-lg/[23.4px]'>
             <h3 className='text-[26px]/[31.47px] font-medium'>Оплата</h3>
-            <p>Онлайн</p>
+            <p>Онлайн.</p>
           </div>
         </div>
       </DialogContent>

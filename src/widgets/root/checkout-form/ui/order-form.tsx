@@ -29,19 +29,19 @@ export const OrderForm = () => {
 
   const schema = yup
     .object({
-      city: yup.string().required("Поле обов'язкове для заповнення."),
-      street: yup.string().required("Поле обов'язкове для заповнення."),
-      buildingNumber: yup.string().required("Поле обов'язкове для заповнення."),
+      city: yup.string().required("Поле обов'язкове для заповнення"),
+      street: yup.string().required("Поле обов'язкове для заповнення"),
+      buildingNumber: yup.string().required("Поле обов'язкове для заповнення"),
       entrance: yup.string(),
       appartmentHouse: yup.string(),
       story: yup.string(),
       intercom: yup.string(),
-      name: yup.string().required("Поле обов'язкове для заповнення."),
-      phone: yup.string().required("Поле обов'язкове для заповнення."),
+      name: yup.string().required("Поле обов'язкове для заповнення"),
+      phone: yup.string().required("Поле обов'язкове для заповнення"),
       email: yup.string(),
-      deliveryDate: yup.string().required("Поле обов'язкове для заповнення."),
-      deliveryTime: yup.string().required("Поле обов'язкове для заповнення."),
-      paymentMethod: yup.string().required("Поле обов'язкове для заповнення."),
+      deliveryDate: yup.string().required("Поле обов'язкове для заповнення"),
+      deliveryTime: yup.string().required("Поле обов'язкове для заповнення"),
+      paymentMethod: yup.string().required("Поле обов'язкове для заповнення"),
       comment: yup.string(),
     })
     .required()
@@ -73,8 +73,6 @@ export const OrderForm = () => {
         .children[1] as HTMLInputElement
 
       const orderId = Date.now().toString()
-
-      console.log(cart)
 
       const { data, signature } = constructLiqpayPayload({
         publicKey: `${LIQPAY_TEST_PUBLIC_KEY}`,

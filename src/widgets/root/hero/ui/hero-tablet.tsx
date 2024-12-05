@@ -18,6 +18,7 @@ export const HeroTablet = () => {
           fill
           sizes='100vw'
           className='block h-auto w-full object-cover xl:hidden'
+          priority
         />
         <Image
           src={poster_xl}

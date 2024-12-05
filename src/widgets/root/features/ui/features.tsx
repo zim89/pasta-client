@@ -1,11 +1,25 @@
-import Image from 'next/image'
+'use client'
 
-import { FeatureCard, FEATURES_DATA } from '@/entities/feature'
+import Image from 'next/image'
+import { useQuery } from '@tanstack/react-query'
+
+import { FeatureCard } from '@/entities/feature'
+import { featureService } from '@/entities/feature/api'
+import { QUERY_KEYS } from '@/shared/constants'
 import decor_image from '@/shared/assets/images/decoration/features-veggies.png'
 import decor_bottom_image from '@/shared/assets/images/decoration/features-veggies2.png'
 import { FeaturesSlider } from './feature-slider'
 
 export const Features = () => {
+  const { data } = useQuery({
+    queryKey: [QUERY_KEYS.FEATURES],
+    queryFn: async () => {
+      return await featureService.getFeatures()
+    },
+  })
+
+  if (!data) return
+
   return (
     <section className='section pt-10 md:pt-[72px] xl:pt-[77px]'>
       <div className='container'>
@@ -14,7 +28,7 @@ export const Features = () => {
         {/* Mobile and Desktop screen */}
         <div className='relative'>
           <ul className='grid grid-cols-2 gap-[14px] md:hidden xl:grid xl:grid-cols-4 xl:gap-[53.33px]'>
-            {FEATURES_DATA.map(item => (
+            {data.map(item => (
               <li key={item.title}>
                 <FeatureCard item={item} />
               </li>
@@ -38,7 +52,7 @@ export const Features = () => {
 
         {/* Tablet screen */}
         <div className='hidden md:block xl:hidden'>
-          <FeaturesSlider data={FEATURES_DATA} />
+          <FeaturesSlider data={data} />
         </div>
       </div>
     </section>

@@ -102,7 +102,7 @@ export const ConfirmationPage = () => {
               entrance: Number(confirmedOrder.details.entrance) || 1,
               flatNumber: Number(confirmedOrder.details.appartmentHouse) || 1,
               floor: Number(confirmedOrder.details.story) || 1,
-              intercomCode: confirmedOrder.details.intercom,
+              intercomCode: confirmedOrder.details.intercom || 'немає',
             },
             orderDetails: {
               payType: 'картою',
@@ -115,8 +115,6 @@ export const ConfirmationPage = () => {
               name: `${confirmedOrder.details.name}`,
             },
           }
-
-          console.log('ORDER PAYLOAD: ', payload)
 
           const succededOrder = await orderService.createOrder(payload)
           setSuccededOrder(succededOrder)
