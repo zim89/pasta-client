@@ -1,4 +1,5 @@
 import axios, { CreateAxiosDefaults } from 'axios'
+
 import { getContentType } from './api.helpers'
 
 const axiosOptions: CreateAxiosDefaults = {

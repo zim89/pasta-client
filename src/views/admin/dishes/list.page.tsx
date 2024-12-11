@@ -17,8 +17,8 @@ import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
 import { BulkDeleteDishes } from '@/features/admin/bulk-delete-dishes'
 import { Dish } from '@/entities/dish/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
+import { useListPagination } from '@/shared/lib/hooks/useListPagination'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
-import { usePaginate } from '@/shared/lib/hooks/usePaginate'
 
 export const ProductList = () => {
   const router = useRouter()
@@ -31,11 +31,8 @@ export const ProductList = () => {
   const sortParam = useHashParamValue('sort')
   const orderParam = useHashParamValue('order')
 
-  const [currentPage, { paginated, setLimit, setCurrentPage }] = usePaginate(
-    displayedRows,
-    Number(pageParam),
-    Number(limitParam),
-  )
+  const [currentPage, { paginated, setLimit, setCurrentPage }] =
+    useListPagination(displayedRows, Number(pageParam), Number(limitParam))
 
   useEffect(() => {
     router.replace('#/dish?perPage=5&page=1')
@@ -57,7 +54,6 @@ export const ProductList = () => {
   useEffect(() => {
     if (data) {
       setDisplayedRows(data)
-      setLimit(Number(limitParam))
     }
   }, [data])
 

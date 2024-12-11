@@ -57,14 +57,19 @@ export const createCartStore = (initState: CartState = defaultInitState) => {
 
             const candidate = cart.find(
               item =>
+                // If the dish is the same
                 item.dish.id === newItem.dish.id &&
+                // And its ingredient set
                 deepEqual(item.ingredients, newItem.ingredients),
             )
 
             // If a dish with the same ingredients' set as newcoming dish is already in the cart, then just increase its quantity and price
             if (candidate) {
               const updatedCart = cart.map(item =>
-                item.dish.id === candidate.dish.id
+                // If the same dish
+                item.dish.id === candidate.dish.id &&
+                // With the same ingredient set
+                deepEqual(item.ingredients, newItem.ingredients)
                   ? {
                       ...item,
                       count: item.count + newItem.count,

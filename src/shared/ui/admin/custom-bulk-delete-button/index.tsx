@@ -32,9 +32,12 @@ export const CustomBulkDeleteButton = ({
       onOpenChange={setShowed}
       open={showed}
       toggler={
-        <Button onClick={() => setShowed(true)} className='text-danger'>
+        <span
+          onClick={() => setShowed(true)}
+          className='inline-flex items-center text-danger'
+        >
           <Trash2 size={16} className='mr-2' /> Видалити
-        </Button>
+        </span>
       }
     >
       <DialogHeader>

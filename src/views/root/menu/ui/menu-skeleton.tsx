@@ -3,7 +3,9 @@ import { ProductSkeleton } from '@/entities/dish'
 export const MenuSkeleton = () => {
   return (
     <>
+
       <div className='grid grid-cols-2 gap-[30px] xl:hidden'>
+
         {Array.from({ length: 2 }).map((_, index) => (
           <ProductSkeleton key={index} />
         ))}

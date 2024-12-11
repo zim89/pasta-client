@@ -1,12 +1,20 @@
 import { Suspense } from 'react'
 import type { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 
 import { Providers } from '@/app/providers/root-providers'
 import { alegreya, inter } from '@/app/ui/fonts'
-import { SITE_NAME } from '@/shared/constants'
+import { DEVELOPMENT_MODE, SITE_NAME } from '@/shared/constants'
 import { cn } from '@/shared/lib/utils'
 
 import '@/app/ui/globals.css'
+
+const WinterTheme = dynamic(
+  async () => (await import('@/widgets/root/winter-theme')).WinterTheme,
+  {
+    ssr: false,
+  },
+)
 
 export const metadata: Metadata = {
   title: {
@@ -32,6 +40,7 @@ export default function RootLayout({
       >
         <Suspense>
           <Providers>{children}</Providers>
+          {!DEVELOPMENT_MODE && <WinterTheme />}
         </Suspense>
       </body>
     </html>

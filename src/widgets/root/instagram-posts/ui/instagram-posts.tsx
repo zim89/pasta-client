@@ -13,12 +13,14 @@ import {
   type CarouselApi,
 } from '@/shared/ui/common/carousel'
 import { cn } from '@/shared/lib/utils'
+import classes from './classes.module.css'
 
 export const InstagramPosts = () => {
   const { data, cursor } = usePosts()
   const [api, setApi] = useState<CarouselApi>()
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [current, setCurrent] = useState(0)
+  const [_, setCurrent] = useState(0)
 
   useEffect(() => {
     if (!api) {
@@ -51,12 +53,18 @@ export const InstagramPosts = () => {
               slidesToScroll: 1,
             }}
           >
-            <CarouselContent className='-ml-5 items-center md:-ml-[27px] xl:-ml-[34.67px] xl:h-[360px]'>
+            <CarouselContent
+              className={cn(
+                'items-center xl:-ml-[2px] xl:h-[360px]',
+                classes.postContainer,
+              )}
+            >
               {data.map(post => (
                 <CarouselItem
                   key={post.id}
                   className={cn(
-                    'group h-[251px] basis-[251px] pl-5 transition-all duration-500 hover:h-[360px] hover:basis-[394.67px] md:h-[220px] md:basis-1/3 md:pl-[27px] xl:h-[272px] xl:basis-[306.67px] xl:pl-[34.67px]',
+                    'group h-[211px] basis-[231px] px-[10px] transition-all duration-500 first-of-type:ml-2 md:h-[220px] md:basis-1/3 md:px-[13.5px] xl:h-[290px] xl:basis-[323px] xl:px-[17.33px] xl:first-of-type:ml-0',
+                    classes.postCard,
                   )}
                 >
                   <a

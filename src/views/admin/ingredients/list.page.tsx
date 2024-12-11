@@ -17,8 +17,8 @@ import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
 import { BulkDeleteIngredients } from '@/features/admin/bulk-delete-ingredients'
 import { Ingredient } from '@/entities/ingredient/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
+import { useListPagination } from '@/shared/lib/hooks/useListPagination'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
-import { usePaginate } from '@/shared/lib/hooks/usePaginate'
 
 export const IngredientList = () => {
   const router = useRouter()
@@ -31,11 +31,8 @@ export const IngredientList = () => {
   const sortParam = useHashParamValue('sort')
   const orderParam = useHashParamValue('order')
 
-  const [currentPage, { paginated, setLimit, setCurrentPage }] = usePaginate(
-    displayedRows,
-    Number(pageParam),
-    Number(limitParam),
-  )
+  const [currentPage, { paginated, setLimit, setCurrentPage }] =
+    useListPagination(displayedRows, Number(pageParam), Number(limitParam))
 
   useEffect(() => {
     router.replace('#/ingredient?perPage=5&page=1')
