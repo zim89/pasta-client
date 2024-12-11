@@ -21,7 +21,7 @@ export const MenuSlider = ({ data }: { data: Dish[] }) => {
     }
 
     api.scrollTo(0)
-  }, [data])
+  }, [data, api])
 
   return (
     <div className='pb-[72px]'>

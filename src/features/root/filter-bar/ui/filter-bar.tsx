@@ -9,6 +9,7 @@ import {
 } from '@/shared/ui/common/carousel'
 import { QUERY_KEYS } from '@/shared/constants'
 import { cn } from '@/shared/lib/utils'
+import { FilterBarSkeleton } from './filter-bar-skeleton'
 
 export const FilterBar = () => {
   const router = useRouter()
@@ -40,43 +41,50 @@ export const FilterBar = () => {
           slidesToScroll: 1,
         }}
       >
-        {!isLoading && data && (
-          <>
-            <CarouselContent className='-ml-5'>
-              <CarouselItem className='basis-auto pl-5'>
-                <button
-                  onClick={() => onClick('Все меню')}
-                  className={cn(
-                    'h-[47px] rounded-[30px] border px-5 text-lg/[23.4px] xl:px-10',
-                    !searchParams.get('filter')
-                      ? 'border-primary-light text-primary-light'
-                      : 'border-black/20 text-black',
-                  )}
-                >
-                  Все меню
-                </button>
-              </CarouselItem>
-              {data.map(category => {
-                const isActive = searchParams.get('filter') === category.name
+        {isLoading ? (
+          <FilterBarSkeleton />
+        ) : (
+          data && (
+            <>
+              <CarouselContent className='-ml-5'>
+                <CarouselItem className='basis-auto pl-5'>
+                  <button
+                    onClick={() => onClick('Все меню')}
+                    className={cn(
+                      'h-[47px] rounded-[30px] border px-5 text-lg/[23.4px] xl:px-10',
+                      !searchParams.get('filter')
+                        ? 'border-primary-light text-primary-light'
+                        : 'border-black/20 text-black',
+                    )}
+                  >
+                    Все меню
+                  </button>
+                </CarouselItem>
+                {data.map(category => {
+                  const isActive = searchParams.get('filter') === category.name
 
-                return (
-                  <CarouselItem key={category.name} className='basis-auto pl-5'>
-                    <button
-                      onClick={() => onClick(category.name)}
-                      className={cn(
-                        'h-[47px] rounded-[30px] border px-5 text-lg/[23.4px] capitalize xl:px-10',
-                        isActive
-                          ? 'border-primary-light text-primary-light'
-                          : 'border-black/20 text-black',
-                      )}
+                  return (
+                    <CarouselItem
+                      key={category.name}
+                      className='basis-auto pl-5'
                     >
-                      {category.name}
-                    </button>
-                  </CarouselItem>
-                )
-              })}
-            </CarouselContent>
-          </>
+                      <button
+                        onClick={() => onClick(category.name)}
+                        className={cn(
+                          'h-[47px] rounded-[30px] border px-5 text-lg/[23.4px] capitalize xl:px-10',
+                          isActive
+                            ? 'border-primary-light text-primary-light'
+                            : 'border-black/20 text-black',
+                        )}
+                      >
+                        {category.name}
+                      </button>
+                    </CarouselItem>
+                  )
+                })}
+              </CarouselContent>
+            </>
+          )
         )}
       </Carousel>
     </div>
