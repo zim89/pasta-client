@@ -28,7 +28,10 @@ export const DeleteOrderItem = ({ item, removeDish }: Props) => {
             onClick={() => setDeleteModalOpened(true)}
             className='ml-auto'
           >
-            <Trash2 size={24} className='text-gray-500' />
+            <Trash2
+              size={24}
+              className='text-gray-500 transition-colors hover:text-danger'
+            />
           </button>
         }
       />

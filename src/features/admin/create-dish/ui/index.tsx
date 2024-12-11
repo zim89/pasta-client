@@ -66,24 +66,22 @@ export const CreateProduct = () => {
             validate={[
               ...valueRange(1),
               requiredField,
-              number('Невірний формат числа.'),
+              number('Невірний формат числа'),
             ]}
           />
           <NumberInput
             source='weight'
             min={0}
             label='Вага (грам)'
-            format={val => parseInt(val)}
             type='number'
-            validate={[...valueRange(0)]}
+            validate={[...valueRange(0), number('Невірний формат числа')]}
           />
           <NumberInput
             source='volume'
             type='number'
             min={0}
-            format={val => parseInt(val)}
             label="Об'єм (л)"
-            validate={[...valueRange(0)]}
+            validate={[...valueRange(0), number('Невірний формат числа')]}
           />
         </div>
         <BrandImageInput source='image' validate={requiredField} />

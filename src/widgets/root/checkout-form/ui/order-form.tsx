@@ -10,6 +10,7 @@ import { ProceedOrder } from '@/features/root/proceed-order'
 import { useCartStore } from '@/entities/cart'
 import { Form } from '@/shared/ui/common/form'
 import {
+  DEVELOPMENT_MODE,
   KEYS,
   LIQPAY_TEST_PRIVATE_KEY,
   LIQPAY_TEST_PUBLIC_KEY,
@@ -88,10 +89,9 @@ export const OrderForm = () => {
             })
             .join('\n')}`,
         orderId,
-        result_url:
-          process.env.NODE_ENV !== 'production'
-            ? 'http://localhost:3000/confirmation'
-            : 'https://pasta-client.vercel.app/confirmation',
+        result_url: DEVELOPMENT_MODE
+          ? 'http://localhost:3000/confirmation'
+          : 'https://pasta-client.vercel.app/confirmation',
         info: JSON.stringify({ details: values }),
       })
 

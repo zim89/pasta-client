@@ -10,6 +10,7 @@ import * as yup from 'yup'
 import { ProceedOrder } from '@/features/root/proceed-order'
 import { useCartStore } from '@/entities/cart'
 import {
+  DEVELOPMENT_MODE,
   KEYS,
   LIQPAY_TEST_PRIVATE_KEY,
   LIQPAY_TEST_PUBLIC_KEY,
@@ -84,10 +85,9 @@ export const PickupOrderForm = ({ OrdersSlot }: Props) => {
             })
             .join('\n')}`,
         orderId,
-        result_url:
-          process.env.NODE_ENV !== 'production'
-            ? 'http://localhost:3000/confirmation?pickup=true'
-            : 'https://pasta-la-pepito.vercel.app/confirmation?pickup=true',
+        result_url: DEVELOPMENT_MODE
+          ? 'http://localhost:3000/confirmation?pickup=true'
+          : 'https://pasta-client.vercel.app/confirmation?pickup=true',
         info: JSON.stringify({ details: values }),
       })
 

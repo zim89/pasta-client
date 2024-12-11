@@ -1,10 +1,5 @@
-import {
-  Button,
-  ColouredTrash,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from '@/shared/ui'
+import { Button, Dialog, DialogContent, DialogTitle } from '@/shared/ui'
+import { Trash2 } from 'lucide-react'
 
 type Props = {
   openingButton: React.ReactNode
@@ -29,20 +24,20 @@ export const DeleteItemModal = ({
         <DialogContent aria-describedby={undefined}>
           <DialogTitle hidden>{title}</DialogTitle>
           <div className='flex items-center gap-8'>
-            <ColouredTrash />
+            <Trash2 size={36} />
             <div>
               <h3 className='text-xl font-medium'>
-                Дана операція скасовує товар.
+                Дана операція видаляє товар.
               </h3>
               <p className='mt-1 text-sm text-gray-500'>
-                Скасувати? А раптом це саме те, що вам потрібно!
+                Видалити? А раптом це саме те, що вам потрібно!
               </p>
             </div>
           </div>
           <div className='flex justify-end gap-3'>
-            <Button onClick={() => handleOpenChange(false)}>Закрити</Button>
+            <Button onClick={() => handleOpenChange(false)}>Ні</Button>
             <Button onClick={handleConfirm} className='text-danger'>
-              Скасувати
+              Так
             </Button>
           </div>
         </DialogContent>

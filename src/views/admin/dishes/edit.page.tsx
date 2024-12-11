@@ -53,14 +53,12 @@ export const EditProduct = () => {
         <NumberInput
           source='weight'
           label='Вага'
-          format={val => parseInt(val)}
           type='number'
           validate={[...valueRange(0)]}
         />
         <NumberInput
           source='volume'
           label="Об'єм"
-          format={val => parseInt(val)}
           type='number'
           validate={[...valueRange(0)]}
         />

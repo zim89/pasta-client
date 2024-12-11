@@ -7,7 +7,11 @@ import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
 import { PostHeaderActions } from '@/widgets/admin/post-header-action'
 import { BulkDeletePosts } from '@/features/admin/bulk-delete-posts'
 import type { Post } from '@/entities/post'
-import { useHashParamValue, useMedia, usePaginate } from '@/shared/lib/hooks'
+import {
+  useHashParamValue,
+  useListPagination,
+  useMedia,
+} from '@/shared/lib/hooks'
 
 export const PostsList = () => {
   const router = useRouter()
@@ -20,11 +24,8 @@ export const PostsList = () => {
   const sortParam = useHashParamValue('sort')
   const orderParam = useHashParamValue('order')
 
-  const [currentPage, { paginated, setLimit, setCurrentPage }] = usePaginate(
-    displayedRows,
-    Number(pageParam),
-    Number(limitParam),
-  )
+  const [currentPage, { paginated, setLimit, setCurrentPage }] =
+    useListPagination(displayedRows, Number(pageParam), Number(limitParam))
 
   useEffect(() => {
     router.replace('#/insta-posts?perPage=5&page=1')

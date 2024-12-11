@@ -20,8 +20,8 @@ import { OrderHeaderActions } from '@/widgets/admin/order-header-actions'
 import { BulkDeleteOrders } from '@/features/admin/bulk-delete-orders'
 import { Order } from '@/entities/order/model/types'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
+import { useListPagination } from '@/shared/lib/hooks/useListPagination'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
-import { usePaginate } from '@/shared/lib/hooks/usePaginate'
 import { Empty } from './ui/Empty'
 
 export const OrdersList = () => {
@@ -35,11 +35,8 @@ export const OrdersList = () => {
   const sortParam = useHashParamValue('sort')
   const orderParam = useHashParamValue('order')
 
-  const [currentPage, { paginated, setLimit, setCurrentPage }] = usePaginate(
-    displayedRows,
-    Number(pageParam),
-    Number(limitParam),
-  )
+  const [currentPage, { paginated, setLimit, setCurrentPage }] =
+    useListPagination(displayedRows, Number(pageParam), Number(limitParam))
 
   useEffect(() => {
     router.replace('#/order?perPage=5&page=1')

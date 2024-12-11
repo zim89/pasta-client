@@ -32,7 +32,7 @@ export const ShowOrder = () => {
       const res = await refetch()
       setSource(res.data)
     })()
-  }, [record])
+  }, [record, refetch])
 
   useEffect(() => {
     if (streetField.current && isEditingOrder) {
