@@ -67,9 +67,19 @@ export const AddIngredient = ({
           {data && !isLoading && (
             <>
               {isDesktop ? (
-                <IngredientFormDesktop data={data} dish={dish} count={count} />
+                <IngredientFormDesktop
+                  data={data}
+                  dish={dish}
+                  count={count}
+                  setOpen={setOpen}
+                />
               ) : (
-                <IngredientForm data={data} dish={dish} count={count} />
+                <IngredientForm
+                  data={data}
+                  dish={dish}
+                  count={count}
+                  setOpen={setOpen}
+                />
               )}
             </>
           )}

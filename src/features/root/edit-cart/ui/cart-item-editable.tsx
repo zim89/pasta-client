@@ -94,7 +94,7 @@ export const CartItemEditable = ({ item }: { item: CartItem }) => {
                   {item.ingredients.map(i => (
                     <li
                       key={i.id}
-                    >{`${i.name} - ${i.count} (${(i.count * i.price).toFixed(2)}₴)`}</li>
+                    >{`${i.label} - ${i.count} (${(i.count * i.price).toFixed(2)}₴)`}</li>
                   ))}
                 </ul>
               )}
