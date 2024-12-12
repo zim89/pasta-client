@@ -20,7 +20,10 @@ export const PageBreadcrumbs = ({
         <BreadcrumbList className='gap-1 text-sm/[18.2px] text-black'>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href='/' className='opacity-50'>
+              <Link
+                href='/'
+                className='opacity-50 transition-opacity duration-300 hover:opacity-100'
+              >
                 Головна
               </Link>
             </BreadcrumbLink>
@@ -30,7 +33,7 @@ export const PageBreadcrumbs = ({
               <BreadcrumbSeparator>/</BreadcrumbSeparator>
 
               {href ? (
-                <BreadcrumbItem className='opacity-50'>
+                <BreadcrumbItem className='opacity-50 transition-opacity duration-300 hover:opacity-100'>
                   <BreadcrumbLink asChild>
                     <Link href={href} className='capitalize'>
                       {label}

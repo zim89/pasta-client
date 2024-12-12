@@ -38,7 +38,7 @@ export const ProductDetails = ({ dish }: { dish: Dish }) => {
           {/* Dish actions */}
           <EditDishCount dish={dish} />
 
-          <DeliveryModal />
+          <DeliveryModal className='transition-colors duration-300 hover:border-b-primary-light hover:text-primary-light' />
         </div>
       </section>
 
