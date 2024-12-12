@@ -18,12 +18,14 @@ export const IngredientFormDesktop = ({
   data,
   dish,
   count = 1,
+  setOpen,
 }: {
   data: Ingredient[]
   dish: Dish
   count?: number
+  setOpen: (value: boolean) => void
 }) => {
-  const { addToCart, toggleCartDrawer } = useCartStore(state => state)
+  const { addToCart } = useCartStore(state => state)
   const FormSchema = generateFormSchema(data)
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -47,9 +49,9 @@ export const IngredientFormDesktop = ({
         return acc
       }, [] as CartIngredient[])
       addToCart({ dish, ingredients, count })
-      toggleCartDrawer()
+      setOpen(false)
     },
-    [data, addToCart, dish, count, toggleCartDrawer],
+    [data, addToCart, dish, count, setOpen],
   )
 
   return (
