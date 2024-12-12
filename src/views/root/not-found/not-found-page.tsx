@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Picture } from '@/shared/ui'
 import { ArrowLeftIcon } from '@/shared/ui/icons'
