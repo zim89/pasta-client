@@ -44,7 +44,7 @@ export const HitsSlider = ({ data }: { data: Dish[] }) => {
       <div className='flex justify-end'>
         <Link
           href={APP_PAGES.MENU}
-          className='border-b border-b-black text-lg/[23.4px]'
+          className='border-b border-b-black text-lg/[23.4px] transition-colors duration-300 hover:border-b-primary-light hover:text-primary-light'
         >
           Подивитися все меню
         </Link>

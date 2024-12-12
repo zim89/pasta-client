@@ -62,7 +62,7 @@ export const IngredientFormItem = ({
               disabled={form.getValues(i.name) === 0}
               type='button'
               onClick={onDecrement}
-              className='flex size-8 items-center justify-center border-[1.26px] border-black/5 text-[22px]/[28.6px] font-medium'
+              className='flex size-8 items-center justify-center border-[1.26px] border-black/5 text-[22px]/[28.6px] font-medium transition-colors duration-300 hover:text-primary-light disabled:text-gray-400 md:text-sm/[18.2px]'
             >
               -
             </button>
@@ -70,13 +70,13 @@ export const IngredientFormItem = ({
               <Input
                 {...field}
                 readOnly
-                className='flex size-8 items-center justify-center border-[1.26px] border-black/5 p-0 text-center text-[22px]/[28.6px] font-medium'
+                className='flex size-8 items-center justify-center border-[1.26px] border-black/5 p-0 text-center text-[22px]/[28.6px] font-medium md:text-sm/[18.2px] md:font-normal'
               />
             </FormControl>
             <button
               type='button'
               onClick={onIncrement}
-              className='flex size-8 items-center justify-center border-[1.26px] border-black/5 text-[22px]/[28.6px] font-medium'
+              className='flex size-8 items-center justify-center border-[1.26px] border-black/5 text-[22px]/[28.6px] font-medium transition-colors duration-300 hover:text-primary-light disabled:text-gray-400 md:text-sm/[18.2px]'
             >
               +
             </button>
