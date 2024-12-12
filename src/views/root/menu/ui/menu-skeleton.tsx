@@ -4,7 +4,6 @@ export const MenuSkeleton = () => {
   return (
     <>
       <div className='grid grid-cols-1 gap-[30px] md:grid-cols-1 xl:hidden'>
-
         {Array.from({ length: 2 }).map((_, index) => (
           <ProductSkeleton key={index} />
         ))}

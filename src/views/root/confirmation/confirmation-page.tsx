@@ -5,12 +5,12 @@ import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { OrderSummary } from '@/shared/ui/order-summary'
 import { PickupAddress } from '@/shared/ui/pickup-address'
+import axios from 'axios'
 
 import { ControlledFields } from '@/widgets/root/checkout-form/model'
 import { CartItem, useCartStore } from '@/entities/cart'
 import { CreateOrder, Order, orderService } from '@/entities/order'
 import { OrderItemCard } from '@/entities/order/ui/order-item-card'
-import { axiosBase } from '@/shared/api'
 import {
   KEYS,
   LIQPAY_TEST_PRIVATE_KEY,
@@ -61,7 +61,7 @@ export const ConfirmationPage = () => {
           params.append('data', data)
           params.append('signature', signature)
 
-          const request = await axiosBase.post(API_URL, params)
+          const request = await axios.post(API_URL, params)
 
           const res = await request.data
 
