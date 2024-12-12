@@ -1,0 +1,7 @@
+.postContainer:hover .postCard:not(:hover) {
+  @apply transition-transform xl:scale-95;
+}
+
+.postContainer .postCard:hover {
+  @apply transition-transform xl:scale-105;
+}
