@@ -3,12 +3,13 @@ import crypto from 'crypto'
 type ConstructLiqpayPayloadParams = {
   action: string
   version: number
-  amount: number
-  description: string
   publicKey: string
   privateKey: string
   orderId: string
+  amount?: number
+  description?: string
   result_url?: string
+  server_url?: string
   language?: string
   info?: string
 }

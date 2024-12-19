@@ -92,6 +92,9 @@ export const OrderForm = () => {
         result_url: DEVELOPMENT_MODE
           ? 'http://localhost:3000/confirmation'
           : 'https://pasta-client.vercel.app/confirmation',
+        server_url: DEVELOPMENT_MODE
+          ? 'http://localhost:3000/api/status'
+          : 'https://pasta-client.vercel.app/api/status',
         info: JSON.stringify({ details: values }),
       })
 

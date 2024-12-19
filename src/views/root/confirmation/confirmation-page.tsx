@@ -11,12 +11,7 @@ import { ControlledFields } from '@/widgets/root/checkout-form/model'
 import { CartItem, useCartStore } from '@/entities/cart'
 import { CreateOrder, Order, orderService } from '@/entities/order'
 import { OrderItemCard } from '@/entities/order/ui/order-item-card'
-import {
-  KEYS,
-  LIQPAY_TEST_PRIVATE_KEY,
-  LIQPAY_TEST_PUBLIC_KEY,
-} from '@/shared/constants'
-import { constructLiqpayPayload } from '@/shared/lib/utils/liqpay'
+import { KEYS } from '@/shared/constants'
 import img_placeholder from '@/shared/assets/images/placeholders/img-square.png'
 import { formatDeliveryString } from './lib/format-delivery-string'
 
@@ -45,25 +40,19 @@ export const ConfirmationPage = () => {
     if (liqpayId.trim() && cart.length) {
       ;(async () => {
         try {
-          const API_URL = 'https://www.liqpay.ua/api/request'
+          const request = await axios.post(
+            '/api/status',
+            {
+              orderId: liqpayId,
+            },
+            {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            },
+          )
 
-          const { data, signature } = constructLiqpayPayload({
-            action: 'confirm',
-            version: 3,
-            publicKey: `${LIQPAY_TEST_PUBLIC_KEY}`,
-            privateKey: `${LIQPAY_TEST_PRIVATE_KEY}`,
-            orderId: liqpayId,
-            amount: totalPrice,
-            description: `Get the status of #${liqpayId} transaction`,
-          })
-
-          const params = new URLSearchParams()
-          params.append('data', data)
-          params.append('signature', signature)
-
-          const request = await axios.post(API_URL, params)
-
-          const res = await request.data
+          const res = await request.data.result
 
           if (res.status !== 'success') {
             let message: string = ''
