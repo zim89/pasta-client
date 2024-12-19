@@ -28,7 +28,7 @@ export type TimeString = `${number}.${number}.${number} - ${string}`
 export const isItTimeString = (value: string): value is TimeString => {
   const split = value.split(' - ')
 
-  // . of / in other words, British time or Ukrainian one
+  // dot (.) or slash (/), in other words: British time or Ukrainian one
   const [day, month, year] = split[0].split(/[\./]/)
 
   return (
