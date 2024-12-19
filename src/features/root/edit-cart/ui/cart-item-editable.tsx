@@ -60,7 +60,7 @@ export const CartItemEditable = ({ item }: { item: CartItem }) => {
                     {item.ingredients.slice(0, 3).map(i => (
                       <li
                         key={i.id}
-                      >{`${i.name} - ${i.count} (${(i.count * i.price).toFixed(2)} грн.)`}</li>
+                      >{`${i.label} - ${i.count} (${(i.count * i.price).toFixed(2)}₴)`}</li>
                     ))}
                   </ul>
                   <Accordion type='single' collapsible>
@@ -70,7 +70,7 @@ export const CartItemEditable = ({ item }: { item: CartItem }) => {
                           {item.ingredients.slice(3).map(i => (
                             <li
                               key={i.id}
-                            >{`${i.name} - ${i.count} (${(i.count * i.price).toFixed(2)} грн.)`}</li>
+                            >{`${i.name} - ${i.count} (${(i.count * i.price).toFixed(2)}₴)`}</li>
                           ))}
                         </ul>
                       </AccordionContent>

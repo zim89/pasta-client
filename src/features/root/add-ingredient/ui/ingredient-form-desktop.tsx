@@ -62,7 +62,7 @@ export const IngredientFormDesktop = ({
         </div>
 
         <div className='flex-1 space-y-8'>
-          <ul className='grid grid-cols-3 gap-[42px]'>
+          <ul className='grid grid-cols-3 gap-[42px] border-b border-b-primary-light pb-8'>
             {data.map(i => (
               <li key={i.id}>
                 <FormField
