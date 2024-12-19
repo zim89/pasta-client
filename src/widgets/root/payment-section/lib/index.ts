@@ -76,8 +76,6 @@ export const calculateTime = (
 
     const currentTime = `${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`
 
-    console.log('TIME: ', currentTime)
-
     result.push({ label: currentTime, value: currentTime })
 
     currentMinute += 30
