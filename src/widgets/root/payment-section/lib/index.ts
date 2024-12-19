@@ -28,7 +28,8 @@ export type TimeString = `${number}.${number}.${number} - ${string}`
 export const isItTimeString = (value: string): value is TimeString => {
   const split = value.split(' - ')
 
-  const [day, month, year] = split[0].split('.')
+  // . of / in other words, British time or Ukrainian one
+  const [day, month, year] = split[0].split(/[\./]/)
 
   return (
     Number.isInteger(+day) &&
@@ -43,7 +44,7 @@ export const calculateTime = (
 ): { label: string; value: string }[] => {
   const currentDate = new Date()
   if (date) {
-    const dateParts = date.split(' - ')[0].split('.')
+    const dateParts = date.split(' - ')[0].split(/[\./]/)
 
     const day = parseInt(dateParts[0], 10)
     const month = parseInt(dateParts[1], 10) - 1 // Months are 0-indexed in JavaScript
@@ -74,6 +75,8 @@ export const calculateTime = (
     }
 
     const currentTime = `${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`
+
+    console.log('TIME: ', currentTime)
 
     result.push({ label: currentTime, value: currentTime })
 
