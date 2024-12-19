@@ -53,8 +53,10 @@ export const IngredientFormEdit = ({
 
   const [price, setPrice] = useState(item.price)
   const onClear = () => {
-    setPrice(item.price)
-    form.reset()
+    setPrice(item.dish.price)
+    Object.entries(form.getValues()).forEach(([key, value]) => {
+      if (value !== 0) form.setValue(key, 0)
+    })
   }
 
   return (

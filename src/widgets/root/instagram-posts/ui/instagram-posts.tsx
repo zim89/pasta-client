@@ -39,7 +39,15 @@ export const InstagramPosts = () => {
       <div className='container'>
         <h2 className='xl:!mb-5'>
           Приєднуйтесь до <br className='xl:hidden' />
-          нас в <span className='text-primary'>Instagram</span>
+          нас в{' '}
+          <a
+            href='https://www.instagram.com/la_pepito.kyiv/'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='text-primary transition-colors duration-300 hover:text-primary-light'
+          >
+            Instagram
+          </a>
         </h2>
 
         {cursor}

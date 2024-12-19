@@ -7,7 +7,7 @@ export const DishCard = ({ dish, price }: { dish: Dish; price: number }) => {
   return (
     <div className='flex flex-row gap-4 md:w-[313px] md:flex-row-reverse md:gap-5 xl:w-auto xl:flex-col-reverse'>
       {/* Dish desc */}
-      <div className='flex flex-col justify-between font-medium md:gap-5'>
+      <div className='flex flex-col justify-between font-medium md:gap-5 xl:w-[240px]'>
         <h2 className='text-lg/[23.4px] md:text-xl/[26px] xl:text-center'>
           {dish.title}
         </h2>
