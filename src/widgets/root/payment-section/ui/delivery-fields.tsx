@@ -27,8 +27,6 @@ export const DeliveryFields = ({ form }: Props) => {
       ? calculateTime(deliveryDate)
       : calculateTime()
 
-  console.log(isItTimeString(deliveryDate))
-
   return (
     <div className='flex w-full flex-col gap-6 rounded-[20px] border border-primary-light px-[10px] py-6 md:max-w-[320px] md:border-0 xl:max-w-full'>
       <h3 className='mb-1 text-[18px]/[23.4px] font-medium md:text-[22px]/[28.6px]'>
