@@ -22,7 +22,7 @@ export const AboutUsPage = () => {
           </div>
           <p className='text-justify text-sm/[1.138rem] xl:text-base/[1.3rem]'>
             <span className='font-semibold text-primary-light'>
-              Pasta Le Pepito
+              Pasta La Pepito
             </span>{' '}
             - ресторан італійської кухні, що виник 2019 року зі спільної
             пристрасті Семена і Романа до концепту street food&apos;а і бажання

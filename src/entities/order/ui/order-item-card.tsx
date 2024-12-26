@@ -37,8 +37,8 @@ export const OrderItemCard = ({
               ? ingredients.reduce(
                   (acc, prev) =>
                     acc.length
-                      ? acc + ', ' + prev.name + ` (${prev.count})`
-                      : acc + prev.name + ` (${prev.count})`,
+                      ? acc + ', ' + prev.label + ` (${prev.count})`
+                      : acc + prev.label + ` (${prev.count})`,
                   '',
                 )
               : 'немає'}
