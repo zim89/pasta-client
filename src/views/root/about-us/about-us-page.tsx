@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import { PageBreadcrumbs, PageHeading } from '@/shared/ui'
 
-import poster2 from '@/shared/assets/images/about-us-poster-2.png'
 import poster from '@/shared/assets/images/about-us-poster.jpg'
 
 export const AboutUsPage = () => {
@@ -13,7 +12,7 @@ export const AboutUsPage = () => {
         <PageHeading title='Про нас' />
 
         <div className='items-center gap-[100px] xl:flex'>
-          <div className='relative mb-5 min-h-[251px] min-w-[343px] overflow-clip rounded-2xl md:float-left md:mb-7 md:mr-8 md:min-h-[264px] md:min-w-[340px] md:rounded-[30px] xl:mr-0 xl:min-h-[450px] xl:min-w-[620px]'>
+          <div className='relative mb-5 min-h-[251px] min-w-[343px] overflow-clip rounded-2xl md:float-left md:mb-0 md:mr-8 md:min-h-[264px] md:min-w-[340px] md:rounded-[30px] xl:mr-0 xl:min-h-[450px] xl:min-w-[620px]'>
             <Image
               className='w-full'
               src={poster.src}
@@ -37,14 +36,6 @@ export const AboutUsPage = () => {
             успішно показала, що ні пандемія, ні повномасштабна війна не стануть
             перешкодою тому, до чого лежить серце.
             <span className='mb-[14px] block md:mb-5 xl:mb-12' />
-            <div className='relative mb-5 min-h-[251px] min-w-[343px] overflow-clip rounded-2xl md:float-right md:mb-0 md:ml-8 md:min-h-[264px] md:min-w-[340px] md:rounded-[30px] xl:hidden'>
-              <Image
-                className='w-full'
-                src={poster2.src}
-                fill
-                alt='About us poster'
-              />
-            </div>
             Головною особливістю ресторану Pasta La Pepito є не тільки смачні
             страви, а й особливий підхід до кожного клієнта. Ми раді бачити
             знайомі обличчя, вести задушевні бесіди та розділяти задоволення від
