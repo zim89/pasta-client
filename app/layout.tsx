@@ -9,6 +9,8 @@ import { cn } from '@/shared/lib/utils'
 
 import '@/app/ui/globals.css'
 
+import Script from 'next/script'
+
 const WinterTheme = dynamic(
   async () => (await import('@/widgets/root/winter-theme')).WinterTheme,
   {
@@ -43,7 +45,7 @@ export default function RootLayout({
           {!DEVELOPMENT_MODE && <WinterTheme />}
         </Suspense>
 
-        <script src='https://acrobatservices.adobe.com/view-sdk/viewer.js'></script>
+        <Script src='https://acrobatservices.adobe.com/view-sdk/viewer.js' />
       </body>
     </html>
   )

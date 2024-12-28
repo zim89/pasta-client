@@ -1,7 +1,6 @@
 'use client'
 
 import axios from 'axios'
-import { fetchUtils } from 'react-admin'
 
 import { KEYS, SERVER_URL } from '@/shared/constants'
 
