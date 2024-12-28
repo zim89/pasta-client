@@ -42,6 +42,8 @@ export default function RootLayout({
           <Providers>{children}</Providers>
           {!DEVELOPMENT_MODE && <WinterTheme />}
         </Suspense>
+
+        <script src='https://acrobatservices.adobe.com/view-sdk/viewer.js'></script>
       </body>
     </html>
   )

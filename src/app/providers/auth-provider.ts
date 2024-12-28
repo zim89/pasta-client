@@ -14,6 +14,7 @@ export const authProvider: AuthProvider = {
       `${SERVER_URL}/auth/admin/login`,
       {
         method: 'POST',
+        credentials: 'include',
         body: JSON.stringify({ email: username, password }),
       },
     )
