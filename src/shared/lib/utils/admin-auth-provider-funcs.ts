@@ -1,6 +1,8 @@
 'use client'
 
-import { KEYS } from '@/shared/constants'
+import axios from 'axios'
+
+import { KEYS, SERVER_URL } from '@/shared/constants'
 
 type ParsedToken = {
   email: string
@@ -17,10 +19,32 @@ const getAuthTokensFromLocalStorage = () => {
   return { accessToken, refreshToken }
 }
 
-const resetAuthTokens = () => {
-  localStorage.removeItem(KEYS.accessToken)
-  localStorage.removeItem(KEYS.refreshToken)
-  window.location.replace('#/login')
+const resetAuthTokens = async () => {
+  try {
+    console.log('Change refresh token to access token')
+
+    const response = await axios.post(
+      `${SERVER_URL}/auth/refresh-token`,
+      null,
+      {
+        withCredentials: true,
+      },
+    )
+
+    const data = await response.data
+
+    console.log('REFRESH TOKEN RESPONSE: ', data)
+
+    if (!data.accessToken) {
+      throw new Error("Access token wasn't provided")
+    }
+
+    localStorage.setItem(KEYS.accessToken, data.accessToken)
+    return data.accessToken
+  } catch (err) {
+    console.log(err)
+    window.location.replace('#/login')
+  }
 }
 
 export const refreshAuth = async () => {
@@ -32,7 +56,8 @@ export const refreshAuth = async () => {
     const currentTime = new Date().getTime()
 
     if (parsedToken.exp < currentTime / 1000) {
-      return resetAuthTokens()
+      console.log('Access token is expired')
+      return await resetAuthTokens()
     }
   }
 }

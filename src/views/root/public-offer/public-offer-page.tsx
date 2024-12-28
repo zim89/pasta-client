@@ -1,18 +1,49 @@
 'use client'
 
-import { Viewer } from '@react-pdf-viewer/core'
+import { useEffect } from 'react'
 
-// Import the styles
-import '@react-pdf-viewer/core/lib/styles/index.css'
+import { ViewSDKClient } from '@/shared/config/view-sdk-client'
 
 export const PublicOfferPage = () => {
+  useEffect(() => {
+    const PDFViewerClient = new ViewSDKClient()
+
+    PDFViewerClient.ready().then(() => {
+      /* Invoke file preview */
+      PDFViewerClient.previewFile(
+        'pdf-div',
+        {
+          /* Pass the embed mode option here */
+
+          content: {
+            location: {
+              url: '/files/publichniy_dohovir_oferty.pdf',
+            },
+          },
+          metaData: {
+            fileName: 'polityka-publichniy_dohovir_oferty.pdf',
+          },
+        },
+        {
+          embedMode: 'SIZED_CONTAINER',
+          showZoomControl: true,
+          showAnnotationTools: false,
+          enableFormFilling: false,
+          enableAnnotationAPIs: false,
+          enableLinearization: true,
+          showDownloadPDF: false,
+          showPrintPDF: false,
+          showThumbnails: false,
+          showBookmarks: false,
+          includePDFAnnotations: false,
+        },
+      )
+    })
+  }, [])
+
   return (
-    <div className='page-wrap bg-white'>
-      <Viewer
-        defaultScale={1.3}
-        enableSmoothScroll
-        fileUrl='/files/publichniy_dohovir_oferty.pdf'
-      />
+    <div className='page-wrap py-0 md:pt-20 xl:pb-0 xl:pt-24'>
+      <div id='pdf-div' className='h-screen' />
     </div>
   )
 }
