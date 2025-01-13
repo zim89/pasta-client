@@ -21,8 +21,6 @@ const getAuthTokensFromLocalStorage = () => {
 
 const resetAuthTokens = async () => {
   try {
-    console.log('Change refresh token to access token')
-
     const response = await axios.post(
       `${SERVER_URL}/auth/refresh-token`,
       null,
@@ -32,8 +30,6 @@ const resetAuthTokens = async () => {
     )
 
     const data = response.data
-
-    console.log('REFRESH TOKEN RESPONSE: ', data)
 
     if (!data.accessToken) {
       throw new Error("Access token wasn't provided")
@@ -56,7 +52,6 @@ export const refreshAuth = async () => {
     const currentTime = new Date().getTime()
 
     if (parsedToken.exp < currentTime / 1000) {
-      console.log('Access token is expired (admin-auth-provider-funcs.ts)')
       return await resetAuthTokens()
     }
     return Promise.resolve()
