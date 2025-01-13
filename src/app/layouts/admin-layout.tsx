@@ -14,7 +14,7 @@ import { QueryClient } from '@tanstack/react-query'
 import { Admin, Edit, Layout, Resource, Show } from 'react-admin'
 
 import { authProviderWithRefresh } from '@/app/providers/auth-provider'
-import { dataProvider } from '@/app/providers/data-provider'
+import { dataProviderWithRefresh } from '@/app/providers/data-provider'
 import { theme } from '@/app/ui/admin-theme'
 import { EditAdvantage } from '@/views/admin/advantages/edit.page'
 import { AdvantagesList } from '@/views/admin/advantages/list.page'
@@ -44,7 +44,7 @@ export default function AdminLayout() {
     <>
       <ChangePasswordModal open={opened} onOpenChange={handleChange} />
       <Admin
-        dataProvider={dataProvider}
+        dataProvider={dataProviderWithRefresh}
         authProvider={authProviderWithRefresh}
         theme={theme}
         layout={CustomLayout}

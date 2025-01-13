@@ -31,7 +31,7 @@ const resetAuthTokens = async () => {
       },
     )
 
-    const data = await response.data
+    const data = response.data
 
     console.log('REFRESH TOKEN RESPONSE: ', data)
 
@@ -56,8 +56,9 @@ export const refreshAuth = async () => {
     const currentTime = new Date().getTime()
 
     if (parsedToken.exp < currentTime / 1000) {
-      console.log('Access token is expired')
+      console.log('Access token is expired (admin-auth-provider-funcs.ts)')
       return await resetAuthTokens()
     }
+    return Promise.resolve()
   }
 }
