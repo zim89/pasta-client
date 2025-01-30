@@ -62,7 +62,11 @@ export const IngredientFormEdit = ({
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={e => {
+          e.preventDefault()
+          e.stopPropagation()
+          form.handleSubmit(onSubmit)(e)
+        }}
         className='grid grid-rows-[1fr_auto] gap-5 md:gap-8 xl:grid-cols-[240px_1fr] xl:grid-rows-none'
       >
         <div className='relative h-full flex-1 grid-rows-[auto_1fr]'>

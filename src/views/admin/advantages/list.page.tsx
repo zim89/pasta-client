@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import {
   Datagrid,
+  fetchUtils,
   ImageField,
   List,
   ListBase,
@@ -16,6 +17,7 @@ import { EntitiesGrid } from '@/widgets/admin/entities-grid'
 import { MobileEntitiesGrid } from '@/widgets/admin/mobile-entities-grid'
 import { BulkDeleteAdvantages } from '@/features/admin/bulk-delete-advantages/ui'
 import { Feature } from '@/entities/feature'
+import { SERVER_URL } from '@/shared/constants'
 import { useHashParamValue } from '@/shared/lib/hooks/useHashValues'
 import { useListPagination } from '@/shared/lib/hooks/useListPagination'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
@@ -30,6 +32,19 @@ export const AdvantagesList = () => {
   const pageParam = useHashParamValue('page')
   const sortParam = useHashParamValue('sort')
   const orderParam = useHashParamValue('order')
+
+  useEffect(() => {
+    ;(async () => {
+      const response = await fetchUtils.fetchJson(
+        `${SERVER_URL}/auth/refresh-token`,
+        {
+          method: 'POST',
+          credentials: 'include',
+        },
+      )
+      console.log(response.json)
+    })()
+  }, [])
 
   const [currentPage, { paginated, setLimit, setCurrentPage }] =
     useListPagination(displayedRows, Number(pageParam), Number(limitParam))

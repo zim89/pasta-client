@@ -1,6 +1,11 @@
-import { DataProvider, fetchUtils } from 'react-admin'
+import {
+  addRefreshAuthToDataProvider,
+  DataProvider,
+  fetchUtils,
+} from 'react-admin'
 
 import { SERVER_URL } from '@/shared/constants'
+import { refreshAuth } from '@/shared/lib/utils/admin-auth-provider-funcs'
 import { retrieveToken } from '@/shared/lib/utils/admin-data-provider-funcs'
 import { transliterate } from '@/shared/lib/utils/transliteration'
 
@@ -197,3 +202,8 @@ export const dataProvider: DataProvider = {
     }
   },
 }
+
+export const dataProviderWithRefresh = addRefreshAuthToDataProvider(
+  dataProvider,
+  refreshAuth,
+)

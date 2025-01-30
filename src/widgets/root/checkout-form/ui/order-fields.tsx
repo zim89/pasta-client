@@ -1,5 +1,3 @@
-import { SquarePen } from 'lucide-react'
-
 import { EditIngredient } from '@/features/root/add-ingredient'
 import { DeleteOrderItem } from '@/features/root/delete-order-item'
 import { CartItem } from '@/entities/cart'
@@ -42,16 +40,9 @@ export const OrderFields = ({
             <DeleteOrderItem item={order} removeDish={removeOrderItem} />
           }
           editIngredientSlot={
-            <EditIngredient
-              triggerButton={
-                <SquarePen
-                  className='text-primary-light'
-                  strokeWidth={1}
-                  size={20}
-                />
-              }
-              item={order}
-            />
+            <div className='flex justify-end'>
+              <EditIngredient item={order} />
+            </div>
           }
         />
       ))}
