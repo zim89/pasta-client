@@ -1,6 +1,11 @@
 import { CLOSING_HOUR, OPENING_HOUR } from '@/shared/constants'
 
-export const calculateDays = (): { label: string; value: string }[] => {
+interface Timeframe {
+  label: string
+  value: string
+}
+
+export const calculateDays = (): Timeframe[] => {
   const today = new Date()
   const result = [{ value: 'today', label: 'Сьогодні' }]
 
@@ -39,9 +44,7 @@ export const isItTimeString = (value: string): value is TimeString => {
   )
 }
 
-export const calculateTime = (
-  date?: TimeString,
-): { label: string; value: string }[] => {
+export const calculateTime = (date?: TimeString): Timeframe[] => {
   const currentDate = new Date()
   if (date) {
     const dateParts = date.split(' - ')[0].split(/[\./]/)
@@ -59,12 +62,12 @@ export const calculateTime = (
     currentDate.setSeconds(0)
   }
 
-  const result: { label: string; value: string }[] = []
+  const result: Timeframe[] = []
 
   let currentHour = currentDate.getHours()
   let currentMinute = Math.ceil(currentDate.getMinutes() / 10) * 10
 
-  while (currentHour >= OPENING_HOUR && currentHour < CLOSING_HOUR) {
+  while (currentHour < CLOSING_HOUR) {
     if (currentMinute >= 60) {
       currentMinute = 0
       currentHour += 1
@@ -82,4 +85,17 @@ export const calculateTime = (
   }
 
   return result
+}
+
+export const getAvailableTimeWindow = (timeframes: Timeframe[]) => {
+  const availableTimeWindow = timeframes.slice(2)
+
+  return availableTimeWindow.length > 0
+    ? availableTimeWindow
+    : [
+        {
+          label: 'Неможливо обробити замовлення в даний час.',
+          value: 'UNAVAILABLE',
+        },
+      ]
 }

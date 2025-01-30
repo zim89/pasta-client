@@ -10,7 +10,12 @@ import {
   FormMessage,
 } from '@/shared/ui/common/form'
 import { cn } from '@/shared/lib/utils'
-import { calculateDays, calculateTime, isItTimeString } from '../lib'
+import {
+  calculateDays,
+  calculateTime,
+  getAvailableTimeWindow,
+  isItTimeString,
+} from '../lib'
 
 type Props = {
   form: OrderForm
@@ -74,18 +79,7 @@ export const DeliveryFields = ({ form }: Props) => {
                 }}
               >
                 <BrandSelect
-                  data={
-                    timeFrames.length
-                      ? deliveryDate === 'today'
-                        ? timeFrames.slice(2)
-                        : timeFrames
-                      : [
-                          {
-                            label: 'Заклад зачинений.',
-                            value: 'UNAVAILABLE',
-                          },
-                        ]
-                  }
+                  data={getAvailableTimeWindow(timeFrames)}
                   classNames={{
                     trigger: {
                       root: cn(
