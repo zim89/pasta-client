@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useMediaQuery } from 'usehooks-ts'
 
 import { FilterBar } from '@/features/root/filter-bar'
+import { MobileFilterBar } from '@/features/root/filter-bar/ui/mobile-filter-bar'
 import { SortDropdown } from '@/features/root/sort-dropdown'
 import { SortSkeleton } from '@/features/root/sort-dropdown/ui/sort-skeleton'
 import { dishService } from '@/entities/dish'
@@ -38,6 +39,7 @@ export const MenuPage = () => {
         <PageBreadcrumbs crumbs={crumbs} />
         <PageHeading title='Наше меню' image={decor_image} />
         <FilterBar />
+        <MobileFilterBar />
         {isLoading ? <SortSkeleton /> : <SortDropdown />}
         {isLoading ? <MenuSkeleton /> : data && <MenuList data={data} />}
       </div>

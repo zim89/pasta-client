@@ -39,14 +39,6 @@ export const Header = () => {
         } as CSSProperties
       }
     >
-      <img
-        src='/images/new-year-banner.png'
-        className='pointer-events-none absolute w-full'
-        style={{
-          filter: 'drop-shadow(1px 1px 0.1px black)',
-        }}
-        alt=''
-      />
       <div className='flex h-[110px] items-center bg-primary md:h-12'>
         <div className='container flex-1'>
           <div className='relative text-center text-xs/[15.6px] text-white md:text-sm/[18.2px]'>
