@@ -4,8 +4,8 @@ import React from 'react'
 import { QuantityController } from '@/shared/ui/quantity-controller'
 
 import { CartItem, useCartStore } from '@/entities/cart'
+import { OrderItemCard } from '@/entities/order/ui/order-item-card'
 import img_placeholder from '@/shared/assets/images/placeholders/img-square.png'
-import { OrderItemCard } from '../../../../entities/order/ui/order-item-card'
 
 type Props = {
   item: CartItem
