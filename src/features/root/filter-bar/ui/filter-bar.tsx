@@ -29,7 +29,7 @@ export const FilterBar = () => {
   }
 
   return (
-    <div className='mb-[22px] flex flex-wrap justify-center gap-1 md:gap-x-[41px] md:gap-y-6 xl:gap-x-[53px] xl:gap-y-5'>
+    <div className='mb-[22px] hidden flex-wrap justify-center gap-1 md:flex md:gap-x-[41px] md:gap-y-6 xl:gap-x-[53px] xl:gap-y-5'>
       {isLoading ? (
         <FilterBarSkeleton />
       ) : (

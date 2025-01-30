@@ -6,7 +6,10 @@ import {
 
 import { SERVER_URL } from '@/shared/constants'
 import { KEYS } from '@/shared/constants/localstorage.const'
-import { refreshAuth } from '@/shared/lib/utils/admin-auth-provider-funcs'
+import {
+  checkIfAccessTokenIsExpired,
+  refreshAuth,
+} from '@/shared/lib/utils/admin-auth-provider-funcs'
 
 export const authProvider: AuthProvider = {
   login: async ({ username, password }) => {
@@ -19,10 +22,9 @@ export const authProvider: AuthProvider = {
       },
     )
 
-    const { admin, accessToken, refreshToken } = response.json
+    const { admin, accessToken } = response.json
 
     localStorage.setItem(KEYS.accessToken, accessToken)
-    localStorage.setItem(KEYS.refreshToken, refreshToken)
 
     return {
       data: admin,
@@ -32,6 +34,12 @@ export const authProvider: AuthProvider = {
     return new Promise<void>((resolve, reject) => {
       const accessToken = localStorage.getItem(KEYS.accessToken)
       if (accessToken) {
+        if (checkIfAccessTokenIsExpired(accessToken)) {
+          console.log('checkAuth says: Session is expired!')
+          reject(new Error('Session is expired!'))
+        }
+
+        console.log('checkAuth')
         resolve()
       } else {
         reject(new Error('The user is unauthorized!'))
@@ -40,7 +48,6 @@ export const authProvider: AuthProvider = {
   },
   logout: async () => {
     localStorage.removeItem(KEYS.accessToken)
-    localStorage.removeItem(KEYS.refreshToken)
 
     return Promise.resolve()
   },
