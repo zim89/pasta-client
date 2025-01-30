@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { Button } from '@/shared/ui'
-import { ArrowDown, ChevronDown, ChevronUp } from 'lucide-react'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 
 import { Ingredient } from '@/entities/ingredient'
 

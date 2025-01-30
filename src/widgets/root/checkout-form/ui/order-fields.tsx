@@ -1,5 +1,3 @@
-import { SquarePen } from 'lucide-react'
-
 import { EditIngredient } from '@/features/root/add-ingredient'
 import { DeleteOrderItem } from '@/features/root/delete-order-item'
 import { CartItem } from '@/entities/cart'
