@@ -18,7 +18,7 @@ export const EditPost = () => {
         <div className='p-2'>
           Діюче посилання: <UrlField source='link' />
         </div>
-        <TextInput validate={requiredField} source='link' />
+        <TextInput validate={requiredField} source='link' label='Лінк' />
 
         <BrandImageInput validate={requiredField} source='image' />
       </SimpleForm>

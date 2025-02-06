@@ -15,9 +15,26 @@ export const EditIngredient = () => {
         WarnWhenUnsavedChangesComponent={AdminUnsavedChangesModal}
         toolbar={<CustomEditFormToolbar />}
       >
-        <TextInput source='label' validate={[requiredField, noMoreThan(60)]} />
-        <NumberInput source='price' min={0} validate={requiredField} />
-        <NumberInput source='weight' min={0} validate={requiredField} />
+        <TextInput
+          source='label'
+          title='Назва'
+          label='Назва'
+          validate={[requiredField, noMoreThan(60)]}
+        />
+        <NumberInput
+          source='price'
+          title='Ціна'
+          label='Ціна'
+          min={0}
+          validate={requiredField}
+        />
+        <NumberInput
+          source='weight'
+          title='Вага'
+          label='Вага'
+          min={0}
+          validate={requiredField}
+        />
         <BrandImageInput source='image' validate={requiredField} />
       </SimpleForm>
     </EditBase>
