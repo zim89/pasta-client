@@ -73,6 +73,20 @@ export const ConfirmationPage = () => {
               details: ControlledFields
             }
 
+            let date: string = ''
+            if (confirmedOrder.details.deliveryDate === 'today') {
+              const currentDate = new Date()
+              const parsed = `${currentDate.toLocaleString('ua-UA', {
+                dateStyle: 'short',
+              })} - ${currentDate.toLocaleString('ua-UA', {
+                weekday: 'short',
+              })}`
+
+              date = parsed
+            } else {
+              date = confirmedOrder.details.deliveryDate
+            }
+
             const payload: CreateOrder = {
               items: cart.map(item => ({
                 dishId: item.dish.id,
@@ -94,7 +108,7 @@ export const ConfirmationPage = () => {
               },
               orderDetails: {
                 payType: 'картою',
-                date: `${confirmedOrder.details.deliveryDate}`,
+                date,
                 email: `${confirmedOrder.details.email}`,
                 phone: confirmedOrder.details.phone,
                 comment: confirmedOrder.details.comment,

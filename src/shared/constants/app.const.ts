@@ -7,8 +7,8 @@ export const RESOURCES = [
   'order',
   'insta-posts',
 ] as const
-export const OPENING_HOUR = 6
-export const CLOSING_HOUR = 12
+export const OPENING_HOUR = 11
+export const CLOSING_HOUR = 20
 
 export const PHONE = '+380 (96) 612 27 20'
 export const ADDRESS = 'Київ, вул. Еспланадна, 34/2'

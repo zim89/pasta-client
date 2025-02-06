@@ -50,21 +50,23 @@ export const OrderItemCard = ({
                 ))
               : 'немає'}
           </p>
-          <Button
-            className='mt-3 flex h-auto items-center self-start p-0 text-primary-light'
-            onClick={e => {
-              e.preventDefault()
-              e.stopPropagation()
-              handleExtend()
-            }}
-          >
-            {extended ? 'Сховати' : 'Показати усі'}
-            {extended ? (
-              <ChevronUp strokeWidth={1.5} />
-            ) : (
-              <ChevronDown strokeWidth={1.5} />
-            )}
-          </Button>
+          {ingredients.length > 3 && (
+            <Button
+              className='mt-3 flex h-auto items-center self-start p-0 text-primary-light'
+              onClick={e => {
+                e.preventDefault()
+                e.stopPropagation()
+                handleExtend()
+              }}
+            >
+              {extended ? 'Сховати' : 'Показати усі'}
+              {extended ? (
+                <ChevronUp strokeWidth={1.5} />
+              ) : (
+                <ChevronDown strokeWidth={1.5} />
+              )}
+            </Button>
+          )}
         </div>
       </div>
     </div>
