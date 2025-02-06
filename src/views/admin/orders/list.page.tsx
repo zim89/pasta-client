@@ -6,7 +6,6 @@ import {
   ArrayField,
   BooleanField,
   ChipField,
-  DateField,
   List,
   NumberField,
   SingleFieldList,
