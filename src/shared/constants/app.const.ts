@@ -7,6 +7,7 @@ export const RESOURCES = [
   'order',
   'insta-posts',
 ] as const
+
 export const OPENING_HOUR = 11
 export const CLOSING_HOUR = 20
 
