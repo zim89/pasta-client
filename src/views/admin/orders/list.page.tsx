@@ -6,7 +6,6 @@ import {
   ArrayField,
   BooleanField,
   ChipField,
-  DateField,
   List,
   NumberField,
   SingleFieldList,
@@ -91,14 +90,16 @@ export const OrdersList = () => {
               <TextField source='orderDetail.name' label='Клієнт' />
               <ArrayField source='orderItems' label='Продукти'>
                 <SingleFieldList
+                  className='overflow-hidden text-ellipsis whitespace-pre'
                   linkType={false}
-                  className='max-w-[600px]'
-                  style={{ flexWrap: 'nowrap' }}
+                  style={{
+                    flexWrap: 'nowrap',
+                  }}
                 >
                   <ChipField source='dish.title' />
                 </SingleFieldList>
               </ArrayField>
-              <DateField source='orderDetail.date' label='Дата' />
+              <TextField source='orderDetail.date' label='Дата' />
               <BooleanField source='pickup' label='Самовивіз' />
               <NumberField source='totalPrice' label='Вартість' />
               <TextField source='orderDetail.payType' label='Оплата' />
@@ -121,7 +122,7 @@ export const OrdersList = () => {
             <ArrayField source='orderItems' label='Продукти'>
               <SingleFieldList
                 linkType={false}
-                className='max-w-[600px]'
+                className='max-w-[600px] overflow-hidden text-ellipsis whitespace-pre'
                 style={{ flexWrap: 'nowrap' }}
               >
                 <ChipField source='dish.title' />
