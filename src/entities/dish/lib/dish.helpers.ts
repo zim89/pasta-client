@@ -11,14 +11,15 @@ export const formatMass = (grams: number) => {
 export const formatVolume = (volume: number) => {
   return `${volume} л`
 }
+export const isDrink = (dish: Dish) => {
+  return dish.category.name.toLowerCase() === 'напої'
+}
 
 export const formatMeasurement = (dish: Dish) => {
   console.log(dish)
 
-  return (
-    dish.category.name.toLocaleLowerCase() === 'напої' ? "Об'єм: " : 'Вага: '
-  ).concat(
-    dish.category.name !== 'напої'
+  return (isDrink(dish) ? "Об'єм: " : 'Вага: ').concat(
+    !isDrink(dish)
       ? dish.weight
         ? formatMass(dish.weight)
         : 'не визначено'
