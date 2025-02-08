@@ -2,6 +2,7 @@ import Image from 'next/image'
 
 import { EditDishCount } from '@/features/root/edit-dish-count'
 import type { Dish } from '@/entities/dish'
+import { isDrink } from '@/entities/dish/lib/dish.helpers'
 import img_placeholder from '@/shared/assets/images/placeholders/img-square.png'
 import { DeliveryModal } from '../../delivery-modal'
 import { RecommendDishes } from '../../recommend-dishes'
@@ -27,7 +28,11 @@ export const ProductDetails = ({ dish }: { dish: Dish }) => {
               {dish.title}
             </h1>
             <p className='flex items-baseline justify-between text-[13px]/[16.9px] xl:text-sm/[18.2px]'>
-              <span>Вага: {dish.weight} г</span>
+              {isDrink(dish) ? (
+                <span>{`Об'єм: ${dish.volume} л`}</span>
+              ) : (
+                <span>Вага: {dish.weight} г</span>
+              )}
               <span></span>
             </p>
             <p className='text-sm/[18.2px] xl:text-base/[20.8px]'>
