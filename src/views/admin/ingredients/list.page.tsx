@@ -32,7 +32,7 @@ export const IngredientList = () => {
   const orderParam = useHashParamValue('order')
 
   const [currentPage, { paginated, setLimit, setCurrentPage }] =
-    useListPagination(displayedRows, Number(pageParam), Number(limitParam))
+    useListPagination({ allItems: displayedRows, resource: 'ingredient' })
 
   useEffect(() => {
     router.replace('#/ingredient?perPage=5&page=1')

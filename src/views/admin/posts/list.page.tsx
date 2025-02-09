@@ -25,7 +25,7 @@ export const PostsList = () => {
   const orderParam = useHashParamValue('order')
 
   const [currentPage, { paginated, setLimit, setCurrentPage }] =
-    useListPagination(displayedRows, Number(pageParam), Number(limitParam))
+    useListPagination({ allItems: displayedRows, resource: 'insta-posts' })
 
   useEffect(() => {
     router.replace('#/insta-posts?perPage=5&page=1')

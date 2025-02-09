@@ -25,7 +25,7 @@ export const CategoriesList = () => {
   const orderParam = useHashParamValue('order')
 
   const [currentPage, { paginated, setLimit, setCurrentPage }] =
-    useListPagination(displayedRows, Number(pageParam), Number(limitParam))
+    useListPagination({ allItems: displayedRows, resource: 'category' })
 
   useEffect(() => {
     router.replace('#/category?perPage=5&page=1')
