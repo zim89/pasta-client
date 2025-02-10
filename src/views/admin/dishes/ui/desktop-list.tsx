@@ -9,18 +9,20 @@ import { AdminPagination } from '@/shared/ui/admin/admin-pagination'
 
 type Props = {
   paginated: Dish[]
-  totalPages: number
   currentPage: number
   setCurrentPage: (page: number) => void
   setLimit: (page: number) => void
+  countItems: number
+  limitParam: number
 }
 
 export const DesktopList = ({
   paginated,
-  totalPages,
   currentPage,
   setCurrentPage,
   setLimit,
+  countItems,
+  limitParam,
 }: Props) => {
   return (
     <List
@@ -28,10 +30,11 @@ export const DesktopList = ({
       pagination={
         <AdminPagination
           hidden={!paginated.length}
-          totalPages={totalPages}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           setLimit={setLimit}
+          countItems={countItems}
+          limitParam={limitParam}
         />
       }
       actions={<DishHeaderActions />}

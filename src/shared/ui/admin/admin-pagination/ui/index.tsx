@@ -9,35 +9,47 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/ui/common'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Play } from 'lucide-react'
 
 import { cn } from '@/shared/lib/utils'
 
 type Props = {
   hidden?: boolean
-  totalPages: number
   currentPage: number
   setCurrentPage(page: number): void
   setLimit: (value: number) => void
+  countItems: number
+  limitParam: number
 }
 
 export const AdminPagination = ({
   hidden,
-  totalPages,
+  countItems,
+  limitParam,
   currentPage,
   setCurrentPage,
   setLimit,
 }: Props) => {
+  const totalPages = countItems / limitParam
+
+  const startItem = (currentPage - 1) * limitParam + 1
+  const endItem = Math.min(currentPage * limitParam, countItems)
+
+  const formattedString = `${startItem}-${endItem} з ${countItems}`
+
   return (
-    <div
-      className={cn('flex items-center justify-between', hidden && 'hidden')}
-    >
+    <div className={cn('flex items-center justify-end', hidden && 'hidden')}>
       <Select
         defaultValue='5'
         onValueChange={value => value && setLimit(Number(value))}
       >
-        <p className='mx-2'>Показати</p>
-        <SelectTrigger className='max-w-min justify-start'>
+        <p className='mx-2 text-sm'>Показати:</p>
+        <SelectTrigger
+          className='bg-transparent ml-2 mr-8 max-w-min justify-start border-none p-0'
+          icon={
+            <Play className='mx-2 size-2 rotate-90 -scale-y-150 fill-gray-700 stroke-none' />
+          }
+        >
           <SelectValue placeholder='Показати записи' />
         </SelectTrigger>
         <SelectContent>
@@ -47,20 +59,19 @@ export const AdminPagination = ({
           <SelectItem value='50'>50</SelectItem>
         </SelectContent>
       </Select>
-      <span></span>
+      <span className='mr-8 text-sm'>{formattedString}</span>
       {totalPages > 0 && (
-        <Pagination className='mx-0 justify-end gap-4 py-2'>
+        <Pagination className='mx-0 max-w-min justify-end gap-4 py-2'>
           <PaginationContent>
             <PaginationItem className='ml-auto'>
               <Button
-                className='border-none text-lg text-black'
+                className='border-none p-0 text-sm text-black'
                 onClick={() => {
                   setCurrentPage(currentPage - 1)
                 }}
                 disabled={currentPage === 1}
               >
-                <ChevronLeft className='mt-[3px] !min-w-6' />
-                Назад
+                <ChevronLeft className='size-4' />
               </Button>
             </PaginationItem>
             {Array.from({ length: totalPages })
@@ -72,7 +83,7 @@ export const AdminPagination = ({
                   <PaginationItem key={index}>
                     <Button
                       className={cn(
-                        'rounded-md border-none text-xl hover:bg-black hover:bg-opacity-15',
+                        'size-7 rounded-full border-none p-0 text-sm hover:bg-black hover:bg-opacity-15',
                         isActive && 'bg-black bg-opacity-15',
                       )}
                       onClick={() => setCurrentPage(index + 1)}
@@ -84,14 +95,13 @@ export const AdminPagination = ({
               })}
             <PaginationItem>
               <Button
-                className='border-none text-lg text-black'
+                className='border-none p-0 text-sm text-black'
                 onClick={() => {
                   setCurrentPage(currentPage + 1)
                 }}
                 disabled={currentPage === totalPages}
               >
-                Далі
-                <ChevronRight className='mt-[3px] !min-w-6' />
+                <ChevronRight className='size-4' />
               </Button>
             </PaginationItem>
           </PaginationContent>

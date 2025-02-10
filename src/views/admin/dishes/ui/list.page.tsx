@@ -25,7 +25,8 @@ export const ProductList = () => {
       ) : (
         <DesktopList
           paginated={paginated}
-          totalPages={Math.floor(allRows.length / Number(limitParam))}
+          limitParam={Number(limitParam)}
+          countItems={allRows.length}
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
           setLimit={setLimit}
