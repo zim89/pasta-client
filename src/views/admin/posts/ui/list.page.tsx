@@ -1,10 +1,10 @@
-import { Dish } from '@/entities/dish'
-import { useMedia } from '@/shared/lib/hooks/useMedia'
+import type { Post } from '@/entities/post'
+import { useMedia } from '@/shared/lib/hooks'
 import { useResourcePaginationSortController } from '@/shared/lib/hooks/useResourcePaginationSort'
 import { DesktopList } from './desktop-list'
 import { MobileList } from './mobile-list'
 
-export const ProductList = () => {
+export const PostsList = () => {
   const {
     paginatedRows,
     currentPage,
@@ -12,7 +12,7 @@ export const ProductList = () => {
     setCurrentPage,
     limitParam,
     setLimit,
-  } = useResourcePaginationSortController<Dish>({ resource: 'dish' })
+  } = useResourcePaginationSortController<Post>({ resource: 'insta-posts' })
   const { isMobileScreen } = useMedia()
 
   return (

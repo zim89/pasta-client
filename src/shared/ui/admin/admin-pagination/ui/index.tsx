@@ -30,7 +30,7 @@ export const AdminPagination = ({
   setCurrentPage,
   setLimit,
 }: Props) => {
-  const totalPages = countItems / limitParam
+  const totalPages = Math.ceil(countItems / limitParam)
 
   const startItem = (currentPage - 1) * limitParam + 1
   const endItem = Math.min(currentPage * limitParam, countItems)
@@ -43,9 +43,9 @@ export const AdminPagination = ({
         defaultValue='5'
         onValueChange={value => value && setLimit(Number(value))}
       >
-        <p className='mx-2 text-sm'>Показати:</p>
+        <p className='mx-2 hidden text-sm xl:block'>Показати:</p>
         <SelectTrigger
-          className='bg-transparent ml-2 mr-8 max-w-min justify-start border-none p-0'
+          className='bg-transparent ml-2 mr-8 hidden max-w-min justify-start border-none p-0 xl:flex'
           icon={
             <Play className='mx-2 size-2 rotate-90 -scale-y-150 fill-gray-700 stroke-none' />
           }
@@ -83,7 +83,7 @@ export const AdminPagination = ({
                   <PaginationItem key={index}>
                     <Button
                       className={cn(
-                        'size-7 rounded-full border-none p-0 text-sm hover:bg-black hover:bg-opacity-15',
+                        'hidden size-7 rounded-full border-none p-0 text-sm hover:bg-black hover:bg-opacity-15 xl:flex',
                         isActive && 'bg-black bg-opacity-15',
                       )}
                       onClick={() => setCurrentPage(index + 1)}

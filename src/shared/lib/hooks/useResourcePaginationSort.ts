@@ -1,40 +1,38 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { useGetList } from 'react-admin'
 
-import { Dish } from '@/entities/dish'
 import { useHashParamValue, useListPagination } from '@/shared/lib/hooks'
 
 type Props = {
   resource: string
 }
 
-export const usePaginationController = ({ resource }: Props) => {
-  const router = useRouter()
+export const useResourcePaginationSortController = <T = unknown>({
+  resource,
+}: Props) => {
   const { data } = useGetList(resource)
-  const [displayedRows, setDisplayedRows] = useState<Dish[]>(data || [])
+  const [displayedRows, setDisplayedRows] = useState<T[]>(data || [])
 
-  const limitParam = useHashParamValue('perPage')
-  const pageParam = useHashParamValue('page')
   const sortParam = useHashParamValue('sort')
   const orderParam = useHashParamValue('order')
 
-  const [currentPage, { paginated, setLimit, setCurrentPage }] =
+  const [currentPage, { paginatedRows, setLimit, limit, setCurrentPage }] =
     useListPagination({
-      allItems: displayedRows,
-      resource: 'dish',
+      allRows: displayedRows,
+      resource,
     })
 
   useEffect(() => {
-    router.replace(`#/${resource}?page=1&perPage=5`)
-  }, [resource, router])
+    setLimit(5)
+    setCurrentPage(1)
+  }, [resource])
 
   useEffect(() => {
     if (!sortParam || !orderParam) return
 
-    const sort = sortParam as keyof Dish
+    const sort = sortParam as keyof T
 
     setDisplayedRows([
       ...displayedRows.sort((a, b) => {
@@ -50,17 +48,10 @@ export const usePaginationController = ({ resource }: Props) => {
     }
   }, [data])
 
-  useEffect(() => {
-    if (limitParam) {
-      setLimit(Number(limitParam) || 5)
-    }
-  }, [limitParam])
-
   return {
-    paginated,
+    paginatedRows,
     currentPage,
-    limitParam: limitParam || '5',
-    pageParam,
+    limitParam: limit,
     sortParam,
     orderParam,
     setCurrentPage,

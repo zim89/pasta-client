@@ -1,10 +1,10 @@
-import { Dish } from '@/entities/dish'
+import { Order } from '@/entities/order/model/types'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
 import { useResourcePaginationSortController } from '@/shared/lib/hooks/useResourcePaginationSort'
 import { DesktopList } from './desktop-list'
 import { MobileList } from './mobile-list'
 
-export const ProductList = () => {
+export const OrdersList = () => {
   const {
     paginatedRows,
     currentPage,
@@ -12,7 +12,7 @@ export const ProductList = () => {
     setCurrentPage,
     limitParam,
     setLimit,
-  } = useResourcePaginationSortController<Dish>({ resource: 'dish' })
+  } = useResourcePaginationSortController<Order>({ resource: 'order' })
   const { isMobileScreen } = useMedia()
 
   return (

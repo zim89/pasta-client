@@ -6,16 +6,16 @@ import { useHashParamValue } from './useHashValues'
 import { useMedia } from './useMedia'
 
 type Props<T> = {
-  allItems: T[]
+  allRows: T[]
   resource: string
 }
 
-export const useListPagination = <T>({ allItems, resource }: Props<T>) => {
+export const useListPagination = <T>({ allRows, resource }: Props<T>) => {
   const router = useRouter()
   const limitParam = useHashParamValue('perPage')
   const pageParam = useHashParamValue('page')
 
-  const [paginated, setPaginated] = useState<T[]>([])
+  const [paginatedRows, setPaginated] = useState<T[]>([])
   const [currentPage, setCurrentPage] = useState(Number(pageParam) || 1)
   const [limit, setLimit] = useState(Number(limitParam) || PAGINATION_LIMIT)
   const { isMobileScreen } = useMedia()
@@ -35,7 +35,7 @@ export const useListPagination = <T>({ allItems, resource }: Props<T>) => {
     [sortParam, orderParam, resource],
   )
 
-  const items = useMemo(() => allItems, [allItems])
+  const items = useMemo(() => allRows, [allRows])
 
   useEffect(() => {
     if (currentPage) {
@@ -62,6 +62,6 @@ export const useListPagination = <T>({ allItems, resource }: Props<T>) => {
 
   return [
     currentPage,
-    { paginated, setPaginated, setLimit, setCurrentPage },
+    { paginatedRows, limit, setPaginated, setLimit, setCurrentPage },
   ] as const
 }

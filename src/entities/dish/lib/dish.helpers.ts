@@ -16,8 +16,6 @@ export const isDrink = (dish: Dish) => {
 }
 
 export const formatMeasurement = (dish: Dish) => {
-  console.log(dish)
-
   return (isDrink(dish) ? "Об'єм: " : 'Вага: ').concat(
     !isDrink(dish)
       ? dish.weight

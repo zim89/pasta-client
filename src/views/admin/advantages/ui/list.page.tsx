@@ -1,10 +1,10 @@
-import { Dish } from '@/entities/dish'
+import { Feature } from '@/entities/feature'
 import { useMedia } from '@/shared/lib/hooks/useMedia'
 import { useResourcePaginationSortController } from '@/shared/lib/hooks/useResourcePaginationSort'
 import { DesktopList } from './desktop-list'
 import { MobileList } from './mobile-list'
 
-export const ProductList = () => {
+export const AdvantagesList = () => {
   const {
     paginatedRows,
     currentPage,
@@ -12,7 +12,9 @@ export const ProductList = () => {
     setCurrentPage,
     limitParam,
     setLimit,
-  } = useResourcePaginationSortController<Dish>({ resource: 'dish' })
+  } = useResourcePaginationSortController<Feature>({
+    resource: 'our-advantages',
+  })
   const { isMobileScreen } = useMedia()
 
   return (
