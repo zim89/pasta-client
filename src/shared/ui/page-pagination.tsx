@@ -1,7 +1,6 @@
 'use client'
 
-import { useCallback } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 import {
   Pagination,
@@ -12,24 +11,15 @@ import {
   PaginationPrevious,
 } from '@/shared/ui/common/pagination'
 import { PAGINATION_LIMIT } from '@/shared/constants'
+import { useQueryString } from '../lib/hooks/useQueryString'
 import { cn } from '../lib/utils'
 
 export const PagePagination = ({ total }: { total: number }) => {
   const path = usePathname()
-  const searchParams = useSearchParams()
+  const { searchParams, createQueryString } = useQueryString()
 
   const pages = Math.ceil(total / PAGINATION_LIMIT)
   const page = parseInt(searchParams.get('page') || '1')
-
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
-
-      return params.toString()
-    },
-    [searchParams],
-  )
 
   if (total <= PAGINATION_LIMIT) return null
 

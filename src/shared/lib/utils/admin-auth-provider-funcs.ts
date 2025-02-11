@@ -33,8 +33,6 @@ export const checkIfAccessTokenIsExpired = (accessToken: string) => {
 
 const resetAuthTokens = async () => {
   try {
-    console.log('Change refresh token to access token')
-
     const response = await fetchUtils.fetchJson(
       `${SERVER_URL}/auth/refresh-token`,
       {
@@ -44,8 +42,6 @@ const resetAuthTokens = async () => {
     )
 
     const data = response.json
-
-    console.log('REFRESH TOKEN RESPONSE: ', data)
 
     if (!data.accessToken) {
       throw new Error("Access token wasn't provided")
@@ -60,12 +56,9 @@ const resetAuthTokens = async () => {
 }
 
 export const refreshAuth = async () => {
-  console.log('refreshAuth')
-
   const { accessToken } = getAuthTokensFromLocalStorage()
   if (accessToken) {
     if (checkIfAccessTokenIsExpired(accessToken)) {
-      console.log('Access token is expired (admin-auth-provider-funcs.ts)')
       return await resetAuthTokens()
     }
     return Promise.resolve()

@@ -277,7 +277,6 @@ export const ShowOrder = () => {
                 </h3>
                 <div
                   contentEditable={isEditingOrder}
-                  onChange={console.log}
                   suppressContentEditableWarning
                   className={
                     'border-b border-l border-primary-lightest p-2 focus:rounded focus:!shadow-none'

@@ -1,23 +1,48 @@
-import { useEffect, useMemo, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 import { PAGINATION_LIMIT } from '@/shared/constants/app.const'
+import { useHashParamValue } from './useHashValues'
 import { useMedia } from './useMedia'
 
-export const useListPagination = <T>(
-  allItems: T[],
-  page?: number,
-  perPage = PAGINATION_LIMIT,
-) => {
-  const [limit, setLimit] = useState(perPage)
-  const [paginated, setPaginated] = useState<T[]>([])
-  const params = useSearchParams()
-  const [currentPage, setCurrentPage] = useState(
-    page || parseInt(params.get('page') || '1'),
-  )
+type Props<T> = {
+  allRows: T[]
+  resource: string
+}
+
+export const useListPagination = <T>({ allRows, resource }: Props<T>) => {
+  const router = useRouter()
+  const limitParam = useHashParamValue('perPage')
+  const pageParam = useHashParamValue('page')
+
+  const [paginatedRows, setPaginated] = useState<T[]>([])
+  const [currentPage, setCurrentPage] = useState(Number(pageParam) || 1)
+  const [limit, setLimit] = useState(Number(limitParam) || PAGINATION_LIMIT)
   const { isMobileScreen } = useMedia()
 
-  const items = useMemo(() => allItems, [allItems])
+  const sortParam = useHashParamValue('sort')
+  const orderParam = useHashParamValue('order')
+
+  const generateURLString = useCallback(
+    (page: number, limit: number) => {
+      const otherParams = [
+        sortParam && `sort=${sortParam}`,
+        orderParam && `order=${orderParam}`,
+      ].filter(param => !!param)
+
+      return `#/${resource}?page=${page}&perPage=${limit}${otherParams.length > 0 ? '&' + otherParams.join('&') : ''}`
+    },
+    [sortParam, orderParam, resource],
+  )
+
+  const items = useMemo(() => allRows, [allRows])
+
+  useEffect(() => {
+    if (currentPage) {
+      const url = generateURLString(currentPage, limit)
+      router.replace(url)
+    }
+  }, [currentPage, limit])
 
   useEffect(() => {
     if (isMobileScreen) return
@@ -37,6 +62,6 @@ export const useListPagination = <T>(
 
   return [
     currentPage,
-    { paginated, setPaginated, params, setLimit, setCurrentPage },
+    { paginatedRows, limit, setPaginated, setLimit, setCurrentPage },
   ] as const
 }

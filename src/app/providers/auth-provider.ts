@@ -35,11 +35,9 @@ export const authProvider: AuthProvider = {
       const accessToken = localStorage.getItem(KEYS.accessToken)
       if (accessToken) {
         if (checkIfAccessTokenIsExpired(accessToken)) {
-          console.log('checkAuth says: Session is expired!')
           reject(new Error('Session is expired!'))
         }
 
-        console.log('checkAuth')
         resolve()
       } else {
         reject(new Error('The user is unauthorized!'))

@@ -27,7 +27,9 @@ export const MobileEntitiesGrid = <T,>({
         displayedRows.length > currentPage * paginationLimit && (
           <Button
             className='w-full'
-            onClick={() => setCurrentPage(currentPage + 1)}
+            onClick={() => {
+              setCurrentPage(currentPage + 1)
+            }}
           >
             <span>Загрузити ще..</span>
           </Button>
