@@ -47,24 +47,26 @@ export const FilterBar = () => {
               Все меню
             </button>
 
-            {data.map(category => {
-              const isActive = searchParams.get('filter') === category.name
+            {data
+              .sort(item => (item.name.toLowerCase() === 'інше' ? 1 : -1))
+              .map(category => {
+                const isActive = searchParams.get('filter') === category.name
 
-              return (
-                <button
-                  key={category.id}
-                  onClick={() => onClick(category.name)}
-                  className={cn(
-                    'h-[47px] flex-1 rounded-[30px] border px-5 text-lg/[23.4px] capitalize md:flex-none xl:px-10',
-                    isActive
-                      ? 'border-primary-light text-primary-light'
-                      : 'border-black/20 text-black',
-                  )}
-                >
-                  {category.name}
-                </button>
-              )
-            })}
+                return (
+                  <button
+                    key={category.id}
+                    onClick={() => onClick(category.name)}
+                    className={cn(
+                      'h-[47px] flex-1 rounded-[30px] border px-5 text-lg/[23.4px] capitalize md:flex-none xl:px-10',
+                      isActive
+                        ? 'border-primary-light text-primary-light'
+                        : 'border-black/20 text-black',
+                    )}
+                  >
+                    {category.name}
+                  </button>
+                )
+              })}
           </>
         )
       )}
