@@ -38,7 +38,7 @@ export const FilterBar = () => {
             <button
               onClick={() => onClick('Все меню')}
               className={cn(
-                'h-[47px] flex-1 whitespace-pre rounded-[30px] border px-5 text-lg/[23.4px] md:flex-none xl:px-10',
+                'filter-hover h-[47px] flex-1 whitespace-pre rounded-[30px] border px-5 text-lg/[23.4px] md:flex-none xl:px-10',
                 !searchParams.get('filter')
                   ? 'border-primary-light text-primary-light'
                   : 'border-black/20 text-black',
@@ -57,7 +57,7 @@ export const FilterBar = () => {
                     key={category.id}
                     onClick={() => onClick(category.name)}
                     className={cn(
-                      'h-[47px] flex-1 rounded-[30px] border px-5 text-lg/[23.4px] capitalize md:flex-none xl:px-10',
+                      'filter-hover h-[47px] flex-1 rounded-[30px] border px-5 text-lg/[23.4px] capitalize md:flex-none xl:px-10',
                       isActive
                         ? 'border-primary-light text-primary-light'
                         : 'border-black/20 text-black',
