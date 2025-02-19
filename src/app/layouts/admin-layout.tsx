@@ -33,6 +33,8 @@ import { AdminAppBar } from '@/shared/ui/admin/admin-bar'
 
 import '@/shared/lib/utils/admin-auth-provider-funcs'
 
+import { LoginPage } from '@/views/admin/login'
+
 const CustomLayout = ({ children }: { children: React.ReactNode }) => {
   return <Layout appBar={AdminAppBar}>{children}</Layout>
 }
@@ -47,6 +49,7 @@ export default function AdminLayout() {
         dataProvider={dataProviderWithRefresh}
         authProvider={authProviderWithRefresh}
         theme={theme}
+        loginPage={LoginPage}
         layout={CustomLayout}
         queryClient={
           new QueryClient({
