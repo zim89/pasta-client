@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'
 
@@ -28,6 +29,12 @@ export const FilterBar = () => {
     router.replace(`${path}?${params.toString()}`, { scroll: false })
   }
 
+  const sortedFilters = useMemo(
+    () =>
+      data?.sort(item => (item.name.toLowerCase() === 'інше' ? 1 : -1)) || [],
+    [data?.length],
+  )
+
   return (
     <div className='mb-[22px] hidden flex-wrap justify-center gap-1 md:flex md:gap-x-[41px] md:gap-y-6 xl:gap-x-[53px] xl:gap-y-5'>
       {isLoading ? (
@@ -47,26 +54,24 @@ export const FilterBar = () => {
               Все меню
             </button>
 
-            {data
-              .sort(item => (item.name.toLowerCase() === 'інше' ? 1 : -1))
-              .map(category => {
-                const isActive = searchParams.get('filter') === category.name
+            {sortedFilters.map(category => {
+              const isActive = searchParams.get('filter') === category.name
 
-                return (
-                  <button
-                    key={category.id}
-                    onClick={() => onClick(category.name)}
-                    className={cn(
-                      'filter-hover h-[47px] flex-1 rounded-[30px] border px-5 text-lg/[23.4px] capitalize md:flex-none xl:px-10',
-                      isActive
-                        ? 'border-primary-light text-primary-light'
-                        : 'border-black/20 text-black',
-                    )}
-                  >
-                    {category.name}
-                  </button>
-                )
-              })}
+              return (
+                <button
+                  key={category.id}
+                  onClick={() => onClick(category.name)}
+                  className={cn(
+                    'filter-hover h-[47px] flex-1 rounded-[30px] border px-5 text-lg/[23.4px] capitalize md:flex-none xl:px-10',
+                    isActive
+                      ? 'border-primary-light text-primary-light'
+                      : 'border-black/20 text-black',
+                  )}
+                >
+                  {category.name}
+                </button>
+              )
+            })}
           </>
         )
       )}
